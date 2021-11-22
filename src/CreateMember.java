@@ -1,4 +1,5 @@
-import Member;
+
+import Domain.Member;
 
 import java.util.ArrayList;
 

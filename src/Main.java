@@ -1,8 +1,9 @@
-import ui.UserInterface;
+import Domain.Controller;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        UserInterface ui = new UserInterface();
-        ui.start();
+        Controller controller = new Controller();
+        controller.start();
+
     }
 }

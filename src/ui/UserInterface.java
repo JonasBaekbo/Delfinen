@@ -5,23 +5,9 @@ package ui;
 import java.util.Scanner;
 
 public class UserInterface {
-
-    public UserInterface() throws Exception {
-        start();
-    }
-
-    public void start() throws Exception {
-        System.out.println("Velkommen hos Delfinen");
-        System.out.println("---------------------------");
-
-        mainMenu();
-    }
-
-    private void mainMenu() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("""
+    Scanner scanner = new Scanner(System.in);
+    public void menu(){
+        printMessage("""
                                         
                     Foretag et valg:
                     1) Registrer nyt medlem (Formand)
@@ -31,32 +17,14 @@ public class UserInterface {
                     5) Registrer bedste træningsresultat for svømmer (Træner)
                     6) Registrer resultat til stævne for svømmer (Træner)
                     0) Slut programmet""");
-            int selection = scanner.nextInt();
-            switch (selection) {
-                case 1:
+    }
+    public String userInput(){
 
-                    break;
-                case 2:
+        return scanner.nextLine();
+    }
 
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-
-
-                    break;
-                case 5:
-
-                    break;
-                case 0:
-                    System.out.println("Tak for at bruge Delfinen. Programmet vil nu slutte sig selv");
-                    System.exit(0);
-                default:
-                    System.out.println("Ugyldigt valg - Vælg et tal fra menuen.");
-                    break;
-            }
-        }
+    public void printMessage(String s) {
+        System.out.println(s);
     }
 }
 

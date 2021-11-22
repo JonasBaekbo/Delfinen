@@ -1,3 +1,5 @@
+import Domain.Member;
+
 import java.util.Comparator;
 
 public class Sorting implements Comparator<Member> {

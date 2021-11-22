@@ -1,5 +1,7 @@
 package accounting;
 
+import Domain.Member;
+
 public class SubscriptionFee {
     private double below18Fee = 1000;
     private  double above18Fee= 1600;
@@ -20,12 +22,13 @@ public class SubscriptionFee {
     }
 
     private boolean isMemberActive() {
-        return member.getActivityLevel;
+        return true;
+       // return Member.getActivityLevel();
     }
 
     private double calculateSubFee() {
         double subscribtionFee;
-        int age = member.getAge;
+       /* int age = Member.getAge();
           if(age<=18){
                 subscribtionFee=below18Fee;}
             else if ((age>18) && (age<60)){
@@ -33,10 +36,11 @@ public class SubscriptionFee {
             else{
                 subscribtionFee=above18Fee*seniorFeeDiscount;
             }
-            return subscribtionFee;
+            return subscribtionFee;*/
+        return 0;
         }
         }
-    }
+    /*}
 
 
-}
+}*/
