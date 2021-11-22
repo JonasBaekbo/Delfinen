@@ -27,12 +27,12 @@ public class Controller {
     }
 
     public void createNewMember(){
-        ui.printMessage("indtast brugerens navn: ");
+        ui.printMessage("Indtast medlemmets navn: ");
         String name = ui.userInput();
-        ui.printMessage("indtast alderen på brugeren: ");
+        ui.printMessage("Indtast medlemmets alder: ");
         String age = ui.userInput();
         ui.printMessage("""
-                indtast activityformen på brugeren: 
+                Indtast medlemmets aktivitetsform: 
                 1) Motionssvømmer
                 2) Konkurrencesvømmer""");
         String activityFormChosen = ui.userInput();
@@ -56,6 +56,7 @@ public class Controller {
         Member m = new Member(name,age,activityForm,activityLevel);
         members.add(m);
     }
+
 
     // SKAL SLETTES SENERE! KUN TIL TEST!
     public String showAllMembers(){

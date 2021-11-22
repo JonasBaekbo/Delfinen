@@ -40,12 +40,10 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", activityForm='" + activityForm + '\'' +
-                ", activityLevel='" + activityLevel + '\'' +
-                '}';
+        return  "Medlemdsnavn: " + name + '\n' +
+                "Alder: " + age + '\n' +
+                "Aktivitetsform: " + activityForm + '\n' +
+                "Medlemsskabs status: " + activityLevel;
     }
 
     public String getActivityLevel() {
