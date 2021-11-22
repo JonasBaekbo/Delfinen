@@ -8,18 +8,34 @@ public class SubscriptionFee {
 
 
 
-    public double getsubscriptionFee(){
+    public double getsubscriptionFee() {
         double subscribtionFee;
-        if (getActivityLevel.equals("pasive")){
-            subscribtionFee=passiveFee;}
-        else if(getAge<=18){
-            subscribtionFee=below18Fee;}
-        else if (getAge>18&&getAge<60){
-            subscribtionFee= above18Fee;}
-        else{
-            subscribtionFee=above18Fee*seniorFeeDiscount;
+        if (!isMemberActive()) {
+            subscribtionFee = passiveFee;
+        } else {
+            subscribtionFee = calculateSubFee();
         }
         return subscribtionFee;
+
+    }
+
+    private boolean isMemberActive() {
+        return member.getActivityLevel;
+    }
+
+    private double calculateSubFee() {
+        double subscribtionFee;
+        int age = member.getAge;
+          if(age<=18){
+                subscribtionFee=below18Fee;}
+            else if ((age>18) && (age<60)){
+                subscribtionFee= above18Fee;}
+            else{
+                subscribtionFee=above18Fee*seniorFeeDiscount;
+            }
+            return subscribtionFee;
+        }
+        }
     }
 
 
