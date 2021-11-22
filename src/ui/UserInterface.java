@@ -1,3 +1,5 @@
+// @JonasBaekbo
+
 package ui;
 
 import java.util.Scanner;
@@ -17,9 +19,8 @@ public class UserInterface {
 
     private void mainMenu() throws Exception {
         Scanner scanner = new Scanner(System.in);
-        boolean isRunning = true;
 
-        while (isRunning) {
+        while (true) {
             System.out.println("""
                                         
                     Foretag et valg:
@@ -29,7 +30,7 @@ public class UserInterface {
                     4) Se top 5 svømmere indenfor hver svømmediciplin (Træner)
                     5) Registrer bedste træningsresultat for svømmer (Træner)
                     6) Registrer resultat til stævne for svømmer (Træner)
-                    0) Exit application""");
+                    0) Slut programmet""");
             int selection = scanner.nextInt();
             switch (selection) {
                 case 1:
@@ -49,9 +50,8 @@ public class UserInterface {
 
                     break;
                 case 0:
-                    System.out.println("Tak for at vælge Marios Pizza");
-                    isRunning = false;
-                    break;
+                    System.out.println("Tak for at bruge Delfinen. Programmet vil nu slutte sig selv");
+                    System.exit(0);
                 default:
                     System.out.println("Ugyldigt valg - Vælg et tal fra menuen.");
                     break;
