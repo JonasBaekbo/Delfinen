@@ -1,6 +1,5 @@
 
 import Domain.Member;
-
 import java.util.ArrayList;
 
 public class CreateMember {

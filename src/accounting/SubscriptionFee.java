@@ -10,7 +10,7 @@ public class SubscriptionFee {
 
 
 
-    public double getsubscriptionFee() {
+    public double getSubscriptionFee() {
         double subscribtionFee;
         if (!isMemberActive()) {
             subscribtionFee = passiveFee;
@@ -22,25 +22,37 @@ public class SubscriptionFee {
     }
 
     private boolean isMemberActive() {
-        return true;
-       // return Member.getActivityLevel();
+        boolean isActive;
+        if(getActivityLevel().equals("active")){
+        isActive=true;}
+        else{isActive=false;}
+       return isActive;
     }
 
     private double calculateSubFee() {
         double subscribtionFee;
-       /* int age = Member.getAge();
+      int age = getAge();
           if(age<=18){
                 subscribtionFee=below18Fee;}
-            else if ((age>18) && (age<60)){
+            else if (age<60){
                 subscribtionFee= above18Fee;}
             else{
                 subscribtionFee=above18Fee*seniorFeeDiscount;
             }
-            return subscribtionFee;*/
-        return 0;
+            return subscribtionFee;
         }
-        }
-    /*}
 
+    private int getAge() {
+       //return Member.getAge();
+       // int age = Integer.parseInt(Member.getAge);
+        //TODO: fjern hardcoded return
+        return 16;
 
-}*/
+    }
+    private String getActivityLevel(){
+        //return Member.getActivityLevel();
+        //TODO: fjern hardcoded return
+        return "active";
+    }
+}
+
