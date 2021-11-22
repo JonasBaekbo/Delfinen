@@ -14,7 +14,7 @@ public class Sorting implements Comparator<Member> {
     public int compare(Member o1, Member o2) {
         int resultat = 0;
         if (type.equals("age")) {
-            resultat = Integer.compare(o1.getAge(), o2.getAge());
+            //resultat = Integer.compare(o1.getAge(), o2.getAge());
         } else if (type.equals("name")) {
             resultat = o1.getName().compareTo(o2.getName());
         } else if (type.equals("activityForm")) {

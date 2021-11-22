@@ -2,12 +2,12 @@ package Domain;
 
 public class Member {
     String name;
-    int age;
+    String age;
     String activityForm; //e.g. motionist eller konkurrencesvømmer.
     String activityLevel; //e.g. Aktivt eller passivt medlem.
 
 
-    public Member(String name, int age, String activityForm, String activityLevel){
+    public Member(String name, String age, String activityForm, String activityLevel){
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
@@ -22,11 +22,11 @@ public class Member {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -36,6 +36,16 @@ public class Member {
 
     public void setActivityForm(String activityForm) {
         this.activityForm = activityForm;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", activityForm='" + activityForm + '\'' +
+                ", activityLevel='" + activityLevel + '\'' +
+                '}';
     }
 
     public String getActivityLevel() {
