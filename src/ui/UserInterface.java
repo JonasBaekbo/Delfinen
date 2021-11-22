@@ -1,0 +1,61 @@
+package ui;
+
+import java.util.Scanner;
+
+public class UserInterface {
+
+    public UserInterface() throws Exception {
+        start();
+    }
+
+    public void start() throws Exception {
+        System.out.println("Velkommen hos Delfinen");
+        System.out.println("---------------------------");
+
+        mainMenu();
+    }
+
+    private void mainMenu() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        boolean isRunning = true;
+
+        while (isRunning) {
+            System.out.println("""
+                                        
+                    Foretag et valg:
+                    1) Se Menukortet
+                    2) Opret en ordre
+                    3) Se alle aktive ordrer
+                    4) Færdiggør ordre
+                    5) Udskriv statistik
+                    0) Exit application""");
+            int selection = scanner.nextInt();
+            switch (selection) {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+
+                    break;
+                case 5:
+
+                    break;
+                case 0:
+                    System.out.println("Tak for at vælge Marios Pizza");
+                    isRunning = false;
+                    break;
+                default:
+                    System.out.println("Ugyldigt valg - Vælg et tal fra menuen.");
+                    break;
+            }
+        }
+    }
+}
+
