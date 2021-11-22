@@ -3,7 +3,7 @@
 public class Member {
     String name;
     int age;
-    String activityForm; //e.g. junior- eller seniorsvømmer, motionist eller konkurrencesvømmer.
+    String activityForm; //e.g. motionist eller konkurrencesvømmer.
     String activityLevel; //e.g. Aktivt eller passivt medlem.
 
 
