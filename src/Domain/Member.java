@@ -40,7 +40,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return  "Medlemdsnavn: " + name + '\n' +
+        return  "Medlemsnavn: " + name + '\n' +
                 "Alder: " + age + '\n' +
                 "Aktivitetsform: " + activityForm + '\n' +
                 "Medlemsskabs status: " + activityLevel;
