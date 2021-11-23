@@ -7,7 +7,7 @@ public class Member {
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
-    private int time;
+    private String time;
     private boolean subPaid;
 
 
@@ -25,6 +25,15 @@ public class Member {
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
+        this.subPaid=false;
+    }
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, String time) {
+        this.name = name;
+        this.age = age;
+        this.activityForm = activityForm;
+        this.activityLevel = activityLevel;
+        this.svømmediciplin = svømmediciplin;
+        this.time = time;
         this.subPaid=false;
     }
 
@@ -96,5 +105,13 @@ public class Member {
 
     public void setSvømmediciplin(String svømmediciplin) {
         this.svømmediciplin = svømmediciplin;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

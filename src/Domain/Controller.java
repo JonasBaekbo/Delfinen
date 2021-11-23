@@ -139,12 +139,28 @@ public class Controller {
     }
 
     public void addTimeTooMember(){
+        Member foundMember = null;
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         for (Member member : members) {
-            //ui.printMessage(member);
+            System.out.println(member+"\n");
         }
-        ui.printMessage("Ind tast medlemets navn som du gerne vil tilføje tid til:");
+        ui.printMessage("Indtast medlemmets navn som du gerne vil tilføje tid til:");
         String memberName = ui.userInput();
+        for (Member member : members) {
+            if (memberName.equals(member.getName())){
+                if (member.getActivityForm().equals("Konkurrence")){
+                    foundMember = member;
+                }else{
+                    ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
+                }
+            }
+        }
+        ui.printMessage("Indtast medlemmets tid");
+        String time = ui.userInput();
+        foundMember.setTime(time);
+        Member m = new Member(foundMember.getName(),foundMember.getAge(), foundMember.getActivityForm(),
+                foundMember.getActivityLevel(),foundMember.getSvømmediciplin(),foundMember.getTime());
+        files.saveNewMember(MEMBER_FILE,m);
     }
 
 
