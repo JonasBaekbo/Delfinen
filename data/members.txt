@@ -10,3 +10,5 @@ Mikkel Sandell;23;Konkurrence;Aktivt;Brystsvømning
 David Ema;61;Konkurrence;Aktivt;Butterfly
 Mikkel;24;Motionist;Aktivt
 Jakob;24;Konkurrence;Aktivt;Butterfly
+Peter Lind;47;Motionist;Passivt
+Tine Marbjerg;57;Motionist;Aktivt
