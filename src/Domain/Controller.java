@@ -29,6 +29,7 @@ public class Controller {
                 case "0" -> exit();
                 case "1" -> createNewMember();
                 case "2" -> ui.printMessage(subFee.calculateExpectedSubFeeTotal(members));
+                case "4" -> addTimeTooMember();
 
             }
         }
@@ -94,6 +95,15 @@ public class Controller {
             files.saveNewMember(MEMBER_FILE, j);
         }
 
+    }
+
+    public void addTimeTooMember(){
+        ArrayList<String> members = files.getAllMembers(MEMBER_FILE);
+        for (String member : members) {
+            ui.printMessage(member);
+        }
+        ui.printMessage("Ind tast medlemets navn som du gerne vil tilføje tid til:");
+        String memberName = ui.userInput();
     }
 
 
