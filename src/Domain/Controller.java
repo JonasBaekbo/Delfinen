@@ -30,7 +30,7 @@ public class Controller {
                 case "1" -> createNewMember();
                 case "2" -> ui.printMessage(subFee.calculateExpectedSubFeeTotal(members));
                 case "5" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
-
+                case "4" -> addTimeTooMember();
             }
         }
     }
@@ -144,6 +144,14 @@ public class Controller {
                 }
             }
         }
+    }
+    public void addTimeTooMember(){
+        ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
+        for (Member member : members) {
+            //ui.printMessage(member);
+        }
+        ui.printMessage("Ind tast medlemets navn som du gerne vil tilføje tid til:");
+        String memberName = ui.userInput();
     }
 
 
