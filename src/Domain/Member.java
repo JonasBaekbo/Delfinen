@@ -74,7 +74,7 @@ public class Member {
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel+ '\n'+
-                    "svømmediciplin: " + svømmediciplin + '\n' +
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
