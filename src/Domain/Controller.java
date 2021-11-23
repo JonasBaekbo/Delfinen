@@ -10,12 +10,14 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Controller {
+    Filehandler files = new Filehandler();
+    private static final String ORDERS_FILE = "data/members.txt";
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subfee = new SubscriptionFee();
     private ArrayList<Member> members = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
-    private String svømmediciplin;
+    //private String svømmediciplin;
     private Member m;
     public void start() throws FileNotFoundException {
         ui.printMessage("Velkommen til Delfinen");
@@ -25,7 +27,7 @@ public class Controller {
             switch (ui.userInput()){
                 case "0" -> exit();
                 case "1" -> createNewMember();
-               case "2" -> ui.printMessage(subfee.calculateTotalSubscription(members));
+                case "2" -> ui.printMessage(subfee.calculateTotalSubscription(members));
 
             }
         }
@@ -58,6 +60,7 @@ public class Controller {
         }else if (Objects.equals(activityLevelChosen, "2")){
             activityLevel = "Passivt";
         }
+        String svømmediciplin = "";
         if (activityForm.equals("Konkurrence")){
             ui.printMessage("""
                     Indtast medlemmets svømmediciplin
@@ -80,12 +83,14 @@ public class Controller {
             }
 
         }
-        if (svømmediciplin != null){
-            m = new Member(name,age,activityForm,activityLevel,svømmediciplin);
+        if (!svømmediciplin.equals("")){
+            Member m = new Member(name,age,activityForm,activityLevel,svømmediciplin);
+            files.saveNewMamber(ORDERS_FILE, m);
         }else{
-            m = new Member(name,age,activityForm,activityLevel);
+            Member j = new Member(name,age,activityForm,activityLevel);
+            files.saveNewMamber(ORDERS_FILE, j);
         }
-        members.add(m);
+
     }
 
 

@@ -2,11 +2,11 @@
 package Domain;
 
 public class Member {
-    String name;
-    String age;
-    String activityForm; //e.g. motionist eller konkurrencesvømmer.
-    String activityLevel; //e.g. Aktivt eller passivt medlem.
-    String svømmediciplin = null;
+    private String name;
+    private String age;
+    private String activityForm; //e.g. motionist eller konkurrencesvømmer.
+    private String activityLevel; //e.g. Aktivt eller passivt medlem.
+    private String svømmediciplin = null;
 
 
     public Member(String name, String age, String activityForm, String activityLevel) {
@@ -73,5 +73,13 @@ public class Member {
 
     public void setActivityLevel(String activityLevel) {
         this.activityLevel = activityLevel;
+    }
+
+    public String getSvømmediciplin() {
+        return svømmediciplin;
+    }
+
+    public void setSvømmediciplin(String svømmediciplin) {
+        this.svømmediciplin = svømmediciplin;
     }
 }
