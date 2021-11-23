@@ -148,7 +148,7 @@ public class Controller {
         members.clear();
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         for (Member member : members) {
-            System.out.println(member+"\n");
+            System.out.println(member);
         }
         ui.printMessage("Indtast medlemmets navn som du gerne vil tilføje tid til:");
         String memberName = ui.userInput();
