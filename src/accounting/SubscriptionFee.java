@@ -36,7 +36,7 @@ public class SubscriptionFee {
     }
 
     private double calculateSubFee(Member member) {
-        int age = Integer.parseInt(member.getAge());
+        int age = getAge(member);
         if (age < 18) {
             subscriptionFee = below18Fee;
         } else if (age >= 60) {
@@ -60,6 +60,10 @@ public class SubscriptionFee {
         return Double.toString(totalSubscription);
 
     }
+        public int getAge(Member member){
+
+            return Integer.parseInt(member.getAge());
+        }
 
 
     @Override
