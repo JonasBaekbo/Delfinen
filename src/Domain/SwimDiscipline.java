@@ -1,15 +1,15 @@
 //@Adam Brandt Lasson
 package Domain;
 
-public class SwimDiscipline {
-    String swimDiscipline;
-    int trainingResult;
-    int date;
-    String tournamentName;
-    String tournamentLocation;
-    int tournamentTime;
+import java.util.ArrayList;
 
-    public SwimDiscipline(String swimDiscipline, int trainingResult, int date){
+public class SwimDiscipline {
+    String swimDiscipline; //e.g. butterfly, crawl, rygcrawl, brystsvømning.
+    int trainingResult; //bedste træningsresultat.
+    int date;
+
+
+    public SwimDiscipline(String swimDiscipline, int trainingResult, int date) {
         this.swimDiscipline = swimDiscipline;
         this.trainingResult = trainingResult;
         this.date = date;
@@ -38,9 +38,5 @@ public class SwimDiscipline {
     public void setDate(int date) {
         this.date = date;
     }
-    public void SwimTournament(String tournamentLocation, String tournamentName, int tournamentTime ){
-        this.tournamentLocation = tournamentLocation;
-        this.tournamentName = tournamentName;
-        this.tournamentTime = tournamentTime;
-    }
 }
+
