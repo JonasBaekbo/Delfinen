@@ -97,9 +97,12 @@ public class Controller {
 
     }
     public void showTop5Swimmers(ArrayList<Member> membersList){
+
         ui.printMessage("Konkurrencesvømmere under 18:");
+        createTableHeader();
         listAllSwimmers("Under", membersList);
-        ui.printMessage("Konkurrencesvømmere over 18:");
+        ui.printMessage("\nKonkurrencesvømmere over 18:");
+        createTableHeader();
         listAllSwimmers("Above", membersList);
 
     }
@@ -124,18 +127,29 @@ public class Controller {
 
     private void getSwimDisiplin(Member member) {
         if (Objects.equals(member.getSvømmediciplin(), "Butterfly")){
-            ui.printMessage(member.toString());
+            createTableContents(member);
+            // ui.printMessage(member.toString());
 
         }else  if (Objects.equals(member.getSvømmediciplin(), "Crawl")){
-            ui.printMessage(member.toString());
+            createTableContents(member);
 
         }else  if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")){
-            ui.printMessage(member.toString());
+            createTableContents(member);
 
         }else  if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")){
-            ui.printMessage(member.toString());
+            createTableContents(member);
 
         }
+    }
+
+    private void createTableHeader(){
+        System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktivitetsniveau", "|", "Svømmediciplin");
+        System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
+    }
+    private void createTableContents(Member member) {
+        System.out.format("%-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActivityLevel(), "|", member.getSvømmediciplin());
+        System.out.println();
     }
 
     public void addTimeTooMember(){
@@ -146,7 +160,6 @@ public class Controller {
         ui.printMessage("Ind tast medlemets navn som du gerne vil tilføje tid til:");
         String memberName = ui.userInput();
     }
-
 
 
 
