@@ -10,6 +10,7 @@ public class SubscriptionFee {
     private double above18Fee = 1600;
     private double passiveFee = 500;
     private double seniorFeeDiscount = 0.75;
+    double subscriptionFee;
 
 
     public SubscriptionFee(Member member) {
@@ -17,7 +18,6 @@ public class SubscriptionFee {
     }
 
     public double getSubscriptionFee() {
-        double subscriptionFee;
         if (!isMemberActive()) {
             subscriptionFee = passiveFee;
         } else {
@@ -36,7 +36,6 @@ public class SubscriptionFee {
     }
 
     private double calculateSubFee() {
-        double subscriptionFee;
         int age = getAge();
           if(age<18){
                 subscriptionFee=below18Fee;}
