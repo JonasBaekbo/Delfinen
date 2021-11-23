@@ -7,6 +7,7 @@ public class Member {
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
+    private int time;
 
 
     public Member(String name, String age, String activityForm, String activityLevel) {
@@ -50,7 +51,7 @@ public class Member {
 
     @Override
     public String toString() {
-        if (svømmediciplin ==null) {
+        if (svømmediciplin == null) {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
