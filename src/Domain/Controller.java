@@ -148,7 +148,7 @@ public class Controller {
         members.clear();
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         for (Member member : members) {
-            System.out.println(member+"\n");
+            System.out.println(member);
         }
         ui.printMessage("Indtast medlemmets navn som du gerne vil tilføje tid til:");
         String memberName = ui.userInput();
@@ -164,9 +164,7 @@ public class Controller {
         ui.printMessage("Indtast medlemmets tid");
         String time = ui.userInput();
         foundMember.setTime(time);
-        Member m = new Member(foundMember.getName(),foundMember.getAge(), foundMember.getActivityForm(),
-                foundMember.getActivityLevel(),foundMember.getSvømmediciplin(),foundMember.getTime());
-        files.saveNewMember(MEMBER_FILE,m,members);
+        files.saveNewMember(MEMBER_FILE,members);
     }
 
 
