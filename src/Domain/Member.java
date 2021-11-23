@@ -55,13 +55,15 @@ public class Member {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel;
+                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "----------------------------------------------" + '\n' + "";
         }else{
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel+ '\n'+
-                    "svømmediciplin: " + svømmediciplin;
+                    "svømmediciplin: " + svømmediciplin + '\n' +
+                    "----------------------------------------------" + '\n' + "";
         }
     }
 

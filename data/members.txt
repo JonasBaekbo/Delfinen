@@ -1,3 +1,8 @@
+Peter Sørensen;45;Motionist;Aktivt
+Adam Brandt Lasson;20;Motionist;Aktivt
+Mille Helbo;22;Konkurrence;Aktivt;Brystsvømning
+William Lasson;15;Motionist;Aktivt
+Knut Knutsen;27;Konkurrence;Aktivt;Butterfly
 Adam Lasson;16;Konkurrence;Aktivt;Butterfly
 Jonas Bækbo;17;Konkurrence;Aktivt;Crawl
 Johanne Weitling;22;Konkurrence;Aktivt;Rygcrawl
