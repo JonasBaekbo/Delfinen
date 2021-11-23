@@ -7,11 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
-public class Filehandler {
+public class FileHandler {
 
 
 
-    public void saveNewMamber(String FILE_PATH, Member member){
+    public void saveNewMember(String FILE_PATH, Member member){
         File file = new File(FILE_PATH);
         try {
             if ( member.getSvømmediciplin() == null){

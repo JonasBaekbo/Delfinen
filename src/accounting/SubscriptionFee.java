@@ -10,32 +10,25 @@ public class SubscriptionFee {
     private double below18Fee = 1000;
     private double above18Fee = 1600;
     private double passiveFee = 500;
-    private double seniorFeeDiscount = 0.75;
+    private double seniorFeeDiscount = 0.75;//der er 25% rabat for medlemmer over 60
     double subscriptionFee;
-
-
 
     public double getSubscriptionFee(Member member) {
         if (!isMemberActive(member)) {
             subscriptionFee = passiveFee;
         } else {
-            subscriptionFee = calculateSubFee(member);
+            subscriptionFee = calculateSubscriptionFee(member);
         }
         return subscriptionFee;
-
     }
 
     private boolean isMemberActive(Member member) {
         boolean isActive;
-        if (member.getActivityLevel().equals("Aktivt")) {
-            isActive = true;
-        } else {
-            isActive = false;
-        }
+        isActive = member.getActivityLevel().equals("Aktivt");
         return isActive;
     }
 
-    private double calculateSubFee(Member member) {
+    private double calculateSubscriptionFee(Member member) {
         int age = getAge(member);
         if (age < 18) {
             subscriptionFee = below18Fee;
@@ -44,25 +37,25 @@ public class SubscriptionFee {
         } else {
             subscriptionFee = above18Fee;
         }
-
         return subscriptionFee;
     }
 
     public String calculateTotalSubscription(ArrayList<Member> memberArrayList) {
         double totalSubscription = 0;
-        double under18SubTotal;
-        double above18SubTotal;
-        double over60SubTotal;
 
         for (Member member : memberArrayList){
-        totalSubscription += getSubscriptionFee(member);
+            totalSubscription += getSubscriptionFee(member);
         }
         return Double.toString(totalSubscription);
 
     }
-        public int getAge(Member member){
 
+        public int getAge(Member member){
             return Integer.parseInt(member.getAge());
+        }
+
+        public boolean subIsPaid(){
+
         }
 
 
