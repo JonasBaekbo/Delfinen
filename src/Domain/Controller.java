@@ -1,6 +1,7 @@
 package Domain;
 
 
+import accounting.SubscriptionFee;
 import ui.UserInterface;
 
 import java.io.FileNotFoundException;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class Controller {
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
+    private SubscriptionFee subfee = new SubscriptionFee();
     private ArrayList<Member> members = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     private String svømmediciplin;
@@ -23,7 +25,7 @@ public class Controller {
             switch (ui.userInput()){
                 case "0" -> exit();
                 case "1" -> createNewMember();
-               case "2" -> ui.printMessage(showAllMembers());
+               case "2" -> ui.printMessage(subfee.calculateTotalSubscription(members));
 
             }
         }

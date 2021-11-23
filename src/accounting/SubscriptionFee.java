@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class SubscriptionFee {
     private Member member;
-    private ArrayList<Member> memberArrayList = new ArrayList<>();
     private double below18Fee = 1000;
     private double above18Fee = 1600;
     private double passiveFee = 500;
@@ -15,23 +14,20 @@ public class SubscriptionFee {
     double subscriptionFee;
 
 
-    public SubscriptionFee(Member member) {
-        this.member = member;
-    }
 
-    public double getSubscriptionFee() {
-        if (!isMemberActive()) {
+    public double getSubscriptionFee(Member member) {
+        if (!isMemberActive(member)) {
             subscriptionFee = passiveFee;
         } else {
-            subscriptionFee = calculateSubFee();
+            subscriptionFee = calculateSubFee(member);
         }
         return subscriptionFee;
 
     }
 
-    private boolean isMemberActive() {
+    private boolean isMemberActive(Member member) {
         boolean isActive;
-        if (getActivityLevel().equals("active")) {
+        if (member.getActivityLevel().equals("Aktivt")) {
             isActive = true;
         } else {
             isActive = false;
@@ -39,8 +35,8 @@ public class SubscriptionFee {
         return isActive;
     }
 
-    private double calculateSubFee() {
-        int age = getAge();
+    private double calculateSubFee(Member member) {
+        int age = Integer.parseInt(member.getAge());
         if (age < 18) {
             subscriptionFee = below18Fee;
         } else if (age >= 60) {
@@ -52,33 +48,23 @@ public class SubscriptionFee {
         return subscriptionFee;
     }
 
-    private int getAge() {
-        int age = Integer.parseInt(member.getAge());
-        return age;
-    }
-
-
-    private String getActivityLevel() {
-        return member.getActivityLevel();
-    }
-
-    public double calculateTotalSubscription() {
+    public String calculateTotalSubscription(ArrayList<Member> memberArrayList) {
         double totalSubscription = 0;
         double under18SubTotal;
         double above18SubTotal;
         double over60SubTotal;
 
         for (Member member : memberArrayList){
-        totalSubscription += getSubscriptionFee(member)
+        totalSubscription += getSubscriptionFee(member);
         }
-        return totalSubscription;
+        return Double.toString(totalSubscription);
 
     }
 
 
     @Override
     public String toString() {
-        return "Medlem: " + member + ".\nKontingent: " + getSubscriptionFee();
+        return "Medlem: " + member + ".\nKontingent: " + getSubscriptionFee(member);
     }
 }
 
