@@ -47,24 +47,12 @@ public class SubscriptionFee {
             totalSubscription += getSubscriptionFee(member);
         }
         return Double.toString(totalSubscription);
-
     }
 
         public int getAgeAsInt(Member member){
             return Integer.parseInt(member.getAge());
         }
 
-    public String memberMissingPayment(ArrayList<Member> memberArrayList) {
-        for (Member member : memberArrayList) {
-            if (getPaymentStatus(member) == false) {
-
-            }
-        }
-        return "name";
-    }
-
-public boolean getPaymentStatus(Member member){
-        return member.isSubPaid();}
 
     @Override
     public String toString() {

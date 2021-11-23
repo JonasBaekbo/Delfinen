@@ -28,7 +28,7 @@ public class Controller {
             switch (ui.userInput()){
                 case "0" -> exit();
                 case "1" -> createNewMember();
-                case "2" -> ui.printMessage(subFee.calculateExpectedSubFeeTotal(members));
+                case "2" -> calculateExpectedSubFeeTotal();
                 case "5" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
                 case "4" -> addTimeTooMember();
             }
@@ -173,7 +173,12 @@ public class Controller {
         files.saveNewMember(MEMBER_FILE,members);
     }
 
+public void calculateExpectedSubFeeTotal(){
+       ArrayList members=files.getAllMembers(MEMBER_FILE);
+       ui.printMessage(subFee.calculateExpectedSubFeeTotal(members));
 
+
+    }
 
 
     // SKAL SLETTES SENERE! KUN TIL TEST!
