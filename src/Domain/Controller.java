@@ -164,9 +164,7 @@ public class Controller {
         ui.printMessage("Indtast medlemmets tid");
         String time = ui.userInput();
         foundMember.setTime(time);
-        Member m = new Member(foundMember.getName(),foundMember.getAge(), foundMember.getActivityForm(),
-                foundMember.getActivityLevel(),foundMember.getSvømmediciplin(),foundMember.getTime());
-        files.saveNewMember(MEMBER_FILE,m,members);
+        files.saveNewMember(MEMBER_FILE,members);
     }
 
 

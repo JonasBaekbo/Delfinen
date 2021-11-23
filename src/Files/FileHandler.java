@@ -39,6 +39,8 @@ public class FileHandler {
 
 
     }
+
+    //https://intellipaat.com/community/69798/how-to-clear-a-text-file-without-deleting-it
     public void clearFile(String FILE_PATH){
         try{
             FileWriter fw = new FileWriter(FILE_PATH, false);
@@ -50,27 +52,10 @@ public class FileHandler {
             System.out.println("Exception have been caught");
         }
     }
-    public void saveNewMember(String FILE_PATH, Member member,ArrayList<Member> members){
+    public void saveNewMember(String FILE_PATH, ArrayList<Member> members){
         File file = new File(FILE_PATH);
         clearFile(FILE_PATH);
         try {
-            /*f ( member.getSvømmediciplin() == null){
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" +member.getActivityLevel());
-                ps.close();
-            }else if (member.getTime() == null){
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin());
-                ps.close();
-            }else{
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin() + ";" +
-                        member.getTime());
-                ps.close();
-            }*/
             for (int i = 0; i < members.size(); i++) {
                 if (members.get(i).getSvømmediciplin() == null) {
                     PrintStream ps = new PrintStream(new FileOutputStream(file, true));
