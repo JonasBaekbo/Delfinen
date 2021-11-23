@@ -86,9 +86,11 @@ public class Controller {
         }
         if (!svømmediciplin.equals("")){
             Member m = new Member(name,age,activityForm,activityLevel,svømmediciplin);
+            members.add(m); // KUN TIL TEST
             files.saveNewMamber(ORDERS_FILE, m);
         }else{
             Member j = new Member(name,age,activityForm,activityLevel);
+            members.add(j); // KUN TIL TEST!
             files.saveNewMamber(ORDERS_FILE, j);
         }
 
