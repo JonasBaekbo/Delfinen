@@ -1,3 +1,4 @@
+//@ Adam
 package Domain;
 
 public class Member {

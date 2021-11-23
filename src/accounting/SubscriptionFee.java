@@ -1,23 +1,29 @@
+//@Johanne Riis-Weitling
 package accounting;
 
 import Domain.Member;
 
 public class SubscriptionFee {
+    private Member member;
+
     private double below18Fee = 1000;
-    private  double above18Fee= 1600;
-    private double passiveFee=500;
+    private double above18Fee = 1600;
+    private double passiveFee = 500;
     private double seniorFeeDiscount = 0.75;
 
 
+    public SubscriptionFee(Member member) {
+        this.member = member;
+    }
 
     public double getSubscriptionFee() {
-        double subscribtionFee;
+        double subscriptionFee;
         if (!isMemberActive()) {
-            subscribtionFee = passiveFee;
+            subscriptionFee = passiveFee;
         } else {
-            subscribtionFee = calculateSubFee();
+            subscriptionFee = calculateSubFee();
         }
-        return subscribtionFee;
+        return subscriptionFee;
 
     }
 
@@ -30,29 +36,29 @@ public class SubscriptionFee {
     }
 
     private double calculateSubFee() {
-        double subscribtionFee;
-      int age = getAge();
-          if(age<=18){
-                subscribtionFee=below18Fee;}
-            else if (age<60){
-                subscribtionFee= above18Fee;}
-            else{
-                subscribtionFee=above18Fee*seniorFeeDiscount;
-            }
-            return subscribtionFee;
+        double subscriptionFee;
+        int age = getAge();
+          if(age<18){
+                subscriptionFee=below18Fee;}
+            else if (age>=60){
+              subscriptionFee=above18Fee*seniorFeeDiscount;}
+            else{ subscriptionFee= above18Fee;}
+
+            return subscriptionFee;
         }
 
     private int getAge() {
-       //return Member.getAge();
-       // int age = Integer.parseInt(Member.getAge);
-        //TODO: fjern hardcoded return
-        return 16;
-
+       int age = Integer.parseInt(member.getAge());
+       return age;
     }
+
     private String getActivityLevel(){
-        //return Member.getActivityLevel();
-        //TODO: fjern hardcoded return
-        return "active";
+        return member.getActivityLevel();
+    }
+
+    @Override
+    public String toString() {
+        return "Medlem: " + member + ".\nKontingent: "+ getSubscriptionFee();
     }
 }
 
