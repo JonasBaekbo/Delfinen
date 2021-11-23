@@ -16,7 +16,8 @@ public class Controller {
     private String svømmediciplin;
     private Member m;
     public void start() throws FileNotFoundException {
-
+        ui.printMessage("Velkommen til Delfinen");
+        ui.printMessage("-----------------------");
         while(isRunning){
             ui.menu();
             switch (ui.userInput()){
@@ -34,7 +35,7 @@ public class Controller {
         ui.printMessage("Indtast medlemmets alder: ");
         String age = ui.userInput();
         ui.printMessage("""
-                Indtast medlemmets aktivitetsform: 
+                Indtast medlemmets aktivitetsform:
                 1) Motionssvømmer
                 2) Konkurrencesvømmer""");
         String activityFormChosen = ui.userInput();
