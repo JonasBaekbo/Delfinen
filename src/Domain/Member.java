@@ -7,7 +7,7 @@ public class Member {
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
-    private int time;
+    private String time = null;
     private boolean subPaid;
 
 
@@ -25,6 +25,15 @@ public class Member {
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
+        this.subPaid=false;
+    }
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, String time) {
+        this.name = name;
+        this.age = age;
+        this.activityForm = activityForm;
+        this.activityLevel = activityLevel;
+        this.svømmediciplin = svømmediciplin;
+        this.time = time;
         this.subPaid=false;
     }
 
@@ -69,12 +78,20 @@ public class Member {
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel + '\n' +
                     "----------------------------------------------" + '\n' + "";
+        }else if (time == null){
+            return "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktivitetsform: " + activityForm + '\n' +
+                    "Medlemsskabs status: " + activityLevel+ '\n'+
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "----------------------------------------------" + '\n' + "";
         }else{
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel+ '\n'+
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "tid: " + time + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
@@ -96,5 +113,13 @@ public class Member {
 
     public void setSvømmediciplin(String svømmediciplin) {
         this.svømmediciplin = svømmediciplin;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

@@ -97,12 +97,9 @@ public class Controller {
 
     }
     public void showTop5Swimmers(ArrayList<Member> membersList){
-
         ui.printMessage("Konkurrencesvømmere under 18:");
-        createTableHeader();
         listAllSwimmers("Under", membersList);
-        ui.printMessage("\nKonkurrencesvømmere over 18:");
-        createTableHeader();
+        ui.printMessage("Konkurrencesvømmere over 18:");
         listAllSwimmers("Above", membersList);
 
     }
@@ -153,13 +150,29 @@ public class Controller {
     }
 
     public void addTimeTooMember(){
+        Member foundMember = null;
+        members.clear();
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         for (Member member : members) {
-            //ui.printMessage(member);
+            System.out.println(member);
         }
-        ui.printMessage("Ind tast medlemets navn som du gerne vil tilføje tid til:");
+        ui.printMessage("Indtast medlemmets navn som du gerne vil tilføje tid til:");
         String memberName = ui.userInput();
+        for (Member member : members) {
+            if (memberName.equals(member.getName())){
+                if (member.getActivityForm().equals("Konkurrence")){
+                    foundMember = member;
+                }else{
+                    ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
+                }
+            }
+        }
+        ui.printMessage("Indtast medlemmets tid");
+        String time = ui.userInput();
+        foundMember.setTime(time);
+        files.saveNewMember(MEMBER_FILE,members);
     }
+
 
 
 
