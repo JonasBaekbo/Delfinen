@@ -2,6 +2,8 @@
 
 package Domain;
 
+
+
 public class TournamentResults {
     String tournamentName;
     String tournamentLocation;
@@ -36,4 +38,6 @@ public class TournamentResults {
     public void setTournamentTime(int tournamentTime) {
         this.tournamentTime = tournamentTime;
     }
+
+
 }
