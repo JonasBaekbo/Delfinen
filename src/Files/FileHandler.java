@@ -22,10 +22,16 @@ public class FileHandler {
                 ps.println(member.getName() + ";" + member.getAge() + ";"
                         + member.getActivityForm() + ";" +member.getActivityLevel());
                 ps.close();
-            }else {
+            }else if (member.getTime() == null){
                 PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                 ps.println(member.getName() + ";" + member.getAge() + ";"
                         + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin());
+                ps.close();
+            }else{
+                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+                ps.println(member.getName() + ";" + member.getAge() + ";"
+                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin() + ";" +
+                        member.getTime());
                 ps.close();
             }
         } catch (FileNotFoundException e) {

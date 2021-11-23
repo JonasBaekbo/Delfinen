@@ -7,7 +7,7 @@ public class Member {
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
-    private int time;
+    private String time = null;
 
 
     public Member(String name, String age, String activityForm, String activityLevel) {
@@ -24,6 +24,15 @@ public class Member {
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
     }
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin,String time) {
+        this.name = name;
+        this.age = age;
+        this.activityForm = activityForm;
+        this.activityLevel = activityLevel;
+        this.svømmediciplin = svømmediciplin;
+        this.time = time;
+    }
+
 
     public String getName() {
         return name;
@@ -56,12 +65,19 @@ public class Member {
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel;
-        }else{
+        }else if(time == null) {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel+ '\n'+
-                    "svømmediciplin: " + svømmediciplin;
+                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "svømmediciplin: " + svømmediciplin + '\n';
+        }else {
+            return "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktivitetsform: " + activityForm + '\n' +
+                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "svømmediciplin: " + svømmediciplin + '\n' +
+                    "Time: " + time;
         }
     }
 
@@ -82,5 +98,13 @@ public class Member {
 
     public void setSvømmediciplin(String svømmediciplin) {
         this.svømmediciplin = svømmediciplin;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
