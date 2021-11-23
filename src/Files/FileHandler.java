@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -33,16 +34,32 @@ public class FileHandler {
         }
 
     }
-    public ArrayList<String> getAllMembers(String Member_FILE_PATH){
+    public ArrayList<Member> getAllMembers(String Member_FILE_PATH){
             File file = new File(Member_FILE_PATH);
 
             try {
                 Scanner scanner = new Scanner(file);
-                ArrayList<String> members = new ArrayList<>();
+                ArrayList<Member> members = new ArrayList<>();
 
                 while (scanner.hasNext()) {
                     String foundLine = scanner.nextLine();
-                    members.add(foundLine);
+                    String[] details = foundLine.split(";");
+                    String name = details[0];
+                    String age = details[1];
+                    String activityForm = details[2];
+                    String activityLevel = details[3];
+                    if (Objects.equals(activityForm, "Konkurrence")){
+                        String diciplin = details[4];
+                        Member m = new Member(name, age, activityForm, activityLevel, diciplin);
+                        members.add(m);
+
+                    }else {
+                    Member m = new Member(name, age, activityForm, activityLevel);
+                    members.add(m);
+
+                    }
+
+
                 }
                 return members;
             } catch (FileNotFoundException e) {

@@ -29,7 +29,7 @@ public class Controller {
                 case "0" -> exit();
                 case "1" -> createNewMember();
                 case "2" -> ui.printMessage(subFee.calculateExpectedSubFeeTotal(members));
-                case "4" -> addTimeTooMember();
+                case "5" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
 
             }
         }
@@ -96,14 +96,54 @@ public class Controller {
         }
 
     }
+    public void showTop5Swimmers(ArrayList<Member> membersList){
+        ui.printMessage("Konkurrencesvømmere under 18:");
+        listAllSwimmers("Under", membersList);
+        ui.printMessage("Konkurrencesvømmere over 18:");
+        listAllSwimmers("Above", membersList);
 
-    public void addTimeTooMember(){
-        ArrayList<String> members = files.getAllMembers(MEMBER_FILE);
-        for (String member : members) {
-            ui.printMessage(member);
+    }
+    public void listAllSwimmers(String aboveOrUnder, ArrayList<Member> membersList){
+        for (Member member : membersList){
+            if (Objects.equals(member.getActivityLevel(), "Aktivt")){
+                if (Objects.equals(member.getActivityForm(), "Konkurrence")){
+                    if (Objects.equals(aboveOrUnder, "Under")){
+                        if (Integer.parseInt(member.getAge()) < 18){
+                            if (Objects.equals(member.getSvømmediciplin(), "Butterfly")){
+                                ui.printMessage(member.toString());
+
+                            }else  if (Objects.equals(member.getSvømmediciplin(), "Crawl")){
+                                ui.printMessage(member.toString());
+
+                            }else  if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")){
+                                ui.printMessage(member.toString());
+
+                            }else  if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")){
+                                ui.printMessage(member.toString());
+
+                            }
+                        }
+                    }else if (Objects.equals(aboveOrUnder, "Above")){
+                        if (Integer.parseInt(member.getAge()) >= 18){
+                            if (Objects.equals(member.getSvømmediciplin(), "Butterfly")){
+                                ui.printMessage(member.toString());
+
+                            }else  if (Objects.equals(member.getSvømmediciplin(), "Crawl")){
+                                ui.printMessage(member.toString());
+
+                            }else  if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")){
+                                ui.printMessage(member.toString());
+
+                            }else  if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")){
+                                ui.printMessage(member.toString());
+
+                            }
+                        }
+                    }
+
+                }
+            }
         }
-        ui.printMessage("Ind tast medlemets navn som du gerne vil tilføje tid til:");
-        String memberName = ui.userInput();
     }
 
 
