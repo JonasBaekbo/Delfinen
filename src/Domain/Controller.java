@@ -1,28 +1,29 @@
+//@ Mikkel Sandell
 package Domain;
 
 
+import Files.Filehandler;
 import ui.UserInterface;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Controller {
+    Filehandler files = new Filehandler();
+    private static final String ORDERS_FILE = "data/members.txt";
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
     private ArrayList<Member> members = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
-    private String svømmediciplin;
-    private Member m;
+    // private String svømmediciplin;
     public void start() throws FileNotFoundException {
         ui.printMessage("Velkommen til Delfinen");
         ui.printMessage("-----------------------");
         while(isRunning){
             ui.menu();
             switch (ui.userInput()){
-                case "0" -> exit();
-                case "1" -> createNewMember();
+               case "0" -> exit();
+               case "1" -> createNewMember();
                case "2" -> ui.printMessage(showAllMembers());
 
             }
@@ -56,6 +57,7 @@ public class Controller {
         }else if (Objects.equals(activityLevelChosen, "2")){
             activityLevel = "Passivt";
         }
+        String svømmediciplin = "";
         if (activityForm.equals("Konkurrence")){
             ui.printMessage("""
                     Indtast medlemmets svømmediciplin
@@ -78,12 +80,14 @@ public class Controller {
             }
 
         }
-        if (svømmediciplin != null){
-            m = new Member(name,age,activityForm,activityLevel,svømmediciplin);
+        if (!svømmediciplin.equals("")){
+            Member m = new Member(name,age,activityForm,activityLevel,svømmediciplin);
+            files.saveNewMamber(ORDERS_FILE, m);
         }else{
-            m = new Member(name,age,activityForm,activityLevel);
+            Member j = new Member(name,age,activityForm,activityLevel);
+            files.saveNewMamber(ORDERS_FILE, j);
         }
-        members.add(m);
+
     }
 
 
