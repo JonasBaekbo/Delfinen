@@ -7,7 +7,7 @@ public class Member {
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
-    private String time;
+    private String time = null;
     private boolean subPaid;
 
 
@@ -78,12 +78,20 @@ public class Member {
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel + '\n' +
                     "----------------------------------------------" + '\n' + "";
+        }else if (time == null){
+            return "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktivitetsform: " + activityForm + '\n' +
+                    "Medlemsskabs status: " + activityLevel+ '\n'+
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "----------------------------------------------" + '\n' + "";
         }else{
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel+ '\n'+
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "tid: " + time + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
