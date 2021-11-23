@@ -1,4 +1,4 @@
-//@ Adam
+//@ Adam Lasson
 package Domain;
 
 public class Member {
@@ -7,7 +7,8 @@ public class Member {
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
-    private String time = null;
+    private int time;
+    private boolean subPaid;
 
 
     public Member(String name, String age, String activityForm, String activityLevel) {
@@ -15,6 +16,7 @@ public class Member {
         this.age = age;
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
+        this.subPaid=false;
     }
 
     public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin) {
@@ -23,16 +25,8 @@ public class Member {
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
+        this.subPaid=false;
     }
-    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin,String time) {
-        this.name = name;
-        this.age = age;
-        this.activityForm = activityForm;
-        this.activityLevel = activityLevel;
-        this.svømmediciplin = svømmediciplin;
-        this.time = time;
-    }
-
 
     public String getName() {
         return name;
@@ -58,26 +52,30 @@ public class Member {
         this.activityForm = activityForm;
     }
 
+    public void setSubPaid(String paid) {
+        if(paid.equals("ja"))
+            this.subPaid=true;
+    }
+
+    public boolean isSubPaid() {
+        return subPaid;
+    }
+
     @Override
     public String toString() {
         if (svømmediciplin == null) {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel;
-        }else if(time == null) {
+                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "----------------------------------------------" + '\n' + "";
+        }else{
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel + '\n' +
-                    "svømmediciplin: " + svømmediciplin + '\n';
-        }else {
-            return "Medlemsnavn: " + name + '\n' +
-                    "Alder: " + age + '\n' +
-                    "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel + '\n' +
-                    "svømmediciplin: " + svømmediciplin + '\n' +
-                    "Time: " + time;
+                    "Medlemsskabs status: " + activityLevel+ '\n'+
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "----------------------------------------------" + '\n' + "";
         }
     }
 
@@ -98,13 +96,5 @@ public class Member {
 
     public void setSvømmediciplin(String svømmediciplin) {
         this.svømmediciplin = svømmediciplin;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 }

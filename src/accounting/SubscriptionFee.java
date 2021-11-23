@@ -29,7 +29,7 @@ public class SubscriptionFee {
     }
 
     private double calculateSubscriptionFee(Member member) {
-        int age = getAge(member);
+        int age = getAgeAsInt(member);
         if (age < 18) {
             subscriptionFee = below18Fee;
         } else if (age >= 60) {
@@ -50,11 +50,21 @@ public class SubscriptionFee {
 
     }
 
-        public int getAge(Member member){
+        public int getAgeAsInt(Member member){
             return Integer.parseInt(member.getAge());
         }
 
+    public String memberMissingPayment(ArrayList<Member> memberArrayList) {
+        for (Member member : memberArrayList) {
+            if (getPaymentStatus(member) == false) {
 
+            }
+        }
+        return "name";
+    }
+
+public boolean getPaymentStatus(Member member){
+        return member.isSubPaid();}
 
     @Override
     public String toString() {
