@@ -145,6 +145,7 @@ public class Controller {
 
     public void addTimeTooMember(){
         Member foundMember = null;
+        members.clear();
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         for (Member member : members) {
             System.out.println(member+"\n");
@@ -165,7 +166,7 @@ public class Controller {
         foundMember.setTime(time);
         Member m = new Member(foundMember.getName(),foundMember.getAge(), foundMember.getActivityForm(),
                 foundMember.getActivityLevel(),foundMember.getSvømmediciplin(),foundMember.getTime());
-        files.saveNewMember(MEMBER_FILE,m);
+        files.saveNewMember(MEMBER_FILE,m,members);
     }
 
 
