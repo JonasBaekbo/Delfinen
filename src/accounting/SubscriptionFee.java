@@ -40,7 +40,7 @@ public class SubscriptionFee {
         return subscriptionFee;
     }
 
-    public String calculateTotalSubscription(ArrayList<Member> memberArrayList) {
+    public String calculateExpectedSubFeeTotal(ArrayList<Member> memberArrayList) {
         double totalSubscription = 0;
 
         for (Member member : memberArrayList){
@@ -54,9 +54,6 @@ public class SubscriptionFee {
             return Integer.parseInt(member.getAge());
         }
 
-        public boolean subIsPaid(){
-
-        }
 
 
     @Override

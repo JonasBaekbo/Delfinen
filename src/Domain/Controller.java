@@ -1,7 +1,7 @@
 package Domain;
 
 
-import Files.Filehandler;
+import Files.FileHandler;
 import accounting.SubscriptionFee;
 import ui.UserInterface;
 
@@ -11,11 +11,11 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Controller {
-    Filehandler files = new Filehandler();
-    private static final String ORDERS_FILE = "data/members.txt";
+    FileHandler files = new FileHandler();
+    private static final String MEMBER_FILE = "data/members.txt";
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
-    private SubscriptionFee subfee = new SubscriptionFee();
+    private SubscriptionFee subFee = new SubscriptionFee();
     private ArrayList<Member> members = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     //private String svømmediciplin;
@@ -28,7 +28,7 @@ public class Controller {
             switch (ui.userInput()){
                 case "0" -> exit();
                 case "1" -> createNewMember();
-                case "2" -> ui.printMessage(subfee.calculateTotalSubscription(members));
+                case "2" -> ui.printMessage(subFee.calculateExpectedSubFeeTotal(members));
 
             }
         }
@@ -87,11 +87,11 @@ public class Controller {
         if (!svømmediciplin.equals("")){
             Member m = new Member(name,age,activityForm,activityLevel,svømmediciplin);
             members.add(m); // KUN TIL TEST
-            files.saveNewMamber(ORDERS_FILE, m);
+            files.saveNewMember(MEMBER_FILE, m);
         }else{
             Member j = new Member(name,age,activityForm,activityLevel);
             members.add(j); // KUN TIL TEST!
-            files.saveNewMamber(ORDERS_FILE, j);
+            files.saveNewMember(MEMBER_FILE, j);
         }
 
     }
