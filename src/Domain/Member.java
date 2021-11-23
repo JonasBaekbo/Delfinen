@@ -6,13 +6,22 @@ public class Member {
     String age;
     String activityForm; //e.g. motionist eller konkurrencesvømmer.
     String activityLevel; //e.g. Aktivt eller passivt medlem.
+    String svømmediciplin = null;
 
 
-    public Member(String name, String age, String activityForm, String activityLevel){
+    public Member(String name, String age, String activityForm, String activityLevel) {
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
+    }
+
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin) {
+        this.name = name;
+        this.age = age;
+        this.activityForm = activityForm;
+        this.activityLevel = activityLevel;
+        this.svømmediciplin = svømmediciplin;
     }
 
     public String getName() {
@@ -41,11 +50,22 @@ public class Member {
 
     @Override
     public String toString() {
-        return  "Medlemsnavn: " + name + '\n' +
-                "Alder: " + age + '\n' +
-                "Aktivitetsform: " + activityForm + '\n' +
-                "Medlemsskabs status: " + activityLevel;
+        if (svømmediciplin ==null) {
+            return "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktivitetsform: " + activityForm + '\n' +
+                    "Medlemsskabs status: " + activityLevel;
+        }else{
+            return "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktivitetsform: " + activityForm + '\n' +
+                    "Medlemsskabs status: " + activityLevel+ '\n'+
+                    "svømmediciplin: " + svømmediciplin;
+        }
     }
+
+
+
 
     public String getActivityLevel() {
         return activityLevel;

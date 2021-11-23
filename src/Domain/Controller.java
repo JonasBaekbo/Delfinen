@@ -13,13 +13,15 @@ public class Controller {
     private UserInterface ui = new UserInterface();
     private ArrayList<Member> members = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
+    private String svømmediciplin;
+    private Member m;
     public void start() throws FileNotFoundException {
 
         while(isRunning){
             ui.menu();
             switch (ui.userInput()){
                 case "0" -> exit();
-               case "1" -> createNewMember();
+                case "1" -> createNewMember();
                case "2" -> ui.printMessage(showAllMembers());
 
             }
@@ -53,7 +55,33 @@ public class Controller {
         }else if (Objects.equals(activityLevelChosen, "2")){
             activityLevel = "Passivt";
         }
-        Member m = new Member(name,age,activityForm,activityLevel);
+        if (activityForm.equals("Konkurrence")){
+            ui.printMessage("""
+                    Indtast medlemmets svømmediciplin
+                    1) Butterfly
+                    2) Crawl
+                    3) Rygcrawl
+                    4) Brystsvømning
+                    """);
+            String svømmediciplinChosen = ui.userInput();
+            if (Objects.equals(svømmediciplinChosen,"1")){
+                svømmediciplin = "Butterfly";
+            } else if (Objects.equals(svømmediciplinChosen,"2")){
+                svømmediciplin = "Crawl";
+            } else if (Objects.equals(svømmediciplinChosen,"3")){
+                svømmediciplin = "Rygcrawl";
+            }else if (Objects.equals(svømmediciplinChosen,"4")){
+                svømmediciplin = "Brystsvømning";
+            }else {
+                ui.printMessage("Ikke gyldigt indput");
+            }
+
+        }
+        if (svømmediciplin != null){
+            m = new Member(name,age,activityForm,activityLevel,svømmediciplin);
+        }else{
+            m = new Member(name,age,activityForm,activityLevel);
+        }
         members.add(m);
     }
 
