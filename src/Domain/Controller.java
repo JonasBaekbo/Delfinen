@@ -97,9 +97,14 @@ public class Controller {
 
     }
     public void showTop5Swimmers(ArrayList<Member> membersList){
-        ui.printMessage("Konkurrencesvømmere under 18:");
+        ui.printMessage("----------------------------------------------" + '\n' +
+                        "Konkurrencesvømmere under 18:" + '\n' +
+                        "----------------------------------------------");
         listAllSwimmers("Under", membersList);
-        ui.printMessage("Konkurrencesvømmere over 18:");
+
+        ui.printMessage("----------------------------------------------" + '\n' +
+                        "Konkurrencesvømmere over 18:" + '\n' +
+                        "----------------------------------------------");
         listAllSwimmers("Above", membersList);
 
     }
