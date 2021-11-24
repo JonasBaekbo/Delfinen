@@ -17,6 +17,7 @@ public class UserInterface {
 
     public void MaineMenu(){
         printMessage("""
+                
                 1) Formands menu
                 2) Træner menu
                 3) Kassér menu
@@ -26,6 +27,7 @@ public class UserInterface {
     }
     public void menuCEO(){
         printMessage("""
+                    
                     Formand
                     Foretag et valg:
                     1) Registrer nyt medlem
@@ -34,6 +36,7 @@ public class UserInterface {
     }
     public void menuCoach(){
         printMessage("""
+                    
                     Træner
                     Foretag et valg:
                     1) Tilføj tid til medlem
@@ -43,7 +46,8 @@ public class UserInterface {
                     0) Tilbage til hovedmenu""");
     }
     public void menuTreasurer(){
-        printMessage("""   
+        printMessage(""" 
+                      
                     Kassér
                     1) Opret kontingent opkrævning
                     2) Register indbetaling
