@@ -55,79 +55,85 @@ public class SubscriptionFee {
     public double getExpectedSubscriptionFeeTotal(ArrayList<Member> memberArrayList) {
         double totalSubscription = 0;
 
-        for (Member member : memberArrayList){
+        for (Member member : memberArrayList) {
             totalSubscription += getSubscriptionFee(member);
         }
         return totalSubscription;
     }
 
-        public int getAgeAsInt(Member member){
-            return Integer.parseInt(member.getAge());
-        }
+    public int getAgeAsInt(Member member) {
+        return Integer.parseInt(member.getAge());
+    }
 
 
-        public ArrayList<String> memberMissingPayment() throws FileNotFoundException {
-            ArrayList<String> members = new ArrayList<>();
-            ArrayList<Charge> charges = readSubFile();
+    public ArrayList<String> memberMissingPayment() throws FileNotFoundException {
+        ArrayList<String> members = new ArrayList<>();
+        ArrayList<Charge> charges = readSubFile();
 
-            for (int i = 0; i < charges.size(); i++) {
-                Charge charge = charges.get(i);
-                if (Objects.equals(charge.getIsPaid(), "ikke betalt")) {
-                    members.add(charge.toString());
-                }
+        for (int i = 0; i < charges.size(); i++) {
+            Charge charge = charges.get(i);
+            if (Objects.equals(charge.getIsPaid(), "ikke betalt")) {
+                members.add(charge.toString());
             }
-            return members;
         }
+        return members;
+    }
 
         //TODO: se på det duplikerede i Charge metoder
     //TODO: fejlbesked hvis input ikke kan findes
     public void makeOneSubscriptionCharge(String memberName) throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
+        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
             if (member.getName().equalsIgnoreCase(memberName)) {
                 double amount = getSubscriptionFee(member);
-                String line = member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+                String line = memberNumber + ";" + member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
                 saveToCSV(SUBSCRIPTION_FILE, line);
             }
         }
     }
 
-        public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
-            ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-            for (int i = 0; i < members.size(); i++) {
-                Member member = members.get(i);
-                double amount = getSubscriptionFee(member);
-                String line = member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
-                saveToCSV(SUBSCRIPTION_FILE, line);
-            }
+    public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
+        ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
+        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
+        for (int i = 0; i < members.size(); i++) {
+            Member member = members.get(i);
+            double amount = getSubscriptionFee(member);
+            String line = member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+            saveToCSV(SUBSCRIPTION_FILE, line);
         }
+    }
 
-        private void saveToCSV(String filePath, String line) throws FileNotFoundException {
-            PrintStream printStream = new PrintStream(new FileOutputStream(filePath, true));
-            printStream.append(line).append("\n");
-        }
+    private void saveToCSV(String filePath, String line) throws FileNotFoundException {
+        PrintStream printStream = new PrintStream(new FileOutputStream(filePath, true));
+        printStream.append(line).append("\n");
+    }
 
         //TODO: fejlbesked hvis input ikke kan findes
         public void updatePaymentStatus(String memberName) {
             try {
                 // læs filen og gem indhold i arraylist
                 ArrayList<Charge> charges = readSubFile();
+    public void updatePaymentStatus(String memberName) {
+        try {
+            // læs filen og gem indhold i arraylist
+            ArrayList<Charge> charges = readSubFile();
 
-                // ryd filen
-                files.clearFile(SUBSCRIPTION_FILE);
+            // ryd filen
+            files.clearFile(SUBSCRIPTION_FILE);
 
-                // skriv filen forfra
-                File file = new File(SUBSCRIPTION_FILE);
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+            // skriv filen forfra
+            File file = new File(SUBSCRIPTION_FILE);
+            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
 
-                // skriv hvert træk i filen
-                for (int i = 0; i < charges.size(); i++) {
-                    Charge charge = charges.get(i);
-                    if (charge.getName().equalsIgnoreCase(memberName)) {
-                        charge.setIsPaid("betalt");
-                    }
-                    ps.println(charge);
+            // skriv hvert træk i filen
+            for (int i = 0; i < charges.size(); i++) {
+                Charge charge = charges.get(i);
+                if (charge.getName().equalsIgnoreCase(memberName)) {
+                    charge.setIsPaid("betalt");
+                }
+                ps.println(charge);
 
                 }
                 ps.close();
@@ -136,28 +142,49 @@ public class SubscriptionFee {
             }
         }
 
-        public ArrayList<Charge> readSubFile() throws FileNotFoundException {
-            ArrayList<Charge> result = new ArrayList<>();
-            File file = new File(SUBSCRIPTION_FILE);
-            Scanner scanner = new Scanner(file);
+    public ArrayList<Charge> readSubFile() throws FileNotFoundException {
+        ArrayList<Charge> result = new ArrayList<>();
+        File file = new File(SUBSCRIPTION_FILE);
+        Scanner scanner = new Scanner(file);
 
-            while (scanner.hasNext()) {
-                String foundLine = scanner.nextLine();
-                String[] details = foundLine.split(";");
+        while (scanner.hasNext()) {
+            String foundLine = scanner.nextLine();
+            String[] details = foundLine.split(";");
 
-                String name = details[0];
-                String age = details[1];
-                String activityLevel = details[2];
-                String amount = details[3];
-                String isPaid = details[4];
+            String name = details[0];
+            String age = details[1];
+            String activityLevel = details[2];
+            String amount = details[3];
+            String isPaid = details[4];
 
-                Charge charge = new Charge(name, age, activityLevel, amount, isPaid);
+            Charge charge = new Charge(name, age, activityLevel, amount, isPaid);
 
-                result.add(charge);
-            }
-
-            return result;
+            result.add(charge);
         }
+
+        return result;
+    }
+
+    public static int getLinesInFile(String fileName) {
+        File file = new File(fileName);
+        int lines = 0;
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                scanner.nextLine();
+                lines++;
+            }
+            return lines;
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't read from " + file, e);
+        }
+    }
+
+    public int getNextMemberNumber(String SUBSCRIPTION_FILE) {
+        int linesInMembersFile = getLinesInFile(SUBSCRIPTION_FILE);
+
+        return linesInMembersFile;
+    }
 
     @Override
     public String toString() {
