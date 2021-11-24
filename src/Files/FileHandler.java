@@ -1,9 +1,11 @@
 //@ Mikkel Sandell
 package Files;
 
+import Domain.Controller;
 import Domain.Member;
 
 import java.io.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -91,25 +93,41 @@ public class FileHandler {
                 while (scanner.hasNext()) {
                     String foundLine = scanner.nextLine();
                     String[] details = foundLine.split(";");
+                    System.out.println(details.length);
                     String name = details[0];
                     String age = details[1];
                     String activityForm = details[2];
                     String activityLevel = details[3];
-                    if (Objects.equals(activityForm, "Konkurrence")){
-                        String diciplin = details[4];
-                        Member m = new Member(name, age, activityForm, activityLevel, diciplin);
+                    String diciplin = null;
+                    if (details.length == 7){
+                        diciplin = details[4];
+                        String time = details[5];
+                        LocalTime timeToAdd = LocalTime.parse(time);
+                        String date = details[6];
+                        if (timeToAdd != null){
+                            Member m = new Member(name, age, activityForm, activityLevel, diciplin, timeToAdd, date);
+                            members.add(m);
+
+                        }
+                    }else if (details.length == 5){
+                        diciplin = details[4];
+                        if (Objects.equals(activityForm, "Konkurrence")){
+                            Member m = new Member(name, age, activityForm, activityLevel, diciplin);
+                            members.add(m);
+
+                        }
+                    }else {
+                        Member m = new Member(name, age, activityForm, activityLevel);
                         members.add(m);
 
-                    }else {
-                    Member m = new Member(name, age, activityForm, activityLevel);
-                    members.add(m);
-
                     }
+
                 }
                 return members;
             } catch (FileNotFoundException e) {
                 throw new FileReadException("Can't read from " + file, e);
             }
         }
-    }
+
+}
 
