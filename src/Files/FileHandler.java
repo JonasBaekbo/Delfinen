@@ -7,6 +7,7 @@ import Domain.Member;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -104,7 +105,8 @@ public class FileHandler {
                     String time = details[5];
                     LocalTime timeToAdd = LocalTime.parse(time);
                     String date = details[6];
-                    LocalDate dateToAdd = LocalDate.parse(date);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate dateToAdd = LocalDate.parse(date, formatter);
                     if (timeToAdd != null) {
                         Member m = new Member(name, age, activityForm, activityLevel, diciplin, timeToAdd, dateToAdd);
                         members.add(m);
