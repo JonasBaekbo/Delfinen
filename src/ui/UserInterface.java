@@ -17,6 +17,8 @@ public class UserInterface {
                     5) Se top 5 svømmere indenfor hver svømmedisciplin (Træner)
                     6) Registrer bedste træningsresultat for svømmer (Træner)
                     7) Registrer resultat til stævne for svømmer (Træner)
+                    8) Opret kontingent opkrævning (Kasser)
+                    9) Register indbetaling (Kasser)
                     0) Slut programmet""");
     }
     public String userInput(){

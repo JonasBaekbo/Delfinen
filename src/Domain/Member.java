@@ -8,7 +8,7 @@ public class Member {
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
     private String time = null;
-    private boolean subPaid;
+
 
 
     public Member(String name, String age, String activityForm, String activityLevel) {
@@ -16,7 +16,7 @@ public class Member {
         this.age = age;
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
-        this.subPaid=false;
+
     }
 
     public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin) {
@@ -25,7 +25,7 @@ public class Member {
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
-        this.subPaid=false;
+
     }
     public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, String time) {
         this.name = name;
@@ -34,7 +34,7 @@ public class Member {
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
         this.time = time;
-        this.subPaid=false;
+
     }
 
     public String getName() {
@@ -59,15 +59,7 @@ public class Member {
 
     public void setActivityForm(String activityForm) {
         this.activityForm = activityForm;
-    }
 
-    public void setSubPaid(String paid) {
-        if(paid.equals("ja"))
-            this.subPaid=true;
-    }
-
-    public boolean isSubPaid() {
-        return subPaid;
     }
 
     @Override

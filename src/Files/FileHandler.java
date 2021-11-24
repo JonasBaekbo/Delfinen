@@ -105,8 +105,6 @@ public class FileHandler {
                     members.add(m);
 
                     }
-
-
                 }
                 return members;
             } catch (FileNotFoundException e) {
