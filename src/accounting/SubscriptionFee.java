@@ -130,7 +130,7 @@ public class SubscriptionFee {
             // skriv hvert træk i filen
             for (int i = 0; i < charges.size(); i++) {
                 Charge charge = charges.get(i);
-                if (charge.getName().equalsIgnoreCase(memberName)) {
+                if (charge.getName().equalsIgnoreCase(memberName)|| (charge.getChargeNumber().equalsIgnoreCase(memberName))){
                     charge.setIsPaid("betalt");
                 }
                 ps.println(charge);

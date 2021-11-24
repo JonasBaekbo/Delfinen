@@ -30,6 +30,10 @@ public class Charge {
 
     }
 
+    public String getChargeNumber() {
+        return chargeNumber;
+    }
+
     @Override
     public String toString() {
         return chargeNumber+";"+name + ";" + age + ";" + activityLevel + ";" + amount + ";" + isPaid;

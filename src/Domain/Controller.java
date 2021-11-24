@@ -283,7 +283,6 @@ public class Controller {
         for (String member : missingPayments) {
             ui.printMessage(member);
         }
-        treasurerMenu();
     }
 private void markAsPaid() throws FileNotFoundException {
         ui.printMessage("Følgende personer har ubetalte regninger:");
