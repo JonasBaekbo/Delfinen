@@ -8,6 +8,7 @@ public class Member {
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
     private String time = null;
+    private String date;
 
 
 
@@ -27,13 +28,15 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
 
     }
-    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, String time) {
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, String time, String date) {
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
         this.time = time;
+        this.date = date;
+
 
     }
 
@@ -84,6 +87,7 @@ public class Member {
                     "Medlemsskabs status: " + activityLevel+ '\n'+
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "tid: " + time + '\n' +
+                    "Dag: " + date + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
@@ -113,5 +117,13 @@ public class Member {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

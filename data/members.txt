@@ -9,6 +9,6 @@ Johanne Weitling;22;Konkurrence;Aktivt;Rygcrawl
 Mikkel Sandell;23;Konkurrence;Aktivt;Brystsvømning
 David Ema;61;Konkurrence;Aktivt;Butterfly
 Mikkel;24;Motionist;Aktivt
-Jakob;24;Konkurrence;Aktivt;Butterfly
+Jakob;24;Konkurrence;Aktivt;Butterfly;12,4;12-4
 Peter Lind;47;Motionist;Passivt
 Tine Marbjerg;57;Motionist;Aktivt

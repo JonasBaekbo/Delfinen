@@ -158,6 +158,8 @@ public class Controller {
     }
 
     public void addTimeTooMember() {
+        int counter=0;
+        boolean isChossing = true;
         Member foundMember = null;
         members.clear();
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
@@ -165,19 +167,30 @@ public class Controller {
             System.out.println(member);
         }
         ui.printMessage("Indtast medlemmets navn som du gerne vil tilføje tid til:");
-        String memberName = ui.userInput();
-        for (Member member : members) {
-            if (memberName.equals(member.getName())) {
-                if (member.getActivityForm().equals("Konkurrence")) {
-                    foundMember = member;
-                } else {
-                    ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
+        while (isChossing) {
+            String memberName = ui.userInput();
+            for (Member member : members) {
+                if (memberName.equals(member.getName())) {
+                    if (member.getActivityForm().equals("Konkurrence")) {
+                        foundMember = member;
+                        isChossing=false;
+                    } else {
+                        ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
+                    }
+                }else{
+                    counter++;
+                    if (counter==members.size()) {
+                        ui.printMessage("Det indtastet navn findes ikke, prøv igen");
+                    }
                 }
             }
         }
         ui.printMessage("Indtast medlemmets tid");
         String time = ui.userInput();
         foundMember.setTime(time);
+        ui.printMessage("Indtast datoen for tiden");
+        String date = ui.userInput();
+        foundMember.setDate(date);
         files.saveNewMember(MEMBER_FILE, members);
     }
 
