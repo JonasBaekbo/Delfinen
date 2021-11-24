@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Controller {
     FileHandler files = new FileHandler();
@@ -18,28 +17,54 @@ public class Controller {
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subFee = new SubscriptionFee();
     private ArrayList<Member> members = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
-    //private String svømmediciplin;
-    private Member m;
 
     public void start() throws FileNotFoundException {
         ui.printMessage("Velkommen til Delfinen");
         ui.printMessage("-----------------------");
+        maineMenu();
+    }
+
+    public void maineMenu() throws FileNotFoundException {
         while (isRunning) {
-            ui.menu();
+            ui.Mainemenu();
             switch (ui.userInput()) {
                 case "0" -> exit();
-                case "1" -> createNewMember();
-                case "2" -> createCoach();
-                case "3" -> addTimeAndDateTooMember();
-                case "4" -> bestPracticeTime();
-                case "5" -> tournamentsResults();
-                case "6" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
-                case "7" -> chargeSubscriptionFee();
-                case "8" -> markAsPaid();
-                case "9" -> calculateExpectedSubFeeTotal();
-                case "10"-> sowMissingPayments();
+                case "1" -> CEOManu();
+                case "2" -> coachMenu();
+                case "3" -> treasurerMenu();
+
             }
+        }
+    }
+
+    public void CEOManu() throws FileNotFoundException {
+        ui.menuCEO();
+        switch (ui.userInput()) {
+            case "1" -> createNewMember();
+            case "2" -> createCoach();
+            case "0" -> backTooMainMenu();
+        }
+    }
+
+    public void coachMenu() throws FileNotFoundException {
+        ui.menuCoach();
+        switch (ui.userInput()) {
+            case "1" -> addTimeAndDateTooMember();
+            case "2" -> bestPracticeTime();
+            case "3" -> tournamentsResults();
+            case "4" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
+            case "0" -> backTooMainMenu();
+        }
+    }
+
+    public void treasurerMenu() throws FileNotFoundException {
+        ui.menuTreasurer();
+        switch (ui.userInput()) {
+            case "1" -> chargeSubscriptionFee();
+            case "2" -> markAsPaid();
+            case "3" -> calculateExpectedSubFeeTotal();
+            case "4" -> sowMissingPayments();
+            case "0" -> backTooMainMenu();
         }
     }
 
@@ -185,7 +210,7 @@ public class Controller {
         System.out.println();
     }
 
-    public void addTimeAndDateTooMember() {
+    public void addTimeAndDateTooMember() throws FileNotFoundException {
         int counter=0;
         boolean isChossing = true;
         Member foundMember = null;
@@ -223,7 +248,7 @@ public class Controller {
         files.saveNewMember(MEMBER_FILE, members);
     }
 
-    public void calculateExpectedSubFeeTotal() {
+    public void calculateExpectedSubFeeTotal() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
         ui.printMessage(expectedTotal+ "kr. Kan forventes at indtjenes i kontingent");
@@ -270,5 +295,9 @@ private void markAsPaid() throws FileNotFoundException {
 
     public void exit() {
         isRunning = false;
+    }
+
+    public void backTooMainMenu() throws FileNotFoundException {
+        maineMenu();
     }
 }
