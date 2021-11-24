@@ -5,6 +5,7 @@ import accounting.SubscriptionFee;
 import ui.UserInterface;
 
 import java.io.FileNotFoundException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -160,11 +161,17 @@ public class Controller {
                 if (Objects.equals(member.getActivityForm(), "Konkurrence")) {
                     if (Objects.equals(aboveOrUnder, "Under")) {
                         if (Integer.parseInt(member.getAge()) < 18) {
+                            if (member.getTime() != null){
                             getSwimDisciplin(member);
+
+                            }
                         }
                     } else if (Objects.equals(aboveOrUnder, "Above")) {
                         if (Integer.parseInt(member.getAge()) >= 18) {
-                            getSwimDisciplin(member);
+                            if (member.getTime() != null){
+                                getSwimDisciplin(member);
+
+                            }
                         }
                     }
 
@@ -185,6 +192,7 @@ public class Controller {
 
         } else if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")) {
             createTableContents(member);
+
 
         }
     }
@@ -230,7 +238,8 @@ public class Controller {
         }
         ui.printMessage("Indtast medlemmets tid");
         String time = ui.userInput();
-        foundMember.setTime(time);
+        LocalTime timeToAdd = LocalTime.parse(time);
+        foundMember.setTime(timeToAdd);
         ui.printMessage("Indtast datoen for tiden");
         String date = ui.userInput();
         foundMember.setDate(date);
@@ -240,11 +249,25 @@ public class Controller {
     public void calculateExpectedSubFeeTotal() {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
-        ui.printMessage(Double.toString(expectedTotal) + "kr. Kan forventes at indtjenes i kontingent");
+        ui.printMessage(expectedTotal+ "kr. Kan forventes at indtjenes i kontingent");
     }
 
     private void chargeSubscriptionFee() throws FileNotFoundException {
-        subFee.makeSubscriptionCharge();
+        ui.printMessage("""
+                      Vil du:
+                        1) Opkræve kontingent for en person
+                        2) Opkræve kontingent for ALLE medlemmer""");
+        String choise=ui.userInput();
+        if(choise.equalsIgnoreCase("1")){
+            ui.printMessage("Skriv navnet på medlemmet der skal opkræves");
+            String memberName =ui.userInput();
+            subFee.makeOneSubscriptionCharge(memberName);
+        }
+        else if (choise.equalsIgnoreCase("2")){
+        subFee.makeSubscriptionChargeForAllMembers();
+        ui.printMessage("Oprettet kontingent opkrævninger for alle medlemmer!");}
+        else ui.printMessage(choise +" er et gyldigt indput. Vælg 1 eller 2");
+
 
     }
 
@@ -254,12 +277,13 @@ public class Controller {
             ui.printMessage(member);
         }
     }
-private void markAsPaid(){
+private void markAsPaid() throws FileNotFoundException {
+        ui.printMessage("Følgende personer har ubetalte regninger:");
+        sowMissingPayments();
         ui.printMessage("Skriv navnet på personen der har indbetalt");
         String memberName = ui.userInput();
         subFee.updatePaymentStatus(memberName);
 }
-
 
 
     // SKAL SLETTES SENERE! KUN TIL TEST!

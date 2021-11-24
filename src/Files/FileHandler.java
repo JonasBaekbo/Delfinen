@@ -5,6 +5,7 @@ import Domain.Coach;
 import Domain.Member;
 
 import java.io.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -96,10 +97,22 @@ public class FileHandler {
                     String age = details[1];
                     String activityForm = details[2];
                     String activityLevel = details[3];
-                    if (Objects.equals(activityForm, "Konkurrence")){
-                        String diciplin = details[4];
-                        Member m = new Member(name, age, activityForm, activityLevel, diciplin);
-                        members.add(m);
+                    String diciplin = null;
+                    if (details.length == 7){
+                        diciplin = details[4];
+                        String time = details[5];
+                        LocalTime timeToAdd = LocalTime.parse(time);
+                        String date = details[6];
+                        if (timeToAdd != null){
+                            Member m = new Member(name, age, activityForm, activityLevel, diciplin, timeToAdd, date);
+                            members.add(m);
+
+                        }
+                    }else if (details.length == 5){
+                        diciplin = details[4];
+                        if (Objects.equals(activityForm, "Konkurrence")){
+                            Member m = new Member(name, age, activityForm, activityLevel, diciplin);
+                            members.add(m);
 
                     }else {
                     Member m = new Member(name, age, activityForm, activityLevel);
