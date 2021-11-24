@@ -28,18 +28,23 @@ public class Controller {
             switch (ui.userInput()) {
                 case "0" -> exit();
                 case "1" -> createNewMember();
-                case "2" -> calculateExpectedSubFeeTotal();
-                case "3"-> sowMissingPayments();
+                case "2" -> addTimeTooMember();
+                case "3" -> bestPracticeTime();
+                case "4" -> tournamentsResults();
                 case "5" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
-                case "4" -> addTimeTooMember();
-                case "8" -> chargeSubscriptionFee();
-                case "9" ->markAsPaid();
+                case "6" -> chargeSubscriptionFee();
+                case "7" -> markAsPaid();
+                case "8" -> calculateExpectedSubFeeTotal();
+                case "9"-> sowMissingPayments();
             }
         }
     }
 
+    private void bestPracticeTime() {
+    }
 
-
+    private void tournamentsResults() {
+    }
 
     public void createNewMember() {
         ui.printMessage("Indtast medlemmets navn: ");
@@ -105,8 +110,10 @@ public class Controller {
 
     public void showTop5Swimmers(ArrayList<Member> membersList) {
         ui.printMessage("Konkurrencesvømmere under 18:");
+        createTableHeader();
         listAllSwimmers("Under", membersList);
         ui.printMessage("Konkurrencesvømmere over 18:");
+        createTableHeader();
         listAllSwimmers("Above", membersList);
 
     }
@@ -197,7 +204,7 @@ public class Controller {
     public void calculateExpectedSubFeeTotal() {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
-        ui.printMessage(Double.toString(expectedTotal));
+        ui.printMessage(Double.toString(expectedTotal) + "kr. Kan forventes at indtjenes i kontingent");
     }
 
     private void chargeSubscriptionFee() throws FileNotFoundException {
