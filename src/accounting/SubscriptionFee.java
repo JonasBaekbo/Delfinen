@@ -50,7 +50,8 @@ public class SubscriptionFee {
         } else {
             subscriptionFee = above18Fee;
         }
-        return subscriptionFee;
+
+        return Math.round(subscriptionFee);
     }
 
     public double getExpectedSubscriptionFeeTotal(ArrayList<Member> memberArrayList) {
@@ -59,7 +60,7 @@ public class SubscriptionFee {
         for (Member member : memberArrayList) {
             totalSubscription += getSubscriptionFee(member);
         }
-        return totalSubscription;
+        return Math.round(totalSubscription);
     }
 
     public int getAgeAsInt(Member member) {
@@ -90,7 +91,7 @@ public class SubscriptionFee {
                 generateAndSaveInvoiceLine(member,invoiceNumber);
             }
         }
-        new Controller().treasurerMenu();
+
     }
 
     public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
@@ -101,12 +102,11 @@ public class SubscriptionFee {
             invoiceNumber++;
             generateAndSaveInvoiceLine(member,invoiceNumber);
         }
-        new Controller().treasurerMenu();
     }
-
+//TODO: skiv beløb med to decimaler
     public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) throws FileNotFoundException {
         double amount = getSubscriptionFee(member);
-        String line = invoiceNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+        String line = invoiceNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + Math.round(amount) + ";" + "ikke betalt";
         saveToCSV(SUBSCRIPTION_FILE, line);
     }
 
