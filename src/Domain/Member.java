@@ -4,6 +4,7 @@ package Domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Member {
     private String name;
@@ -13,6 +14,7 @@ public class Member {
     private String svømmediciplin = null;
     private LocalTime time = null;
     private LocalDate date;
+    private ArrayList<Competitions> competitions= new ArrayList<>();
 
 
 
@@ -130,5 +132,14 @@ public class Member {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public void addCompetition(Competitions c){
+        competitions.add(c);
+
+    }
+
+    public ArrayList<Competitions> getCompetitions() {
+        return competitions;
     }
 }
