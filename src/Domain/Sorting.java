@@ -1,6 +1,5 @@
 package Domain;//@Mikkel Sandell
 import Domain.Member;
-
 import java.util.Comparator;
 
 public class Sorting implements Comparator<Member> {
@@ -15,13 +14,17 @@ public class Sorting implements Comparator<Member> {
     public int compare(Member o1, Member o2) {
         int resultat = 0;
         if (type.equals("age")) {
-            //resultat = Integer.compare(o1.getAge(), o2.getAge());
+            resultat = o1.getAge().compareTo(o2.getAge());
         } else if (type.equals("name")) {
             resultat = o1.getName().compareTo(o2.getName());
         } else if (type.equals("activityForm")) {
             resultat = o1.getActivityForm().compareTo(o2.getActivityForm());
         } else if (type.equals("activityLevel")) {
             resultat = o1.getActivityLevel().compareTo(o2.getActivityLevel());
+        }else if (type.equals("diciplin")){
+            resultat = o1.getSvømmediciplin().compareTo(o2.getSvømmediciplin());
+        }else if(type.equals("time")){
+            resultat = o1.getTime().compareTo(o2.getTime());
         }
         return resultat;
     }

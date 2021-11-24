@@ -5,8 +5,10 @@ import accounting.SubscriptionFee;
 import ui.UserInterface;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Controller {
@@ -198,64 +200,114 @@ public class Controller {
     public void showTop5Swimmers(ArrayList<Member> membersList) throws FileNotFoundException {
         ui.printMessage("Konkurrencesvømmere under 18:");
         createTableHeader();
-        listAllSwimmers("Under", membersList);
+        listAllSwimmersUnder18(membersList);
         ui.printMessage("Konkurrencesvømmere over 18:");
         createTableHeader();
-        listAllSwimmers("Above", membersList);
+        listAllSwimmersOver18(membersList);
         coachMenu();
     }
+    public void listAllSwimmersUnder18(ArrayList<Member> membersList) {
+        ArrayList<Member> butterflyUnder18 = new ArrayList<>();
+        ArrayList<Member> crawlUnder18 = new ArrayList<>();
+        ArrayList<Member> rygUnder18 = new ArrayList<>();
+        ArrayList<Member> brystUnder18 = new ArrayList<>();
 
-    public void listAllSwimmers(String aboveOrUnder, ArrayList<Member> membersList) {
         for (Member member : membersList) {
             if (Objects.equals(member.getActivityLevel(), "Aktivt")) {
                 if (Objects.equals(member.getActivityForm(), "Konkurrence")) {
-                    if (Objects.equals(aboveOrUnder, "Under")) {
-                        if (Integer.parseInt(member.getAge()) < 18) {
-                            if (member.getTime() != null){
-                            getSwimDisciplin(member);
 
-                            }
-                        }
-                    } else if (Objects.equals(aboveOrUnder, "Above")) {
-                        if (Integer.parseInt(member.getAge()) >= 18) {
-                            if (member.getTime() != null){
-                                getSwimDisciplin(member);
-
+                    if (Integer.parseInt(member.getAge()) <= 18) {
+                        if (member.getTime() != null) {
+                            if (Objects.equals(member.getSvømmediciplin(), "Butterfly")) {
+                                butterflyUnder18.add(member);
+                            } else if (Objects.equals(member.getSvømmediciplin(), "Crawl")) {
+                                crawlUnder18.add(member);
+                            } else if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")) {
+                                rygUnder18.add(member);
+                            } else if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")) {
+                                brystUnder18.add(member);
                             }
                         }
                     }
-
                 }
             }
         }
+        ui.printMessage("Konkurrencesvømmere i brystsvømning:");
+        writeTop5Swimmers(brystUnder18);
+        ui.printMessage("Konkurrencesvømmere i butterfly:");
+        writeTop5Swimmers(butterflyUnder18);
+        ui.printMessage("Konkurrencesvømmere i crawl:");
+        writeTop5Swimmers(crawlUnder18);
+        ui.printMessage("Konkurrencesvømmere i rygcrawl:");
+        writeTop5Swimmers(rygUnder18);
+
+    }
+    public void listAllSwimmersOver18(ArrayList<Member> membersList) {
+                    ArrayList<Member> butterflyOver18 = new ArrayList<>();
+                    ArrayList<Member> crawlOver18 = new ArrayList<>();
+                    ArrayList<Member> rygOver18 = new ArrayList<>();
+                    ArrayList<Member> brystOver18 = new ArrayList<>();
+
+                    for (Member member : membersList) {
+                        if (Objects.equals(member.getActivityLevel(), "Aktivt")) {
+                            if (Objects.equals(member.getActivityForm(), "Konkurrence")) {
+
+                                if (Integer.parseInt(member.getAge()) >= 18) {
+                                    if (member.getTime() != null) {
+                                        if (Objects.equals(member.getSvømmediciplin(), "Butterfly")) {
+                                            butterflyOver18.add(member);
+                                        } else if (Objects.equals(member.getSvømmediciplin(), "Crawl")) {
+                                            crawlOver18.add(member);
+                                        } else if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")) {
+                                            rygOver18.add(member);
+                                        } else if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")) {
+                                            brystOver18.add(member);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ui.printMessage("Konkurrencesvømmere i brystsvømning:");
+                    writeTop5Swimmers(brystOver18);
+        ui.printMessage("Konkurrencesvømmere i butterfly:");
+        writeTop5Swimmers(butterflyOver18);
+        ui.printMessage("Konkurrencesvømmere i crawl:");
+        writeTop5Swimmers(crawlOver18);
+        ui.printMessage("Konkurrencesvømmere i rygcrawl:");
+        writeTop5Swimmers(rygOver18);
+
     }
 
-    private void getSwimDisciplin(Member member) {
-        if (Objects.equals(member.getSvømmediciplin(), "Butterfly")) {
+private void writeTop5Swimmers(ArrayList<Member> membersList){
+        membersList.sort(new Sorting("time"));
+        if (membersList.size() < 5){
+    for (Member member : membersList) {
             createTableContents(member);
 
-        } else if (Objects.equals(member.getSvømmediciplin(), "Crawl")) {
-            createTableContents(member);
-
-        } else if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")) {
-            createTableContents(member);
-
-        } else if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")) {
-            createTableContents(member);
-
-
+    }
         }
-    }
+        else{
+                for (int j = 0; j < 5; j++) {
+                createTableContents(membersList.get(j));
+
+
+            }
+        }
+
+
+}
 
     private void createTableHeader() {
         System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktivitetsniveau", "|", "Svømmediciplin");
+        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktivitetsniveau", "|", "Svømmediciplin", "|", "Tid");
         System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
     private void createTableContents(Member member) {
-        System.out.format("%-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActivityLevel(), "|", member.getSvømmediciplin());
+        System.out.format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActivityLevel(), "|", member.getSvømmediciplin(), "|", member.getTime());
         System.out.println();
+
     }
 
     public void addTimeAndDateTooMember() throws FileNotFoundException {

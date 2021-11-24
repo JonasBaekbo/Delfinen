@@ -17,7 +17,6 @@ public class Member {
     private ArrayList<Competitions> competitions= new ArrayList<>();
 
 
-
     public Member(String name, String age, String activityForm, String activityLevel) {
         this.name = name;
         this.age = age;
@@ -34,6 +33,7 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
 
     }
+
     public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, LocalTime time, LocalDate date) {
         this.name = name;
         this.age = age;
@@ -79,25 +79,23 @@ public class Member {
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel + '\n' +
                     "----------------------------------------------" + '\n' + "";
-        }else if (time == null){
+        } else if (time == null) {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel+ '\n'+
+                    "Medlemsskabs status: " + activityLevel + '\n' +
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "----------------------------------------------" + '\n' + "";
-        }else{
+        } else {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel+ '\n'+
+                    "Medlemsskabs status: " + activityLevel + '\n' +
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "tid: " + time + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
-
-
 
 
     public String getActivityLevel() {
@@ -146,4 +144,6 @@ public class Member {
     public ArrayList<Competitions> getCompetitions() {
         return competitions;
     }
+
+
 }
