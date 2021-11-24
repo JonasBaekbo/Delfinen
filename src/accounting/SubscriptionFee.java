@@ -80,8 +80,6 @@ public class SubscriptionFee {
         return members;
     }
 
-        //TODO: se på det duplikerede i Charge metoder
-    //TODO: fejlbesked hvis input ikke kan findes
     public void makeOneSubscriptionCharge(String memberName) throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
@@ -91,6 +89,9 @@ public class SubscriptionFee {
                 double amount = getSubscriptionFee(member);
                 String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
                 saveToCSV(SUBSCRIPTION_FILE, line);
+            } else {
+                System.out.println("Dette er ikke et medlem");
+                break;
             }
         }
         new Controller().treasurerMenu();
@@ -115,23 +116,23 @@ public class SubscriptionFee {
         printStream.append(line).append("\n");
     }
 
-        //TODO: fejlbesked hvis input ikke kan findes
+
         public void updatePaymentStatus(String memberName) {
             try {
-                // læs filen og gem indhold i arraylist
                 ArrayList<Charge> charges = readSubFile();
-            // ryd filen
+
             files.clearFile(SUBSCRIPTION_FILE);
 
-            // skriv filen forfra
             File file = new File(SUBSCRIPTION_FILE);
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
 
-            // skriv hvert træk i filen
             for (int i = 0; i < charges.size(); i++) {
                 Charge charge = charges.get(i);
                 if (charge.getName().equalsIgnoreCase(memberName)|| (charge.getChargeNumber().equalsIgnoreCase(memberName))){
                     charge.setIsPaid("betalt");
+                } else {
+                    System.out.println("Dette er ikke et medlem i klubben");
+                    break;
                 }
                 ps.println(charge);
 
