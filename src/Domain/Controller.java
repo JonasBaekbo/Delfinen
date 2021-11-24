@@ -65,7 +65,6 @@ public class Controller {
         while (isRunning){
         ui.menuTreasurer();
         switch (ui.userInput()) {
-
             case "1" -> chargeSubscriptionFee();
             case "2" -> markAsPaid();
             case "3" -> calculateExpectedSubFeeTotal();
@@ -154,14 +153,14 @@ public class Controller {
 
     }
 
-    public void showTop5Swimmers(ArrayList<Member> membersList) {
+    public void showTop5Swimmers(ArrayList<Member> membersList) throws FileNotFoundException {
         ui.printMessage("Konkurrencesvømmere under 18:");
         createTableHeader();
         listAllSwimmers("Under", membersList);
         ui.printMessage("Konkurrencesvømmere over 18:");
         createTableHeader();
         listAllSwimmers("Above", membersList);
-
+        coachMenu();
     }
 
     public void listAllSwimmers(String aboveOrUnder, ArrayList<Member> membersList) {
@@ -259,6 +258,7 @@ public class Controller {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
         ui.printMessage(expectedTotal+ "kr. Kan forventes at indtjenes i kontingent");
+        treasurerMenu();
     }
 
     private void chargeSubscriptionFee() throws FileNotFoundException {
@@ -283,6 +283,7 @@ public class Controller {
         for (String member : missingPayments) {
             ui.printMessage(member);
         }
+        treasurerMenu();
     }
 private void markAsPaid() throws FileNotFoundException {
         ui.printMessage("Følgende personer har ubetalte regninger:");
