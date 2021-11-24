@@ -89,12 +89,13 @@ public class SubscriptionFee {
             Member member = members.get(i);
             if (member.getName().equalsIgnoreCase(memberName)) {
                 double amount = getSubscriptionFee(member);
-                String line = memberNumber + ";" + member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+                String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
                 saveToCSV(SUBSCRIPTION_FILE, line);
             }
         }
         new Controller().treasurerMenu();
     }
+
 
     public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
@@ -151,13 +152,14 @@ public class SubscriptionFee {
             String foundLine = scanner.nextLine();
             String[] details = foundLine.split(";");
 
-            String name = details[0];
-            String age = details[1];
-            String activityLevel = details[2];
-            String amount = details[3];
-            String isPaid = details[4];
+            String chargeNumber = details[0];
+            String name = details[1];
+            String age = details[2];
+            String activityLevel = details[3];
+            String amount = details[4];
+            String isPaid = details[5];
 
-            Charge charge = new Charge(name, age, activityLevel, amount, isPaid);
+            Charge charge = new Charge(chargeNumber, name, age, activityLevel, amount, isPaid);
 
             result.add(charge);
         }
