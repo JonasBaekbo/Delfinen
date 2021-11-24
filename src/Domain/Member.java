@@ -1,14 +1,17 @@
 //@ Adam Lasson
 package Domain;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Member {
     private String name;
     private String age;
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
-    private String time = null;
-    private String date;
+    private LocalTime time = null;
+    private LocalDate date;
 
 
 
@@ -28,7 +31,7 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
 
     }
-    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, String time, String date) {
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, LocalTime time, LocalDate date) {
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
@@ -110,18 +113,18 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
     public void setDate(String date) {
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 }
