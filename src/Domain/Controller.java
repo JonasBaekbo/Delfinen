@@ -26,7 +26,7 @@ public class Controller {
 
     public void maineMenu() throws FileNotFoundException {
         while (isRunning) {
-            ui.Mainemenu();
+            ui.MaineMenu();
             switch (ui.userInput()) {
                 case "0" -> exit();
                 case "1" -> CEOManu();
