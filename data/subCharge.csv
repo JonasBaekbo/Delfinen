@@ -1,21 +1,8 @@
-
-1;Adam Lasson; 22;Aktivt;1600.0;ikke betalt
-2;Jakob Sørensen; 25;Aktivt;1600.0;ikke betalt
-3;William Petersen; 16;Aktivt;1000.0;ikke betalt
-4;Mille Helbo; 22;Aktivt;1600.0;ikke betalt
-6;Mille Helbo; 22;Aktivt;1600.0;ikke betalt
-6;Knut Knutsen; 27;Passivt;500.0;ikke betalt
-6;Adam Lasson; 16;Aktivt;1000.0;ikke betalt
-6;Jonas Bækbo; 17;Aktivt;1000.0;ikke betalt
-6;Johanne Weitling; 22;Aktivt;1600.0;ikke betalt
-6;Mikkel Sandell; 23;Aktivt;1600.0;ikke betalt
-6;David Ema; 61;Aktivt;1200.0;ikke betalt
-6;Jakob; 24;Aktivt;1600.0;ikke betalt
-14;Mille Helbo; 22;Aktivt;1600.0;ikke betalt
-15;Knut Knutsen; 27;Passivt;500.0;ikke betalt
-16;Adam Lasson; 16;Aktivt;1000.0;ikke betalt
-17;Jonas Bækbo; 17;Aktivt;1000.0;ikke betalt
-18;Johanne Weitling; 22;Aktivt;1600.0;ikke betalt
-19;Mikkel Sandell; 23;Aktivt;1600.0;ikke betalt
-20;David Ema; 61;Aktivt;1200.0;ikke betalt
-21;Jakob; 24;Aktivt;1600.0;ikke betalt
+2;Mille Helbo; 22;Aktivt;betalt
+3;Knut Knutsen; 27;Passivt;500.0
+4;Adam Lasson; 16;Aktivt;1000.0
+5;Jonas Bækbo; 17;Aktivt;betalt
+6;Johanne Weitling; 22;Aktivt;1600.0
+7;Mikkel Sandell; 23;Aktivt;1600.0
+8;David Ema; 61;Aktivt;1200.0
+9;Jakob; 24;Aktivt;1600.0

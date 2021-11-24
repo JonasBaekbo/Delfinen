@@ -287,9 +287,10 @@ public class Controller {
 private void markAsPaid() throws FileNotFoundException {
         ui.printMessage("Følgende personer har ubetalte regninger:");
         sowMissingPayments();
-        ui.printMessage("Skriv navnet på personen der har indbetalt");
+        ui.printMessage("Skriv navnet eller kontingentnummer på personen der har indbetalt");
         String memberName = ui.userInput();
         subFee.updatePaymentStatus(memberName);
+
 }
 
 
