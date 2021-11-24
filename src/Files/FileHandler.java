@@ -125,7 +125,7 @@ public class FileHandler {
         }
     }
 
-    public ArrayList<Member> getAllMembers(String Member_FILE_PATH) throws FileNotFoundException {
+    public ArrayList<Member> getAllMembers(String Member_FILE_PATH) {
         File file = new File(Member_FILE_PATH);
 
         try {
