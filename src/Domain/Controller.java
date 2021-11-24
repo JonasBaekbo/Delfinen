@@ -65,6 +65,7 @@ public class Controller {
         while (isRunning){
         ui.menuTreasurer();
         switch (ui.userInput()) {
+
             case "1" -> chargeSubscriptionFee();
             case "2" -> markAsPaid();
             case "3" -> calculateExpectedSubFeeTotal();
@@ -275,8 +276,6 @@ public class Controller {
         subFee.makeSubscriptionChargeForAllMembers();
         ui.printMessage("Oprettet kontingent opkrævninger for alle medlemmer!");}
         else ui.printMessage(choice +" er et gyldigt indput. Vælg 1 eller 2");
-
-
     }
 
     private void sowMissingPayments() throws FileNotFoundException {

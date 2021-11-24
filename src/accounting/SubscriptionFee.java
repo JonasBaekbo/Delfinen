@@ -99,8 +99,9 @@ public class SubscriptionFee {
         int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
+            memberNumber++;
             double amount = getSubscriptionFee(member);
-            String line = member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+            String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
             saveToCSV(SUBSCRIPTION_FILE, line);
         }
     }
@@ -115,11 +116,6 @@ public class SubscriptionFee {
             try {
                 // læs filen og gem indhold i arraylist
                 ArrayList<Charge> charges = readSubFile();
-    public void updatePaymentStatus(String memberName) {
-        try {
-            // læs filen og gem indhold i arraylist
-            ArrayList<Charge> charges = readSubFile();
-
             // ryd filen
             files.clearFile(SUBSCRIPTION_FILE);
 
