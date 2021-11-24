@@ -50,8 +50,7 @@ public class SubscriptionFee {
         } else {
             subscriptionFee = above18Fee;
         }
-
-        return Math.round(subscriptionFee);
+        return subscriptionFee;
     }
 
     public double getExpectedSubscriptionFeeTotal(ArrayList<Member> memberArrayList) {
@@ -60,7 +59,7 @@ public class SubscriptionFee {
         for (Member member : memberArrayList) {
             totalSubscription += getSubscriptionFee(member);
         }
-        return Math.round(totalSubscription);
+        return totalSubscription;
     }
 
     public int getAgeAsInt(Member member) {
@@ -81,33 +80,35 @@ public class SubscriptionFee {
         return members;
     }
 
-    //TODO: fejlbesked hvis input ikke kan findes
     public void makeOneSubscriptionCharge(String memberName) throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
+        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
             if (member.getName().equalsIgnoreCase(memberName)) {
-                generateAndSaveInvoiceLine(member,invoiceNumber);
+                double amount = getSubscriptionFee(member);
+                String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+                saveToCSV(SUBSCRIPTION_FILE, line);
+            } else {
+                System.out.println("Dette er ikke et medlem");
+                break;
             }
         }
-
+        new Controller().treasurerMenu();
     }
+
 
     public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
+        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
-            invoiceNumber++;
-            generateAndSaveInvoiceLine(member,invoiceNumber);
+            memberNumber++;
+            double amount = getSubscriptionFee(member);
+            String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+            saveToCSV(SUBSCRIPTION_FILE, line);
         }
-    }
-
-    public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) throws FileNotFoundException {
-        double amount = getSubscriptionFee(member);
-        String line = invoiceNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + Math.round(amount) + ";" + "ikke betalt";
-        saveToCSV(SUBSCRIPTION_FILE, line);
+        new Controller().treasurerMenu();
     }
 
     private void saveToCSV(String filePath, String line) throws FileNotFoundException {
@@ -115,23 +116,21 @@ public class SubscriptionFee {
         printStream.append(line).append("\n");
     }
 
-        //TODO: fejlbesked hvis input ikke kan findes
         public void updatePaymentStatus(String memberName) {
             try {
-                // læs filen og gem indhold i arraylist
                 ArrayList<Charge> charges = readSubFile();
-            // ryd filen
             files.clearFile(SUBSCRIPTION_FILE);
-
-            // skriv filen forfra
             File file = new File(SUBSCRIPTION_FILE);
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
 
-            // skriv hvert træk i filen
+
             for (int i = 0; i < charges.size(); i++) {
                 Charge charge = charges.get(i);
                 if (charge.getName().equalsIgnoreCase(memberName)|| (charge.getChargeNumber().equalsIgnoreCase(memberName))){
                     charge.setIsPaid("betalt");
+                }else {
+                    System.out.println("Dette er ikke et medlem");
+                    break;
                 }
                 ps.println(charge);
 
@@ -182,7 +181,7 @@ public class SubscriptionFee {
         }
     }
 
-    public int getNextInvoiceNumber(String SUBSCRIPTION_FILE) {
+    public int getNextMemberNumber(String SUBSCRIPTION_FILE) {
         int linesInMembersFile = getLinesInFile(SUBSCRIPTION_FILE);
 
         return linesInMembersFile;
