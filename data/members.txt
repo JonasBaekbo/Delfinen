@@ -5,4 +5,4 @@ Jonas Bækbo;17;Konkurrence;Aktivt;Crawl
 Johanne Weitling;22;Konkurrence;Aktivt;Rygcrawl
 Mikkel Sandell;23;Konkurrence;Aktivt;Brystsvømning;02:12:05;2021-11-24
 David Ema;61;Konkurrence;Aktivt;Butterfly;12:15:12;2021-11-23
-Jakob;24;Konkurrence;Aktivt;Butterfly;01:12:10;2021-12-01
+Jakob;24;Konkurrence;Aktivt;Butterfly;01:12:10;2021-12-01;[hops;1st;12:23:12]

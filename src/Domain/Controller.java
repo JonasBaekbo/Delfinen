@@ -18,6 +18,8 @@ public class Controller {
     private SubscriptionFee subFee = new SubscriptionFee();
     private ArrayList<Member> members = new ArrayList<>();
 
+
+
     public void start() throws FileNotFoundException {
         ui.printMessage("Velkommen til Delfinen");
         ui.printMessage("-----------------------");
@@ -102,8 +104,12 @@ public class Controller {
             for (Member member : members) {
                 if (memberName.equals(member.getName())) {
                     if (member.getActivityForm().equals("Konkurrence")) {
-                        foundMember = member;
-                        isChossing=false;
+                        if (member.getTime() != null) {
+                            foundMember = member;
+                            isChossing = false;
+                        }else {
+                            ui.printMessage("det valgte medlemt har ikke en tid");
+                        }
                     } else {
                         ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
                     }
