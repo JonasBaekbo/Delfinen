@@ -28,18 +28,23 @@ public class Controller {
             switch (ui.userInput()) {
                 case "0" -> exit();
                 case "1" -> createNewMember();
-                case "2" -> calculateExpectedSubFeeTotal();
-                case "3"-> sowMissingPayments();
+                case "2" -> addTimeTooMember();
+                case "3" -> bestPracticeTime();
+                case "4" -> tournamentsResults();
                 case "5" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
-                case "4" -> addTimeTooMember();
-                case "8" -> chargeSubscriptionFee();
-                case "9" ->markAsPaid();
+                case "6" -> chargeSubscriptionFee();
+                case "7" -> markAsPaid();
+                case "8" -> calculateExpectedSubFeeTotal();
+                case "9"-> sowMissingPayments();
             }
         }
     }
 
+    private void bestPracticeTime() {
+    }
 
-
+    private void tournamentsResults() {
+    }
 
     public void createNewMember() {
         ui.printMessage("Indtast medlemmets navn: ");
