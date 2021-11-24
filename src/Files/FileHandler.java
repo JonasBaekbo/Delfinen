@@ -114,7 +114,8 @@ public class FileHandler {
                     PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                     ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
                             + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
-                            members.get(i).getTime() + ";" + members.get(i).getDate() + ";" + members.get(i).getCompetitions());
+                            members.get(i).getTime() + ";" + members.get(i).getDate() + ";" +
+                            members.get(i).getCompetition());
                     ps.close();
                 }
             }

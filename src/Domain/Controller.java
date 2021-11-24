@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Controller {
     FileHandler files = new FileHandler();
-    private static final String MEMBER_FILE = "data/members.txt";
+    private static String MEMBER_FILE = "data/members.txt";
     private static final String COACH_FILE = "data/coach.txt";
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
@@ -348,5 +348,8 @@ public class Controller {
 
     public void backTooMainMenu() throws FileNotFoundException {
         maineMenu();
+    }
+    public void updateMemberFile(String FILE_Path){
+        MEMBER_FILE = FILE_Path;
     }
 }

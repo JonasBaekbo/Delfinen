@@ -139,6 +139,10 @@ public class Member {
 
     }
 
+    public Competitions getCompetition(){
+        return competitions.get(0);
+    }
+
     public ArrayList<Competitions> getCompetitions() {
         return competitions;
     }
