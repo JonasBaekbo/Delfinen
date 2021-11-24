@@ -254,6 +254,7 @@ public class Controller {
         files.addTimeAndDateTooMember(MEMBER_FILE, members);
     }
 
+    //TODO: udskriv med to decimaler
     public void calculateExpectedSubFeeTotal() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);

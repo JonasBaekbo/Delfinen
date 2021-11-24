@@ -103,7 +103,7 @@ public class SubscriptionFee {
             generateAndSaveInvoiceLine(member,invoiceNumber);
         }
     }
-
+//TODO: skiv beløb med to decimaler
     public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) throws FileNotFoundException {
         double amount = getSubscriptionFee(member);
         String line = invoiceNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + Math.round(amount) + ";" + "ikke betalt";
