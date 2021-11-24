@@ -3,6 +3,7 @@ package Domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Member {
     private String name;
@@ -122,6 +123,9 @@ public class Member {
     }
 
     public void setDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateToAdd = LocalDate.parse(date, formatter);
+        this.date = dateToAdd;
     }
 
     public LocalDate getDate() {

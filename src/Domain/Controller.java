@@ -38,15 +38,18 @@ public class Controller {
     }
 
     public void CEOManu() throws FileNotFoundException {
+        while (isRunning){
         ui.menuCEO();
         switch (ui.userInput()) {
             case "1" -> createNewMember();
             case "2" -> createCoach();
             case "0" -> backTooMainMenu();
         }
+        }
     }
 
     public void coachMenu() throws FileNotFoundException {
+        while (isRunning){
         ui.menuCoach();
         switch (ui.userInput()) {
             case "1" -> addTimeAndDateTooMember();
@@ -55,9 +58,11 @@ public class Controller {
             case "4" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
             case "0" -> backTooMainMenu();
         }
+        }
     }
 
     public void treasurerMenu() throws FileNotFoundException {
+        while (isRunning){
         ui.menuTreasurer();
         switch (ui.userInput()) {
             case "1" -> chargeSubscriptionFee();
@@ -65,6 +70,7 @@ public class Controller {
             case "3" -> calculateExpectedSubFeeTotal();
             case "4" -> sowMissingPayments();
             case "0" -> backTooMainMenu();
+        }
         }
     }
 

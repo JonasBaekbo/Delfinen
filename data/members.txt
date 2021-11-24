@@ -1,14 +1,8 @@
-Peter Sørensen;45;Motionist;Aktivt
-Adam Brandt Lasson;20;Motionist;Aktivt
 Mille Helbo;22;Konkurrence;Aktivt;Brystsvømning
-William Lasson;15;Motionist;Aktivt
 Knut Knutsen;27;Konkurrence;Passivt;Butterfly
 Adam Lasson;16;Konkurrence;Aktivt;Butterfly
 Jonas Bækbo;17;Konkurrence;Aktivt;Crawl
 Johanne Weitling;22;Konkurrence;Aktivt;Rygcrawl
-Mikkel Sandell;23;Konkurrence;Aktivt;Brystsvømning
-David Ema;61;Konkurrence;Aktivt;Butterfly
-Mikkel;24;Motionist;Aktivt
-Jakob;24;Konkurrence;Aktivt;Butterfly;12,4;12-4
-Peter Lind;47;Motionist;Passivt
-Tine Marbjerg;57;Motionist;Aktivt
+Mikkel Sandell;23;Konkurrence;Aktivt;Brystsvømning;02:12:05;2021-11-24
+David Ema;61;Konkurrence;Aktivt;Butterfly;12:15:12;2021-11-23
+Jakob;24;Konkurrence;Aktivt;Butterfly;01:12:10;2021-12-01
