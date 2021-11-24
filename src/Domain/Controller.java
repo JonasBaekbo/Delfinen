@@ -257,7 +257,7 @@ public class Controller {
     public void calculateExpectedSubFeeTotal() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
-        ui.printMessage(expectedTotal+ "kr. Kan forventes at indtjenes i kontingent");
+        ui.printMessage(Math.round(expectedTotal)+ "kr. Kan forventes i kontingent");
         treasurerMenu();
     }
 
@@ -266,6 +266,7 @@ public class Controller {
                       Vil du:
                         1) Opkræve kontingent for en person
                         2) Opkræve kontingent for ALLE medlemmer""");
+
         String choice=ui.userInput();
         if(choice.equalsIgnoreCase("1")){
             ui.printMessage("Skriv navnet på medlemmet der skal opkræves");
@@ -275,7 +276,7 @@ public class Controller {
         else if (choice.equalsIgnoreCase("2")){
         subFee.makeSubscriptionChargeForAllMembers();
         ui.printMessage("Oprettet kontingent opkrævninger for alle medlemmer!");}
-        else ui.printMessage(choice +" er et gyldigt indput. Vælg 1 eller 2");
+        else ui.printMessage(choice +" er ikke et gyldigt indput. Vælg 1 eller 2");
     }
 
     private void sowMissingPayments() throws FileNotFoundException {
