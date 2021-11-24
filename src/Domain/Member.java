@@ -1,6 +1,7 @@
 //@ Adam Lasson
 package Domain;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Member {
@@ -10,7 +11,7 @@ public class Member {
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
     private LocalTime time = null;
-    private String date;
+    private LocalDate date;
 
 
 
@@ -30,7 +31,7 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
 
     }
-    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, LocalTime time, String date) {
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, LocalTime time, LocalDate date) {
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
@@ -123,7 +124,7 @@ public class Member {
     public void setDate(String date) {
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 }

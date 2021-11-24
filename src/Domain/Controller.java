@@ -236,11 +236,11 @@ public class Controller {
                 }
             }
         }
-        ui.printMessage("Indtast medlemmets tid");
+        ui.printMessage("Indtast medlemmets tid (MM:SS:mm)");
         String time = ui.userInput();
         LocalTime timeToAdd = LocalTime.parse(time);
         foundMember.setTime(timeToAdd);
-        ui.printMessage("Indtast datoen for tiden");
+        ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
         String date = ui.userInput();
         foundMember.setDate(date);
         files.saveNewMember(MEMBER_FILE, members);
