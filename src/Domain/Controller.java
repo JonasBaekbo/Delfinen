@@ -65,6 +65,7 @@ public class Controller {
         while (isRunning){
         ui.menuTreasurer();
         switch (ui.userInput()) {
+
             case "1" -> chargeSubscriptionFee();
             case "2" -> markAsPaid();
             case "3" -> calculateExpectedSubFeeTotal();
@@ -84,9 +85,11 @@ public class Controller {
     }
 
     private void bestPracticeTime() {
+        //TODO:
     }
 
     private void tournamentsResults() {
+        //TODO:
     }
 
     public void createNewMember() {
@@ -263,18 +266,16 @@ public class Controller {
                       Vil du:
                         1) Opkræve kontingent for en person
                         2) Opkræve kontingent for ALLE medlemmer""");
-        String choise=ui.userInput();
-        if(choise.equalsIgnoreCase("1")){
+        String choice=ui.userInput();
+        if(choice.equalsIgnoreCase("1")){
             ui.printMessage("Skriv navnet på medlemmet der skal opkræves");
             String memberName =ui.userInput();
             subFee.makeOneSubscriptionCharge(memberName);
         }
-        else if (choise.equalsIgnoreCase("2")){
+        else if (choice.equalsIgnoreCase("2")){
         subFee.makeSubscriptionChargeForAllMembers();
         ui.printMessage("Oprettet kontingent opkrævninger for alle medlemmer!");}
-        else ui.printMessage(choise +" er et gyldigt indput. Vælg 1 eller 2");
-
-
+        else ui.printMessage(choice +" er et gyldigt indput. Vælg 1 eller 2");
     }
 
     private void sowMissingPayments() throws FileNotFoundException {

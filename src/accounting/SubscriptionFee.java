@@ -79,6 +79,8 @@ public class SubscriptionFee {
         return members;
     }
 
+        //TODO: se på det duplikerede i Charge metoder
+    //TODO: fejlbesked hvis input ikke kan findes
     public void makeOneSubscriptionCharge(String memberName) throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
@@ -97,8 +99,9 @@ public class SubscriptionFee {
         int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
+            memberNumber++;
             double amount = getSubscriptionFee(member);
-            String line = member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+            String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
             saveToCSV(SUBSCRIPTION_FILE, line);
         }
     }
@@ -108,11 +111,11 @@ public class SubscriptionFee {
         printStream.append(line).append("\n");
     }
 
-    public void updatePaymentStatus(String memberName) {
-        try {
-            // læs filen og gem indhold i arraylist
-            ArrayList<Charge> charges = readSubFile();
-
+        //TODO: fejlbesked hvis input ikke kan findes
+        public void updatePaymentStatus(String memberName) {
+            try {
+                // læs filen og gem indhold i arraylist
+                ArrayList<Charge> charges = readSubFile();
             // ryd filen
             files.clearFile(SUBSCRIPTION_FILE);
 
@@ -128,12 +131,12 @@ public class SubscriptionFee {
                 }
                 ps.println(charge);
 
+                }
+                ps.close();
+            } catch (FileNotFoundException e) {
+                throw new FileReadException("Can't read from subscription file", e);
             }
-            ps.close();
-        } catch (FileNotFoundException e) {
-            throw new FileReadException("Can't read from subscription file", e);
         }
-    }
 
     public ArrayList<Charge> readSubFile() throws FileNotFoundException {
         ArrayList<Charge> result = new ArrayList<>();
