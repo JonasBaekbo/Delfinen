@@ -183,7 +183,7 @@ public class Controller {
         System.out.println();
     }
 
-    public void addTimeAndDateTooMember() {
+    public void addTimeAndDateTooMember() throws FileNotFoundException {
         int counter=0;
         boolean isChossing = true;
         Member foundMember = null;
@@ -221,7 +221,7 @@ public class Controller {
         files.saveNewMember(MEMBER_FILE, members);
     }
 
-    public void calculateExpectedSubFeeTotal() {
+    public void calculateExpectedSubFeeTotal() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
         ui.printMessage(expectedTotal+ "kr. Kan forventes at indtjenes i kontingent");
