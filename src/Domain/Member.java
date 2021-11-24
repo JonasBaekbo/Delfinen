@@ -1,13 +1,15 @@
 //@ Adam Lasson
 package Domain;
 
+import java.time.LocalTime;
+
 public class Member {
     private String name;
     private String age;
     private String activityForm; //e.g. motionist eller konkurrencesvømmer.
     private String activityLevel; //e.g. Aktivt eller passivt medlem.
     private String svømmediciplin = null;
-    private String time = null;
+    private LocalTime time = null;
     private String date;
 
 
@@ -28,7 +30,7 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
 
     }
-    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, String time, String date) {
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, LocalTime time, String date) {
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
@@ -110,11 +112,11 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 

@@ -5,6 +5,7 @@ import accounting.SubscriptionFee;
 import ui.UserInterface;
 
 import java.io.FileNotFoundException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -137,11 +138,17 @@ public class Controller {
                 if (Objects.equals(member.getActivityForm(), "Konkurrence")) {
                     if (Objects.equals(aboveOrUnder, "Under")) {
                         if (Integer.parseInt(member.getAge()) < 18) {
+                            if (member.getTime() != null){
                             getSwimDisciplin(member);
+
+                            }
                         }
                     } else if (Objects.equals(aboveOrUnder, "Above")) {
                         if (Integer.parseInt(member.getAge()) >= 18) {
-                            getSwimDisciplin(member);
+                            if (member.getTime() != null){
+                                getSwimDisciplin(member);
+
+                            }
                         }
                     }
 
@@ -162,6 +169,7 @@ public class Controller {
 
         } else if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")) {
             createTableContents(member);
+
 
         }
     }
@@ -207,7 +215,8 @@ public class Controller {
         }
         ui.printMessage("Indtast medlemmets tid");
         String time = ui.userInput();
-        foundMember.setTime(time);
+        LocalTime timeToAdd = LocalTime.parse(time);
+        foundMember.setTime(timeToAdd);
         ui.printMessage("Indtast datoen for tiden");
         String date = ui.userInput();
         foundMember.setDate(date);
@@ -252,7 +261,6 @@ private void markAsPaid() throws FileNotFoundException {
         String memberName = ui.userInput();
         subFee.updatePaymentStatus(memberName);
 }
-
 
 
     // SKAL SLETTES SENERE! KUN TIL TEST!
