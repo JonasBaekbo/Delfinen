@@ -186,7 +186,7 @@ public class Controller {
     public void calculateExpectedSubFeeTotal() {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
-        ui.printMessage(Double.toString(expectedTotal));
+        ui.printMessage(Double.toString(expectedTotal) + "kr. Kan forventes at indtjenes i kontingent");
     }
 
     private void chargeSubscriptionFee() throws FileNotFoundException {
