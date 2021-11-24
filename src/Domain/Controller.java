@@ -87,8 +87,44 @@ public class Controller {
         //TODO:
     }
 
-    private void tournamentsResults() {
-        //TODO:
+    private void tournamentsResults() throws FileNotFoundException {
+        int counter=0;
+        boolean isChossing = true;
+        Member foundMember = null;
+        members.clear();
+        ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
+        for (Member member : members) {
+            System.out.println(member);
+        }
+        ui.printMessage("Indtast medlemmets navn som har deltaget i et stævne:");
+        while (isChossing) {
+            String memberName = ui.userInput();
+            for (Member member : members) {
+                if (memberName.equals(member.getName())) {
+                    if (member.getActivityForm().equals("Konkurrence")) {
+                        foundMember = member;
+                        isChossing=false;
+                    } else {
+                        ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
+                    }
+                }else{
+                    counter++;
+                    if (counter==members.size()) {
+                        ui.printMessage("Det indtastet navn findes ikke, prøv igen");
+                    }
+                }
+            }
+        }
+        ui.printMessage("Indtast navnet på stævnet:");
+        String tournamentName = ui.userInput();
+        ui.printMessage("Indtast placeringen til stævnet:");
+        String place = ui.userInput();
+        ui.printMessage("Indtast tiden til stævnet (MM:SS:mm):");
+        String time = ui.userInput();
+        LocalTime timeToAdd = LocalTime.parse(time);
+        Competitions c = new Competitions(tournamentName,place,timeToAdd);
+        foundMember.addCompetition(c);
+        files.addCompetitonTooMamber(MEMBER_FILE, members);
     }
 
     public void createNewMember() {
@@ -284,7 +320,7 @@ public class Controller {
             ui.printMessage(member);
         }
     }
-private void markAsPaid() throws FileNotFoundException {
+    private void markAsPaid() throws FileNotFoundException {
         ui.printMessage("Følgende personer har ubetalte regninger:");
         sowMissingPayments();
         ui.printMessage("Skriv navnet eller kontingentnummer på personen der har indbetalt");

@@ -80,9 +80,45 @@ public class FileHandler {
                             + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
                             members.get(i).getTime() + ";" + members.get(i).getDate());
                     ps.close();
-                    new Controller().coachMenu();
                 }
             }
+            new Controller().coachMenu();
+        } catch (FileNotFoundException e) {
+            throw new FileWriteException("Can't write to " + file, e);
+
+        }
+    }
+
+    public void addCompetitonTooMamber(String FILE_PATH, ArrayList<Member> members) {
+        File file = new File(FILE_PATH);
+        clearFile(FILE_PATH);
+        try {
+            for (int i = 0; i < members.size(); i++) {
+                if (members.get(i).getSvømmediciplin() == null) {
+                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
+                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel());
+                    ps.close();
+                } else if (members.get(i).getTime() == null) {
+                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
+                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin());
+                    ps.close();
+                } else if (members.get(i).getCompetitions().size() == 0) {
+                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
+                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
+                            members.get(i).getTime() + ";" + members.get(i).getDate());
+                    ps.close();
+                } else {
+                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
+                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
+                            members.get(i).getTime() + ";" + members.get(i).getDate() + ";" + members.get(i).getCompetitions());
+                    ps.close();
+                }
+            }
+            new Controller().coachMenu();
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
 
@@ -148,5 +184,7 @@ public class FileHandler {
 
         }
     }
-}
+
+
+    }
 
