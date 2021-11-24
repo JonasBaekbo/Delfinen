@@ -105,8 +105,10 @@ public class Controller {
 
     public void showTop5Swimmers(ArrayList<Member> membersList) {
         ui.printMessage("Konkurrencesvømmere under 18:");
+        createTableHeader();
         listAllSwimmers("Under", membersList);
         ui.printMessage("Konkurrencesvømmere over 18:");
+        createTableHeader();
         listAllSwimmers("Above", membersList);
 
     }
