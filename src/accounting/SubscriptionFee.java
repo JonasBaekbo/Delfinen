@@ -1,6 +1,7 @@
 //@Johanne Riis-Weitling
 package accounting;
 
+import Domain.Controller;
 import Domain.Member;
 import Files.FileHandler;
 import Files.FileReadException;
@@ -92,6 +93,7 @@ public class SubscriptionFee {
                 saveToCSV(SUBSCRIPTION_FILE, line);
             }
         }
+        new Controller().treasurerMenu();
     }
 
     public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
@@ -104,6 +106,7 @@ public class SubscriptionFee {
             String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
             saveToCSV(SUBSCRIPTION_FILE, line);
         }
+        new Controller().treasurerMenu();
     }
 
     private void saveToCSV(String filePath, String line) throws FileNotFoundException {
@@ -133,6 +136,7 @@ public class SubscriptionFee {
 
                 }
                 ps.close();
+                new Controller().treasurerMenu();
             } catch (FileNotFoundException e) {
                 throw new FileReadException("Can't read from subscription file", e);
             }
