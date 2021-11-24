@@ -1,6 +1,7 @@
 //@ Mikkel Sandell
 package Files;
 
+import Domain.Coach;
 import Domain.Member;
 
 import java.io.*;
@@ -111,5 +112,17 @@ public class FileHandler {
                 throw new FileReadException("Can't read from " + file, e);
             }
         }
+
+    public void saveNewCoach(String FILE_PATH, Coach coach) {
+        File file = new File(FILE_PATH);
+        try {
+        PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+        ps.println(coach.getName() + ";" + coach.getAge());
+        ps.close();
+        } catch (FileNotFoundException e) {
+            throw new FileWriteException("Can't write to " + file, e);
+
+        }
     }
+}
 

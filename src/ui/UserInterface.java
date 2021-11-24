@@ -11,14 +11,15 @@ public class UserInterface {
                                         
                     Foretag et valg:
                     1) Registrer nyt medlem (Formand)
-                    2) Tilføj tid til medlem (Træner)
-                    3) Registrer bedste træningsresultat for svømmer (Træner)
-                    4) Registrer resultat til stævne for svømmer (Træner)
-                    5) Se top 5 svømmere indenfor hver svømmedisciplin (Træner)
-                    6) Opret kontingent opkrævning (Kasser)
-                    7) Register indbetaling (Kasser)
-                    8) Se forventet indbetaling af kontingentet (Kasser)
-                    9) Se oversigt over medlemmer i restance (Kasser)
+                    2) Registrer ny træner (Formand)
+                    3) Tilføj tid til medlem (Træner)
+                    4) Registrer bedste træningsresultat for svømmer (Træner)
+                    5) Registrer resultat til stævne for svømmer (Træner)
+                    6) Se top 5 svømmere indenfor hver svømmedisciplin (Træner)
+                    7) Opret kontingent opkrævning (Kasser)
+                    8) Register indbetaling (Kasser)
+                    9) Se forventet indbetaling af kontingentet (Kasser)
+                    10) Se oversigt over medlemmer i restance (Kasser)
                     0) Slut programmet""");
     }
     public String userInput(){

@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Controller {
     FileHandler files = new FileHandler();
     private static final String MEMBER_FILE = "data/members.txt";
+    private static final String COACH_FILE = "data/coach.txt";
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subFee = new SubscriptionFee();
@@ -28,16 +29,26 @@ public class Controller {
             switch (ui.userInput()) {
                 case "0" -> exit();
                 case "1" -> createNewMember();
-                case "2" -> addTimeTooMember();
-                case "3" -> bestPracticeTime();
-                case "4" -> tournamentsResults();
-                case "5" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
-                case "6" -> chargeSubscriptionFee();
-                case "7" -> markAsPaid();
-                case "8" -> calculateExpectedSubFeeTotal();
-                case "9"-> sowMissingPayments();
+                case "2" -> createCoach();
+                case "3" -> addTimeAndDateTooMember();
+                case "4" -> bestPracticeTime();
+                case "5" -> tournamentsResults();
+                case "6" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
+                case "7" -> chargeSubscriptionFee();
+                case "8" -> markAsPaid();
+                case "9" -> calculateExpectedSubFeeTotal();
+                case "10"-> sowMissingPayments();
             }
         }
+    }
+
+    private void createCoach() {
+        ui.printMessage("Indtast træneres navn: ");
+        String name = ui.userInput();
+        ui.printMessage("Indtast træneres alder: ");
+        String age = ui.userInput();
+        Coach m = new Coach(name, age);
+        files.saveNewCoach(COACH_FILE, m);
     }
 
     private void bestPracticeTime() {
@@ -164,7 +175,7 @@ public class Controller {
         System.out.println();
     }
 
-    public void addTimeTooMember() {
+    public void addTimeAndDateTooMember() {
         int counter=0;
         boolean isChossing = true;
         Member foundMember = null;
