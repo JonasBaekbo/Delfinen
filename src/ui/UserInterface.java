@@ -6,6 +6,15 @@ import java.util.Scanner;
 
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
+    public String userInput(){
+
+        return scanner.nextLine();
+    }
+
+    public void printMessage(String s) {
+        System.out.println(s);
+    }
+
     public void Mainemenu(){
         printMessage("""
                 1) Formands menu
@@ -15,26 +24,15 @@ public class UserInterface {
                 """);
 
     }
-
-    public String userInput(){
-
-        return scanner.nextLine();
-    }
-
-    public void printMessage(String s) {
-        System.out.println(s);
-    }
     public void menuCEO(){
-        printMessage("""
-                                        
+        printMessage("""            
                     Foretag et valg:
                     1) Registrer nyt medlem (Formand)
                     2) Registrer ny træner (Formand)
                     0) Tilbage til hovedmenu""");
     }
     public void menuCoach(){
-        printMessage("""
-                                        
+        printMessage("""            
                     Foretag et valg:
                     1) Tilføj tid til medlem (Træner)
                     2) Registrer bedste træningsresultat for svømmer (Træner)
@@ -43,8 +41,7 @@ public class UserInterface {
                     0) Tilbage til hovedmenu""");
     }
     public void menuTreasurer(){
-        printMessage("""
-                                        
+        printMessage("""                
                     Foretag et valg:
                     1) Opret kontingent opkrævning (Kasser)
                     2) Register indbetaling (Kasser)
