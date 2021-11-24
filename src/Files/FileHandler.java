@@ -2,7 +2,9 @@
 package Files;
 
 import Domain.Coach;
+import Domain.Controller;
 import Domain.Member;
+import ui.UserInterface;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -12,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class FileHandler {
 
+public class FileHandler {
 
     public void saveNewMember(String FILE_PATH, Member member) {
         File file = new File(FILE_PATH);
@@ -34,6 +36,7 @@ public class FileHandler {
                         + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin() + ";" +
                         member.getTime());
                 ps.close();
+                new Controller().CEOManu();
             }
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
@@ -56,7 +59,7 @@ public class FileHandler {
         }
     }
 
-    public void saveNewMember(String FILE_PATH, ArrayList<Member> members) {
+    public void addTimeAndDateTooMember(String FILE_PATH, ArrayList<Member> members) {
         File file = new File(FILE_PATH);
         clearFile(FILE_PATH);
         try {
@@ -77,6 +80,7 @@ public class FileHandler {
                             + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
                             members.get(i).getTime() + ";" + members.get(i).getDate());
                     ps.close();
+                    new Controller().coachMenu();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -138,6 +142,7 @@ public class FileHandler {
         PrintStream ps = new PrintStream(new FileOutputStream(file, true));
         ps.println(coach.getName() + ";" + coach.getAge());
         ps.close();
+        new Controller().CEOManu();
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
 
