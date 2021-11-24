@@ -80,34 +80,34 @@ public class SubscriptionFee {
         return members;
     }
 
-        //TODO: se på det duplikerede i Charge metoder
     //TODO: fejlbesked hvis input ikke kan findes
     public void makeOneSubscriptionCharge(String memberName) throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
+        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
             if (member.getName().equalsIgnoreCase(memberName)) {
-                double amount = getSubscriptionFee(member);
-                String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
-                saveToCSV(SUBSCRIPTION_FILE, line);
+                generateAndSaveInvoiceLine(member,invoiceNumber);
             }
         }
         new Controller().treasurerMenu();
     }
 
-
     public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
+        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
-            memberNumber++;
-            double amount = getSubscriptionFee(member);
-            String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
-            saveToCSV(SUBSCRIPTION_FILE, line);
+            invoiceNumber++;
+            generateAndSaveInvoiceLine(member,invoiceNumber);
         }
         new Controller().treasurerMenu();
+    }
+
+    public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) throws FileNotFoundException {
+        double amount = getSubscriptionFee(member);
+        String line = invoiceNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+        saveToCSV(SUBSCRIPTION_FILE, line);
     }
 
     private void saveToCSV(String filePath, String line) throws FileNotFoundException {
@@ -182,7 +182,7 @@ public class SubscriptionFee {
         }
     }
 
-    public int getNextMemberNumber(String SUBSCRIPTION_FILE) {
+    public int getNextInvoiceNumber(String SUBSCRIPTION_FILE) {
         int linesInMembersFile = getLinesInFile(SUBSCRIPTION_FILE);
 
         return linesInMembersFile;
