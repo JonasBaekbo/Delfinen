@@ -79,7 +79,21 @@ public class SubscriptionFee {
             return members;
         }
 
-        public void makeSubscriptionCharge() throws FileNotFoundException {
+        //TODO: se på det duplikerede i Charge metoder
+    //TODO: fejlbesked hvis input ikke kan findes
+    public void makeOneSubscriptionCharge(String memberName) throws FileNotFoundException {
+        ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
+        for (int i = 0; i < members.size(); i++) {
+            Member member = members.get(i);
+            if (member.getName().equalsIgnoreCase(memberName)) {
+                double amount = getSubscriptionFee(member);
+                String line = member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
+                saveToCSV(SUBSCRIPTION_FILE, line);
+            }
+        }
+    }
+
+        public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
             ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
             for (int i = 0; i < members.size(); i++) {
                 Member member = members.get(i);
@@ -94,6 +108,7 @@ public class SubscriptionFee {
             printStream.append(line).append("\n");
         }
 
+        //TODO: fejlbesked hvis input ikke kan findes
         public void updatePaymentStatus(String memberName) {
             try {
                 // læs filen og gem indhold i arraylist
