@@ -50,7 +50,8 @@ public class SubscriptionFee {
         } else {
             subscriptionFee = above18Fee;
         }
-        return subscriptionFee;
+
+        return Math.round(subscriptionFee);
     }
 
     public double getExpectedSubscriptionFeeTotal(ArrayList<Member> memberArrayList) {
@@ -59,7 +60,7 @@ public class SubscriptionFee {
         for (Member member : memberArrayList) {
             totalSubscription += getSubscriptionFee(member);
         }
-        return totalSubscription;
+        return Math.round(totalSubscription);
     }
 
     public int getAgeAsInt(Member member) {
@@ -80,50 +81,61 @@ public class SubscriptionFee {
         return members;
     }
 
-    public void makeOneSubscriptionCharge(String memberName) throws FileNotFoundException {
+    public void makeOneSubscriptionCharge(String memberName){
+        try {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
+        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
             if (member.getName().equalsIgnoreCase(memberName)) {
-                double amount = getSubscriptionFee(member);
-                String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
-                saveToCSV(SUBSCRIPTION_FILE, line);
+                generateAndSaveInvoiceLine(member,invoiceNumber);
             } else {
-                System.out.println("Dette er ikke et medlem");
-                break;
             }
         }
         new Controller().treasurerMenu();
-    }
+    } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't find the file you're looking for", e);
+        }}
 
 
-    public void makeSubscriptionChargeForAllMembers() throws FileNotFoundException {
+        public void makeSubscriptionChargeForAllMembers() {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int memberNumber = getNextMemberNumber(SUBSCRIPTION_FILE);
+        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
         for (int i = 0; i < members.size(); i++) {
             Member member = members.get(i);
-            memberNumber++;
-            double amount = getSubscriptionFee(member);
-            String line = memberNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + amount + ";" + "ikke betalt";
-            saveToCSV(SUBSCRIPTION_FILE, line);
+            invoiceNumber++;
+            generateAndSaveInvoiceLine(member,invoiceNumber);
         }
-        new Controller().treasurerMenu();
     }
 
-    private void saveToCSV(String filePath, String line) throws FileNotFoundException {
-        PrintStream printStream = new PrintStream(new FileOutputStream(filePath, true));
-        printStream.append(line).append("\n");
+    public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) {
+       double amount = getSubscriptionFee(member);
+        String line = invoiceNumber+";"+ member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + Math.round(amount) + ";" + "ikke betalt";
+        saveToCSV(SUBSCRIPTION_FILE, line);
     }
 
+    private void saveToCSV(String filePath, String line){
+        try {
+            PrintStream printStream = new PrintStream(new FileOutputStream(filePath, true));
+            printStream.append(line).append("\n");
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't find the file you're looking for", e);
+        }
+    }
+
+        //TODO: fejlbesked hvis input ikke kan findes
         public void updatePaymentStatus(String memberName) {
             try {
+                // læs filen og gem indhold i arraylist
                 ArrayList<Charge> charges = readSubFile();
+            // ryd filen
             files.clearFile(SUBSCRIPTION_FILE);
+
+            // skriv filen forfra
             File file = new File(SUBSCRIPTION_FILE);
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
 
-
+            // skriv hvert træk i filen
             for (int i = 0; i < charges.size(); i++) {
                 Charge charge = charges.get(i);
                 if (charge.getName().equalsIgnoreCase(memberName)|| (charge.getChargeNumber().equalsIgnoreCase(memberName))){
@@ -143,27 +155,38 @@ public class SubscriptionFee {
         }
 
     public ArrayList<Charge> readSubFile() throws FileNotFoundException {
-        ArrayList<Charge> result = new ArrayList<>();
-        File file = new File(SUBSCRIPTION_FILE);
-        Scanner scanner = new Scanner(file);
+        try {
+            ArrayList<Charge> result = new ArrayList<>();
+            File file = new File(SUBSCRIPTION_FILE);
+            Scanner scanner = new Scanner(file);
 
-        while (scanner.hasNext()) {
-            String foundLine = scanner.nextLine();
-            String[] details = foundLine.split(";");
+            while (scanner.hasNext()) {
+                String foundLine = scanner.nextLine();
+                String[] details = foundLine.split(";");
 
-            String chargeNumber = details[0];
-            String name = details[1];
-            String age = details[2];
-            String activityLevel = details[3];
-            String amount = details[4];
-            String isPaid = details[5];
+                String chargeNumber = details[0];
+                String name = details[1];
+                String age = details[2];
+                String activityLevel = details[3];
+                String amount = details[4];
+                String isPaid = details[5];
 
-            Charge charge = new Charge(chargeNumber, name, age, activityLevel, amount, isPaid);
+                Charge charge = new Charge(chargeNumber, name, age, activityLevel, amount, isPaid);
 
-            result.add(charge);
-        }
+                result.add(charge);
+            }
 
-        return result;
+            return result;
+
+         } catch (FileNotFoundException e) {
+        throw new FileReadException("Can't read from subscription file", e);
+    }}
+
+
+
+    public int getNextInvoiceNumber(String SUBSCRIPTION_FILE) {
+        int linesInMembersFile = getLinesInFile(SUBSCRIPTION_FILE);
+        return linesInMembersFile;
     }
 
     public static int getLinesInFile(String fileName) {
@@ -179,12 +202,6 @@ public class SubscriptionFee {
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't read from " + file, e);
         }
-    }
-
-    public int getNextMemberNumber(String SUBSCRIPTION_FILE) {
-        int linesInMembersFile = getLinesInFile(SUBSCRIPTION_FILE);
-
-        return linesInMembersFile;
     }
 
     @Override
