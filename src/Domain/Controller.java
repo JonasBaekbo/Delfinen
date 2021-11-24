@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Controller {
     FileHandler files = new FileHandler();
     private static final String MEMBER_FILE = "data/members.txt";
+    private static final String COACH_FILE = "data/coach.txt";
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subFee = new SubscriptionFee();
@@ -29,16 +30,26 @@ public class Controller {
             switch (ui.userInput()) {
                 case "0" -> exit();
                 case "1" -> createNewMember();
-                case "2" -> addTimeTooMember();
-                case "3" -> bestPracticeTime();
-                case "4" -> tournamentsResults();
-                case "5" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
-                case "6" -> chargeSubscriptionFee();
-                case "7" -> markAsPaid();
-                case "8" -> calculateExpectedSubFeeTotal();
-                case "9"-> sowMissingPayments();
+                case "2" -> createCoach();
+                case "3" -> addTimeAndDateTooMember();
+                case "4" -> bestPracticeTime();
+                case "5" -> tournamentsResults();
+                case "6" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
+                case "7" -> chargeSubscriptionFee();
+                case "8" -> markAsPaid();
+                case "9" -> calculateExpectedSubFeeTotal();
+                case "10"-> sowMissingPayments();
             }
         }
+    }
+
+    private void createCoach() {
+        ui.printMessage("Indtast træneres navn: ");
+        String name = ui.userInput();
+        ui.printMessage("Indtast træneres alder: ");
+        String age = ui.userInput();
+        Coach m = new Coach(name, age);
+        files.saveNewCoach(COACH_FILE, m);
     }
 
     private void bestPracticeTime() {
@@ -172,7 +183,7 @@ public class Controller {
         System.out.println();
     }
 
-    public void addTimeTooMember() {
+    public void addTimeAndDateTooMember() {
         int counter=0;
         boolean isChossing = true;
         Member foundMember = null;
@@ -213,11 +224,25 @@ public class Controller {
     public void calculateExpectedSubFeeTotal() {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
-        ui.printMessage(Double.toString(expectedTotal) + "kr. Kan forventes at indtjenes i kontingent");
+        ui.printMessage(expectedTotal+ "kr. Kan forventes at indtjenes i kontingent");
     }
 
     private void chargeSubscriptionFee() throws FileNotFoundException {
-        subFee.makeSubscriptionCharge();
+        ui.printMessage("""
+                      Vil du:
+                        1) Opkræve kontingent for en person
+                        2) Opkræve kontingent for ALLE medlemmer""");
+        String choise=ui.userInput();
+        if(choise.equalsIgnoreCase("1")){
+            ui.printMessage("Skriv navnet på medlemmet der skal opkræves");
+            String memberName =ui.userInput();
+            subFee.makeOneSubscriptionCharge(memberName);
+        }
+        else if (choise.equalsIgnoreCase("2")){
+        subFee.makeSubscriptionChargeForAllMembers();
+        ui.printMessage("Oprettet kontingent opkrævninger for alle medlemmer!");}
+        else ui.printMessage(choise +" er et gyldigt indput. Vælg 1 eller 2");
+
 
     }
 
@@ -227,7 +252,9 @@ public class Controller {
             ui.printMessage(member);
         }
     }
-private void markAsPaid(){
+private void markAsPaid() throws FileNotFoundException {
+        ui.printMessage("Følgende personer har ubetalte regninger:");
+        sowMissingPayments();
         ui.printMessage("Skriv navnet på personen der har indbetalt");
         String memberName = ui.userInput();
         subFee.updatePaymentStatus(memberName);

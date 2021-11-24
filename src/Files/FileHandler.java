@@ -1,7 +1,7 @@
 //@ Mikkel Sandell
 package Files;
 
-import Domain.Controller;
+import Domain.Coach;
 import Domain.Member;
 
 import java.io.*;
@@ -93,7 +93,6 @@ public class FileHandler {
                 while (scanner.hasNext()) {
                     String foundLine = scanner.nextLine();
                     String[] details = foundLine.split(";");
-                    System.out.println(details.length);
                     String name = details[0];
                     String age = details[1];
                     String activityForm = details[2];
@@ -115,13 +114,11 @@ public class FileHandler {
                             Member m = new Member(name, age, activityForm, activityLevel, diciplin);
                             members.add(m);
 
-                        }
                     }else {
-                        Member m = new Member(name, age, activityForm, activityLevel);
-                        members.add(m);
+                    Member m = new Member(name, age, activityForm, activityLevel);
+                    members.add(m);
 
                     }
-
                 }
                 return members;
             } catch (FileNotFoundException e) {
@@ -129,5 +126,16 @@ public class FileHandler {
             }
         }
 
+    public void saveNewCoach(String FILE_PATH, Coach coach) {
+        File file = new File(FILE_PATH);
+        try {
+        PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+        ps.println(coach.getName() + ";" + coach.getAge());
+        ps.close();
+        } catch (FileNotFoundException e) {
+            throw new FileWriteException("Can't write to " + file, e);
+
+        }
+    }
 }
 

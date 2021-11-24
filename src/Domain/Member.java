@@ -89,7 +89,6 @@ public class Member {
                     "Medlemsskabs status: " + activityLevel+ '\n'+
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "tid: " + time + '\n' +
-                    "Dag: " + date + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
@@ -121,11 +120,10 @@ public class Member {
         this.time = time;
     }
 
-    public String getDate() {
-        return date;
+    public void setDate(String date) {
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getDate() {
+        return date;
     }
 }
