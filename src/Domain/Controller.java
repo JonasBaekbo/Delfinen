@@ -26,7 +26,7 @@ public class Controller {
 
     public void maineMenu() throws FileNotFoundException {
         while (isRunning) {
-            ui.Mainemenu();
+            ui.MaineMenu();
             switch (ui.userInput()) {
                 case "0" -> exit();
                 case "1" -> CEOManu();
@@ -252,7 +252,7 @@ public class Controller {
         ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
         String date = ui.userInput();
         foundMember.setDate(date);
-        files.saveNewMember(MEMBER_FILE, members);
+        files.addTimeAndDateTooMember(MEMBER_FILE, members);
     }
 
     public void calculateExpectedSubFeeTotal() throws FileNotFoundException {
