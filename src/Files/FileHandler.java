@@ -1,4 +1,4 @@
-//@ Mikkel Sandell
+//@ Mikkel Sandell, @Jonas Bækbo
 package Files;
 
 import Domain.Coach;

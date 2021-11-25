@@ -1,4 +1,6 @@
-package Domain;//@Mikkel Sandell
+//@Mikkel Sandell, @Jonas Bækbo
+
+package Domain;
 import Domain.Member;
 import java.util.Comparator;
 
