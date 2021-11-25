@@ -10,3 +10,4 @@ test1;19;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 test2;36;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 test3;26;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 test4;17;Konkurrence;Aktivt;Crawl;00:56:33;2021-11-24;hops;1;01:02:03
+

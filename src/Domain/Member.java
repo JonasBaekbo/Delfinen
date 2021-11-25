@@ -85,20 +85,20 @@ public class Member {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "Medlemskabs status: " + activityLevel + '\n' +
                     "----------------------------------------------" + '\n' + "";
         } else if (time == null) {
             return  "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "Medlemskabs status: " + activityLevel + '\n' +
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "----------------------------------------------" + '\n' + "";
         } else if (competitions.isEmpty()){
             return  "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "Medlemskabs status: " + activityLevel + '\n' +
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "tid: " + time + '\n' +
                     "----------------------------------------------" + '\n' + "";
@@ -106,7 +106,7 @@ public class Member {
             return  "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "Medlemskabs status: " + activityLevel + '\n' +
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "tid: " + time + '\n' +
                     "stævne navn: " + getCompetition().getConvention() + '\n'+
@@ -164,4 +164,46 @@ public class Member {
     public ArrayList<Competitions> getCompetitions() {
         return competitions;
     }
+
+
+    public static String chooseSwimDesiplin(String svømmediciplinChosen) {
+        String svømmediciplin="";
+
+        if (svømmediciplinChosen.equals("1")) {
+            svømmediciplin = "Butterfly";
+        } else if (svømmediciplinChosen.equals( "2")) {
+            svømmediciplin = "Crawl";
+        } else if (svømmediciplinChosen.equals("3")) {
+            svømmediciplin = "Rygcrawl";
+        } else if (svømmediciplinChosen.equals( "4")) {
+            svømmediciplin = "Brystsvømning";
+        } else {
+            svømmediciplin ="Ikke gyldigt indput";
+        }
+        return svømmediciplin;
+    }
+
+
+    public static String chooseActivityLevel(String userInput) {
+        String activityLevel = "";
+        if (userInput.equals("1")) {
+            activityLevel = "Aktivt";
+        } else if (userInput.equals("2")) {
+            activityLevel = "Passivt";
+        }
+        return activityLevel;
+    }
+
+    public static String chooseActivityForm(String userInput) {
+        String activityForm = "";
+        if (userInput.equals( "1")) {
+            activityForm = "Motionist";
+        } else if (userInput.equals( "2")) {
+            activityForm = "Konkurrence";
+        }
+        return activityForm;
+    }
+
 }
+
+
