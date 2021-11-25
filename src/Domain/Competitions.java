@@ -39,9 +39,8 @@ public class Competitions{
 
     @Override
     public String toString() {
-       /* return  "Stævets navn: " + convention + '\n' +
+        return  "Stævets navn: " + convention + '\n' +
                 "Placeringen til stævnet: " + place + '\n' +
-                "Tiden til stævnet: " + time;*/
-        return convention + ";" + place + ";" + time;
+                "Tiden til stævnet: " + time;
     }
 }

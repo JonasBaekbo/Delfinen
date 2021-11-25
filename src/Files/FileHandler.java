@@ -2,6 +2,7 @@
 package Files;
 
 import Domain.Coach;
+import Domain.Competitions;
 import Domain.Controller;
 import Domain.Member;
 
@@ -84,7 +85,8 @@ public class FileHandler {
                     ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
                             + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
                             members.get(i).getTime() + ";" + members.get(i).getDate() + ";" +
-                            members.get(i).getCompetition());
+                            members.get(i).getCompetition().getConvention()+";"+
+                            members.get(i).getCompetition().getPlace()+";"+members.get(i).getCompetition().getTime());
                     ps.close();
                 }
             }
@@ -110,7 +112,25 @@ public class FileHandler {
                 String activityForm = details[2];
                 String activityLevel = details[3];
                 String diciplin = null;
-                if (details.length == 7) {
+                if (details.length ==10){
+                    diciplin = details[4];
+                    String time = details[5];
+                    LocalTime timeToAdd = LocalTime.parse(time);
+                    String date = details[6];
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate dateToAdd = LocalDate.parse(date, formatter);
+                    String competitonName = details[7];
+                    String place = details[8];
+                    String competitontime = details[9];
+                    LocalTime competitontimeToAdd = LocalTime.parse(competitontime);
+                    if (competitontimeToAdd != null) {
+                        Member m = new Member(name, age, activityForm, activityLevel, diciplin, timeToAdd, dateToAdd, competitonName, place, competitontimeToAdd);
+                        members.add(m);
+
+                    }
+
+
+                } else if (details.length == 7) {
                     diciplin = details[4];
                     String time = details[5];
                     LocalTime timeToAdd = LocalTime.parse(time);

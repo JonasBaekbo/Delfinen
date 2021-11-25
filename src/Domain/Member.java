@@ -14,7 +14,7 @@ public class Member {
     private String svømmediciplin = null;
     private LocalTime time = null;
     private LocalDate date;
-    private ArrayList<Competitions> competitions= new ArrayList<>();
+    private ArrayList<Competitions> competitions = new ArrayList<>();
 
 
     public Member(String name, String age, String activityForm, String activityLevel) {
@@ -22,7 +22,6 @@ public class Member {
         this.age = age;
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
-
     }
 
     public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin) {
@@ -31,10 +30,19 @@ public class Member {
         this.activityForm = activityForm;
         this.activityLevel = activityLevel;
         this.svømmediciplin = svømmediciplin;
-
     }
 
     public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin, LocalTime time, LocalDate date) {
+        this.name = name;
+        this.age = age;
+        this.activityForm = activityForm;
+        this.activityLevel = activityLevel;
+        this.svømmediciplin = svømmediciplin;
+        this.time = time;
+        this.date = date;
+    }
+    public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin,
+                  LocalTime time, LocalDate date, String competitonName, String place,  LocalTime competitontime) {
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
@@ -80,19 +88,30 @@ public class Member {
                     "Medlemsskabs status: " + activityLevel + '\n' +
                     "----------------------------------------------" + '\n' + "";
         } else if (time == null) {
-            return "Medlemsnavn: " + name + '\n' +
+            return  "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel + '\n' +
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "----------------------------------------------" + '\n' + "";
-        } else {
-            return "Medlemsnavn: " + name + '\n' +
+        } else if (competitions.isEmpty()){
+            return  "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
                     "Aktivitetsform: " + activityForm + '\n' +
                     "Medlemsskabs status: " + activityLevel + '\n' +
                     "Svømmedisciplin: " + svømmediciplin + '\n' +
                     "tid: " + time + '\n' +
+                    "----------------------------------------------" + '\n' + "";
+        }else{
+            return  "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktivitetsform: " + activityForm + '\n' +
+                    "Medlemsskabs status: " + activityLevel + '\n' +
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "tid: " + time + '\n' +
+                    "stævne navn: " + getCompetition().getConvention() + '\n'+
+                    "placering: " + getCompetition().getPlace() + '\n' +
+                    "Stævne tid: " + getCompetition().getTime() + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
@@ -133,6 +152,7 @@ public class Member {
     }
 
     public void addCompetition(Competitions c){
+        competitions.clear();
         competitions.add(c);
 
     }
@@ -144,6 +164,4 @@ public class Member {
     public ArrayList<Competitions> getCompetitions() {
         return competitions;
     }
-
-
 }
