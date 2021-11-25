@@ -38,6 +38,8 @@ public class Controller {
                 case "1" -> CEOMenu();
                 case "2" -> coachMenu();
                 case "3" -> treasurerMenu();
+                default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
+
 
             }
         }
@@ -50,6 +52,8 @@ public class Controller {
                 case "1" -> createNewMember();
                 case "2" -> createCoach();
                 case "0" -> backTooMainMenu();
+                default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
+
             }
         }
     }
@@ -63,6 +67,7 @@ public class Controller {
                 case "3" -> tournamentsResults();
                 case "4" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
                 case "0" -> backTooMainMenu();
+                default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
             }
         }
     }
@@ -76,6 +81,8 @@ public class Controller {
                 case "3" -> calculateExpectedSubFeeTotal();
                 case "4" -> sowMissingPayments();
                 case "0" -> backTooMainMenu();
+                default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
+
             }
         }
     }
