@@ -1,5 +1,5 @@
-Mille Helbo;22;Konkurrence;Aktivt;Brystsvømning;00:26:43;2021-11-24
-Knut Knutsen;27;Konkurrence;Passivt;Butterfly;
+Mille Helbo;22;Konkurrence;Aktivt;Brystsvømning;12:21:21;2010-10-10
+Knut Knutsen;27;Konkurrence;Passivt;Butterfly;12:21:21;2001-10-21
 Adam Lasson;56;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 Jonas Bækbo;17;Konkurrence;Aktivt;Crawl;00:56:43;2021-11-24
 Johanne Weitling;22;Konkurrence;Aktivt;Rygcrawl;00:56:43;2021-11-24
@@ -10,4 +10,3 @@ test1;19;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 test2;36;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 test3;26;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 test4;17;Konkurrence;Aktivt;Crawl;00:56:33;2021-11-24
-

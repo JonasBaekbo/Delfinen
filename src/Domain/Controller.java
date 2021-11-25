@@ -91,7 +91,15 @@ public class Controller {
         //TODO:
     }
 
+    public void addTimeAndDateTooMember() {
+        chooseMember(2);
+    }
+
     private void tournamentsResults() {
+        chooseMember(1);
+    }
+
+    public void chooseMember(int choose){
         int counter = 0;
         boolean isChossing = true;
         Member foundMember = null;
@@ -106,11 +114,18 @@ public class Controller {
             for (Member member : members) {
                 if (memberName.equals(member.getName())) {
                     if (member.getActivityForm().equals("Konkurrence")) {
-                        if (member.getTime() != null) {
+                        if (choose == 2){
                             foundMember = member;
-                            isChossing = false;
-                        } else {
-                            ui.printMessage("det valgte medlemmet har ikke en tid");
+                            isChossing=false;
+                        }
+                        if (choose == 1){
+                            if (member.getTime() != null) {
+                                foundMember = member;
+                                isChossing = false;
+
+                            } else {
+                                ui.printMessage("det valgte medlemmet har ikke en tid");
+                            }
                         }
                     } else {
                         ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
@@ -123,16 +138,28 @@ public class Controller {
                 }
             }
         }
-        ui.printMessage("Indtast navnet på stævnet:");
-        String tournamentName = ui.userInput();
-        ui.printMessage("Indtast placeringen til stævnet:");
-        String place = ui.userInput();
-        ui.printMessage("Indtast tiden til stævnet (MM:SS:mm):");
-        String time = ui.userInput();
-        LocalTime timeToAdd = LocalTime.parse(time);
-        Competitions c = new Competitions(tournamentName, place, timeToAdd);
-        foundMember.addCompetition(c);
-        files.addCompetitonTooMamber(MEMBER_FILE, members);
+        if (choose == 1){
+            ui.printMessage("Indtast navnet på stævnet:");
+            String tournamentName = ui.userInput();
+            ui.printMessage("Indtast placeringen til stævnet:");
+            String place = ui.userInput();
+            ui.printMessage("Indtast tiden til stævnet (MM:SS:mm):");
+            String time = ui.userInput();
+            LocalTime timeToAdd = LocalTime.parse(time);
+            Competitions c = new Competitions(tournamentName, place, timeToAdd);
+            foundMember.addCompetition(c);
+            files.addCompetitonAndTimeAndDateTooMember(MEMBER_FILE, members);
+        }
+        if (choose ==2){
+            ui.printMessage("Indtast medlemmets tid (MM:SS:mm)");
+            String time = ui.userInput();
+            LocalTime timeToAdd = LocalTime.parse(time);
+            foundMember.setTime(timeToAdd);
+            ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
+            String date = ui.userInput();
+            foundMember.setDate(date);
+            files.addCompetitonAndTimeAndDateTooMember(MEMBER_FILE, members);
+        }
     }
 
     public void createNewMember() {
@@ -305,43 +332,7 @@ private void writeTop5Swimmers(ArrayList<Member> membersList){
 
     }
 
-    public void addTimeAndDateTooMember() {
-        int counter=0;
-        boolean isChossing = true;
-        Member foundMember = null;
-        members.clear();
-        ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        for (Member member : members) {
-            System.out.println(member);
-        }
-        ui.printMessage("Indtast medlemmets navn som du gerne vil tilføje tid til:");
-        while (isChossing) {
-            String memberName = ui.userInput();
-            for (Member member : members) {
-                if (memberName.equals(member.getName())) {
-                    if (member.getActivityForm().equals("Konkurrence")) {
-                        foundMember = member;
-                        isChossing=false;
-                    } else {
-                        ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
-                    }
-                }else{
-                    counter++;
-                    if (counter==members.size()) {
-                        ui.printMessage("Det indtastet navn findes ikke, prøv igen");
-                    }
-                }
-            }
-        }
-        ui.printMessage("Indtast medlemmets tid (MM:SS:mm)");
-        String time = ui.userInput();
-        LocalTime timeToAdd = LocalTime.parse(time);
-        foundMember.setTime(timeToAdd);
-        ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
-        String date = ui.userInput();
-        foundMember.setDate(date);
-        files.addTimeAndDateTooMember(MEMBER_FILE, members);
-    }
+
 
     public void calculateExpectedSubFeeTotal() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
