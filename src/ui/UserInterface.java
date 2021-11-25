@@ -1,4 +1,4 @@
-// @JonasBaekbo
+// @Jonas Bækbo
 
 package ui;
 
@@ -17,7 +17,7 @@ public class UserInterface {
 
     public void MaineMenu(){
         printMessage("""
-                
+                Foretag et valg:
                 1) Formands menu
                 2) Træner menu
                 3) Kassér menu
@@ -49,6 +49,7 @@ public class UserInterface {
         printMessage(""" 
                       
                     Kassér
+                    Foretag et valg:
                     1) Opret kontingent opkrævning
                     2) Register indbetaling
                     3) Se forventet indbetaling af kontingentet

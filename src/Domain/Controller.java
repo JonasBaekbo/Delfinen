@@ -1,3 +1,5 @@
+//@Jonas Bækbo
+
 package Domain;
 
 import Files.FileHandler;

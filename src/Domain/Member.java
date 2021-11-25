@@ -50,7 +50,7 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
         this.time = time;
         this.date = date;
-
+        addCompetition(new Competitions(competitonName, place, competitontime));
 
     }
 
