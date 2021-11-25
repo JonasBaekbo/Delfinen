@@ -4,7 +4,6 @@ package Files;
 import Domain.Coach;
 import Domain.Controller;
 import Domain.Member;
-import ui.UserInterface;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -36,7 +35,7 @@ public class FileHandler {
                         + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin() + ";" +
                         member.getTime());
                 ps.close();
-                new Controller().CEOManu();
+                new Controller().CEOMenu();
             }
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
@@ -179,7 +178,7 @@ public class FileHandler {
         PrintStream ps = new PrintStream(new FileOutputStream(file, true));
         ps.println(coach.getName() + ";" + coach.getAge());
         ps.close();
-        new Controller().CEOManu();
+        new Controller().CEOMenu();
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
 

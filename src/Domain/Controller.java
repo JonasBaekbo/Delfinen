@@ -33,7 +33,7 @@ public class Controller {
             ui.MaineMenu();
             switch (ui.userInput()) {
                 case "0" -> exit();
-                case "1" -> CEOManu();
+                case "1" -> CEOMenu();
                 case "2" -> coachMenu();
                 case "3" -> treasurerMenu();
 
@@ -41,40 +41,40 @@ public class Controller {
         }
     }
 
-    public void CEOManu() throws FileNotFoundException {
-        while (isRunning){
-        ui.menuCEO();
-        switch (ui.userInput()) {
-            case "1" -> createNewMember();
-            case "2" -> createCoach();
-            case "0" -> backTooMainMenu();
-        }
+    public void CEOMenu() throws FileNotFoundException {
+        while (isRunning) {
+            ui.menuCEO();
+            switch (ui.userInput()) {
+                case "1" -> createNewMember();
+                case "2" -> createCoach();
+                case "0" -> backTooMainMenu();
+            }
         }
     }
 
     public void coachMenu() throws FileNotFoundException {
-        while (isRunning){
-        ui.menuCoach();
-        switch (ui.userInput()) {
-            case "1" -> addTimeAndDateTooMember();
-            case "2" -> bestPracticeTime();
-            case "3" -> tournamentsResults();
-            case "4" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
-            case "0" -> backTooMainMenu();
-        }
+        while (isRunning) {
+            ui.menuCoach();
+            switch (ui.userInput()) {
+                case "1" -> addTimeAndDateTooMember();
+                case "2" -> bestPracticeTime();
+                case "3" -> tournamentsResults();
+                case "4" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
+                case "0" -> backTooMainMenu();
+            }
         }
     }
 
     public void treasurerMenu() throws FileNotFoundException {
-        while (isRunning){
-        ui.menuTreasurer();
-        switch (ui.userInput()) {
-            case "1" -> chargeSubscriptionFee();
-            case "2" -> markAsPaid();
-            case "3" -> calculateExpectedSubFeeTotal();
-            case "4" -> sowMissingPayments();
-            case "0" -> backTooMainMenu();
-        }
+        while (isRunning) {
+            ui.menuTreasurer();
+            switch (ui.userInput()) {
+                case "1" -> chargeSubscriptionFee();
+                case "2" -> markAsPaid();
+                case "3" -> calculateExpectedSubFeeTotal();
+                case "4" -> sowMissingPayments();
+                case "0" -> backTooMainMenu();
+            }
         }
     }
 
@@ -91,8 +91,8 @@ public class Controller {
         //TODO:
     }
 
-    private void tournamentsResults() throws FileNotFoundException {
-        int counter=0;
+    private void tournamentsResults() {
+        int counter = 0;
         boolean isChossing = true;
         Member foundMember = null;
         members.clear();
@@ -109,15 +109,15 @@ public class Controller {
                         if (member.getTime() != null) {
                             foundMember = member;
                             isChossing = false;
-                        }else {
+                        } else {
                             ui.printMessage("det valgte medlemt har ikke en tid");
                         }
                     } else {
                         ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
                     }
-                }else{
+                } else {
                     counter++;
-                    if (counter==members.size()) {
+                    if (counter == members.size()) {
                         ui.printMessage("Det indtastet navn findes ikke, prøv igen");
                     }
                 }
@@ -130,7 +130,7 @@ public class Controller {
         ui.printMessage("Indtast tiden til stævnet (MM:SS:mm):");
         String time = ui.userInput();
         LocalTime timeToAdd = LocalTime.parse(time);
-        Competitions c = new Competitions(tournamentName,place,timeToAdd);
+        Competitions c = new Competitions(tournamentName, place, timeToAdd);
         foundMember.addCompetition(c);
         files.addCompetitonTooMamber(MEMBER_FILE, members);
     }
@@ -284,18 +284,13 @@ private void writeTop5Swimmers(ArrayList<Member> membersList){
         if (membersList.size() < 5){
     for (Member member : membersList) {
             createTableContents(member);
-
     }
         }
         else{
                 for (int j = 0; j < 5; j++) {
                 createTableContents(membersList.get(j));
-
-
             }
         }
-
-
 }
 
     private void createTableHeader() {
@@ -310,7 +305,7 @@ private void writeTop5Swimmers(ArrayList<Member> membersList){
 
     }
 
-    public void addTimeAndDateTooMember() throws FileNotFoundException {
+    public void addTimeAndDateTooMember() {
         int counter=0;
         boolean isChossing = true;
         Member foundMember = null;
@@ -351,42 +346,45 @@ private void writeTop5Swimmers(ArrayList<Member> membersList){
     public void calculateExpectedSubFeeTotal() throws FileNotFoundException {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
-        ui.printMessage(Math.round(expectedTotal)+ "kr. Kan forventes i kontingent");
+        ui.printMessage(Math.round(expectedTotal) + "kr. Kan forventes i kontingent");
         treasurerMenu();
     }
 
-    private void chargeSubscriptionFee() throws FileNotFoundException {
+    private void chargeSubscriptionFee() {
         ui.printMessage("""
-                      Vil du:
-                        1) Opkræve kontingent for en person
-                        2) Opkræve kontingent for ALLE medlemmer""");
+                Vil du:
+                  1) Opkræve kontingent for en person
+                  2) Opkræve kontingent for ALLE medlemmer""");
 
-        String choice=ui.userInput();
-        if(choice.equalsIgnoreCase("1")){
+        String choice = ui.userInput();
+        if (choice.equalsIgnoreCase("1")) {
             ui.printMessage("Skriv navnet på medlemmet der skal opkræves");
-            String memberName =ui.userInput();
-            subFee.makeOneSubscriptionCharge(memberName);
+            String memberName = ui.userInput();
+            String result = subFee.makeSubscriptionChargeForOneMember(memberName);
+            ui.printMessage(result);
+        } else if (choice.equalsIgnoreCase("2")) {
+            String result = subFee.makeSubscriptionChargeForAllMembers();
+            ui.printMessage(result);
+        } else {
+            ui.printMessage(choice + " er ikke et gyldigt indput. Vælg 1 eller 2");
         }
-        else if (choice.equalsIgnoreCase("2")){
-        subFee.makeSubscriptionChargeForAllMembers();
-        ui.printMessage("Oprettet kontingent opkrævninger for alle medlemmer!");}
-        else ui.printMessage(choice +" er ikke et gyldigt indput. Vælg 1 eller 2");
     }
 
-    private void sowMissingPayments() throws FileNotFoundException {
+    private void sowMissingPayments() {
         ArrayList<String> missingPayments = subFee.memberMissingPayment();
         for (String member : missingPayments) {
             ui.printMessage(member);
         }
     }
-    private void markAsPaid() throws FileNotFoundException {
+
+    private void markAsPaid() {
         ui.printMessage("Følgende personer har ubetalte regninger:");
         sowMissingPayments();
         ui.printMessage("Skriv fakturanummer eller navnet på personen der har indbetalt");
-        String memberName = ui.userInput();
-        subFee.updatePaymentStatus(memberName);
-
-}
+        String userInput = ui.userInput();
+        String result = subFee.updatePaymentStatus(userInput);
+        ui.printMessage(result);
+    }
 
 
     // SKAL SLETTES SENERE! KUN TIL TEST!
