@@ -110,7 +110,7 @@ public class Controller {
                             foundMember = member;
                             isChossing = false;
                         } else {
-                            ui.printMessage("det valgte medlemt har ikke en tid");
+                            ui.printMessage("det valgte medlemmet har ikke en tid");
                         }
                     } else {
                         ui.printMessage("Det valgte medlem er ikke en konkurrence svømmer");
