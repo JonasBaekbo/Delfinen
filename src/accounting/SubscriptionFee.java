@@ -134,16 +134,15 @@ public class SubscriptionFee {
 
     public String updatePaymentStatus(String input) {
         try {
-            // læs filen og gem indhold i arraylist
+
             ArrayList<Charge> charges = readSubFile();
-            // ryd filen
             files.clearFile(SUBSCRIPTION_FILE);
 
-            // skriv filen forfra
+
             File file = new File(SUBSCRIPTION_FILE);
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
 
-            // skriv hvert træk i filen
+
             int numUpdates = 0;
             for (int i = 0; i < charges.size(); i++) {
                 Charge charge = charges.get(i);

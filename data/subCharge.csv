@@ -1,9 +1,9 @@
-1;Mille Helbo; 22;Aktivt;1600;ikke betalt
+1;Mille Helbo; 22;Aktivt;1600;betalt
 2;Mille Helbo; 22;Aktivt;1600;ikke betalt
 3;Knut Knutsen; 27;Passivt;500;ikke betalt
 4;Adam Lasson; 16;Aktivt;1000;betalt
 5;Jonas Bækbo; 17;Aktivt;1000;betalt
-6;Johanne Weitling; 22;Aktivt;1600;ikke betalt
+6;Johanne Weitling; 22;Aktivt;1600;betalt
 7;Mikkel Sandell; 23;Aktivt;1600;ikke betalt
 8;David Ema; 61;Aktivt;1200;betalt
 8;David Ema; 61;Aktivt;1200;betalt
@@ -11,7 +11,7 @@
 11;Mille Helbo; 22;Aktivt;1600;ikke betalt
 12;Knut Knutsen; 27;Passivt;500;ikke betalt
 13;Adam Lasson; 16;Aktivt;1000;ikke betalt
-14;Jonas Bækbo; 17;Aktivt;1000;ikke betalt
+14;Jonas Bækbo; 17;Aktivt;1000;betalt
 15;Johanne Weitling; 22;Aktivt;1600;ikke betalt
 16;Mikkel Sandell; 23;Aktivt;1600;ikke betalt
 17;David Ema; 61;Aktivt;1200;betalt
