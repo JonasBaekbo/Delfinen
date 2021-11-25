@@ -1,3 +1,5 @@
+//@ Mikkel Sandell
+
 package Domain;
 
 import java.time.LocalTime;
