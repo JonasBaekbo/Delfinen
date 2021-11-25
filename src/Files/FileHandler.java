@@ -2,7 +2,6 @@
 package Files;
 
 import Domain.Coach;
-import Domain.Competitions;
 import Domain.Controller;
 import Domain.Member;
 
@@ -20,7 +19,7 @@ public class FileHandler {
     public void saveNewMember(String FILE_PATH, Member member) {
         File file = new File(FILE_PATH);
         try {
-            if (member.getSvømmediciplin() == null) {
+            if (member.getSwimmingDiscipline() == null) {
                 PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                 ps.println(member.getName() + ";" + member.getAge() + ";"
                         + member.getActivityForm() + ";" + member.getActivityLevel());
@@ -28,12 +27,12 @@ public class FileHandler {
             } else if (member.getTime() == null) {
                 PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                 ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin());
+                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSwimmingDiscipline());
                 ps.close();
             } else {
                 PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                 ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSvømmediciplin() + ";" +
+                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSwimmingDiscipline() + ";" +
                         member.getTime());
                 ps.close();
                 new Controller().CEOMenu();
@@ -64,7 +63,7 @@ public class FileHandler {
         clearFile(FILE_PATH);
         try {
             for (int i = 0; i < members.size(); i++) {
-                if (members.get(i).getSvømmediciplin() == null) {
+                if (members.get(i).getSwimmingDiscipline() == null) {
                     PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                     ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
                             + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel());
@@ -72,18 +71,18 @@ public class FileHandler {
                 } else if (members.get(i).getTime() == null) {
                     PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                     ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
-                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin());
+                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSwimmingDiscipline());
                     ps.close();
                 } else if (members.get(i).getCompetitions().size() == 0) {
                     PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                     ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
-                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
+                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSwimmingDiscipline() + ";" +
                             members.get(i).getTime() + ";" + members.get(i).getDate());
                     ps.close();
                 } else {
                     PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                     ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
-                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSvømmediciplin() + ";" +
+                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSwimmingDiscipline() + ";" +
                             members.get(i).getTime() + ";" + members.get(i).getDate() + ";" +
                             members.get(i).getCompetition().getConvention()+";"+
                             members.get(i).getCompetition().getPlace()+";"+members.get(i).getCompetition().getTime());
@@ -96,6 +95,7 @@ public class FileHandler {
 
         }
     }
+
 
     public ArrayList<Member> getAllMembers(String Member_FILE_PATH) {
         File file = new File(Member_FILE_PATH);

@@ -9,7 +9,6 @@ import ui.UserInterface;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Controller {
     FileHandler files = new FileHandler();
@@ -19,6 +18,7 @@ public class Controller {
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subFee = new SubscriptionFee();
     private ArrayList<Member> members = new ArrayList<>();
+    private SwimTeam st = new SwimTeam();
 
 
     public void start() throws FileNotFoundException {
@@ -193,9 +193,9 @@ public class Controller {
                     3) Rygcrawl
                     4) Brystsvømning
                     """);
-            String svømmediciplinChosen = ui.userInput();
-            String svømmediciplin = chooseSwimDesiplin(svømmediciplinChosen);
-            Member member = new Member(name, age, activityForm, activityLevel, svømmediciplin);
+            String swimDisciplineChosen = ui.userInput();
+            String SwimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
+            Member member = new Member(name, age, activityForm, activityLevel, SwimDiscipline);
             files.saveNewMember(MEMBER_FILE,member);
         } else {
             Member member = new Member(name, age, activityForm, activityLevel);
@@ -211,92 +211,48 @@ public class Controller {
         return Member.chooseActivityLevel(activityLevelChosen);
     }
 
-    private String chooseSwimDesiplin(String svømmediciplinChosen) {
-        return Member.chooseSwimDesiplin(svømmediciplinChosen);
+    private String chooseSwimDiscipline(String swimDisciplineChosen) {
+        return Member.chooseSwimDesiplin(swimDisciplineChosen);
     }
 
     public void listAllSwimmersUnder18(ArrayList<Member> membersList) {
-        ArrayList<Member> butterflyUnder18 = new ArrayList<>();
-        ArrayList<Member> crawlUnder18 = new ArrayList<>();
-        ArrayList<Member> rygUnder18 = new ArrayList<>();
-        ArrayList<Member> brystUnder18 = new ArrayList<>();
-
-        for (Member member : membersList) {
-            if (Objects.equals(member.getActivityLevel(), "Aktivt")) {
-                if (Objects.equals(member.getActivityForm(), "Konkurrence")) {
-
-                    if (Integer.parseInt(member.getAge()) <= 18) {
-                        if (member.getTime() != null) {
-                            if (Objects.equals(member.getSvømmediciplin(), "Butterfly")) {
-                                butterflyUnder18.add(member);
-                            } else if (Objects.equals(member.getSvømmediciplin(), "Crawl")) {
-                                crawlUnder18.add(member);
-                            } else if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")) {
-                                rygUnder18.add(member);
-                            } else if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")) {
-                                brystUnder18.add(member);
-                            }
-                        }
-                    }
-                }
-            }
-        }
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
+        ArrayList<Member> brystUnder18 = st.listSwimmersUnderSplitAge( membersList,18,"Brystsvømning");
         writeTop5Swimmers(brystUnder18);
         ui.printMessage("Konkurrencesvømmere i butterfly:");
+        ArrayList<Member>butterflyUnder18= st.listSwimmersUnderSplitAge( membersList,18,"Butterfly");
         writeTop5Swimmers(butterflyUnder18);
         ui.printMessage("Konkurrencesvømmere i crawl:");
+        ArrayList<Member>crawlUnder18= st.listSwimmersUnderSplitAge( membersList,18,"Crawl");
         writeTop5Swimmers(crawlUnder18);
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
+        ArrayList<Member>rygUnder18= st.listSwimmersUnderSplitAge( membersList,18,"Rygcrawl");
         writeTop5Swimmers(rygUnder18);
-
     }
 
     public void listAllSwimmersOver18(ArrayList<Member> membersList) {
-        ArrayList<Member> butterflyOver18 = new ArrayList<>();
-        ArrayList<Member> crawlOver18 = new ArrayList<>();
-        ArrayList<Member> rygOver18 = new ArrayList<>();
-        ArrayList<Member> brystOver18 = new ArrayList<>();
-
-        for (Member member : membersList) {
-            if (Objects.equals(member.getActivityLevel(), "Aktivt")) {
-                if (Objects.equals(member.getActivityForm(), "Konkurrence")) {
-
-                    if (Integer.parseInt(member.getAge()) >= 18) {
-                        if (member.getTime() != null) {
-                            if (Objects.equals(member.getSvømmediciplin(), "Butterfly")) {
-                                butterflyOver18.add(member);
-                            } else if (Objects.equals(member.getSvømmediciplin(), "Crawl")) {
-                                crawlOver18.add(member);
-                            } else if (Objects.equals(member.getSvømmediciplin(), "Rygcrawl")) {
-                                rygOver18.add(member);
-                            } else if (Objects.equals(member.getSvømmediciplin(), "Brystsvømning")) {
-                                brystOver18.add(member);
-                            }
-                        }
-                    }
-                }
-            }
-        }
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
+        ArrayList<Member> brystOver18 =st.listSwimmersOverSplitAge(membersList, 18, "Brystsvømning");
         writeTop5Swimmers(brystOver18);
         ui.printMessage("Konkurrencesvømmere i butterfly:");
+        ArrayList<Member>butterflyOver18=st.listSwimmersOverSplitAge(membersList, 18, "Butterfly");
         writeTop5Swimmers(butterflyOver18);
         ui.printMessage("Konkurrencesvømmere i crawl:");
+        ArrayList<Member> crawlOver18 =st.listSwimmersOverSplitAge(membersList, 18, "Crawl");
         writeTop5Swimmers(crawlOver18);
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
+        ArrayList<Member>rygOver18 =st.listSwimmersOverSplitAge(membersList, 18, "Rygcrawl");
         writeTop5Swimmers(rygOver18);
-
     }
 
-    public void showTop5Swimmers(ArrayList<Member> membersList) throws FileNotFoundException {
+    public void showTop5Swimmers(ArrayList<Member> membersList) {
         ui.printMessage("Konkurrencesvømmere under 18:");
         createTableHeader();
         listAllSwimmersUnder18(membersList);
-        ui.printMessage("Konkurrencesvømmere over 18:");
+        ui.printMessage("\nKonkurrencesvømmere over 18:");
         createTableHeader();
         listAllSwimmersOver18(membersList);
-        coachMenu();
+
     }
 
     private void writeTop5Swimmers(ArrayList<Member> membersList) {
@@ -319,7 +275,7 @@ public class Controller {
     }
 
     private void createTableContents(Member member) {
-        System.out.format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActivityLevel(), "|", member.getSvømmediciplin(), "|", member.getTime());
+        System.out.format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActivityLevel(), "|", member.getSwimmingDiscipline(), "|", member.getTime());
         System.out.println();
 
     }
@@ -329,7 +285,7 @@ public class Controller {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
         ui.printMessage(Math.round(expectedTotal) + "kr. Kan forventes i kontingent");
-        treasurerMenu();
+
     }
 
     private void chargeSubscriptionFee() {

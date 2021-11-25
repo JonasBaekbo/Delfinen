@@ -125,7 +125,7 @@ public class Member {
         this.activityLevel = activityLevel;
     }
 
-    public String getSvømmediciplin() {
+    public String getSwimmingDiscipline() {
         return svømmediciplin;
     }
 
