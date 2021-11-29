@@ -4,12 +4,13 @@ package Domain;
 
 import java.time.LocalTime;
 
-public class Competitions{
+public class Competition {
 
     private String convention;
     private String place;
     private LocalTime time;
-    public Competitions(String convention, String place, LocalTime time){
+
+    public Competition(String convention, String place, LocalTime time) {
         this.convention = convention;
         this.place = place;
         this.time = time;
@@ -41,7 +42,7 @@ public class Competitions{
 
     @Override
     public String toString() {
-        return  "Stævets navn: " + convention + '\n' +
+        return "Stævnets navn: " + convention + '\n' +
                 "Placeringen til stævnet: " + place + '\n' +
                 "Tiden til stævnet: " + time;
     }

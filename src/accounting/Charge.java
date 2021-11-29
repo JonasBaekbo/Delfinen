@@ -8,8 +8,8 @@ public class Charge {
     private String amount;
     private String isPaid;
 
-    public Charge(String chargeNumber,String name, String age, String activityLevel, String amount, String isPaid) {
-        this.chargeNumber=chargeNumber;
+    public Charge(String chargeNumber, String name, String age, String activityLevel, String amount, String isPaid) {
+        this.chargeNumber = chargeNumber;
         this.name = name;
         this.age = age;
         this.activityLevel = activityLevel;
@@ -36,6 +36,6 @@ public class Charge {
 
     @Override
     public String toString() {
-        return chargeNumber+";"+name + ";" + age + ";" + activityLevel + ";" + amount + ";" + isPaid;
+        return chargeNumber + ";" + name + ";" + age + ";" + activityLevel + ";" + amount + ";" + isPaid;
     }
 }

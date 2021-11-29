@@ -1,4 +1,4 @@
-//@ Adam Lasson, Mikkel Sandell
+//@ Adam Lasson
 package Domain;
 
 import java.time.LocalDate;

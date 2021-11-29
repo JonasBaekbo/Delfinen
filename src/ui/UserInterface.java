@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
-    public String userInput(){
+
+    public String userInput() {
 
         return scanner.nextLine();
     }
@@ -15,7 +16,7 @@ public class UserInterface {
         System.out.println(s);
     }
 
-    public void MaineMenu(){
+    public void MaineMenu() {
         printMessage("""
                 Foretag et valg:
                 1) Formands menu
@@ -25,36 +26,46 @@ public class UserInterface {
                 """);
 
     }
-    public void menuCEO(){
+
+    public void menuCEO() {
         printMessage("""
-                    
-                    Formand
-                    Foretag et valg:
-                    1) Registrer nyt medlem
-                    2) Registrer ny træner
-                    0) Tilbage til hovedmenu""");
+                                    
+                Formand
+                Foretag et valg:
+                1) Registrer nyt medlem
+                2) Registrer ny træner
+                0) Tilbage til hovedmenu""");
     }
-    public void menuCoach(){
+
+    public void menuCoach() {
         printMessage("""
-                    
-                    Træner
-                    Foretag et valg:
-                    1) Tilføj tid til medlem
-                    2) Registrer bedste træningsresultat for svømmer
-                    3) Registrer resultat til stævne for svømmer
-                    4) Se top 5 svømmere indenfor hver svømmedisciplin
-                    0) Tilbage til hovedmenu""");
+                                    
+                Træner
+                Foretag et valg:
+                1) Tilføj tid til medlem
+                2) Registrer bedste træningsresultat for svømmer
+                3) Registrer resultat til stævne for svømmer
+                4) Se top 5 svømmere indenfor hver svømmedisciplin
+                0) Tilbage til hovedmenu""");
     }
-    public void menuTreasurer(){
+
+    public void menuTreasurer() {
         printMessage(""" 
-                      
-                    Kassér
-                    Foretag et valg:
-                    1) Opret kontingent opkrævning
-                    2) Register indbetaling
-                    3) Se forventet indbetaling af kontingentet
-                    4) Se oversigt over medlemmer i restance
-                    0) Tilbage til hovedmenu""");
+                  
+                Kassér
+                Foretag et valg:
+                1) Opret kontingent opkrævning
+                2) Register indbetaling
+                3) Se forventet indbetaling af kontingentet
+                4) Se oversigt over medlemmer i restance
+                0) Tilbage til hovedmenu""");
+    }
+
+    //TODO:
+    public void createTableHeader() {
+        System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktivitetsniveau", "|", "Svømmediciplin", "|", "Tid");
+        System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
 }

@@ -1,7 +1,7 @@
 //@Mikkel Sandell, @Jonas Bækbo
 
 package Domain;
-import Domain.Member;
+
 import java.util.Comparator;
 
 public class Sorting implements Comparator<Member> {
@@ -23,9 +23,9 @@ public class Sorting implements Comparator<Member> {
             resultat = o1.getActivityForm().compareTo(o2.getActivityForm());
         } else if (type.equals("activityLevel")) {
             resultat = o1.getActivityLevel().compareTo(o2.getActivityLevel());
-        }else if (type.equals("diciplin")){
-            resultat = o1.getSvømmediciplin().compareTo(o2.getSvømmediciplin());
-        }else if(type.equals("time")){
+        } else if (type.equals("diciplin")) {
+            resultat = o1.getSwimmingDiscipline().compareTo(o2.getSwimmingDiscipline());
+        } else if (type.equals("time")) {
             resultat = o1.getTime().compareTo(o2.getTime());
         }
         return resultat;

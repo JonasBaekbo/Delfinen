@@ -1,5 +1,6 @@
 //@Johanne Riis-Weitling
 package accounting;
+
 import Domain.Member;
 import Files.FileHandler;
 import Files.FileReadException;
@@ -119,7 +120,7 @@ public class SubscriptionFee {
 
     public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) {
         double amount = getSubscriptionFee(member);
-        String line = invoiceNumber + ";" + member.getName() + "; " + member.getAge() + ";" + member.getActivityLevel() + ";" + Math.round(amount) + ";" + "ikke betalt";
+        String line = invoiceNumber + ";" + member.getInvoiceLine() + ";" + Math.round(amount) + ";" + "ikke betalt";
         saveToCSV(SUBSCRIPTION_FILE, line);
     }
 
