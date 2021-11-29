@@ -49,7 +49,7 @@ public class FileHandler {
         try {
             for (Member member : members) {
                 PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                String memberCompetition = member.addCompetitonAndTimeAndDateTooMember();
+                String memberCompetition = member.addCompetitionAndTimeAndDateTooMember();
                 ps.println(memberCompetition);
                 ps.close();
             }

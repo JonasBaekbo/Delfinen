@@ -110,4 +110,7 @@ class SubscriptionFeeTest {
 
         assertEquals(expected, result);
     }
+
+    //TODO: test med fejl indput?
+
 }
