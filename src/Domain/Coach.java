@@ -1,10 +1,18 @@
 package Domain;
 
+import Files.FileWriteException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 public class Coach {
 
     private String name;
     private String age;
-    public Coach (String name, String age){
+
+    public Coach(String name, String age) {
         this.name = name;
         this.age = age;
     }
@@ -25,9 +33,16 @@ public class Coach {
         this.age = age;
     }
 
+
+    public String coachNameAndAge() {
+        return getName() + ";" + getAge();
+    }
+
     @Override
     public String toString() {
         return "Navn: " + name + '\n' +
-               "Alder: " +  age;
+                "Alder: " + age;
     }
+
+
 }

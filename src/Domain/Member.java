@@ -1,4 +1,4 @@
-//@ Adam Lasson
+//@ Adam Lasson, @Johanne Riis-Weitling
 package Domain;
 
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ public class Member {
     private String svømmediciplin = null;
     private LocalTime time = null;
     private LocalDate date;
-    private ArrayList<Competitions> competitions = new ArrayList<>();
+    private ArrayList<Competition> competitions = new ArrayList<>();
 
 
     public Member(String name, String age, String activityForm, String activityLevel) {
@@ -41,8 +41,9 @@ public class Member {
         this.time = time;
         this.date = date;
     }
+
     public Member(String name, String age, String activityForm, String activityLevel, String svømmediciplin,
-                  LocalTime time, LocalDate date, String competitonName, String place,  LocalTime competitontime) {
+                  LocalTime time, LocalDate date, String competitonName, String place, LocalTime competitontime) {
         this.name = name;
         this.age = age;
         this.activityForm = activityForm;
@@ -50,7 +51,7 @@ public class Member {
         this.svømmediciplin = svømmediciplin;
         this.time = time;
         this.date = date;
-        addCompetition(new Competitions(competitonName, place, competitontime));
+        addCompetition(new Competition(competitonName, place, competitontime));
 
     }
 
@@ -77,43 +78,6 @@ public class Member {
     public void setActivityForm(String activityForm) {
         this.activityForm = activityForm;
 
-    }
-
-    @Override
-    public String toString() {
-        if (svømmediciplin == null) {
-            return "Medlemsnavn: " + name + '\n' +
-                    "Alder: " + age + '\n' +
-                    "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemskabs status: " + activityLevel + '\n' +
-                    "----------------------------------------------" + '\n' + "";
-        } else if (time == null) {
-            return  "Medlemsnavn: " + name + '\n' +
-                    "Alder: " + age + '\n' +
-                    "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemskabs status: " + activityLevel + '\n' +
-                    "Svømmedisciplin: " + svømmediciplin + '\n' +
-                    "----------------------------------------------" + '\n' + "";
-        } else if (competitions.isEmpty()){
-            return  "Medlemsnavn: " + name + '\n' +
-                    "Alder: " + age + '\n' +
-                    "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemskabs status: " + activityLevel + '\n' +
-                    "Svømmedisciplin: " + svømmediciplin + '\n' +
-                    "tid: " + time + '\n' +
-                    "----------------------------------------------" + '\n' + "";
-        }else{
-            return  "Medlemsnavn: " + name + '\n' +
-                    "Alder: " + age + '\n' +
-                    "Aktivitetsform: " + activityForm + '\n' +
-                    "Medlemskabs status: " + activityLevel + '\n' +
-                    "Svømmedisciplin: " + svømmediciplin + '\n' +
-                    "tid: " + time + '\n' +
-                    "stævne navn: " + getCompetition().getConvention() + '\n'+
-                    "placering: " + getCompetition().getPlace() + '\n' +
-                    "Stævne tid: " + getCompetition().getTime() + '\n' +
-                    "----------------------------------------------" + '\n' + "";
-        }
     }
 
 
@@ -151,59 +115,96 @@ public class Member {
         return date;
     }
 
-    public void addCompetition(Competitions c){
+    public void addCompetition(Competition c) {
         competitions.clear();
         competitions.add(c);
 
     }
 
-    public Competitions getCompetition(){
+    public Competition getCompetition() {
         return competitions.get(0);
     }
 
-    public ArrayList<Competitions> getCompetitions() {
+    public ArrayList<Competition> getCompetitions() {
         return competitions;
+
     }
 
+    public String basisString() {
+        return getName() + ";" + getAge() + ";" + getActivityForm() + ";" + getActivityLevel();
 
-    public static String chooseSwimDesiplin(String svømmediciplinChosen) {
-        String svømmediciplin="";
+    }
 
-        if (svømmediciplinChosen.equals("1")) {
-            svømmediciplin = "Butterfly";
-        } else if (svømmediciplinChosen.equals( "2")) {
-            svømmediciplin = "Crawl";
-        } else if (svømmediciplinChosen.equals("3")) {
-            svømmediciplin = "Rygcrawl";
-        } else if (svømmediciplinChosen.equals( "4")) {
-            svømmediciplin = "Brystsvømning";
+    public String saveNewMember() {
+
+        if (getSwimmingDiscipline() == null) {
+            return basisString();
+
+        } else if (getTime() == null) {
+            return basisString() + ";" + getSwimmingDiscipline();
+
         } else {
-            svømmediciplin ="Ikke gyldigt indput";
+            return basisString() + ";" + getSwimmingDiscipline() + ";" + getTime();
         }
-        return svømmediciplin;
+
+
     }
 
+    public String addCompetitonAndTimeAndDateTooMember() {
 
-    public static String chooseActivityLevel(String userInput) {
-        String activityLevel = "";
-        if (userInput.equals("1")) {
-            activityLevel = "Aktivt";
-        } else if (userInput.equals("2")) {
-            activityLevel = "Passivt";
+        if (getSwimmingDiscipline() == null) {
+            return basisString();
+
+        } else if (getTime() == null) {
+            return basisString() + ";" + getSwimmingDiscipline();
+
+        } else if (getCompetitions().size() == 0) {
+            return basisString() + ";" + getSwimmingDiscipline() + ";" + getTime() + ";" + getDate();
+
+        } else {
+            Competition competition = getCompetition();
+            return basisString() + ";" + getSwimmingDiscipline() + ";" + getTime() + ";" + getDate() + ";" +
+                    competition.getConvention() + ";" + competition.getPlace() + ";" + competition.getTime();
+
         }
-        return activityLevel;
     }
 
-    public static String chooseActivityForm(String userInput) {
-        String activityForm = "";
-        if (userInput.equals( "1")) {
-            activityForm = "Motionist";
-        } else if (userInput.equals( "2")) {
-            activityForm = "Konkurrence";
-        }
-        return activityForm;
+    public String getInvoiceLine() {
+        return getName() + "; " + getAge() + ";" + getActivityLevel();
     }
 
+    public String basisToStringString() {
+        return "Medlemsnavn: " + name + '\n' +
+                "Alder: " + age + '\n' +
+                "Aktivitetsform: " + activityForm + '\n' +
+                "Medlemskabs status: " + activityLevel + '\n';
+    }
+
+    @Override
+    public String toString() {
+        if (svømmediciplin == null) {
+            return basisToStringString() +
+                    "----------------------------------------------" + '\n' + "";
+        } else if (time == null) {
+            return basisToStringString() +
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "----------------------------------------------" + '\n' + "";
+        } else if (competitions.isEmpty()) {
+            return basisToStringString() +
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "tid: " + time + '\n' +
+                    "----------------------------------------------" + '\n' + "";
+        } else {
+            Competition competition = getCompetition();
+            return basisToStringString() +
+                    "Svømmedisciplin: " + svømmediciplin + '\n' +
+                    "tid: " + time + '\n' +
+                    "stævne navn: " + competition.getConvention() + '\n' +
+                    "placering: " + competition.getPlace() + '\n' +
+                    "Stævne tid: " + competition.getTime() + '\n' +
+                    "----------------------------------------------" + '\n' + "";
+        }
+    }
 }
 
 

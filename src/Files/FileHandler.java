@@ -1,8 +1,7 @@
-//@ Mikkel Sandell, @Jonas Bækbo
+//@ Mikkel Sandell, @Jonas Bækbo, @Johanne Riis-Weitling
 package Files;
 
 import Domain.Coach;
-import Domain.Controller;
 import Domain.Member;
 
 import java.io.*;
@@ -19,29 +18,14 @@ public class FileHandler {
     public void saveNewMember(String FILE_PATH, Member member) {
         File file = new File(FILE_PATH);
         try {
-            if (member.getSwimmingDiscipline() == null) {
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" + member.getActivityLevel());
-                ps.close();
-            } else if (member.getTime() == null) {
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSwimmingDiscipline());
-                ps.close();
-            } else {
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                ps.println(member.getName() + ";" + member.getAge() + ";"
-                        + member.getActivityForm() + ";" + member.getActivityLevel() + ";" + member.getSwimmingDiscipline() + ";" +
-                        member.getTime());
-                ps.close();
-                new Controller().CEOMenu();
-            }
+            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+            String newMember = member.saveNewMember();
+            ps.println(newMember);
+            ps.close();
+
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
-
         }
-
 
     }
 
@@ -58,45 +42,25 @@ public class FileHandler {
         }
     }
 
+
     public void addCompetitonAndTimeAndDateTooMember(String FILE_PATH, ArrayList<Member> members) {
         File file = new File(FILE_PATH);
         clearFile(FILE_PATH);
         try {
-            for (int i = 0; i < members.size(); i++) {
-                if (members.get(i).getSwimmingDiscipline() == null) {
-                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
-                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel());
-                    ps.close();
-                } else if (members.get(i).getTime() == null) {
-                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
-                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSwimmingDiscipline());
-                    ps.close();
-                } else if (members.get(i).getCompetitions().size() == 0) {
-                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
-                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSwimmingDiscipline() + ";" +
-                            members.get(i).getTime() + ";" + members.get(i).getDate());
-                    ps.close();
-                } else {
-                    PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                    ps.println(members.get(i).getName() + ";" + members.get(i).getAge() + ";"
-                            + members.get(i).getActivityForm() + ";" + members.get(i).getActivityLevel() + ";" + members.get(i).getSwimmingDiscipline() + ";" +
-                            members.get(i).getTime() + ";" + members.get(i).getDate() + ";" +
-                            members.get(i).getCompetition().getConvention()+";"+
-                            members.get(i).getCompetition().getPlace()+";"+members.get(i).getCompetition().getTime());
-                    ps.close();
-                }
+            for (Member member : members) {
+                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+                String memberCompetition = member.addCompetitonAndTimeAndDateTooMember();
+                ps.println(memberCompetition);
+                ps.close();
             }
-            new Controller().coachMenu();
+
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
-
         }
     }
 
 
+    //TODO: Kan forenkles/deles op?
     public ArrayList<Member> getAllMembers(String Member_FILE_PATH) {
         File file = new File(Member_FILE_PATH);
 
@@ -112,7 +76,7 @@ public class FileHandler {
                 String activityForm = details[2];
                 String activityLevel = details[3];
                 String diciplin = null;
-                if (details.length ==10){
+                if (details.length == 10) {
                     diciplin = details[4];
                     String time = details[5];
                     LocalTime timeToAdd = LocalTime.parse(time);
@@ -155,7 +119,7 @@ public class FileHandler {
                     }
                 }
             }
-                return members;
+            return members;
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't read from " + file, e);
         }
@@ -165,16 +129,15 @@ public class FileHandler {
     public void saveNewCoach(String FILE_PATH, Coach coach) {
         File file = new File(FILE_PATH);
         try {
-        PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-        ps.println(coach.getName() + ";" + coach.getAge());
-        ps.close();
-        new Controller().CEOMenu();
+            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+            String newCoach = coach.coachNameAndAge();
+            ps.println(newCoach);
+            ps.close();
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
 
         }
     }
 
-
-    }
+}
 

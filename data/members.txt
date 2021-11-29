@@ -8,5 +8,5 @@ David Ema;61;Konkurrence;Aktivt;Butterfly;12:15:12;2021-11-23
 Jakob;24;Konkurrence;Aktivt;Butterfly;00:12:10;2021-12-01
 test1;19;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
 test2;36;Konkurrence;Aktivt;Butterfly;05:22:59;2021-03-12
-test3;26;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
-test4;17;Konkurrence;Aktivt;Crawl;00:56:33;2021-11-24;hops;1;01:02:03
+test3;26;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24;testStævne;3;20:20:20
+test4;17;Konkurrence;Aktivt;Crawl;20:20:20;2019-03-03;hops;1;01:02:03
