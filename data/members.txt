@@ -13,3 +13,7 @@ test4;17;true;Crawl;20:20:20;2019-03-03;hops;1;01:02:03
 test uden;40;true;Butterfly;20:30:10;2019-10-12
 test konkurance;30;true;Rygcrawl
 test motion;12;true;true
+test bool;40;true;true;Butterfly
+tetst4;40;true;true
+test4;40;true;true
+tetst5;50;true;true

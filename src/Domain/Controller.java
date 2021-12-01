@@ -19,13 +19,13 @@ public class Controller {
     private SwimTeam st = new SwimTeam();
 
 
-    public void start() throws Exception {
+    public void start() {
         ui.printMessage("Velkommen til Delfinen");
         ui.printMessage("-----------------------");
         mainMenu();
     }
 
-    private void mainMenu() throws Exception {
+    private void mainMenu() {
         while (isRunning) {
             ui.MaineMenu();
             switch (ui.userInput()) {
@@ -40,7 +40,7 @@ public class Controller {
         }
     }
 
-    private void ceoMenu() throws Exception {
+    private void ceoMenu() {
         while (isRunning) {
             ui.menuCEO();
             switch (ui.userInput()) {
@@ -53,7 +53,7 @@ public class Controller {
         }
     }
 
-    private void coachMenu() throws Exception {
+    private void coachMenu() {
         while (isRunning) {
             ui.menuCoach();
             switch (ui.userInput()) {
@@ -67,7 +67,7 @@ public class Controller {
         }
     }
 
-    private void treasurerMenu() throws Exception {
+    private void treasurerMenu() {
         while (isRunning) {
             ui.menuTreasurer();
             switch (ui.userInput()) {
@@ -82,7 +82,7 @@ public class Controller {
         }
     }
 
-    public void createNewMember() throws Exception {
+    public void createNewMember() {
         ui.printMessage("Indtast medlemmets navn: ");
         String name = ui.userInput();
         ui.printMessage("Indtast medlemmets alder: ");
@@ -127,15 +127,15 @@ public class Controller {
         return activityForm;
     }
 
-    private boolean chooseActivityLevel(String activityLevelChosen) throws Exception {
+    private boolean chooseActivityLevel(String activityLevelChosen) {
         if (activityLevelChosen.equals("1")) {
             return true;
         } else if (activityLevelChosen.equals("2")) {
             return false;
         } else {
-            throw new Exception("Ikke et gyldigt input");
-
+            ui.printMessage("Ikke et gyldigt indput, sætter status til aktiv");
         }
+        return true;
     }
 
     private String chooseSwimDiscipline(String swimDisciplineChosen) {
@@ -364,7 +364,7 @@ public class Controller {
         isRunning = false;
     }
 
-    public void backTooMainMenu() throws Exception {
+    public void backTooMainMenu() {
         mainMenu();
     }
 
