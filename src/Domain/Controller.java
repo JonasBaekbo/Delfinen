@@ -6,7 +6,6 @@ import Files.FileHandler;
 import accounting.SubscriptionFee;
 import ui.UserInterface;
 
-import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -17,22 +16,21 @@ public class Controller {
     boolean isRunning = true;
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subFee = new SubscriptionFee();
-
     private SwimTeam st = new SwimTeam();
 
 
-    public void start() throws FileNotFoundException {
+    public void start() throws Exception {
         ui.printMessage("Velkommen til Delfinen");
         ui.printMessage("-----------------------");
         mainMenu();
     }
 
-    private void mainMenu() throws FileNotFoundException {
+    private void mainMenu() throws Exception {
         while (isRunning) {
             ui.MaineMenu();
             switch (ui.userInput()) {
                 case "0" -> exit();
-                case "1" -> CEOMenu();
+                case "1" -> ceoMenu();
                 case "2" -> coachMenu();
                 case "3" -> treasurerMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
@@ -42,7 +40,7 @@ public class Controller {
         }
     }
 
-    private void CEOMenu() throws FileNotFoundException {
+    private void ceoMenu() throws Exception {
         while (isRunning) {
             ui.menuCEO();
             switch (ui.userInput()) {
@@ -55,21 +53,21 @@ public class Controller {
         }
     }
 
-    private void coachMenu() throws FileNotFoundException {
+    private void coachMenu() throws Exception {
         while (isRunning) {
             ui.menuCoach();
             switch (ui.userInput()) {
                 case "1" -> addTimeAndDateTooMember();
                 case "2" -> bestPracticeTime();
                 case "3" -> tournamentsResults();
-                case "4" -> showTop5Swimmers(files.getAllMembers(MEMBER_FILE));
+                case "4" -> showTop5Swimmers((files.getAllMembers(MEMBER_FILE)));
                 case "0" -> backTooMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
             }
         }
     }
 
-    private void treasurerMenu() throws FileNotFoundException {
+    private void treasurerMenu() throws Exception {
         while (isRunning) {
             ui.menuTreasurer();
             switch (ui.userInput()) {
@@ -84,7 +82,7 @@ public class Controller {
         }
     }
 
-    public void createNewMember() {
+    public void createNewMember() throws Exception {
         ui.printMessage("Indtast medlemmets navn: ");
         String name = ui.userInput();
         ui.printMessage("Indtast medlemmets alder: ");
@@ -100,7 +98,7 @@ public class Controller {
                 1) Aktivt medlem
                 2) Passivt medlem""");
         String activityLevelChosen = ui.userInput();
-        String activityLevel = chooseActivityLevel(activityLevelChosen);
+        boolean isActive = chooseActivityLevel(activityLevelChosen);
         if (!activityForm.equalsIgnoreCase("Motionist")) {
             ui.printMessage("""
                     Indtast medlemmets svømmediciplin
@@ -111,10 +109,10 @@ public class Controller {
                     """);
             String swimDisciplineChosen = ui.userInput();
             String SwimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
-            Member member = new Member(name, age, activityForm, activityLevel, SwimDiscipline);
-            files.saveNewMember(MEMBER_FILE, member);
+            CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, SwimDiscipline);
+            files.saveNewMember(MEMBER_FILE, competitionSwimmer);
         } else {
-            Member member = new Member(name, age, activityForm, activityLevel);
+            Member member = new Member(name, age, isActive);
             files.saveNewMember(MEMBER_FILE, member);
         }
     }
@@ -129,15 +127,15 @@ public class Controller {
         return activityForm;
     }
 
-    private String chooseActivityLevel(String activityLevelChosen) {
-        String activityLevel = "";
+    private boolean chooseActivityLevel(String activityLevelChosen) throws Exception {
         if (activityLevelChosen.equals("1")) {
-            activityLevel = "Aktivt";
+            return true;
         } else if (activityLevelChosen.equals("2")) {
-            activityLevel = "Passivt";
-        }
-        return activityLevel;
+            return false;
+        } else {
+            throw new Exception("Ikke et gyldigt input");
 
+        }
     }
 
     private String chooseSwimDiscipline(String swimDisciplineChosen) {
@@ -159,32 +157,31 @@ public class Controller {
 
     public void listAllSwimmersUnder18(ArrayList<Member> membersList) {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
-        ArrayList<Member> brystUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Brystsvømning", false);
+        ArrayList<CompetitionSwimmer> brystUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Brystsvømning", false);
         writeTop5Swimmers(brystUnder18);
-        ;
         ui.printMessage("Konkurrencesvømmere i butterfly:");
-        ArrayList<Member> butterflyUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Butterfly", false);
+        ArrayList<CompetitionSwimmer> butterflyUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Butterfly", false);
         writeTop5Swimmers(butterflyUnder18);
         ui.printMessage("Konkurrencesvømmere i crawl:");
-        ArrayList<Member> crawlUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Crawl", false);
+        ArrayList<CompetitionSwimmer> crawlUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Crawl", false);
         writeTop5Swimmers(crawlUnder18);
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
-        ArrayList<Member> rygUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Rygcrawl", false);
+        ArrayList<CompetitionSwimmer> rygUnder18 = st.listSwimmersSplitByAge(membersList, 18, "Rygcrawl", false);
         writeTop5Swimmers(rygUnder18);
     }
 
     public void listAllSwimmersOver18(ArrayList<Member> membersList) {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
-        ArrayList<Member> brystOver18 = st.listSwimmersSplitByAge(membersList, 18, "Brystsvømning", true);
+        ArrayList<CompetitionSwimmer> brystOver18 = st.listSwimmersSplitByAge(membersList, 18, "Brystsvømning", true);
         writeTop5Swimmers(brystOver18);
         ui.printMessage("Konkurrencesvømmere i butterfly:");
-        ArrayList<Member> butterflyOver18 = st.listSwimmersSplitByAge(membersList, 18, "Butterfly", true);
+        ArrayList<CompetitionSwimmer> butterflyOver18 = st.listSwimmersSplitByAge(membersList, 18, "Butterfly", true);
         writeTop5Swimmers(butterflyOver18);
         ui.printMessage("Konkurrencesvømmere i crawl:");
-        ArrayList<Member> crawlOver18 = st.listSwimmersSplitByAge(membersList, 18, "Crawl", true);
+        ArrayList<CompetitionSwimmer> crawlOver18 = st.listSwimmersSplitByAge(membersList, 18, "Crawl", true);
         writeTop5Swimmers(crawlOver18);
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
-        ArrayList<Member> rygOver18 = st.listSwimmersSplitByAge(membersList, 18, "Rygcrawl", true);
+        ArrayList<CompetitionSwimmer> rygOver18 = st.listSwimmersSplitByAge(membersList, 18, "Rygcrawl", true);
         writeTop5Swimmers(rygOver18);
     }
 
@@ -211,6 +208,7 @@ public class Controller {
         //TODO:
     }
 
+
     public ArrayList<Member> getMembersAsArrayList() {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         return members;
@@ -231,18 +229,18 @@ public class Controller {
         listCompetitionSwimmers(members);
         ui.printMessage("Indtast medlemmets navn som har deltaget i et stævne:");
         String memberName = ui.userInput();
-        Member foundMember = findMemberByName(members, memberName);
+        CompetitionSwimmer foundMember = (CompetitionSwimmer) findMemberByName(members, memberName);
         if (foundMember != null) {
-            if (foundMember.getTime() != null) {
+            if (foundMember.getSwimTime() != null) {
                 ui.printMessage("Indtast navnet på stævnet:");
                 String tournamentName = ui.userInput();
                 ui.printMessage("Indtast placeringen til stævnet:");
-                String place = ui.userInput();
+                String tournamentPlace = ui.userInput();
                 ui.printMessage("Indtast tiden til stævnet (MM:SS:mm):");
-                String time = ui.userInput();
-                LocalTime timeToAdd = LocalTime.parse(time);
-                Competition c = new Competition(tournamentName, place, timeToAdd);
-                foundMember.addCompetition(c);
+                String timeAsString = ui.userInput();
+                LocalTime tournamentTime = LocalTime.parse(timeAsString);
+                Competition competition = new Competition(tournamentName, tournamentPlace, tournamentTime);
+                foundMember.addCompetition(competition);
                 files.addCompetitonAndTimeAndDateTooMember(MEMBER_FILE, members);
             } else {
                 ui.printMessage("det valgte medlemmet har ikke en tid");
@@ -257,47 +255,44 @@ public class Controller {
         listCompetitionSwimmers(members);
         ui.printMessage("Indtast medlemmets navn som skal have tilføjet en ny tid:");
         String memberName = ui.userInput();
-        Member foundMember = findMemberByName(members, memberName);
+        CompetitionSwimmer foundMember = (CompetitionSwimmer) findMemberByName(members, memberName);
         if (foundMember != null) {
             ui.printMessage("Indtast medlemmets tid (MM:SS:mm)");
-            String time = ui.userInput();
-            LocalTime timeToAdd = LocalTime.parse(time);
-            foundMember.setTime(timeToAdd);
+            String swimTimeAsString = ui.userInput();
+            LocalTime timeToAdd = LocalTime.parse(swimTimeAsString);
+            foundMember.setSwimTime(timeToAdd);
             ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
-            String date = ui.userInput();
-            foundMember.setDate(date);
+            String swimDate = ui.userInput();
+            foundMember.setSwimDate(swimDate);
             files.addCompetitonAndTimeAndDateTooMember(MEMBER_FILE, members);
         } else ui.printMessage("Det indtastet navn findes ikke, prøv igen");
     }
 
     private void listCompetitionSwimmers(ArrayList<Member> members) {
         for (Member member : members) {
-            if (member.getActivityForm().equals("Konkurrence"))
+            CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
+            if (competitionSwimmer.getSwimDisciplin() != null)
                 ui.printMessage(member.toString());
         }
     }
 
-    //TODO: find ud af om dette er den rigtige placering til metoden?
-    private void writeTop5Swimmers(ArrayList<Member> membersList) {
-        membersList.sort(new Sorting("time"));
-        if (membersList.size() < 5) {
-            for (Member member : membersList) {
-                createTableContents(member);
-            }
-        } else {
-            for (int j = 0; j < 5; j++) {
-                createTableContents(membersList.get(j));
-            }
+
+    private void writeTop5Swimmers(ArrayList<CompetitionSwimmer> membersList) {
+        ArrayList<CompetitionSwimmer> list = st.writeTop5Swimmers(membersList);
+        for (CompetitionSwimmer competitionSwimmer : list) {
+            createTableContents(competitionSwimmer);
         }
     }
+
 
     private void createTableHeader() {
         ui.createTableHeader();
     }
 
+    //TODO: skal ud i userinterface,
     //TODO: deles evt. op i 2, en del i UserInterface og en del i Member
-    private void createTableContents(Member member) {
-        System.out.format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActivityLevel(), "|", member.getSwimmingDiscipline(), "|", member.getTime());
+    private void createTableContents(CompetitionSwimmer competitionSwimmer) {
+        System.out.format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", competitionSwimmer.getName(), "|", competitionSwimmer.getAge(), "|", competitionSwimmer.getActive(), "|", competitionSwimmer.getSwimDisciplin(), "|", competitionSwimmer.getSwimTime());
         System.out.println();
 
     }
@@ -309,6 +304,7 @@ public class Controller {
 
     }
 
+
     private void chargeSubscriptionFee() {
         ui.printMessage("""
                 Vil du:
@@ -319,11 +315,11 @@ public class Controller {
         if (choice.equalsIgnoreCase("1")) {
             ui.printMessage("Skriv navnet på medlemmet der skal opkræves");
             String memberName = ui.userInput();
-            String result = makeSubscriptionChargeForOneMember(memberName);
-            ui.printMessage(result);
+            String resultSubsForOne = makeSubscriptionChargeForOneMember(memberName);
+            ui.printMessage(resultSubsForOne);
         } else if (choice.equalsIgnoreCase("2")) {
-            String result = makeSubscriptionChargeForAllMembers();
-            ui.printMessage(result);
+            String resultSubForAll = makeSubscriptionChargeForAllMembers();
+            ui.printMessage(resultSubForAll);
         } else {
             ui.printMessage(choice + " er ikke et gyldigt indput. Vælg 1 eller 2");
         }
@@ -341,10 +337,11 @@ public class Controller {
         sowMissingPayments();
         ui.printMessage("Skriv fakturanummer eller navnet på personen der har indbetalt");
         String userInput = ui.userInput();
-        String result = updatePaymentStatus(userInput);
-        ui.printMessage(result);
+        String resultUpdatePayment = updatePaymentStatus(userInput);
+        ui.printMessage(resultUpdatePayment);
     }
 
+    //TODO: skal delvist over på member?
     private String makeSubscriptionChargeForOneMember(String memberName) {
         return subFee.makeSubscriptionChargeForOneMember(memberName);
     }
@@ -367,7 +364,7 @@ public class Controller {
         isRunning = false;
     }
 
-    public void backTooMainMenu() throws FileNotFoundException {
+    public void backTooMainMenu() throws Exception {
         mainMenu();
     }
 

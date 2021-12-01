@@ -4,7 +4,7 @@ package Domain;
 
 import java.util.Comparator;
 
-public class Sorting implements Comparator<Member> {
+public class Sorting implements Comparator<CompetitionSwimmer> {
     private String type;
 
     public Sorting(String type) {
@@ -13,20 +13,19 @@ public class Sorting implements Comparator<Member> {
 
 
     @Override
-    public int compare(Member o1, Member o2) {
+    public int compare(CompetitionSwimmer o1, CompetitionSwimmer o2) {
         int resultat = 0;
         if (type.equals("age")) {
             resultat = o1.getAge().compareTo(o2.getAge());
         } else if (type.equals("name")) {
             resultat = o1.getName().compareTo(o2.getName());
-        } else if (type.equals("activityForm")) {
+        } /*else if (type.equals("activityForm")) {
             resultat = o1.getActivityForm().compareTo(o2.getActivityForm());
-        } else if (type.equals("activityLevel")) {
-            resultat = o1.getActivityLevel().compareTo(o2.getActivityLevel());
-        } else if (type.equals("diciplin")) {
-            resultat = o1.getSwimmingDiscipline().compareTo(o2.getSwimmingDiscipline());
+         else if (type.equals("activityLevel")) {
+            resultat = o1.getActive().compareTo(o2.getActive());*/ else if (type.equals("diciplin")) {
+            resultat = o1.getSwimDisciplin().compareTo(o2.getSwimDisciplin());
         } else if (type.equals("time")) {
-            resultat = o1.getTime().compareTo(o2.getTime());
+            resultat = o1.getSwimTime().compareTo(o2.getSwimTime());
         }
         return resultat;
     }

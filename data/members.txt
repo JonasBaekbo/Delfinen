@@ -1,12 +1,15 @@
-Mille Helbo;22;Konkurrence;Aktivt;Brystsvømning;12:21:21;2010-10-10
-Knut Knutsen;27;Konkurrence;Passivt;Butterfly;12:21:21;2001-10-21
-Adam Lasson;56;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
-Jonas Bækbo;17;Konkurrence;Aktivt;Crawl;00:56:43;2021-11-24
-Johanne Weitling;22;Konkurrence;Aktivt;Rygcrawl;00:56:43;2021-11-24
-Mikkel Sandell;23;Konkurrence;Aktivt;Brystsvømning;02:12:05;2021-11-24
-David Ema;61;Konkurrence;Aktivt;Butterfly;12:15:12;2021-11-23
-Jakob;24;Konkurrence;Aktivt;Butterfly;00:12:10;2021-12-01
-test1;19;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24
-test2;36;Konkurrence;Aktivt;Butterfly;05:22:59;2021-03-12
-test3;26;Konkurrence;Aktivt;Butterfly;00:56:43;2021-11-24;testStævne;3;20:20:20
-test4;17;Konkurrence;Aktivt;Crawl;20:20:20;2019-03-03;hops;1;01:02:03
+Mille Helbo;22;true;Brystsvømning;12:21:21;2010-10-10
+Knut Knutsen;27;false;Butterfly;12:21:21;2001-10-21
+Adam Lasson;56;true;Butterfly;00:56:43;2021-11-24
+Jonas Bækbo;17;true;Crawl;00:56:43;2021-11-24
+Johanne Weitling;22;true;Rygcrawl;00:56:43;2021-11-24
+Mikkel Sandell;23;true;Brystsvømning;02:12:05;2021-11-24
+David Ema;61;true;Butterfly;12:15:12;2021-11-23
+Jakob;24;true;Butterfly;00:12:10;2021-12-01
+test1;19;true;Butterfly;00:56:43;2021-11-24
+test2;36;true;Butterfly;05:22:59;2021-03-12
+test3;26;true;Butterfly;00:56:43;2021-11-24;testStævne;3;20:20:20
+test4;17;true;Crawl;20:20:20;2019-03-03;hops;1;01:02:03
+test uden;40;true;Butterfly;20:30:10;2019-10-12
+test konkurance;30;true;Rygcrawl
+test motion;12;true;true

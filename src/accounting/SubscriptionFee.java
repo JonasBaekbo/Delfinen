@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+//TODO: flytte dele af denne klasse over til member og memberList?
+
 public class SubscriptionFee {
     private Member member;
     private double below18Fee = 1000;
@@ -36,7 +38,7 @@ public class SubscriptionFee {
 
     private boolean isMemberActive(Member member) {
         boolean isActive;
-        isActive = member.getActivityLevel().equals("Aktivt");
+        isActive = member.getActive() == true;
         return isActive;
     }
 
@@ -106,8 +108,7 @@ public class SubscriptionFee {
         ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
         int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
         int numCharge = 0;
-        for (int i = 0; i < members.size(); i++) {
-            Member member = members.get(i);
+        for (Member member : members) {
             invoiceNumber++;
             generateAndSaveInvoiceLine(member, invoiceNumber);
             numCharge++;
@@ -145,8 +146,7 @@ public class SubscriptionFee {
 
 
             int numUpdates = 0;
-            for (int i = 0; i < charges.size(); i++) {
-                Charge charge = charges.get(i);
+            for (Charge charge : charges) {
                 if (charge.getName().equalsIgnoreCase(input) || (charge.getChargeNumber().equalsIgnoreCase(input))) {
                     charge.setIsPaid("betalt");
                     numUpdates++;
