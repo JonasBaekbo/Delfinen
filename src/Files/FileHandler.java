@@ -76,7 +76,7 @@ public class FileHandler {
                 String name = details[0];
                 String age = details[1];
                 boolean isActive = Boolean.parseBoolean(details[2]);
-                if (details.length == 9) {
+                if (details.length == 10) {
                     String diciplin = details[3];
                     DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
                     String time = details[4];

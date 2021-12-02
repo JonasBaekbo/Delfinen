@@ -12,7 +12,6 @@ public class CompetitionSwimmer extends Member {
     private LocalTime practiceTime = null;
     private LocalDate practiceDate;
     private ArrayList<Competition> competitions = new ArrayList<>();
-    private String competitiondate;
 
     public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin) {
         super(name, age, isActive);
@@ -31,7 +30,6 @@ public class CompetitionSwimmer extends Member {
         this.swimDisciplin = swimDisciplin;
         this.practiceTime = practiceTime;
         this.practiceDate = practiceDate;
-        this.competitiondate = competitiondate;
         addCompetition(new Competition(competitonName, place, competitiondate, competitontime));
     }
 
