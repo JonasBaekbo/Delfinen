@@ -8,16 +8,6 @@ David Ema;61;true;BUTTERFLY;12:15:12;2021-11-23
 Jakob;24;true;BUTTERFLY;00:12:10;2021-12-01
 test1;19;true;BUTTERFLY;00:56:43;2021-11-24
 test2;36;true;BUTTERFLY;05:22:59;2021-03-12
-test3;26;true;BUTTERFLY;00:56:43;2021-11-24;
-test4;17;true;CRAWL;20:20:20;2019-03-03;
-test uden;40;true;BUTTERFLY;20:30:10;2019-10-12
-test konkurance;30;true;RYGCRAWL
-test motion;12;true;BUTTERFLY
-test bool;40;true;BUTTERFLY
-tetst4;40;true;RYGCRAWL
-test4;40;true;BUTTERFLY
-tetst5;50;true;RYGCRAWL
+test3;26;true;BUTTERFLY;00:56:43;2021-11-24
+test4;17;true;CRAWL;20:20:20;2019-03-03
 Pelle;12;true;BRYSTSVØMNING
-test ofTrue;21;true
-test 3;21;true
-test4;21;true
