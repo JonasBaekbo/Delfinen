@@ -20,7 +20,7 @@ public class FileHandler {
         File file = new File(FILE_PATH);
         try {
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-            String newMember = member.saveNewMember();
+            String newMember = member.saveMember();
             ps.println(newMember);
             ps.close();
 
@@ -51,7 +51,7 @@ public class FileHandler {
             for (Member member : members) {
                 PrintStream ps = new PrintStream(new FileOutputStream(file, true));
                 CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
-                String memberCompetition = competitionSwimmer.addCompetitionAndTimeAndDateTooMember();
+                String memberCompetition = competitionSwimmer.saveMember();
                 ps.println(memberCompetition);
                 ps.close();
             }
@@ -61,8 +61,6 @@ public class FileHandler {
         }
     }
 
-
-    //TODO: Kan forenkles/deles op?
     public ArrayList<Member> getAllMembers(String Member_FILE_PATH) {
         File file = new File(Member_FILE_PATH);
 
@@ -108,9 +106,9 @@ public class FileHandler {
                     }
 
                 } else if (details.length == 4) {
-                    String diciplin = details[3];
-                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
-                    if (diciplin != null) {
+                    String dicsipline = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(dicsipline);
+                    if (dicsipline != null) {
                         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum);
                         members.add(competitionSwimmer);
 

@@ -34,6 +34,7 @@ public class UserInterface {
                 Foretag et valg:
                 1) Registrer nyt medlem
                 2) Registrer ny træner
+                3) Skift status på medlem (Aktiv/Passiv)
                 0) Tilbage til hovedmenu""");
     }
 

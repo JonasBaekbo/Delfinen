@@ -26,7 +26,6 @@ public class TreasurerController {
                 case "4" -> sowMissingPayments();
                 case "0" -> controller.backTooMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
-
             }
         }
     }

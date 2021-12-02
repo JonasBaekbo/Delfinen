@@ -58,7 +58,7 @@ public class Member {
 
     }
 
-    public String saveNewMember() {
+    public String saveMember() {
         return basisString();
 
     }
@@ -75,7 +75,7 @@ public class Member {
     public String basisToStringString() {
         return "Medlemsnavn: " + name + '\n' +
                 "Alder: " + age + '\n' +
-                "Medlemskabs status: " + isActive + '\n';
+                "Aktiv: " + isActive + '\n';
     }
 
     @Override
@@ -84,16 +84,6 @@ public class Member {
                 "----------------------------------------------" + '\n' + "";
     }
 
-
-    public Member findMemberByName(ArrayList<Member> members, String memberName) {
-        Member foundMember = null;
-        for (Member member : members) {
-            if (memberName.equalsIgnoreCase(member.getName())) {
-                foundMember = member;
-            }
-        }
-        return foundMember;
-    }
 }
 
 

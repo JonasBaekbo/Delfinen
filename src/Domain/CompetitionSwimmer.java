@@ -79,7 +79,7 @@ public class CompetitionSwimmer extends Member {
 
     }
 
-    public String addCompetitionAndTimeAndDateTooMember() {
+    /*public String addCompetitionAndTimeAndDateTooMember() {
 
         if (getSwimDisciplin() == null) {
             return basisString();
@@ -96,9 +96,9 @@ public class CompetitionSwimmer extends Member {
                     competition.getConvention() + ";" + competition.getConventionPlace() + ";" +competition.getCoventiondate() + ";" + competition.getConventionTime();
 
         }
-    }
+    }*/
 
-    public String saveNewMember() {
+    public String saveMember() {
 
         if (getSwimDisciplin() == null) {
             return basisString();
@@ -106,12 +106,16 @@ public class CompetitionSwimmer extends Member {
         } else if (getPracticeTime() == null) {
             return basisString() + ";" + getSwimDisciplin();
 
+        } else if (getCompetitions().size() == 0) {
+            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate();
+
         } else {
-            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime();
-        }
+            Competition competition = getCompetition();
+            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate() + ";" +
+                    competition.getConvention() + ";" + competition.getConventionPlace() + ";" +competition.getCoventiondate() + ";" + competition.getConventionTime();
 
 
-    }
+    }}
     @Override
     public String toString() {
         if (swimDisciplin == null) {

@@ -17,24 +17,24 @@ public class Controller {
         ui.printMessage("-----------------------");
         mainMenu();
     }
-
     private void mainMenu() {
         while (isRunning) {
             ui.MaineMenu();
             switch (ui.userInput()) {
-                case "0" -> exit();
                 case "1" -> ceoController.ceoMenu(this);
                 case "2" -> coachController.coachMenu(this);
                 case "3" -> treasurerController.treasurerMenu(this);
+                case "0" -> exit();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
-
-
             }
         }
     }
-
+//TODO: skal de alle have false for at stoppe?
     public void exit() {
         isRunning = false;
+        ceoController.isRunning=false;
+        treasurerController.isRunning=false;
+        coachController.isRunning=false;
     }
 
     public void backTooMainMenu() {
