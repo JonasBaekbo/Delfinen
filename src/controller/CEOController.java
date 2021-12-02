@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class CEOController {
     boolean isRunning = true;
-    //private static String MEMBER_FILE = "data/members.txt";
-    //private static final String COACH_FILE = "data/coach.txt";
     FileHandler files = new FileHandler();
     private final FilePath filePath =new FilePath();
     private UserInterface ui = new UserInterface();
@@ -24,13 +22,14 @@ public class CEOController {
             ui.menuCEO();
             switch (ui.userInput()) {
                 case "1" -> createNewMember();
-                case "2" -> createCoach();
-                case "3" -> changeActiveStatus();
+                case "2" -> changeActiveStatus();
+                case "3" -> createCoach();
                 case "0" -> controller.backTooMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
             }
         }
     }
+
     private void createNewMember() {
         ui.printMessage("Indtast medlemmets navn: ");
         String name = ui.userInput();
@@ -57,6 +56,7 @@ public class CEOController {
             createNormalMember(name, age, isActive);
         }
     }
+
     private void createNormalMember(String name, String age, boolean isActive){
         Member member = new Member(name, age, isActive);
         files.saveNewMember(filePath.MEMBER_PATH, member);
@@ -76,8 +76,6 @@ public class CEOController {
         files.saveNewMember(filePath.MEMBER_PATH, competitionSwimmer);
 
     }
-
-
 
     private String chooseActivityForm(String activityFormChosen) {
         String activityForm = "";
@@ -109,6 +107,7 @@ public class CEOController {
         };
         return swimDiscipline;
     }
+
     private void createCoach() {
         ui.printMessage("Indtast træneres navn: ");
         String name = ui.userInput();
@@ -133,7 +132,6 @@ public class CEOController {
 
     }
 
-
     public void updateActiveStatus(String input,boolean isActive) {
         String file= filePath.MEMBER_PATH;
         try {
@@ -154,6 +152,7 @@ public class CEOController {
             throw new FileReadException("Can't read from subscription file", e);
         }
     }
+
     private ArrayList<Member> getMembersAsArrayList(String filePath){
         ArrayList<Member> members= files.getAllMembers(filePath);
         return members;

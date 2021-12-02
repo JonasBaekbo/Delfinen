@@ -9,22 +9,15 @@ public class Competition {
 
     private String convention;
     private String conventionPlace;
-    private LocalTime conventionTime;
-    private LocalDate coventionDate;
-    private String coventionStringDate;
+    private LocalTime competitionTime;
+    private LocalDate competitionDate;
 
-    /*public Competition(String convention, String conventionPlace, String coventiondate, LocalTime conventionTime) {
+
+    public Competition(String convention, String conventionPlace, LocalDate competitionDate, LocalTime competitionTime) {
         this.convention = convention;
         this.conventionPlace = conventionPlace;
-        this.conventionTime = conventionTime;
-        this.coventionStringDate = coventiondate;
-    }*/
-
-    public Competition(String convention, String conventionPlace, LocalDate coventiondate, LocalTime conventionTime) {
-        this.convention = convention;
-        this.conventionPlace = conventionPlace;
-        this.conventionTime = conventionTime;
-        this.coventionDate = coventiondate;
+        this.competitionTime = competitionTime;
+        this.competitionDate = competitionDate;
     }
 
     public String getConvention() {
@@ -43,27 +36,27 @@ public class Competition {
         this.conventionPlace = conventionPlace;
     }
 
-    public LocalDate getCoventiondate() {
-        return coventionDate;
+    public LocalDate getCompetitionDate() {
+        return competitionDate;
     }
 
-    public void setCoventiondate(LocalDate coventiondate) {
-        this.coventionDate = coventiondate;
+    public void setCompetitionDate(LocalDate competitionDate) {
+        this.competitionDate = competitionDate;
     }
 
-    public LocalTime getConventionTime() {
-        return conventionTime;
+    public LocalTime getCompetitionTime() {
+        return competitionTime;
     }
 
-    public void setConventionTime(LocalTime conventionTime) {
-        this.conventionTime = conventionTime;
+    public void setCompetitionTime(LocalTime competitionTime) {
+        this.competitionTime = competitionTime;
     }
 
     @Override
     public String toString() {
         return "Stævnets navn: " + convention + '\n' +
-                "Dato for stævne: " + coventionDate + '\n' +
+                "Dato for stævne: " + competitionDate + '\n' +
                 "Placeringen til stævnet: " + conventionPlace + '\n' +
-                "Tiden til stævnet: " + conventionTime;
+                "Tiden til stævnet: " + competitionTime;
     }
 }

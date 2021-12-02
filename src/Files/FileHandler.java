@@ -30,34 +30,16 @@ public class FileHandler {
 
     }
 
-    //https://intellipaat.com/community/69798/how-to-clear-a-text-file-without-deleting-it
-    public void clearFile(String FILE_PATH) {
-        try {
-            FileWriter fw = new FileWriter(FILE_PATH, false);
-            PrintWriter pw = new PrintWriter(fw, false);
-            pw.flush();
-            pw.close();
-            fw.close();
-        } catch (Exception exception) {
-            System.out.println("Exception have been caught");
-        }
-    }
-
-
-    public void addCompetitonAndTimeAndDateTooMember(String FILE_PATH, ArrayList<Member> members) {
+    public void saveNewCoach(String FILE_PATH, Coach coach) {
         File file = new File(FILE_PATH);
-        clearFile(FILE_PATH);
         try {
-            for (Member member : members) {
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
-                String memberCompetition = competitionSwimmer.saveMember();
-                ps.println(memberCompetition);
-                ps.close();
-            }
-
+            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+            String newCoach = coach.coachNameAndAge();
+            ps.println(newCoach);
+            ps.close();
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
+
         }
     }
 
@@ -75,26 +57,26 @@ public class FileHandler {
                 String age = details[1];
                 boolean isActive = Boolean.parseBoolean(details[2]);
                 if (details.length == 10) {
-                    String diciplin = details[3];
-                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
+                    String discipline = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
                     String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
                     String date = details[5];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate dateToAdd = LocalDate.parse(date, formatter);
-                    String competitonName = details[6];
+                    String competitionName = details[6];
                     String place = details[7];
-                    String competitiondate = details[8];
-                    LocalDate competitionDateToAdd = LocalDate.parse(competitiondate, formatter);
-                    String competitonTime = details[9];
-                    LocalTime competitontimeToAdd = LocalTime.parse(competitonTime);
-                    if (competitontimeToAdd != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitonName, place, competitionDateToAdd, competitontimeToAdd);
+                    String competitionDate = details[8];
+                    LocalDate competitionDateToAdd = LocalDate.parse(competitionDate, formatter);
+                    String competitionTime = details[9];
+                    LocalTime competitionTimeToAdd = LocalTime.parse(competitionTime);
+                    if (competitionTimeToAdd != null) {
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitionName, place, competitionDateToAdd, competitionTimeToAdd);
                         members.add(competitionSwimmer);
                     }
                 } else if (details.length == 6) {
-                    String diciplin = details[3];
-                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
+                    String discipline = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
                     String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
                     String date = details[5];
@@ -106,9 +88,9 @@ public class FileHandler {
                     }
 
                 } else if (details.length == 4) {
-                    String dicsipline = details[3];
-                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(dicsipline);
-                    if (dicsipline != null) {
+                    String discipline = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
+                    if (discipline != null) {
                         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum);
                         members.add(competitionSwimmer);
 
@@ -126,17 +108,33 @@ public class FileHandler {
         }
     }
 
-
-    public void saveNewCoach(String FILE_PATH, Coach coach) {
+    public void addCompetitionAndTimeAndDateTooMember(String FILE_PATH, ArrayList<Member> members) {
         File file = new File(FILE_PATH);
+        clearFile(FILE_PATH);
         try {
-            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-            String newCoach = coach.coachNameAndAge();
-            ps.println(newCoach);
-            ps.close();
+            for (Member member : members) {
+                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
+                String memberCompetition = competitionSwimmer.saveMember();
+                ps.println(memberCompetition);
+                ps.close();
+            }
+
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
+        }
+    }
 
+    //https://intellipaat.com/community/69798/how-to-clear-a-text-file-without-deleting-it
+    public void clearFile(String FILE_PATH) {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+        } catch (Exception exception) {
+            System.out.println("Exception have been caught");
         }
     }
 

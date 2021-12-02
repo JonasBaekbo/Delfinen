@@ -1,12 +1,15 @@
+//@Adam Lasson
 package accounting;
 
 import Domain.CompetitionSwimmer;
+import Domain.DisciplineEnum;
 import Domain.Member;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SubscriptionFeeTest {
+
 
     @Test
     public void testafCalculateSubscriptionFee_AktivtMedlemOver18() {
@@ -112,6 +115,42 @@ class SubscriptionFeeTest {
         assertEquals(expected, result);
     }
 
-    //TODO: test med fejl indput?
-//TODO: Test med CompetistionsSwimmer
+
+    @Test
+    public void testafCalculateSubscriptionFee_AktivtKonkurrenceOver18() {
+
+        SubscriptionFee subscriptionFee = new SubscriptionFee();
+        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer("Adam Lasson","19",true, DisciplineEnum.BRYSTSVØMNING);
+        int expected = 1600;
+
+        int result = (int) subscriptionFee.getSubscriptionFee(competitionSwimmer);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testafCalculateSubscriptionFee_PassivtKonkurrenceOver18() {
+
+        SubscriptionFee subscriptionFee = new SubscriptionFee();
+        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer("Adam Lasson","20",false, DisciplineEnum.BRYSTSVØMNING);
+
+        int expected = 500;
+
+        int result = (int) subscriptionFee.getSubscriptionFee(competitionSwimmer);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testafCalculateSubscriptionFee_AktivtKonkurrenceOver60() {
+
+        SubscriptionFee subscriptionFee = new SubscriptionFee();
+        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer("Adam Lasson","65",true, DisciplineEnum.CRAWL);
+
+        int expected = 1200;
+
+        int result = (int) subscriptionFee.getSubscriptionFee(competitionSwimmer);
+
+        assertEquals(expected, result);
+    }
 }

@@ -2,31 +2,30 @@ package Domain;
 
 import java.util.ArrayList;
 
-//TODO omdøbe til memberList?
 public class SwimTeam {
 
-    public ArrayList<CompetitionSwimmer> listSwimmersSplitByAge(ArrayList<Member> membersList, int splitAge, DisciplineEnum swimmingDiscipline, boolean overSplitAge) {
-        ArrayList<CompetitionSwimmer> swimmingDisciplineSplitByAge = new ArrayList<>();
+    public ArrayList<CompetitionSwimmer> listSwimmersSplitByAge(ArrayList<Member> membersList, int splitAge, DisciplineEnum swimDiscipline, boolean overSplitAge) {
+        ArrayList<CompetitionSwimmer> swimDisciplineSplitByAge = new ArrayList<>();
         for (Member member : membersList) {
             if (member.getActive()) {
                 CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
                 if (competitionSwimmer.getSwimDisciplin() != null) {
                     if (competitionSwimmer.getPracticeTime() != null) {
-                        if (competitionSwimmer.getSwimDisciplin()==swimmingDiscipline) {
+                        if (competitionSwimmer.getSwimDisciplin()==swimDiscipline) {
                             int memberAge = Integer.parseInt(member.getAge());
 
                             if (overSplitAge && (memberAge >= splitAge)) {
-                                swimmingDisciplineSplitByAge.add((CompetitionSwimmer) member);
+                                swimDisciplineSplitByAge.add((CompetitionSwimmer) member);
 
                             } else if (!overSplitAge && (memberAge < splitAge)) {
-                                swimmingDisciplineSplitByAge.add((CompetitionSwimmer) member);
+                                swimDisciplineSplitByAge.add((CompetitionSwimmer) member);
                             }
                         }
                     }
                 }
             }
         }
-        return swimmingDisciplineSplitByAge;
+        return swimDisciplineSplitByAge;
 
     }
 

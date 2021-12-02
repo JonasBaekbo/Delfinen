@@ -33,8 +33,8 @@ public class UserInterface {
                 Formand
                 Foretag et valg:
                 1) Registrer nyt medlem
-                2) Registrer ny træner
-                3) Skift status på medlem (Aktiv/Passiv)
+                2) Skift status på medlem (Aktiv/Passiv)
+                3) Registrer ny træner
                 0) Tilbage til hovedmenu""");
     }
 
@@ -62,16 +62,15 @@ public class UserInterface {
     }
 
 
-    public void createTableHeader() {
+    public void printTableHeader() {
         System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktivitetsniveau", "|", "Svømmedisciplin", "|", "Tid");
+        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktiv", "|", "Svømmedisciplin", "|", "Tid");
         System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
-    public void createTableContents(String tableContent) {
+    public void printTableContents(String tableContent) {
         System.out.format(tableContent);
         System.out.println();
-
     }
 }
 

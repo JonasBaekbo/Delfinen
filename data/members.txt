@@ -1,14 +1,59 @@
-Mille Helbo;22;true;BRYSTSVØMNING;12:21:21;2010-10-10
-Knut Knutsen;27;false;BUTTERFLY;12:21:21;2001-10-21
-Adam Lasson;56;true;BUTTERFLY;00:56:43;2021-11-24
-Jonas Bækbo;17;true;CRAWL;00:56:43;2021-11-24
-Johanne Weitling;22;true;RYGCRAWL;00:56:43;2021-11-24
-Mikkel Sandell;23;true;BRYSTSVØMNING;02:12:05;2021-11-24
-David Ema;61;true;BUTTERFLY;12:15:12;2021-11-23
-Jakob;24;true;BUTTERFLY;00:12:10;2021-12-01
-test1;19;true;BUTTERFLY;00:56:43;2021-11-24
-test2;36;true;BUTTERFLY;05:22:59;2021-03-12
-test3;26;true;BUTTERFLY;00:56:43;2021-11-24
-test4;17;true;CRAWL;20:20:20;2019-03-03
-Pelle;12;true;BRYSTSVØMNING
-Mie bonde;21;true;RYGCRAWL
+Adam Lasson;56;true;BUTTERFLY;00:16:43;2021-11-24
+Bendt Jensen;19;true;BUTTERFLY;00:16:43;2021-11-24
+David Ema;61;true;BUTTERFLY;00:15:12;2021-11-23
+Jakob Sandell;24;true;BUTTERFLY;00:12:10;2021-12-01
+Johanne Weitling;22;true;RYGCRAWL;00:16:43;2021-11-24
+Knut Knutsen;27;false;BUTTERFLY;00:21:21;2001-10-21
+Lars Larsen;36;true;CRAWL;00:22:59;2021-03-12
+Mie Bonde;21;true;RYGCRAWL;00:21:21;2021-09-10
+Mikkel Sandell;23;true;BRYSTSVØMNING;00:12:05;2021-11-24
+Mille Helbo;22;true;BRYSTSVØMNING;00:21:21;2021-10-10
+Pelle Helle;12;true;BRYSTSVØMNING;00:21:21;2021-09-10
+Peter Lind;45;true;CRAWL;00:20:20;2019-03-03
+Tine Marbjerg;45;true;BUTTERFLY;00:16:43;2021-11-24
+Alfred Nielsen;15;true;BUTTERFLY;00:15:12;2001-10-21
+Oscar Jensen;29;true;RYGCRAWL;00:16:43;2001-10-22
+Carl Hansen;35;true;BRYSTSVØMNING
+Freja Pedersen;35;false;BUTTERFLY;00:12:05;2001-10-24
+Clara Andersen;35;true;CRAWL;00:21:21;2001-10-25
+Emma Christensen;50;true;RYGCRAWL;00:16:43;2019-03-04
+Arthur Møller;17;true;BRYSTSVØMNING;00:11:59;2021-09-10
+Valdemar Lund;19;false;CRAWL;00:12:10;2021-09-10
+Malthe Holm;17;true;BUTTERFLY
+Emil Schmidt;19;false;RYGCRAWL;00:22:59;2021-09-11
+Laura Østergaard;15;true;BUTTERFLY
+Josefine Vestergaard;39;true;BRYSTSVØMNING;00:15:12;2021-10-10
+Ida Kjær;16;true;BRYSTSVØMNING;00:12:59;2021-10-11
+Magnus Nørgaard;18;true;BRYSTSVØMNING;00:14:43;2021-10-11
+Anton Dahl;41;true;BUTTERFLY;00:12:10;2021-10-11
+Otto Nielsen;18;true;CRAWL;00:20:20;2021-10-12
+Mathilde Jensen;42;true;BUTTERFLY;00:22:59;2021-10-12
+Adam Pedersen;43;true;RYGCRAWL;00:21:21;2021-10-13
+Alexander Andersen;18;true;RYGCRAWL;00:16:43;2021-10-14
+Maja Christensen;15;true;CRAWL;00:21:21;2021-11-24
+Emil Larsen;15;true;RYGCRAWL;00:16:43;2021-11-24
+Andrea Sørensen;16;true;BUTTERFLY;00:20:20;2021-11-24
+Johan Rasmussen;16;true;CRAWL;00:16:43;2021-11-24
+Villads Jørgensen;17;true;BRYSTSVØMNING;00:12:10;2021-11-24
+Marie Møller;17;true;RYGCRAWL;00:21:21;2021-11-24
+Albert Holm;55;true;BUTTERFLY;00:16:43;2021-11-24
+Sofie Schmidt;61;true;RYGCRAWL;00:12:10;2021-11-24
+Christian Dahl;16;true;CRAWL;00:16:43;2021-11-25
+Benjamin Nielsen;17;true;RYGCRAWL;00:20:20;2021-11-25
+Vilhelm Jensen;19;true;BRYSTSVØMNING
+Bjørn Hansen;22;true;BRYSTSVØMNING
+Sofia Larsen;51;true;RYGCRAWL;00:15:12;2019-03-05
+Anna Sørensen;16;true;BUTTERFLY;00:21:21;2021-03-12
+Oliver Rasmussen;36;true;RYGCRAWL;00:16:43;2021-03-13
+Aksel Jørgensen;36;true;RYGCRAWL;00:12:05;2021-03-14
+Bjørn Olsen;26;true;RYGCRAWL;00:16:43;2021-11-25
+Marie Jensen;57;true;CRAWL;00:16:43;2021-11-25
+Mathias Høg;66;true;CRAWL;00:12:05;2021-11-25
+Rasmus Smidt;16;false;BRYSTSVØMNING
+Tone Jaeger;16;true;RYGCRAWL;00:21:21;2021-11-26
+Peter Larsen;60;true;CRAWL;00:14:30;2021-09-12
+Ole Sørensen;72;true;CRAWL;00:22:59;2021-11-26
+Michael Thomsen;17;true;BUTTERFLY
+Sofie Milling;26;true;BUTTERFLY;00:16:43;2021-12-01
+Mads Schrøder;54;true;RYGCRAWL;00:21:21;2021-12-01
+Mikkel Søgraard;24;true;CRAWL;00:16:43;2021-12-02

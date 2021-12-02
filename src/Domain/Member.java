@@ -1,20 +1,15 @@
 //@ Adam Lasson, @Johanne Riis-Weitling
 package Domain;
 
-
-import java.util.ArrayList;
-
 public class Member {
     private String name;
     private String age;
-    //private boolean activityForm; //e.g. motionist eller konkurrencesvømmer.
     private boolean isActive; //e.g. Aktivt eller passivt medlem.
 
 
     public Member(String name, String age, boolean isActive) {
         this.name = name;
         this.age = age;
-        //this.activityForm = activityForm;
         this.isActive = isActive;
     }
 
@@ -34,16 +29,6 @@ public class Member {
         this.age = age;
     }
 
-   /* public String getActivityForm() {
-        return activityForm;
-    }
-
-    public void setActivityForm(String activityForm) {
-        this.activityForm = activityForm;
-
-    }*/
-
-
     public boolean getActive() {
         return isActive;
     }
@@ -52,17 +37,28 @@ public class Member {
         this.isActive = isActive;
     }
 
-
+//TODO: disse to er ens hvordan skal de slås sammen?
     public String basisString() {
         return getName() + ";" + getAge() + ";" + getActive();
 
     }
-
+    //TODO: disse to er ens hvordan skal de slås sammen?
     public String saveMember() {
         return basisString();
 
     }
 
+   public String basisToString() {
+        return "Medlemsnavn: " + name + '\n' +
+                "Alder: " + age + '\n' +
+                "Aktiv: " + isActive + '\n';
+    }
+//TODO: rette lidt til i toString, forvirre lidt på competitionSwimmer ?
+    @Override
+    public String toString() {
+        return basisToString()+
+                "----------------------------------------------" + '\n' + "";
+    }
 
     public String getInvoiceLine() {
         if (getActive()) {
@@ -70,18 +66,6 @@ public class Member {
         } else {
             return getName() + "; " + getAge() + "; Passivt medlemskab";
         }
-    }
-
-    public String basisToStringString() {
-        return "Medlemsnavn: " + name + '\n' +
-                "Alder: " + age + '\n' +
-                "Aktiv: " + isActive + '\n';
-    }
-
-    @Override
-    public String toString() {
-        return basisToStringString() +
-                "----------------------------------------------" + '\n' + "";
     }
 
 }

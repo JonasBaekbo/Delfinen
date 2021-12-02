@@ -59,7 +59,7 @@ public class CoachController {
                 LocalTime tournamentTime = LocalTime.parse(timeAsString);
                 Competition competition = new Competition(tournamentName, tournamentPlace, dateToAdd, tournamentTime);
                 foundMember.addCompetition(competition);
-                files.addCompetitonAndTimeAndDateTooMember(filePath.MEMBER_PATH, members);
+                files.addCompetitionAndTimeAndDateTooMember(filePath.MEMBER_PATH, members);
             } else {
                 ui.printMessage("det valgte medlemmet har ikke en tid");
             }
@@ -75,14 +75,14 @@ public class CoachController {
         String memberName = ui.userInput();
         CompetitionSwimmer foundMember = (CompetitionSwimmer) findMemberByName(members, memberName);
         if (foundMember != null) {
-            ui.printMessage("Indtast medlemmets tid (MM:SS:mm)");
+            ui.printMessage("Indtast medlemmets tid (HH:mm:ss)");
             String swimTimeAsString = ui.userInput();
             LocalTime timeToAdd = LocalTime.parse(swimTimeAsString);
             foundMember.setPracticeTime(timeToAdd);
             ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
             String swimDate = ui.userInput();
             foundMember.setPracticeDate(swimDate);
-            files.addCompetitonAndTimeAndDateTooMember(filePath.MEMBER_PATH, members);
+            files.addCompetitionAndTimeAndDateTooMember(filePath.MEMBER_PATH, members);
         } else ui.printMessage("Det indtastet navn findes ikke, prøv igen");
     }
 
@@ -108,12 +108,15 @@ public class CoachController {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
         ArrayList<CompetitionSwimmer> brystUnder18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.BRYSTSVØMNING, false);
         writeTop5Swimmers(brystUnder18);
+        ui.printMessage("-------------------------------------------------------------------------------------------------------------------------------------------------");
         ui.printMessage("Konkurrencesvømmere i butterfly:");
         ArrayList<CompetitionSwimmer> butterflyUnder18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.BUTTERFLY, false);
         writeTop5Swimmers(butterflyUnder18);
+        ui.printMessage("-------------------------------------------------------------------------------------------------------------------------------------------------");
         ui.printMessage("Konkurrencesvømmere i crawl:");
         ArrayList<CompetitionSwimmer> crawlUnder18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.CRAWL, false);
         writeTop5Swimmers(crawlUnder18);
+        ui.printMessage("-------------------------------------------------------------------------------------------------------------------------------------------------");
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
         ArrayList<CompetitionSwimmer> rygUnder18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.RYGCRAWL, false);
         writeTop5Swimmers(rygUnder18);
@@ -123,12 +126,15 @@ public class CoachController {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
         ArrayList<CompetitionSwimmer> brystOver18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.BRYSTSVØMNING, true);
         writeTop5Swimmers(brystOver18);
+        ui.printMessage("-------------------------------------------------------------------------------------------------------------------------------------------------");
         ui.printMessage("Konkurrencesvømmere i butterfly:");
         ArrayList<CompetitionSwimmer> butterflyOver18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.BUTTERFLY, true);
         writeTop5Swimmers(butterflyOver18);
+        ui.printMessage("-------------------------------------------------------------------------------------------------------------------------------------------------");
         ui.printMessage("Konkurrencesvømmere i crawl:");
         ArrayList<CompetitionSwimmer> crawlOver18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.CRAWL, true);
         writeTop5Swimmers(crawlOver18);
+        ui.printMessage("-------------------------------------------------------------------------------------------------------------------------------------------------");
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
         ArrayList<CompetitionSwimmer> rygOver18 = swimTeam.listSwimmersSplitByAge(membersList, 18, DisciplineEnum.RYGCRAWL, true);
         writeTop5Swimmers(rygOver18);
@@ -152,11 +158,11 @@ public class CoachController {
     }
 
     private void createTableHeader() {
-        ui.createTableHeader();
+        ui.printTableHeader();
     }
 
     private void createTableContents(CompetitionSwimmer competitionSwimmer) {
         String tableContent = competitionSwimmer.informationToTable();
-        ui.createTableContents(tableContent);
+        ui.printTableContents(tableContent);
     }
 }
