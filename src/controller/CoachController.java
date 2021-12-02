@@ -90,7 +90,7 @@ public class CoachController {
         return members;
     }
 
-    //TODO: skal samles og ligges i member
+    //TODO: skal samles og ligges i member ?
    private Member findMemberByName(ArrayList<Member> members, String memberName) {
         Member foundMember = null;
         for (Member member : members) {
