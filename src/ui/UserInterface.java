@@ -43,9 +43,8 @@ public class UserInterface {
                 Træner
                 Foretag et valg:
                 1) Tilføj tid til medlem
-                2) Registrer bedste træningsresultat for svømmer
-                3) Registrer resultat til stævne for svømmer
-                4) Se top 5 svømmere indenfor hver svømmedisciplin
+                2) Registrer resultat til stævne for svømmer
+                3) Se top 5 svømmere indenfor hver svømmedisciplin
                 0) Tilbage til hovedmenu""");
     }
 

@@ -22,9 +22,8 @@ public class CoachController {
             ui.menuCoach();
             switch (ui.userInput()) {
                 case "1" -> addTimeAndDateTooMember();
-                case "2" -> bestPracticeTime();
-                case "3" -> tournamentsResults();
-                case "4" -> showTop5Swimmers((files.getAllMembers(filePath.MEMBER_PATH)));
+                case "2" -> tournamentsResults();
+                case "3" -> showTop5Swimmers((files.getAllMembers(filePath.MEMBER_PATH)));
                 case "0" -> controller.backTooMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
             }
@@ -81,11 +80,6 @@ public class CoachController {
             foundMember.setPracticeDate(swimDate);
             files.addCompetitonAndTimeAndDateTooMember(filePath.MEMBER_PATH, members);
         } else ui.printMessage("Det indtastet navn findes ikke, prøv igen");
-    }
-
-
-    private void bestPracticeTime() {
-        //TODO:
     }
 
 
