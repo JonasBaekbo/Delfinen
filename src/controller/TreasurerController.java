@@ -31,7 +31,7 @@ public class TreasurerController {
         }
     }
 
-    public void calculateExpectedSubFeeTotal() {
+    private void calculateExpectedSubFeeTotal() {
         ArrayList<Member> members = files.getAllMembers(filePath.MEMBER_PATH);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
         ui.printMessage(Math.round(expectedTotal) + "kr. Kan forventes i kontingent");
@@ -70,6 +70,7 @@ public class TreasurerController {
     private String updatePaymentStatus(String userInput) {
         return subFee.updatePaymentStatus(userInput);
     }
+
     private void sowMissingPayments() {
         ArrayList<String> missingPayments = subFee.memberMissingPayment();
         for (String member : missingPayments) {

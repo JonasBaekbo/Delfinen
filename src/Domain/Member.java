@@ -2,6 +2,8 @@
 package Domain;
 
 
+import java.util.ArrayList;
+
 public class Member {
     private String name;
     private String age;
@@ -82,6 +84,16 @@ public class Member {
                 "----------------------------------------------" + '\n' + "";
     }
 
+
+    public Member findMemberByName(ArrayList<Member> members, String memberName) {
+        Member foundMember = null;
+        for (Member member : members) {
+            if (memberName.equalsIgnoreCase(member.getName())) {
+                foundMember = member;
+            }
+        }
+        return foundMember;
+    }
 }
 
 

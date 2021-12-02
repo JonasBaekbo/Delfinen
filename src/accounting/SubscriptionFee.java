@@ -102,7 +102,7 @@ public class SubscriptionFee {
         }
     }
 
-
+//TODO: udskriv evt. medlemmer inden man kan opkræve
     public String makeSubscriptionChargeForAllMembers() {
         ArrayList<Member> members = files.getAllMembers(filePath.MEMBER_PATH);
         int invoiceNumber = getNextInvoiceNumber(filePath.SUB_CHARGE_PATH);

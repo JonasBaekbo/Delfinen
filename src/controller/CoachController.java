@@ -15,6 +15,7 @@ public class CoachController {
     private final FilePath filePath =new FilePath();
     private UserInterface ui = new UserInterface();
     private SwimTeam swimTeam = new SwimTeam();
+    private Member member;
 
     public void coachMenu(Controller controller) {
         while (isRunning) {
@@ -93,7 +94,8 @@ public class CoachController {
         return members;
     }
 
-    private Member findMemberByName(ArrayList<Member> members, String memberName) {
+    //TODO: skal samles og ligges i member
+   private Member findMemberByName(ArrayList<Member> members, String memberName) {
         Member foundMember = null;
         for (Member member : members) {
             if (memberName.equalsIgnoreCase(member.getName())) {
@@ -102,6 +104,7 @@ public class CoachController {
         }
         return foundMember;
     }
+
 
     public void listAllSwimmersUnder18(ArrayList<Member> membersList) {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
