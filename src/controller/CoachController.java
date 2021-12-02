@@ -5,6 +5,7 @@ import Files.FileHandler;
 import Files.FilePath;
 import ui.UserInterface;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -52,10 +53,11 @@ public class CoachController {
                 String tournamentPlace = ui.userInput();
                 ui.printMessage("Indtast datoen for stævnet (DD/MM/ÅÅÅÅ) :");
                 String tournamnetdate = ui.userInput();
+                LocalDate dateToAdd = foundMember.setCompetitionDate(tournamnetdate);
                 ui.printMessage("Indtast tiden til stævnet (HH:mm:ss):");
                 String timeAsString = ui.userInput();
                 LocalTime tournamentTime = LocalTime.parse(timeAsString);
-                Competition competition = new Competition(tournamentName, tournamentPlace, tournamnetdate, tournamentTime);
+                Competition competition = new Competition(tournamentName, tournamentPlace, dateToAdd, tournamentTime);
                 foundMember.addCompetition(competition);
                 files.addCompetitonAndTimeAndDateTooMember(filePath.MEMBER_PATH, members);
             } else {

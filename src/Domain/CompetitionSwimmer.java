@@ -12,6 +12,7 @@ public class CompetitionSwimmer extends Member {
     private LocalTime practiceTime = null;
     private LocalDate practiceDate;
     private ArrayList<Competition> competitions = new ArrayList<>();
+    private LocalDate competitiondate;
 
     public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin) {
         super(name, age, isActive);
@@ -52,10 +53,11 @@ public class CompetitionSwimmer extends Member {
         this.practiceDate = dateToAdd;
     }
 
-    public void setCompetitionDate (String competitionDate){
+    public LocalDate setCompetitionDate (String competitionDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateToAdd = LocalDate.parse(competitionDate, formatter);
-        this.practiceDate = dateToAdd;
+        this.competitiondate = dateToAdd;
+        return this.competitiondate;
     }
 
     public LocalDate getPracticeDate() {

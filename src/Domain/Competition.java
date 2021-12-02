@@ -13,12 +13,12 @@ public class Competition {
     private LocalDate coventionDate;
     private String coventionStringDate;
 
-    public Competition(String convention, String conventionPlace, String coventiondate, LocalTime conventionTime) {
+    /*public Competition(String convention, String conventionPlace, String coventiondate, LocalTime conventionTime) {
         this.convention = convention;
         this.conventionPlace = conventionPlace;
         this.conventionTime = conventionTime;
         this.coventionStringDate = coventiondate;
-    }
+    }*/
 
     public Competition(String convention, String conventionPlace, LocalDate coventiondate, LocalTime conventionTime) {
         this.convention = convention;
