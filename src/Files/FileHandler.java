@@ -77,27 +77,28 @@ public class FileHandler {
                 String age = details[1];
                 boolean isActive = Boolean.parseBoolean(details[2]);
                 if (details.length == 9) {
-                    String diciplin = details[3];
+                    String diciplin = details[2];
                     DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
-                    String time = details[4];
+                    String time = details[3];
                     LocalTime timeToAdd = LocalTime.parse(time);
-                    String date = details[5];
+                    String date = details[4];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate dateToAdd = LocalDate.parse(date, formatter);
-                    String competitonName = details[6];
-                    String place = details[7];
+                    String competitonName = details[5];
+                    String place = details[6];
+                    String competitiondate = details[7];
                     String competitonTime = details[8];
                     LocalTime competitontimeToAdd = LocalTime.parse(competitonTime);
                     if (competitontimeToAdd != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitonName, place, competitontimeToAdd);
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitonName, place, competitiondate, competitontimeToAdd);
                         members.add(competitionSwimmer);
                     }
                 } else if (details.length == 6) {
-                    String diciplin = details[3];
+                    String diciplin = details[2];
                     DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
-                    String time = details[4];
+                    String time = details[3];
                     LocalTime timeToAdd = LocalTime.parse(time);
-                    String date = details[5];
+                    String date = details[4];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate dateToAdd = LocalDate.parse(date, formatter);
                     if (timeToAdd != null) {

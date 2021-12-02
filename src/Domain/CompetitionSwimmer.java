@@ -13,6 +13,7 @@ public class CompetitionSwimmer extends Member {
     private LocalTime practiceTime = null;
     private LocalDate practiceDate;
     private ArrayList<Competition> competitions = new ArrayList<>();
+    private String competitiondate;
 
     public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin) {
         super(name, age, isActive);
@@ -26,12 +27,13 @@ public class CompetitionSwimmer extends Member {
         this.practiceDate = practiceDate;
     }
 
-    public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin, LocalTime practiceTime, LocalDate practiceDate, String competitonName, String place, LocalTime competitontime) {
+    public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin, LocalTime practiceTime, LocalDate practiceDate, String competitonName, String place, String competitiondate, LocalTime competitontime) {
         super(name, age, isActive);
         this.swimDisciplin = swimDisciplin;
         this.practiceTime = practiceTime;
         this.practiceDate = practiceDate;
-        addCompetition(new Competition(competitonName, place, competitontime));
+        this.competitiondate = competitiondate;
+        addCompetition(new Competition(competitonName, place, competitiondate, competitontime));
     }
 
     public DisciplineEnum getSwimDisciplin() {

@@ -50,10 +50,12 @@ public class CoachController {
                 String tournamentName = ui.userInput();
                 ui.printMessage("Indtast placeringen til stævnet:");
                 String tournamentPlace = ui.userInput();
+                ui.printMessage("Indtast datoen for stævnet:");
+                String tournamnetdate = ui.userInput();
                 ui.printMessage("Indtast tiden til stævnet (MM:SS:mm):");
                 String timeAsString = ui.userInput();
                 LocalTime tournamentTime = LocalTime.parse(timeAsString);
-                Competition competition = new Competition(tournamentName, tournamentPlace, tournamentTime);
+                Competition competition = new Competition(tournamentName, tournamentPlace, tournamnetdate, tournamentTime);
                 foundMember.addCompetition(competition);
                 files.addCompetitonAndTimeAndDateTooMember(filePath.MEMBER_PATH, members);
             } else {

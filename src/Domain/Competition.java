@@ -9,12 +9,13 @@ public class Competition {
     private String convention;
     private String conventionPlace;
     private LocalTime conventionTime;
-    //TODO tilføj dato til stævne
+    private String coventiondate;
 
-    public Competition(String convention, String conventionPlace, LocalTime conventionTime) {
+    public Competition(String convention, String conventionPlace, String coventiondate, LocalTime conventionTime) {
         this.convention = convention;
         this.conventionPlace = conventionPlace;
         this.conventionTime = conventionTime;
+        this.coventiondate = coventiondate;
     }
 
     public String getConvention() {
