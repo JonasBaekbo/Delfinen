@@ -150,7 +150,7 @@ public class Member {
 
     }
 
-    public String addCompetitonAndTimeAndDateTooMember() {
+    public String addCompetitionAndTimeAndDateTooMember() {
 
         if (getSwimmingDiscipline() == null) {
             return basisString();

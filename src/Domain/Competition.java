@@ -7,13 +7,14 @@ import java.time.LocalTime;
 public class Competition {
 
     private String convention;
-    private String place;
-    private LocalTime time;
+    private String conventionPlace;
+    private LocalTime conventionTime;
+    //TODO tilføj dato til stævne
 
-    public Competition(String convention, String place, LocalTime time) {
+    public Competition(String convention, String conventionPlace, LocalTime conventionTime) {
         this.convention = convention;
-        this.place = place;
-        this.time = time;
+        this.conventionPlace = conventionPlace;
+        this.conventionTime = conventionTime;
     }
 
     public String getConvention() {
@@ -24,26 +25,26 @@ public class Competition {
         this.convention = convention;
     }
 
-    public String getPlace() {
-        return place;
+    public String getConventionPlace() {
+        return conventionPlace;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setConventionPlace(String conventionPlace) {
+        this.conventionPlace = conventionPlace;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public LocalTime getConventionTime() {
+        return conventionTime;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setConventionTime(LocalTime conventionTime) {
+        this.conventionTime = conventionTime;
     }
 
     @Override
     public String toString() {
         return "Stævnets navn: " + convention + '\n' +
-                "Placeringen til stævnet: " + place + '\n' +
-                "Tiden til stævnet: " + time;
+                "Placeringen til stævnet: " + conventionPlace + '\n' +
+                "Tiden til stævnet: " + conventionTime;
     }
 }

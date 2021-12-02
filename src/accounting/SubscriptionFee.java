@@ -3,6 +3,7 @@ package accounting;
 
 import Domain.Member;
 import Files.FileHandler;
+import Files.FilePath;
 import Files.FileReadException;
 
 import java.io.File;
@@ -13,16 +14,18 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+//TODO: flytte dele af denne klasse over til member og memberList?
+
 public class SubscriptionFee {
-    private Member member;
     private double below18Fee = 1000;
     private double above18Fee = 1600;
     private double passiveFee = 500;
     private double seniorFeeDiscount = 0.75;//der er 25% rabat for medlemmer over 60
     double subscriptionFee;
     FileHandler files = new FileHandler();
-    private static final String SUBSCRIPTION_FILE = "data/subCharge.csv";
-    private static final String MEMBER_FILE = "data/members.txt";
+    private final FilePath filePath =new FilePath();
+    //private static final String SUBSCRIPTION_FILE = "data/subCharge.csv";
+    //private static final String MEMBER_FILE = "data/members.txt";
 
 
     public double getSubscriptionFee(Member member) {
@@ -36,7 +39,7 @@ public class SubscriptionFee {
 
     private boolean isMemberActive(Member member) {
         boolean isActive;
-        isActive = member.getActivityLevel().equals("Aktivt");
+        isActive = member.getActive() == true;
         return isActive;
     }
 
@@ -71,8 +74,7 @@ public class SubscriptionFee {
         ArrayList<String> members = new ArrayList<>();
         ArrayList<Charge> charges = readSubFile();
 
-        for (int i = 0; i < charges.size(); i++) {
-            Charge charge = charges.get(i);
+        for (Charge charge : charges) {
             if (Objects.equals(charge.getIsPaid(), "ikke betalt")) {
                 members.add(charge.toString());
             }
@@ -82,11 +84,10 @@ public class SubscriptionFee {
 
     public String makeSubscriptionChargeForOneMember(String memberName) {
 
-        ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
+        ArrayList<Member> members = files.getAllMembers(filePath.MEMBER_PATH);
+        int invoiceNumber = getNextInvoiceNumber(filePath.SUB_CHARGE_PATH);
         int numCharge = 0;
-        for (int i = 0; i < members.size(); i++) {
-            Member member = members.get(i);
+        for (Member member : members) {
             if (member.getName().equalsIgnoreCase(memberName)) {
                 generateAndSaveInvoiceLine(member, invoiceNumber);
                 numCharge++;
@@ -103,11 +104,10 @@ public class SubscriptionFee {
 
 
     public String makeSubscriptionChargeForAllMembers() {
-        ArrayList<Member> members = files.getAllMembers(MEMBER_FILE);
-        int invoiceNumber = getNextInvoiceNumber(SUBSCRIPTION_FILE);
+        ArrayList<Member> members = files.getAllMembers(filePath.MEMBER_PATH);
+        int invoiceNumber = getNextInvoiceNumber(filePath.SUB_CHARGE_PATH);
         int numCharge = 0;
-        for (int i = 0; i < members.size(); i++) {
-            Member member = members.get(i);
+        for (Member member : members) {
             invoiceNumber++;
             generateAndSaveInvoiceLine(member, invoiceNumber);
             numCharge++;
@@ -121,7 +121,7 @@ public class SubscriptionFee {
     public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) {
         double amount = getSubscriptionFee(member);
         String line = invoiceNumber + ";" + member.getInvoiceLine() + ";" + Math.round(amount) + ";" + "ikke betalt";
-        saveToCSV(SUBSCRIPTION_FILE, line);
+        saveToCSV(filePath.SUB_CHARGE_PATH, line);
     }
 
     private void saveToCSV(String filePath, String line) {
@@ -137,16 +137,15 @@ public class SubscriptionFee {
         try {
 
             ArrayList<Charge> charges = readSubFile();
-            files.clearFile(SUBSCRIPTION_FILE);
+            files.clearFile(filePath.SUB_CHARGE_PATH);
 
 
-            File file = new File(SUBSCRIPTION_FILE);
+            File file = new File(filePath.SUB_CHARGE_PATH);
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
 
 
             int numUpdates = 0;
-            for (int i = 0; i < charges.size(); i++) {
-                Charge charge = charges.get(i);
+            for (Charge charge : charges) {
                 if (charge.getName().equalsIgnoreCase(input) || (charge.getChargeNumber().equalsIgnoreCase(input))) {
                     charge.setIsPaid("betalt");
                     numUpdates++;
@@ -172,7 +171,7 @@ public class SubscriptionFee {
     public ArrayList<Charge> readSubFile() {
         try {
             ArrayList<Charge> result = new ArrayList<>();
-            File file = new File(SUBSCRIPTION_FILE);
+            File file = new File(filePath.SUB_CHARGE_PATH);
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNext()) {
@@ -182,11 +181,11 @@ public class SubscriptionFee {
                 String chargeNumber = details[0];
                 String name = details[1];
                 String age = details[2];
-                String activityLevel = details[3];
+                String isActive = details[3];
                 String amount = details[4];
                 String isPaid = details[5];
 
-                Charge charge = new Charge(chargeNumber, name, age, activityLevel, amount, isPaid);
+                Charge charge = new Charge(chargeNumber, name, age, isActive, amount, isPaid);
 
                 result.add(charge);
             }
@@ -217,11 +216,6 @@ public class SubscriptionFee {
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't read from " + file, e);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Medlem: " + member + ".\nKontingent: " + getSubscriptionFee(member);
     }
 }
 

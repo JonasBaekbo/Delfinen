@@ -1,5 +1,6 @@
 package accounting;
 
+import Domain.CompetitionSwimmer;
 import Domain.Member;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_AktivtMedlemOver18() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "19", "Motionist", "Aktivt");
+        Member member = new Member("Adam Lasson", "19", true);
 
         int expected = 1600;
 
@@ -24,7 +25,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_PassivtMedlemOver18() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "20", "Motionist", "Passivt");
+        Member member = new Member("Adam Lasson", "20", false);
 
         int expected = 500;
 
@@ -37,7 +38,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_AktivtMedlemOver60() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "65", "Motionist", "Aktivt");
+        Member member = new Member("Adam Lasson", "65", true);
 
         int expected = 1200;
 
@@ -50,7 +51,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_PassivtMedlemOver60() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "65", "Motionist", "Passivt");
+        Member member = new Member("Adam Lasson", "65", false);
 
         int expected = 500;
 
@@ -63,7 +64,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_AktivtMedlemPå60() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "60", "Motionist", "Aktivt");
+        Member member = new Member("Adam Lasson", "60", true);
 
         int expected = 1200;
 
@@ -76,7 +77,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_AktivtMedlemUnder18() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "15", "Motionist", "Aktivt");
+        Member member = new Member("Adam Lasson", "15", true);
 
         int expected = 1000;
 
@@ -89,7 +90,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_PassivtMedlemUnder18() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "15", "Motionist", "Passivt");
+        Member member = new Member("Adam Lasson", "15", false);
 
         int expected = 500;
 
@@ -102,7 +103,7 @@ class SubscriptionFeeTest {
     public void testafCalculateSubscriptionFee_AktivtMedlemPå18() {
 
         SubscriptionFee subscriptionFee = new SubscriptionFee();
-        Member member = new Member("Adam Lasson", "18", "Motionist", "Aktivt");
+        Member member = new Member("Adam Lasson", "18", true);
 
         int expected = 1600;
 
@@ -112,5 +113,5 @@ class SubscriptionFeeTest {
     }
 
     //TODO: test med fejl indput?
-
+//TODO: Test med CompetistionsSwimmer
 }

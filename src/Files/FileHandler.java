@@ -2,14 +2,15 @@
 package Files;
 
 import Domain.Coach;
+import Domain.CompetitionSwimmer;
 import Domain.Member;
+import Domain.DisciplineEnum;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -49,7 +50,8 @@ public class FileHandler {
         try {
             for (Member member : members) {
                 PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                String memberCompetition = member.addCompetitionAndTimeAndDateTooMember();
+                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
+                String memberCompetition = competitionSwimmer.addCompetitionAndTimeAndDateTooMember();
                 ps.println(memberCompetition);
                 ps.close();
             }
@@ -73,52 +75,51 @@ public class FileHandler {
                 String[] details = foundLine.split(";");
                 String name = details[0];
                 String age = details[1];
-                String activityForm = details[2];
-                String activityLevel = details[3];
-                String diciplin = null;
-                if (details.length == 10) {
-                    diciplin = details[4];
-                    String time = details[5];
+                boolean isActive = Boolean.parseBoolean(details[2]);
+                if (details.length == 9) {
+                    String diciplin = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
+                    String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
-                    String date = details[6];
+                    String date = details[5];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate dateToAdd = LocalDate.parse(date, formatter);
-                    String competitonName = details[7];
-                    String place = details[8];
-                    String competitontime = details[9];
-                    LocalTime competitontimeToAdd = LocalTime.parse(competitontime);
+                    String competitonName = details[6];
+                    String place = details[7];
+                    String competitonTime = details[8];
+                    LocalTime competitontimeToAdd = LocalTime.parse(competitonTime);
                     if (competitontimeToAdd != null) {
-                        Member m = new Member(name, age, activityForm, activityLevel, diciplin, timeToAdd, dateToAdd, competitonName, place, competitontimeToAdd);
-                        members.add(m);
-
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitonName, place, competitontimeToAdd);
+                        members.add(competitionSwimmer);
                     }
-
-
-                } else if (details.length == 7) {
-                    diciplin = details[4];
-                    String time = details[5];
+                } else if (details.length == 6) {
+                    String diciplin = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
+                    String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
-                    String date = details[6];
+                    String date = details[5];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate dateToAdd = LocalDate.parse(date, formatter);
                     if (timeToAdd != null) {
-                        Member m = new Member(name, age, activityForm, activityLevel, diciplin, timeToAdd, dateToAdd);
-                        members.add(m);
-
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd);
+                        members.add(competitionSwimmer);
                     }
-                } else if (details.length == 5) {
-                    diciplin = details[4];
-                    if (Objects.equals(activityForm, "Konkurrence")) {
-                        Member m = new Member(name, age, activityForm, activityLevel, diciplin);
-                        members.add(m);
+
+                } else if (details.length == 4) {
+                    String diciplin = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
+                    if (diciplin != null) {
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum);
+                        members.add(competitionSwimmer);
 
                     } else {
-                        Member m = new Member(name, age, activityForm, activityLevel);
+                        Member m = new Member(name, age, isActive);
                         members.add(m);
 
                     }
                 }
             }
+
             return members;
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't read from " + file, e);

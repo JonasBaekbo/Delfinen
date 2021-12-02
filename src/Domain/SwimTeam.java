@@ -1,25 +1,25 @@
 package Domain;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
+//TODO omdøbe til memberList?
 public class SwimTeam {
 
-    public ArrayList<Member> listSwimmersSplitByAge(ArrayList<Member> membersList, int splitAge, String swimmingDiscipline, boolean overSplitAge) {
-        ArrayList<Member> swimmingDisciplineSplitByAge = new ArrayList<>();
+    public ArrayList<CompetitionSwimmer> listSwimmersSplitByAge(ArrayList<Member> membersList, int splitAge, DisciplineEnum swimmingDiscipline, boolean overSplitAge) {
+        ArrayList<CompetitionSwimmer> swimmingDisciplineSplitByAge = new ArrayList<>();
         for (Member member : membersList) {
-            if (Objects.equals(member.getActivityLevel(), "Aktivt")) {
-                if (Objects.equals(member.getActivityForm(), "Konkurrence")) {
-                    if (member.getTime() != null) {
-
-                        if (member.getSwimmingDiscipline().equalsIgnoreCase(swimmingDiscipline)) {
+            if (member.getActive()) {
+                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
+                if (competitionSwimmer.getSwimDisciplin() != null) {
+                    if (competitionSwimmer.getPracticeTime() != null) {
+                        if (competitionSwimmer.getSwimDisciplin()==swimmingDiscipline) {
                             int memberAge = Integer.parseInt(member.getAge());
 
                             if (overSplitAge && (memberAge >= splitAge)) {
-                                swimmingDisciplineSplitByAge.add(member);
+                                swimmingDisciplineSplitByAge.add((CompetitionSwimmer) member);
 
                             } else if (!overSplitAge && (memberAge < splitAge)) {
-                                swimmingDisciplineSplitByAge.add(member);
+                                swimmingDisciplineSplitByAge.add((CompetitionSwimmer) member);
                             }
                         }
                     }
@@ -28,5 +28,15 @@ public class SwimTeam {
         }
         return swimmingDisciplineSplitByAge;
 
+    }
+
+    public ArrayList<CompetitionSwimmer> writeTop5Swimmers(ArrayList<CompetitionSwimmer> membersList) {
+        ArrayList<CompetitionSwimmer> top5Swimmers = new ArrayList<>();
+        membersList.sort(new Sorting("time"));
+        int min = Math.min(membersList.size(), 5);
+        for (int i = 0; i < min; i++) {
+            top5Swimmers.add(membersList.get(i));
+        }
+        return top5Swimmers;
     }
 }
