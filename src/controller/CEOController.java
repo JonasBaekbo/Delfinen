@@ -5,6 +5,8 @@ import Files.FileHandler;
 import Files.FilePath;
 import ui.UserInterface;
 
+import java.util.ArrayList;
+
 public class CEOController {
     boolean isRunning = true;
     //private static String MEMBER_FILE = "data/members.txt";
@@ -25,7 +27,7 @@ public class CEOController {
             }
         }
     }
-    public void createNewMember() {
+    private void createNewMember() {
         ui.printMessage("Indtast medlemmets navn: ");
         String name = ui.userInput();
         ui.printMessage("Indtast medlemmets alder: ");
@@ -58,7 +60,7 @@ public class CEOController {
 
     private void createCompetitionSwimmer(String name, String age, boolean isActive){
         ui.printMessage("""
-                    Indtast medlemmets svømmediciplin
+                    Indtast medlemmets svømmedisciplin
                     1) Butterfly
                     2) Crawl
                     3) Rygcrawl
@@ -92,14 +94,14 @@ public class CEOController {
     }
 
     private DisciplineEnum chooseSwimDiscipline(String swimDisciplineChosen) {
-        DisciplineEnum svømmediciplin = switch (swimDisciplineChosen) {
+        DisciplineEnum swimDiscipline = switch (swimDisciplineChosen) {
             case "1" -> DisciplineEnum.BUTTERFLY;
             case "2" -> DisciplineEnum.CRAWL;
             case "3" -> DisciplineEnum.RYGCRAWL;
             case "4" -> DisciplineEnum.BRYSTSVØMNING;
             default -> null;
         };
-        return svømmediciplin;
+        return swimDiscipline;
     }
     private void createCoach() {
         ui.printMessage("Indtast træneres navn: ");
@@ -109,4 +111,6 @@ public class CEOController {
         Coach coach = new Coach(name, age);
         files.saveNewCoach(filePath.COACH_PATH, coach);
     }
+
+
 }
