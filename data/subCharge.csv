@@ -1,14 +1,21 @@
-1;Mille Helbo; 22;true;1600;ikke betalt
-2;Knut Knutsen; 27;false;500;ikke betalt
-3;Adam Lasson; 56;true;1600;ikke betalt
-4;Jonas Bækbo; 17;true;1000;ikke betalt
-5;Johanne Weitling; 22;true;1600;ikke betalt
-6;Mikkel Sandell; 23;true;1600;ikke betalt
-7;David Ema; 61;true;1200;ikke betalt
-8;Jakob; 24;true;1600;ikke betalt
-9;test1; 19;true;1600;ikke betalt
-10;test2; 36;true;1600;ikke betalt
-11;test3; 26;true;1600;ikke betalt
-12;test4; 17;true;1000;ikke betalt
-13;test uden; 40;true;1600;ikke betalt
-14;test konkurance; 30;true;1600;ikke betalt
+1;Mille Helbo; 22; Aktivt medlemskab;1600;ikke betalt
+2;Knut Knutsen; 27; Passivt medlemskab;500;ikke betalt
+3;Adam Lasson; 56; Aktivt medlemskab;1600;ikke betalt
+4;Jonas Bækbo; 17; Aktivt medlemskab;1000;ikke betalt
+5;Johanne Weitling; 22; Aktivt medlemskab;1600;ikke betalt
+6;Mikkel Sandell; 23; Aktivt medlemskab;1600;ikke betalt
+7;David Ema; 61; Aktivt medlemskab;1200;ikke betalt
+8;Jakob; 24; Aktivt medlemskab;1600;ikke betalt
+9;test1; 19; Aktivt medlemskab;1600;ikke betalt
+10;test2; 36; Aktivt medlemskab;1600;ikke betalt
+11;test3; 26; Aktivt medlemskab;1600;ikke betalt
+12;test4; 17; Aktivt medlemskab;1000;ikke betalt
+13;test uden; 40; Aktivt medlemskab;1600;ikke betalt
+14;test konkurance; 30; Aktivt medlemskab;1600;ikke betalt
+15;test motion; 12; Aktivt medlemskab;1000;ikke betalt
+16;test bool; 40; Aktivt medlemskab;1600;betalt
+17;tetst4; 40; Aktivt medlemskab;1600;ikke betalt
+18;test4; 40; Aktivt medlemskab;1600;ikke betalt
+19;tetst5; 50; Aktivt medlemskab;1600;ikke betalt
+20;Pelle; 12; Aktivt medlemskab;1000;ikke betalt
+21;Pelle; 12; Aktivt medlemskab;1000;ikke betalt

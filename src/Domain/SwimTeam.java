@@ -8,7 +8,7 @@ public class SwimTeam {
     public ArrayList<CompetitionSwimmer> listSwimmersSplitByAge(ArrayList<Member> membersList, int splitAge, DisciplineEnum swimmingDiscipline, boolean overSplitAge) {
         ArrayList<CompetitionSwimmer> swimmingDisciplineSplitByAge = new ArrayList<>();
         for (Member member : membersList) {
-            if (member.getActive() == true) {
+            if (member.getActive()) {
                 CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
                 if (competitionSwimmer.getSwimDisciplin() != null) {
                     if (competitionSwimmer.getPracticeTime() != null) {
