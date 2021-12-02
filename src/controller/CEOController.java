@@ -110,23 +110,5 @@ public class CEOController {
         String age = ui.userInput();
         Coach coach = new Coach(name, age);
         files.saveNewCoach(filePath.COACH_PATH, coach);
-    }
+    }}
 
-    //TODO: ny funktion tilføj til diagrammer
-    private void changeActiveStatus(){
-        ui.printMessage("Skriv navnet på det medlem der skal ændre status");
-        String name = ui.userInput();
-        findMemberByName(name);
-
-        ui.printMessage("""
-                Hvad skal ny status være?
-                1) Aktivt medlem
-                2) Passivt medlem""");
-        String choose= ui.userInput();
-        boolean newLevel= chooseActivityLevel(choose);
-        // member.setActive(newLevel);
-
-    }
-    //TODO: indfør metode, genbrug den som skal ligge på member?
-    private void findMemberByName(String memberName) {
-}}

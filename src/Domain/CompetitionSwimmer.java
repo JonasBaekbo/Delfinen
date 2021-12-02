@@ -9,7 +9,6 @@ import static java.lang.String.format;
 
 public class CompetitionSwimmer extends Member {
     private DisciplineEnum swimDisciplin;
-    //TODO: er time i korrekt format, tror det er i timer,minutter og sekunder og ikke mm:ss:MMMM?
     private LocalTime practiceTime = null;
     private LocalDate practiceDate;
     private ArrayList<Competition> competitions = new ArrayList<>();

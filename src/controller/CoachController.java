@@ -52,7 +52,7 @@ public class CoachController {
                 String tournamentPlace = ui.userInput();
                 ui.printMessage("Indtast datoen for stævnet:");
                 String tournamnetdate = ui.userInput();
-                ui.printMessage("Indtast tiden til stævnet (MM:SS:mm):");
+                ui.printMessage("Indtast tiden til stævnet (HH:mm:ss):");
                 String timeAsString = ui.userInput();
                 LocalTime tournamentTime = LocalTime.parse(timeAsString);
                 Competition competition = new Competition(tournamentName, tournamentPlace, tournamnetdate, tournamentTime);
