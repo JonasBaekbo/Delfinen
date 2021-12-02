@@ -52,7 +52,7 @@ public class Member {
 
 
     public String basisString() {
-        return getName() + ";" + getAge() + ";" + getActive() + ";" + getActive();
+        return getName() + ";" + getAge() + ";" + getActive();
 
     }
 

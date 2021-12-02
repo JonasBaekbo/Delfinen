@@ -14,19 +14,15 @@ public class Sorting implements Comparator<CompetitionSwimmer> {
 
     @Override
     public int compare(CompetitionSwimmer o1, CompetitionSwimmer o2) {
-        int resultat = 0;
-        if (type.equals("age")) {
-            resultat = o1.getAge().compareTo(o2.getAge());
-        } else if (type.equals("name")) {
-            resultat = o1.getName().compareTo(o2.getName());
-        } /*else if (type.equals("activityForm")) {
-            resultat = o1.getActivityForm().compareTo(o2.getActivityForm());
-         else if (type.equals("activityLevel")) {
-            resultat = o1.getActive().compareTo(o2.getActive());*/ else if (type.equals("diciplin")) {
-            resultat = o1.getSwimDisciplin().compareTo(o2.getSwimDisciplin());
-        } else if (type.equals("time")) {
-            resultat = o1.getSwimTime().compareTo(o2.getSwimTime());
-        }
+        int resultat = switch (type) {
+            case "age" -> o1.getAge().compareTo(o2.getAge());
+            case "name" -> o1.getName().compareTo(o2.getName());
+            //case "activityForm" -> o1.getActivityForm().compareTo(o2.getActivityForm());
+            //case "activityLevel" -> o1.getActive().compareTo(o2.getActive());
+            case "disciplin" -> o1.getSwimDisciplin().compareTo(o2.getSwimDisciplin());
+            case "time" -> o1.getPracticeTime().compareTo(o2.getPracticeTime());
+            default -> 0;
+        };
         return resultat;
     }
 }

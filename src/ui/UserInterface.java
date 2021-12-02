@@ -61,12 +61,17 @@ public class UserInterface {
                 0) Tilbage til hovedmenu""");
     }
 
-    //TODO:
+
     public void createTableHeader() {
         System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktivitetsniveau", "|", "Svømmediciplin", "|", "Tid");
+        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktivitetsniveau", "|", "Svømmedisciplin", "|", "Tid");
         System.out.printf("%s%n", "-------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
+    public void createTableContents(String tableContent) {
+        System.out.format(tableContent);
+        System.out.println();
+
+    }
 }
 

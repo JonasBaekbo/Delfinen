@@ -4,6 +4,7 @@ package Files;
 import Domain.Coach;
 import Domain.CompetitionSwimmer;
 import Domain.Member;
+import Domain.DisciplineEnum;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -74,11 +75,10 @@ public class FileHandler {
                 String[] details = foundLine.split(";");
                 String name = details[0];
                 String age = details[1];
-                //String activityForm = details[2];
                 boolean isActive = Boolean.parseBoolean(details[2]);
-                String diciplin = null;
                 if (details.length == 9) {
-                    diciplin = details[3];
+                    String diciplin = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
                     String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
                     String date = details[5];
@@ -86,31 +86,30 @@ public class FileHandler {
                     LocalDate dateToAdd = LocalDate.parse(date, formatter);
                     String competitonName = details[6];
                     String place = details[7];
-                    String competitontime = details[8];
-                    LocalTime competitontimeToAdd = LocalTime.parse(competitontime);
+                    String competitonTime = details[8];
+                    LocalTime competitontimeToAdd = LocalTime.parse(competitonTime);
                     if (competitontimeToAdd != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, diciplin, timeToAdd, dateToAdd, competitonName, place, competitontimeToAdd);
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitonName, place, competitontimeToAdd);
                         members.add(competitionSwimmer);
-
                     }
-
-
                 } else if (details.length == 6) {
-                    diciplin = details[3];
+                    String diciplin = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
                     String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
                     String date = details[5];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate dateToAdd = LocalDate.parse(date, formatter);
                     if (timeToAdd != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, diciplin, timeToAdd, dateToAdd);
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd);
                         members.add(competitionSwimmer);
-
                     }
+
                 } else if (details.length == 4) {
-                    diciplin = details[3];
+                    String diciplin = details[3];
+                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(diciplin);
                     if (diciplin != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, diciplin);
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum);
                         members.add(competitionSwimmer);
 
                     } else {
@@ -120,6 +119,7 @@ public class FileHandler {
                     }
                 }
             }
+
             return members;
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't read from " + file, e);

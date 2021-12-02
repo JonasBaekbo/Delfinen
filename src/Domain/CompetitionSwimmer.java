@@ -5,54 +5,55 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import static java.lang.String.format;
+
 public class CompetitionSwimmer extends Member {
-    //TODO: enum?
-    private String swimDisciplin = null;
-    //TODO: er time i korrekt format?
-    private LocalTime swimTime = null;
-    private LocalDate swimDate;
+    private DisciplineEnum swimDisciplin;
+    //TODO: er time i korrekt format, tror det er i timer,minutter og sekunder og ikke mm:ss:MMMM?
+    private LocalTime practiceTime = null;
+    private LocalDate practiceDate;
     private ArrayList<Competition> competitions = new ArrayList<>();
 
-    public CompetitionSwimmer(String name, String age, boolean isActive, String svømmediciplin) {
+    public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin) {
         super(name, age, isActive);
-        this.swimDisciplin = svømmediciplin;
+        this.swimDisciplin = swimDisciplin;
     }
 
-    public CompetitionSwimmer(String name, String age, boolean isActive, String svømmediciplin, LocalTime time, LocalDate date) {
+    public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin, LocalTime practiceTime, LocalDate practiceDate) {
         super(name, age, isActive);
-        this.swimDisciplin = svømmediciplin;
-        this.swimTime = time;
-        this.swimDate = date;
+        this.swimDisciplin = swimDisciplin;
+        this.practiceTime = practiceTime;
+        this.practiceDate = practiceDate;
     }
 
-    public CompetitionSwimmer(String name, String age, boolean isActive, String svømmediciplin, LocalTime time, LocalDate date, String competitonName, String place, LocalTime competitontime) {
+    public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin, LocalTime practiceTime, LocalDate practiceDate, String competitonName, String place, LocalTime competitontime) {
         super(name, age, isActive);
-        this.swimDisciplin = svømmediciplin;
-        this.swimTime = time;
-        this.swimDate = date;
+        this.swimDisciplin = swimDisciplin;
+        this.practiceTime = practiceTime;
+        this.practiceDate = practiceDate;
         addCompetition(new Competition(competitonName, place, competitontime));
     }
 
-    public String getSwimDisciplin() {
+    public DisciplineEnum getSwimDisciplin() {
         return swimDisciplin;
     }
 
-    public LocalTime getSwimTime() {
-        return swimTime;
+    public LocalTime getPracticeTime() {
+        return practiceTime;
     }
 
-    public void setSwimTime(LocalTime swimTime) {
-        this.swimTime = swimTime;
+    public void setPracticeTime(LocalTime practiceTime) {
+        this.practiceTime = practiceTime;
     }
 
-    public void setSwimDate(String swimDate) {
+    public void setPracticeDate(String practiceDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dateToAdd = LocalDate.parse(swimDate, formatter);
-        this.swimDate = dateToAdd;
+        LocalDate dateToAdd = LocalDate.parse(practiceDate, formatter);
+        this.practiceDate = dateToAdd;
     }
 
-    public LocalDate getSwimDate() {
-        return swimDate;
+    public LocalDate getPracticeDate() {
+        return practiceDate;
     }
 
     public void addCompetition(Competition competition) {
@@ -75,15 +76,15 @@ public class CompetitionSwimmer extends Member {
         if (getSwimDisciplin() == null) {
             return basisString();
 
-        } else if (getSwimTime() == null) {
+        } else if (getPracticeTime() == null) {
             return basisString() + ";" + getSwimDisciplin();
 
         } else if (getCompetitions().size() == 0) {
-            return basisString() + ";" + getSwimDisciplin() + ";" + getSwimTime() + ";" + getSwimDate();
+            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate();
 
         } else {
             Competition competition = getCompetition();
-            return basisString() + ";" + getSwimDisciplin() + ";" + getSwimTime() + ";" + getSwimDate() + ";" +
+            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate() + ";" +
                     competition.getConvention() + ";" + competition.getConventionPlace() + ";" + competition.getConventionTime();
 
         }
@@ -94,39 +95,45 @@ public class CompetitionSwimmer extends Member {
         if (getSwimDisciplin() == null) {
             return basisString();
 
-        } else if (getSwimTime() == null) {
+        } else if (getPracticeTime() == null) {
             return basisString() + ";" + getSwimDisciplin();
 
         } else {
-            return basisString() + ";" + getSwimDisciplin() + ";" + getSwimTime();
+            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime();
         }
 
 
     }
-
     @Override
     public String toString() {
         if (swimDisciplin == null) {
             return basisToStringString() +
                     "----------------------------------------------" + '\n' + "";
-        } else if (swimTime == null) {
+        } else if (practiceTime == null) {
             return basisToStringString() +
                     "Svømmedisciplin: " + swimDisciplin + '\n' +
                     "----------------------------------------------" + '\n' + "";
         } else if (competitions.isEmpty()) {
             return basisToStringString() +
                     "Svømmedisciplin: " + swimDisciplin + '\n' +
-                    "tid: " + swimTime + '\n' +
+                    "tid: " + practiceTime + '\n' +
                     "----------------------------------------------" + '\n' + "";
         } else {
             Competition competition = getCompetition();
             return basisToStringString() +
                     "Svømmedisciplin: " + swimDisciplin + '\n' +
-                    "tid: " + swimTime + '\n' +
+                    "tid: " + practiceTime + '\n' +
                     "stævne navn: " + competition.getConvention() + '\n' +
                     "placering: " + competition.getConventionPlace() + '\n' +
                     "Stævne tid: " + competition.getConventionTime() + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
     }
+
+
+    //TODO: find ud af om det er det "tilladt" at sende strenge i format
+    public String informationToTable() {
+        String tableContent = format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", getName(), "|", getAge(), "|", getActive(), "|", getSwimDisciplin(), "|", getPracticeTime());
+        return tableContent;}
+
 }
