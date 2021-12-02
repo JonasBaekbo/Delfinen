@@ -2,6 +2,7 @@
 
 package Domain;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Competition {
@@ -9,13 +10,21 @@ public class Competition {
     private String convention;
     private String conventionPlace;
     private LocalTime conventionTime;
-    private String coventiondate;
+    private LocalDate coventionDate;
+    private String coventionStringDate;
 
     public Competition(String convention, String conventionPlace, String coventiondate, LocalTime conventionTime) {
         this.convention = convention;
         this.conventionPlace = conventionPlace;
         this.conventionTime = conventionTime;
-        this.coventiondate = coventiondate;
+        this.coventionStringDate = coventiondate;
+    }
+
+    public Competition(String convention, String conventionPlace, LocalDate coventiondate, LocalTime conventionTime) {
+        this.convention = convention;
+        this.conventionPlace = conventionPlace;
+        this.conventionTime = conventionTime;
+        this.coventionDate = coventiondate;
     }
 
     public String getConvention() {
@@ -34,12 +43,12 @@ public class Competition {
         this.conventionPlace = conventionPlace;
     }
 
-    public String getCoventiondate() {
-        return coventiondate;
+    public LocalDate getCoventiondate() {
+        return coventionDate;
     }
 
-    public void setCoventiondate(String coventiondate) {
-        this.coventiondate = coventiondate;
+    public void setCoventiondate(LocalDate coventiondate) {
+        this.coventionDate = coventiondate;
     }
 
     public LocalTime getConventionTime() {
@@ -53,7 +62,7 @@ public class Competition {
     @Override
     public String toString() {
         return "Stævnets navn: " + convention + '\n' +
-                "Dato for stævne: " + coventiondate + '\n' +
+                "Dato for stævne: " + coventionDate + '\n' +
                 "Placeringen til stævnet: " + conventionPlace + '\n' +
                 "Tiden til stævnet: " + conventionTime;
     }

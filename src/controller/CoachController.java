@@ -50,7 +50,7 @@ public class CoachController {
                 String tournamentName = ui.userInput();
                 ui.printMessage("Indtast placeringen til stævnet:");
                 String tournamentPlace = ui.userInput();
-                ui.printMessage("Indtast datoen for stævnet:");
+                ui.printMessage("Indtast datoen for stævnet (DD/MM/ÅÅÅÅ) :");
                 String tournamnetdate = ui.userInput();
                 ui.printMessage("Indtast tiden til stævnet (HH:mm:ss):");
                 String timeAsString = ui.userInput();

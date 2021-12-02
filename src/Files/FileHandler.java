@@ -87,10 +87,11 @@ public class FileHandler {
                     String competitonName = details[6];
                     String place = details[7];
                     String competitiondate = details[8];
+                    LocalDate competitionDateToAdd = LocalDate.parse(competitiondate, formatter);
                     String competitonTime = details[9];
                     LocalTime competitontimeToAdd = LocalTime.parse(competitonTime);
                     if (competitontimeToAdd != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitonName, place, competitiondate, competitontimeToAdd);
+                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitonName, place, competitionDateToAdd, competitontimeToAdd);
                         members.add(competitionSwimmer);
                     }
                 } else if (details.length == 6) {

@@ -25,11 +25,12 @@ public class CompetitionSwimmer extends Member {
         this.practiceDate = practiceDate;
     }
 
-    public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin, LocalTime practiceTime, LocalDate practiceDate, String competitonName, String place, String competitiondate, LocalTime competitontime) {
+    public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDisciplin, LocalTime practiceTime, LocalDate practiceDate, String competitonName, String place, LocalDate competitiondate, LocalTime competitontime) {
         super(name, age, isActive);
         this.swimDisciplin = swimDisciplin;
         this.practiceTime = practiceTime;
         this.practiceDate = practiceDate;
+        this.competitiondate = competitiondate;
         addCompetition(new Competition(competitonName, place, competitiondate, competitontime));
     }
 
@@ -48,6 +49,12 @@ public class CompetitionSwimmer extends Member {
     public void setPracticeDate(String practiceDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateToAdd = LocalDate.parse(practiceDate, formatter);
+        this.practiceDate = dateToAdd;
+    }
+
+    public void setCompetitionDate (String competitionDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateToAdd = LocalDate.parse(competitionDate, formatter);
         this.practiceDate = dateToAdd;
     }
 
@@ -84,7 +91,7 @@ public class CompetitionSwimmer extends Member {
         } else {
             Competition competition = getCompetition();
             return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate() + ";" +
-                    competition.getConvention() + ";" + competition.getConventionPlace() + ";" + competition.getConventionTime();
+                    competition.getConvention() + ";" + competition.getConventionPlace() + ";" +competition.getCoventiondate() + ";" + competition.getConventionTime();
 
         }
     }
@@ -124,6 +131,7 @@ public class CompetitionSwimmer extends Member {
                     "tid: " + practiceTime + '\n' +
                     "stævne navn: " + competition.getConvention() + '\n' +
                     "placering: " + competition.getConventionPlace() + '\n' +
+                    "Stævne dato " + competition.getCoventiondate() + '\n' +
                     "Stævne tid: " + competition.getConventionTime() + '\n' +
                     "----------------------------------------------" + '\n' + "";
         }
