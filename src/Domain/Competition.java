@@ -34,6 +34,14 @@ public class Competition {
         this.conventionPlace = conventionPlace;
     }
 
+    public String getCoventiondate() {
+        return coventiondate;
+    }
+
+    public void setCoventiondate(String coventiondate) {
+        this.coventiondate = coventiondate;
+    }
+
     public LocalTime getConventionTime() {
         return conventionTime;
     }
@@ -45,6 +53,7 @@ public class Competition {
     @Override
     public String toString() {
         return "Stævnets navn: " + convention + '\n' +
+                "Dato for stævne: " + coventiondate + '\n' +
                 "Placeringen til stævnet: " + conventionPlace + '\n' +
                 "Tiden til stævnet: " + conventionTime;
     }
