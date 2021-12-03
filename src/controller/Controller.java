@@ -29,7 +29,7 @@ public class Controller {
             }
         }
     }
-//TODO: skal de alle have false for at stoppe?
+
     public void exit() {
         isRunning = false;
         ceoController.isRunning=false;

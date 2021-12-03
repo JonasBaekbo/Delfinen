@@ -37,26 +37,19 @@ public class Member {
         this.isActive = isActive;
     }
 
-//TODO: disse to er ens hvordan skal de slås sammen?
-    public String basisString() {
-        return getName() + ";" + getAge() + ";" + getActive();
-
-    }
-    //TODO: disse to er ens hvordan skal de slås sammen?
     public String saveMember() {
-        return basisString();
-
+        return getName() + ";" + getAge() + ";" + getActive();
     }
 
-   public String basisToString() {
+    public String basisToString() {
         return "Medlemsnavn: " + name + '\n' +
                 "Alder: " + age + '\n' +
                 "Aktiv: " + isActive + '\n';
     }
-//TODO: rette lidt til i toString, forvirre lidt på competitionSwimmer ?
+
     @Override
     public String toString() {
-        return basisToString()+
+        return basisToString() +
                 "----------------------------------------------" + '\n' + "";
     }
 

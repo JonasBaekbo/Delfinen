@@ -52,7 +52,7 @@ public class CompetitionSwimmer extends Member {
         this.practiceDate = LocalDate.parse(practiceDate, formatter);
     }
 
-    public LocalDate setCompetitionDate (String competitionDate){
+    public LocalDate setCompetitionDate(String competitionDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.competitionDate = LocalDate.parse(competitionDate, formatter);
         return this.competitionDate;
@@ -77,26 +77,30 @@ public class CompetitionSwimmer extends Member {
 
     }
 
+    public String basisStringForSaveMember() {
+        return getName() + ";" + getAge() + ";" + getActive();
+    }
 
-//TODO: bør basisString være her også?
+
     public String saveMember() {
 
         if (getSwimDisciplin() == null) {
-            return basisString();
+            return basisStringForSaveMember();
 
         } else if (getPracticeTime() == null) {
-            return basisString() + ";" + getSwimDisciplin();
+            return basisStringForSaveMember() + ";" + getSwimDisciplin();
 
         } else if (getCompetitions().size() == 0) {
-            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate();
+            return basisStringForSaveMember() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate();
 
         } else {
             Competition competition = getCompetition();
-            return basisString() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate() + ";" +
-                    competition.getConvention() + ";" + competition.getConventionPlace() + ";" +competition.getCompetitionDate() + ";" + competition.getCompetitionTime();
+            return basisStringForSaveMember() + ";" + getSwimDisciplin() + ";" + getPracticeTime() + ";" + getPracticeDate() + ";" +
+                    competition.getConvention() + ";" + competition.getConventionPlace() + ";" + competition.getCompetitionDate() + ";" + competition.getCompetitionTime();
 
 
-    }}
+        }
+    }
 
     @Override
     public String toString() {
@@ -128,6 +132,7 @@ public class CompetitionSwimmer extends Member {
 
     //TODO: find ud af om det er det "tilladt" at sende strenge i format
     public String informationToTable() {
-        return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", getName(), "|", getAge(), "|", getActive(), "|", getSwimDisciplin(), "|", getPracticeTime());}
+        return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", getName(), "|", getAge(), "|", getActive(), "|", getSwimDisciplin(), "|", getPracticeTime());
+    }
 
 }

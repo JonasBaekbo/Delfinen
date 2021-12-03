@@ -11,7 +11,7 @@ public class SwimTeam {
                 CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
                 if (competitionSwimmer.getSwimDisciplin() != null) {
                     if (competitionSwimmer.getPracticeTime() != null) {
-                        if (competitionSwimmer.getSwimDisciplin()==swimDiscipline) {
+                        if (competitionSwimmer.getSwimDisciplin() == swimDiscipline) {
                             int memberAge = Integer.parseInt(member.getAge());
 
                             if (overSplitAge && (memberAge >= splitAge)) {

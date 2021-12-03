@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class TreasurerController {
     boolean isRunning = true;
-    //private static String MEMBER_FILE = "data/members.txt";
     FileHandler files = new FileHandler();
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subFee = new SubscriptionFee();
-    private final FilePath filePath =new FilePath();
+    private final FilePath filePath = new FilePath();
+    private final String memberFile=filePath.MEMBER_PATH;
 
     public void treasurerMenu(Controller controller) {
         while (isRunning) {
@@ -31,7 +31,7 @@ public class TreasurerController {
     }
 
     private void calculateExpectedSubFeeTotal() {
-        ArrayList<Member> members = files.getAllMembers(filePath.MEMBER_PATH);
+        ArrayList<Member> members = files.getAllMembers(memberFile);
         double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
         ui.printMessage(Math.round(expectedTotal) + "kr. Kan forventes i kontingent");
 
@@ -57,7 +57,6 @@ public class TreasurerController {
         }
     }
 
-    //TODO: skal delvist over på member?
     private String makeSubscriptionChargeForOneMember(String memberName) {
         return subFee.makeSubscriptionChargeForOneMember(memberName);
     }

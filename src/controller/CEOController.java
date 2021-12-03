@@ -13,9 +13,12 @@ import java.util.ArrayList;
 
 public class CEOController {
     boolean isRunning = true;
+    private UserInterface ui = new UserInterface();
+
     FileHandler files = new FileHandler();
     private final FilePath filePath =new FilePath();
-    private UserInterface ui = new UserInterface();
+    private final String memberFile=filePath.MEMBER_PATH;
+
 
     public void ceoMenu(Controller controller) {
         while (isRunning) {
@@ -40,7 +43,6 @@ public class CEOController {
                 1) Motionssvømmer
                 2) Konkurrencesvømmer""");
         String activityFormChosen = ui.userInput();
-        //TODO ændre den til at tage "2" som input og ikke lave denne om til string?
         String activityForm = chooseActivityForm(activityFormChosen);
         ui.printMessage("""
                 Aktivt eller passivt medlem?
@@ -48,7 +50,6 @@ public class CEOController {
                 2) Passivt medlem""");
         String activityLevelChosen = ui.userInput();
         boolean isActive = chooseActivityLevel(activityLevelChosen);
-        //TODO ændre den til at tage "2" som input?
         if (!activityForm.equalsIgnoreCase("Motionist")) {
             createCompetitionSwimmer(name, age, isActive);
 
@@ -59,7 +60,7 @@ public class CEOController {
 
     private void createNormalMember(String name, String age, boolean isActive){
         Member member = new Member(name, age, isActive);
-        files.saveNewMember(filePath.MEMBER_PATH, member);
+        files.saveNewMember(memberFile, member);
     }
 
     private void createCompetitionSwimmer(String name, String age, boolean isActive){
@@ -73,7 +74,7 @@ public class CEOController {
         String swimDisciplineChosen = ui.userInput();
         DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, swimDiscipline);
-        files.saveNewMember(filePath.MEMBER_PATH, competitionSwimmer);
+        files.saveNewMember(memberFile, competitionSwimmer);
 
     }
 
@@ -133,7 +134,7 @@ public class CEOController {
     }
 
     public void updateActiveStatus(String input,boolean isActive) {
-        String file= filePath.MEMBER_PATH;
+        String file= memberFile;
         try {
             ArrayList<Member> members =getMembersAsArrayList(file);
             files.clearFile(file);

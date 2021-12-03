@@ -56,4 +56,4 @@ Ole Sørensen;72;true;CRAWL;00:22:59;2021-11-26
 Michael Thomsen;17;true;BUTTERFLY
 Sofie Milling;26;true;BUTTERFLY;00:16:43;2021-12-01
 Mads Schrøder;54;true;RYGCRAWL;00:21:21;2021-12-01
-Mikkel Søgraard;24;true;CRAWL;00:16:43;2021-12-02
+Mikkel Søgaard;24;true;CRAWL;00:15:20;2021-12-12
