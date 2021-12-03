@@ -1,4 +1,4 @@
-// @Jonas Bækbo
+// @Jonas Bækbo, Mikkel Sandell
 
 package ui;
 

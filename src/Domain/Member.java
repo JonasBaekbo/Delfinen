@@ -1,4 +1,4 @@
-//@ Adam Lasson, @Johanne Riis-Weitling
+//@ Adam Lasson, @Johanne Riis-Weitling, Mikkel Sandell
 package Domain;
 
 public class Member {

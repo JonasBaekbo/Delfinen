@@ -1,3 +1,5 @@
+//@Mikkel Sandell
+
 package Domain;
 
 public class Coach {
