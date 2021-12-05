@@ -5,7 +5,7 @@ package controller;
 import ui.UserInterface;
 
 public class Controller {
-    boolean isRunning = true;
+    private boolean isRunning = true;
     private UserInterface ui = new UserInterface();
     private TreasurerController treasurerController =new TreasurerController();
     private CEOController ceoController =new CEOController();
@@ -19,7 +19,7 @@ public class Controller {
     }
     private void mainMenu() {
         while (isRunning) {
-            ui.MaineMenu();
+            ui.mainMenu();
             switch (ui.userInput()) {
                 case "1" -> ceoController.ceoMenu(this);
                 case "2" -> coachController.coachMenu(this);
@@ -32,12 +32,12 @@ public class Controller {
 
     public void exit() {
         isRunning = false;
-        ceoController.isRunning=false;
-        treasurerController.isRunning=false;
-        coachController.isRunning=false;
+        ceoController.stop();
+        treasurerController.stop();
+        coachController.stop();
     }
 
-    public void backTooMainMenu() {
+    public void backToMainMenu() {
         mainMenu();
     }
 

@@ -6,7 +6,6 @@ public class Member {
     private String age;
     private boolean isActive; //e.g. Aktivt eller passivt medlem.
 
-
     public Member(String name, String age, boolean isActive) {
         this.name = name;
         this.age = age;
@@ -17,16 +16,8 @@ public class Member {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAge() {
         return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
     }
 
     public boolean getActive() {
@@ -37,7 +28,8 @@ public class Member {
         this.isActive = isActive;
     }
 
-    public String saveMember() {
+    public String getStringForSaving() {
+        // TODO: omdøb i diagrammer
         return getName() + ";" + getAge() + ";" + getActive();
     }
 
@@ -49,8 +41,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return basisToString() +
-                "----------------------------------------------" + '\n' + "";
+        return basisToString() + "----------------------------------------------\n";
     }
 
     public String getInvoiceLine() {
@@ -60,7 +51,6 @@ public class Member {
             return getName() + "; " + getAge() + "; Passivt medlemskab";
         }
     }
-
 }
 
 

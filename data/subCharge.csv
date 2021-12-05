@@ -10,7 +10,7 @@
 10;Lars Larsen; 36; Aktivt medlemskab;1600;ikke betalt
 11;Tine Marbjerg; 26; Aktivt medlemskab;1600;betalt
 12;Peter Lind; 17; Aktivt medlemskab;1000;ikke betalt
-13;Pelle Helle; 12; Aktivt medlemskab;1000;ikke betalt
+13;Pelle Helle; 12; Aktivt medlemskab;1000;betalt
 14;Mie Bonde; 21; Aktivt medlemskab;1600;betalt
 15;Adam Lasson; 56; Aktivt medlemskab;1600;ikke betalt
 16;Bendt Jensen; 19; Aktivt medlemskab;1600;ikke betalt
@@ -18,11 +18,11 @@
 18;Jakob Sandell; 24; Aktivt medlemskab;1600;ikke betalt
 19;Johanne Weitling; 22; Aktivt medlemskab;1600;ikke betalt
 20;Knut Knutsen; 27; Passivt medlemskab;500;ikke betalt
-21;Lars Larsen; 36; Aktivt medlemskab;1600;ikke betalt
+21;Lars Larsen; 36; Aktivt medlemskab;1600;betalt
 22;Mie Bonde; 21; Aktivt medlemskab;1600;betalt
-23;Mikkel Sandell; 23; Aktivt medlemskab;1600;ikke betalt
-24;Mille Helbo; 22; Aktivt medlemskab;1600;ikke betalt
-25;Pelle Helle; 12; Aktivt medlemskab;1000;ikke betalt
+23;Mikkel Sandell; 23; Aktivt medlemskab;1600;betalt
+24;Mille Helbo; 22; Aktivt medlemskab;1600;betalt
+25;Pelle Helle; 12; Aktivt medlemskab;1000;betalt
 26;Peter Lind; 45; Aktivt medlemskab;1600;ikke betalt
 27;Tine Marbjerg; 45; Aktivt medlemskab;1600;ikke betalt
 28;Alfred Nielsen; 15; Aktivt medlemskab;1000;betalt
@@ -31,19 +31,19 @@
 31;Freja Pedersen; 35; Passivt medlemskab;500;ikke betalt
 32;Clara Andersen; 35; Aktivt medlemskab;1600;ikke betalt
 33;Emma Christensen; 50; Aktivt medlemskab;1600;ikke betalt
-34;Arthur Møller; 17; Aktivt medlemskab;1000;ikke betalt
-35;Valdemar Lund; 19; Passivt medlemskab;500;ikke betalt
-36;Malthe Holm; 17; Aktivt medlemskab;1000;ikke betalt
-37;Emil Schmidt; 19; Passivt medlemskab;500;ikke betalt
-38;Laura Østergaard; 15; Aktivt medlemskab;1000;ikke betalt
+34;Arthur Møller; 17; Aktivt medlemskab;1000;betalt
+35;Valdemar Lund; 19; Passivt medlemskab;500;betalt
+36;Malthe Holm; 17; Aktivt medlemskab;1000;betalt
+37;Emil Schmidt; 19; Passivt medlemskab;500;betalt
+38;Laura Østergaard; 15; Aktivt medlemskab;1000;betalt
 39;Josefine Vestergaard; 39; Aktivt medlemskab;1600;ikke betalt
 40;Ida Kjær; 16; Aktivt medlemskab;1000;ikke betalt
 41;Magnus Nørgaard; 18; Aktivt medlemskab;1600;ikke betalt
 42;Anton Dahl; 41; Aktivt medlemskab;1600;ikke betalt
-43;Otto Nielsen; 18; Aktivt medlemskab;1600;ikke betalt
+43;Otto Nielsen; 18; Aktivt medlemskab;1600;betalt
 44;Mathilde Jensen; 42; Aktivt medlemskab;1600;betalt
 45;Adam Pedersen; 43; Aktivt medlemskab;1600;ikke betalt
-46;Alexander Andersen; 18; Aktivt medlemskab;1600;ikke betalt
+46;Alexander Andersen; 18; Aktivt medlemskab;1600;betalt
 47;Maja Christensen; 15; Aktivt medlemskab;1000;ikke betalt
 48;Emil Larsen; 15; Aktivt medlemskab;1000;ikke betalt
 49;Andrea Sørensen; 16; Aktivt medlemskab;1000;ikke betalt
@@ -61,13 +61,14 @@
 61;Oliver Rasmussen; 36; Aktivt medlemskab;1600;betalt
 62;Aksel Jørgensen; 36; Aktivt medlemskab;1600;betalt
 63;Bjørn Olsen; 26; Aktivt medlemskab;1600;ikke betalt
-64;Marie Jensen; 57; Aktivt medlemskab;1600;ikke betalt
+64;Marie Jensen; 57; Aktivt medlemskab;1600;betalt
 65;Mathias Høg; 66; Aktivt medlemskab;1200;ikke betalt
 66;Rasmus Smidt; 16; Passivt medlemskab;500;ikke betalt
 67;Tone Jaeger; 16; Aktivt medlemskab;1000;ikke betalt
-68;Peter Larsen; 60; Aktivt medlemskab;1200;ikke betalt
-69;Ole Sørensen; 72; Aktivt medlemskab;1200;ikke betalt
+68;Peter Larsen; 60; Aktivt medlemskab;1200;betalt
+69;Ole Sørensen; 72; Aktivt medlemskab;1200;betalt
 70;Michael Thomsen; 17; Aktivt medlemskab;1000;betalt
 71;Sofie Milling; 26; Aktivt medlemskab;1600;ikke betalt
 72;Mads Schrøder; 54; Aktivt medlemskab;1600;ikke betalt
-73;Mikkel Søgraard; 24; Aktivt medlemskab;1600;ikke betalt
+73;Mikkel Søgraard; 24; Aktivt medlemskab;1600;betalt
+

@@ -4,22 +4,15 @@ package controller;
 
 import Domain.*;
 import Files.FileHandler;
-import Files.FilePath;
-import Files.FileReadException;
+
 import ui.UserInterface;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
 
 public class CEOController {
-    boolean isRunning = true;
+    private boolean isRunning = true;
     private UserInterface ui = new UserInterface();
+    private FileHandler files = new FileHandler();
 
-    FileHandler files = new FileHandler();
-    private final FilePath filePath =new FilePath();
-    private final String memberFile=filePath.MEMBER_PATH;
 
 
     public void ceoMenu(Controller controller) {
@@ -29,10 +22,14 @@ public class CEOController {
                 case "1" -> createNewMember();
                 case "2" -> changeActiveStatus();
                 case "3" -> createCoach();
-                case "0" -> controller.backTooMainMenu();
+                case "0" -> controller.backToMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
             }
         }
+    }
+
+    public void stop() {
+        isRunning = false;
     }
 
     private void createNewMember() {
@@ -54,29 +51,28 @@ public class CEOController {
         boolean isActive = chooseActivityLevel(activityLevelChosen);
         if (!activityForm.equalsIgnoreCase("Motionist")) {
             createCompetitionSwimmer(name, age, isActive);
-
         } else {
             createNormalMember(name, age, isActive);
         }
     }
 
-    private void createNormalMember(String name, String age, boolean isActive){
+    private void createNormalMember(String name, String age, boolean isActive) {
         Member member = new Member(name, age, isActive);
-        files.saveNewMember(memberFile, member);
+        files.saveNewMember(member);
     }
 
-    private void createCompetitionSwimmer(String name, String age, boolean isActive){
+    private void createCompetitionSwimmer(String name, String age, boolean isActive) {
         ui.printMessage("""
-                    Indtast medlemmets svømmedisciplin
-                    1) Butterfly
-                    2) Crawl
-                    3) Rygcrawl
-                    4) Brystsvømning
-                    """);
+                Indtast medlemmets svømmedisciplin
+                1) Butterfly
+                2) Crawl
+                3) Rygcrawl
+                4) Brystsvømning
+                """);
         String swimDisciplineChosen = ui.userInput();
         DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, swimDiscipline);
-        files.saveNewMember(memberFile, competitionSwimmer);
+        files.saveNewMember(competitionSwimmer);
 
     }
 
@@ -91,11 +87,11 @@ public class CEOController {
     }
 
     private boolean chooseActivityLevel(String activityLevelChosen) {
-        boolean isActive=true;
+        boolean isActive = true;
         if (activityLevelChosen.equals("1")) {
-            isActive= true;
+            isActive = true;
         } else if (activityLevelChosen.equals("2")) {
-            isActive= false;
+            isActive = false;
         }
         return isActive;
     }
@@ -112,55 +108,29 @@ public class CEOController {
     }
 
     private void createCoach() {
-        ui.printMessage("Indtast træneres navn: ");
+        ui.printMessage("Indtast trænerens navn: ");
         String name = ui.userInput();
-        ui.printMessage("Indtast træneres alder: ");
+        ui.printMessage("Indtast trænerens alder: ");
         String age = ui.userInput();
         Coach coach = new Coach(name, age);
-        files.saveNewCoach(filePath.COACH_PATH, coach);
+        files.saveNewCoach(coach);
     }
 
     //TODO: ny funktion tilføj til diagrammer
-    private void changeActiveStatus(){
-        ui.printMessage("Skriv navnet på det medlem der skal ændre status");
+    private void changeActiveStatus() {
+        ui.printMessage("Skriv navnet på det medlem, der skal ændre status");
         String name = ui.userInput();
         ui.printMessage("""
                 Hvad skal ny status være?
                 1) Aktivt medlem
                 2) Passivt medlem""");
-        String choose= ui.userInput();
-        boolean newLevel= chooseActivityLevel(choose);
-        updateActiveStatus(name,newLevel);
-
-
+        String choice = ui.userInput();
+        boolean newLevel = chooseActivityLevel(choice);
+        updateActiveStatus(name, newLevel);
+        ui.printMessage("opdaterede status på " + name);
     }
 
-    public void updateActiveStatus(String input,boolean isActive) {
-        String file= memberFile;
-        try {
-            ArrayList<Member> members =getMembersAsArrayList(file);
-            files.clearFile(file);
-            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-
-            for (Member member : members) {
-                if (member.getName().equalsIgnoreCase(input)) {
-                    member.setActive(isActive);
-                }
-                ps.println(member.saveMember());
-            }
-            ps.close();
-            ui.printMessage("opdaterede status på "+input);
-
-        } catch (FileNotFoundException e) {
-            throw new FileReadException("Can't read from subscription file", e);
-        }
+    public void updateActiveStatus(String input, boolean isActive) {
+        files.updateActiveStatus(input,isActive);
     }
-
-    private ArrayList<Member> getMembersAsArrayList(String filePath){
-        ArrayList<Member> members= files.getAllMembers(filePath);
-        return members;
-    }
-
-    }
-
-
+}

@@ -3,7 +3,6 @@
 package Domain;
 
 public class Coach {
-
     private String name;
     private String age;
 
@@ -16,20 +15,11 @@ public class Coach {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAge() {
         return age;
     }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-
-    public String coachNameAndAge() {
+    public String getStringForSaving() {
         return getName() + ";" + getAge();
     }
 
@@ -38,6 +28,4 @@ public class Coach {
         return "Navn: " + name + '\n' +
                 "Alder: " + age;
     }
-
-
 }

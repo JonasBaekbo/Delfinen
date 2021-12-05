@@ -16,7 +16,7 @@ public class UserInterface {
         System.out.println(s);
     }
 
-    public void MaineMenu() {
+    public void mainMenu() {
         printMessage("""
                 Foretag et valg:
                 1) Formands menu
@@ -71,6 +71,10 @@ public class UserInterface {
     public void printTableContents(String tableContent) {
         System.out.format(tableContent);
         System.out.println();
+    }
+
+    public void printSeparator() {
+        System.out.printf("%s%n", "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 }
 

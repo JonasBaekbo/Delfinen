@@ -27,7 +27,6 @@ public class Charge {
 
     public void setIsPaid(String isPaid) {
         this.isPaid = isPaid;
-
     }
 
     public String getChargeNumber() {
@@ -36,6 +35,7 @@ public class Charge {
 
     @Override
     public String toString() {
+        // Dan en streng som kan gemmes i en fil
         return chargeNumber + ";" + name + ";" + age + ";" + isActive + ";" + amount + ";" + isPaid;
     }
 }

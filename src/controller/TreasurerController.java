@@ -4,19 +4,16 @@ package controller;
 
 import Domain.Member;
 import Files.FileHandler;
-import Files.FilePath;
 import accounting.SubscriptionFee;
 import ui.UserInterface;
 
 import java.util.ArrayList;
 
 public class TreasurerController {
-    boolean isRunning = true;
-    FileHandler files = new FileHandler();
+    private boolean isRunning = true;
+    private FileHandler files = new FileHandler();
     private UserInterface ui = new UserInterface();
     private SubscriptionFee subFee = new SubscriptionFee();
-    private final FilePath filePath = new FilePath();
-    private final String memberFile=filePath.MEMBER_PATH;
 
     public void treasurerMenu(Controller controller) {
         while (isRunning) {
@@ -24,19 +21,22 @@ public class TreasurerController {
             switch (ui.userInput()) {
                 case "1" -> chargeSubscriptionFee();
                 case "2" -> markAsPaid();
-                case "3" -> calculateExpectedSubFeeTotal();
-                case "4" -> sowMissingPayments();
-                case "0" -> controller.backTooMainMenu();
+                case "3" -> calculateTotalExpectedIncome();  // TODO: omdøb i diagrammer
+                case "4" -> showMissingPayments();
+                case "0" -> controller.backToMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
             }
         }
     }
 
-    private void calculateExpectedSubFeeTotal() {
-        ArrayList<Member> members = files.getAllMembers(memberFile);
-        double expectedTotal = subFee.getExpectedSubscriptionFeeTotal(members);
-        ui.printMessage(Math.round(expectedTotal) + "kr. Kan forventes i kontingent");
+    public void stop() {
+        isRunning = false;
+    }
 
+    private void calculateTotalExpectedIncome() {
+        ArrayList<Member> members = files.getAllMembers();
+        double expectedTotal = subFee.getTotalExpectedIncome(members);
+        ui.printMessage(Math.round(expectedTotal) + "kr. kan forventes i kontingent");
     }
 
     private void chargeSubscriptionFee() {
@@ -68,11 +68,11 @@ public class TreasurerController {
     }
 
     private String updatePaymentStatus(String userInput) {
-        return subFee.updatePaymentStatus(userInput);
+        return files.updatePaymentStatus(userInput);
     }
 
-    private void sowMissingPayments() {
-        ArrayList<String> missingPayments = subFee.memberMissingPayment();
+    private void showMissingPayments() {
+        ArrayList<String> missingPayments = subFee.getMembersMissingPayment();
         for (String member : missingPayments) {
             ui.printMessage(member);
         }
@@ -80,12 +80,10 @@ public class TreasurerController {
 
     private void markAsPaid() {
         ui.printMessage("Følgende personer har ubetalte regninger:");
-        sowMissingPayments();
+        showMissingPayments();
         ui.printMessage("Skriv fakturanummer eller navnet på personen der har indbetalt");
         String userInput = ui.userInput();
         String resultUpdatePayment = updatePaymentStatus(userInput);
         ui.printMessage(resultUpdatePayment);
-
     }
 }
-
