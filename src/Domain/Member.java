@@ -1,4 +1,4 @@
-//@ Adam Lasson, @Johanne Riis-Weitling, Mikkel Sandell
+//@ Adam Lasson, Johanne Riis-Weitling, Mikkel Sandell
 package Domain;
 
 public class Member {
@@ -29,7 +29,6 @@ public class Member {
     }
 
     public String getStringForSaving() {
-        // TODO: omdøb i diagrammer
         return getName() + ";" + getAge() + ";" + getActive();
     }
 

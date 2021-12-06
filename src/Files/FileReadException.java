@@ -1,3 +1,4 @@
+//@ Mikkel Sandell
 package Files;
 
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-//@ Mikkel Sandell, @Jonas Bækbo, @Johanne Riis-Weitling
+//@ Mikkel Sandell, Jonas Bækbo, Johanne Riis-Weitling
 package Files;
 
 import Domain.Coach;
@@ -110,7 +110,6 @@ public class FileHandler {
     }
 
     public void saveMemberResult(ArrayList<Member> members) {
-        // TODO: omdøb i diagrammer
         File file = new File(memberFile);
         clearFile(memberFile);
         try {
@@ -150,7 +149,6 @@ public class FileHandler {
     }
 
     public int countLinesInSubscriptionFile() {
-        // TODO: omdøb i diagrammer
         File file = new File(subscriptionFile);
         int lines = 0;
         try {

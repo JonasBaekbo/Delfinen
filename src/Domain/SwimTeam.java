@@ -1,3 +1,4 @@
+// @Jonas Bækbo, Johanne Riis-Weitling
 package Domain;
 
 import java.util.ArrayList;

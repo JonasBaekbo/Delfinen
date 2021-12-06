@@ -6,10 +6,10 @@ import ui.UserInterface;
 
 public class Controller {
     private boolean isRunning = true;
-    private UserInterface ui = new UserInterface();
-    private TreasurerController treasurerController =new TreasurerController();
-    private CEOController ceoController =new CEOController();
-    private CoachController coachController =new CoachController();
+    private final UserInterface ui = new UserInterface();
+    private final TreasurerController treasurerController =new TreasurerController();
+    private final CEOController ceoController =new CEOController();
+    private final CoachController coachController =new CoachController();
 
 
     public void start() {
@@ -30,7 +30,7 @@ public class Controller {
         }
     }
 
-    public void exit() {
+    private void exit() {
         isRunning = false;
         ceoController.stop();
         treasurerController.stop();

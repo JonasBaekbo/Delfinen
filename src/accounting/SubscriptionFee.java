@@ -55,7 +55,6 @@ public class SubscriptionFee {
     }
 
     public ArrayList<String> getMembersMissingPayment() {
-        // TODO: omdøb i diagrammer
         ArrayList<String> members = new ArrayList<>();
         ArrayList<Charge> charges = files.readSubFile();
 
@@ -70,7 +69,7 @@ public class SubscriptionFee {
 
     public String makeSubscriptionChargeForOneMember(String memberName) {
         ArrayList<Member> members = files.getAllMembers();
-        int invoiceNumber = getNextInvoiceNumber()+1;
+        int invoiceNumber = getNextInvoiceNumber();
         int numCharge = 0;
         for (Member member : members) {
             if (member.getName().equalsIgnoreCase(memberName)) {
@@ -110,12 +109,9 @@ public class SubscriptionFee {
     }
 
 
-
-
-
     public int getNextInvoiceNumber() {
-        int linesInMembersFile = files.countLinesInSubscriptionFile();
-        return linesInMembersFile;
+        int linesInSubChargeFile = files.countLinesInSubscriptionFile();
+        return linesInSubChargeFile+1;
     }
 
 

@@ -21,7 +21,7 @@ public class TreasurerController {
             switch (ui.userInput()) {
                 case "1" -> chargeSubscriptionFee();
                 case "2" -> markAsPaid();
-                case "3" -> calculateTotalExpectedIncome();  // TODO: omdøb i diagrammer
+                case "3" -> calculateTotalExpectedIncome();
                 case "4" -> showMissingPayments();
                 case "0" -> controller.backToMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");

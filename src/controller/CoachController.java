@@ -43,7 +43,6 @@ public class CoachController {
     }
 
     private void addTournamentResult() {
-        // TODO: omdøb metode i diagrammer
         ArrayList<Member> members = getMembersAsArrayList();
         listCompetitionSwimmers(members);
         ui.printMessage("Indtast medlemmets navn som har deltaget i et stævne:");
@@ -74,7 +73,6 @@ public class CoachController {
     }
 
     public void addTrainingResult() {
-        // TODO: omdøb i diagrammer
         ArrayList<Member> members = getMembersAsArrayList();
         listCompetitionSwimmers(members);
         ui.printMessage("Indtast medlemmets navn som skal have tilføjet en ny tid:");

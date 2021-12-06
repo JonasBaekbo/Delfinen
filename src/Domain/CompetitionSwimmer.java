@@ -1,3 +1,4 @@
+//@ Adam Lasson, Johanne Riis-Weitling, Mikkel Sandell
 package Domain;
 
 import java.time.LocalDate;
@@ -127,7 +128,6 @@ public class CompetitionSwimmer extends Member {
         }
     }
 
-    //TODO: find ud af om det er det "tilladt" at sende strenge i format
     public String informationToTable() {
         return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", getName(), "|", getAge(), "|", getActive(), "|", getSwimDiscipline(), "|", getPracticeTime());
     }
