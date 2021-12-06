@@ -1,5 +1,6 @@
-Mikkel Sørensen;45
-Bendt Olsen;29
-Mads Mikkelsen;29
-Nicklas Jensen;32
-Torben;34
+Mikkel Sørensen;45;BRYSTSVØMNING
+Bendt Olsen;29;RYGCRAWL
+Mads Mikkelsen;29;CRAWL
+Nicklas Jensen;32;BRYSTSVØMNING
+Torben;34;BUTTERFLY
+søren jensen;47;RYGCRAWL

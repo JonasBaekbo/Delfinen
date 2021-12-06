@@ -4,6 +4,7 @@ package controller;
 
 import Domain.Member;
 import Files.FileHandler;
+import accounting.Charge;
 import accounting.SubscriptionFee;
 import ui.UserInterface;
 
@@ -13,7 +14,8 @@ public class TreasurerController {
     private boolean isRunning = true;
     private FileHandler files = new FileHandler();
     private UserInterface ui = new UserInterface();
-    private SubscriptionFee subFee = new SubscriptionFee();
+    //private SubscriptionFee subFee = new SubscriptionFee();
+    private Member member = new Member();
 
     public void treasurerMenu(Controller controller) {
         while (isRunning) {
@@ -35,7 +37,7 @@ public class TreasurerController {
 
     private void calculateTotalExpectedIncome() {
         ArrayList<Member> members = files.getAllMembers();
-        double expectedTotal = subFee.getTotalExpectedIncome(members);
+        double expectedTotal = member.getTotalExpectedIncome(members);
         ui.printMessage(Math.round(expectedTotal) + "kr. kan forventes i kontingent");
     }
 
@@ -60,11 +62,12 @@ public class TreasurerController {
     }
 
     private String makeSubscriptionChargeForOneMember(String memberName) {
-        return subFee.makeSubscriptionChargeForOneMember(memberName);
+        //TODO: udskriv alle medlemmer?
+        return member.makeSubscriptionChargeForOneMember(memberName);
     }
 
     private String makeSubscriptionChargeForAllMembers() {
-        return subFee.makeSubscriptionChargeForAllMembers();
+        return member.makeSubscriptionChargeForAllMembers();
     }
 
     private String updatePaymentStatus(String userInput) {
@@ -72,10 +75,22 @@ public class TreasurerController {
     }
 
     private void showMissingPayments() {
-        ArrayList<String> missingPayments = subFee.getMembersMissingPayment();
+        ArrayList<String> missingPayments = getMembersMissingPayment();
         for (String member : missingPayments) {
             ui.printMessage(member);
         }
+    }
+    public ArrayList<String> getMembersMissingPayment() {
+        ArrayList<String> members = new ArrayList<>();
+        ArrayList<Charge> charges = files.readSubFile();
+
+        for (Charge charge : charges) {
+            if (charge.getIsPaid().equalsIgnoreCase("ikke betalt")) {
+                members.add(charge.toString());
+            }
+        }
+
+        return members;
     }
 
     private void markAsPaid() {
@@ -86,4 +101,7 @@ public class TreasurerController {
         String resultUpdatePayment = updatePaymentStatus(userInput);
         ui.printMessage(resultUpdatePayment);
     }
+
+
+
 }

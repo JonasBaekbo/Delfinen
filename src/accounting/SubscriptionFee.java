@@ -1,4 +1,4 @@
-//@Johanne Riis-Weitling
+//@Johanne Riis-Weitling, Adam Lasson
 package accounting;
 
 import Domain.Member;
@@ -11,22 +11,22 @@ public class SubscriptionFee {
     private FileHandler files = new FileHandler();
 
 
-    private double below18Fee = 1000;
+   /* private double below18Fee = 1000;
     private double above18Fee = 1600;
     private double passiveFee = 500;
     private double seniorFeeDiscount = 0.75; // der er 25% rabat for medlemmer over 60
     private double subscriptionFee;
-
-    public double getSubscriptionFee(Member member) {
+*/
+  /*  public double getSubscriptionFee(Member member) {
         if (!member.getActive()) {
             subscriptionFee = passiveFee;
         } else {
             subscriptionFee = calculateSubscriptionFee(member);
         }
         return subscriptionFee;
-    }
+    }*/
 
-    private double calculateSubscriptionFee(Member member) {
+  /*  private double calculateSubscriptionFee(Member member) {
         int age = getAgeAsInt(member);
 
         if (age < 18) {
@@ -38,9 +38,9 @@ public class SubscriptionFee {
         }
 
         return Math.round(subscriptionFee);
-    }
+    }*/
 
-    public double getTotalExpectedIncome(ArrayList<Member> memberArrayList) {
+    /*public double getTotalExpectedIncome(ArrayList<Member> memberArrayList) {
         double totalSubscription = 0;
 
         for (Member member : memberArrayList) {
@@ -48,13 +48,13 @@ public class SubscriptionFee {
         }
 
         return Math.round(totalSubscription);
-    }
+    }*/
 
-    public int getAgeAsInt(Member member) {
+    /*public int getAgeAsInt(Member member) {
         return Integer.parseInt(member.getAge());
-    }
+    }*/
 
-    public ArrayList<String> getMembersMissingPayment() {
+   /* public ArrayList<String> getMembersMissingPayment() {
         ArrayList<String> members = new ArrayList<>();
         ArrayList<Charge> charges = files.readSubFile();
 
@@ -65,9 +65,9 @@ public class SubscriptionFee {
         }
 
         return members;
-    }
+    }*/
 
-    public String makeSubscriptionChargeForOneMember(String memberName) {
+   /* public String makeSubscriptionChargeForOneMember(String memberName) {
         ArrayList<Member> members = files.getAllMembers();
         int invoiceNumber = getNextInvoiceNumber();
         int numCharge = 0;
@@ -101,19 +101,18 @@ public class SubscriptionFee {
         } else
             return "Oprettede " + numCharge + " fakturaer";
     }
-
-    public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) {
+*/
+   /* public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) {
         double amount = getSubscriptionFee(member);
         String line = invoiceNumber + ";" + member.getInvoiceLine() + ";" + Math.round(amount) + ";" + "ikke betalt";
         files.saveToSubscriptionFile(line);
-    }
+    }*/
 
 
-    public int getNextInvoiceNumber() {
+   /* public int getNextInvoiceNumber() {
         int linesInSubChargeFile = files.countLinesInSubscriptionFile();
         return linesInSubChargeFile+1;
-    }
+    }*/
 
 
 }
-

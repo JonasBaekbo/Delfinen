@@ -7,6 +7,8 @@ import Files.FileHandler;
 
 import ui.UserInterface;
 
+import java.util.ArrayList;
+
 
 public class CEOController {
     private boolean isRunning = true;
@@ -22,11 +24,14 @@ public class CEOController {
                 case "1" -> createNewMember();
                 case "2" -> changeActiveStatus();
                 case "3" -> createCoach();
+                case "4" -> printAllCoachs();
                 case "0" -> controller.backToMainMenu();
                 default -> ui.printMessage("Du skal vælge et punkt fra menuen. Prøv venligst igen");
             }
         }
     }
+
+
 
     public void stop() {
         isRunning = false;
@@ -112,11 +117,27 @@ public class CEOController {
         String name = ui.userInput();
         ui.printMessage("Indtast trænerens alder: ");
         String age = ui.userInput();
-        Coach coach = new Coach(name, age);
+        ui.printMessage("""
+                Indtast trænerens svømmedisciplin
+                1) Butterfly
+                2) Crawl
+                3) Rygcrawl
+                4) Brystsvømning
+                """);
+        String swimDisciplineChosen = ui.userInput();
+        DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
+        Coach coach = new Coach(name, age,swimDiscipline);
         files.saveNewCoach(coach);
     }
+//TODO: ny metode tilføj til diagrammer
+    private void printAllCoachs() {
+       ArrayList<Coach> coaches= files.getAllCoachs();
+        for (Coach coach : coaches) {
+            String coachString = coach.toString();
+            ui.printMessage(coachString);
+        }
+    }
 
-    //TODO: ny funktion tilføj til diagrammer
     private void changeActiveStatus() {
         ui.printMessage("Skriv navnet på det medlem, der skal ændre status");
         String name = ui.userInput();
@@ -130,7 +151,7 @@ public class CEOController {
         ui.printMessage("opdaterede status på " + name);
     }
 
-    public void updateActiveStatus(String input, boolean isActive) {
+    private void updateActiveStatus(String input, boolean isActive) {
         files.updateActiveStatus(input,isActive);
     }
 }

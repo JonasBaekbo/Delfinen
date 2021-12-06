@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHandler {
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final String memberFile = "data/members.txt";
     private final String coachFile = "data/coach.txt";
     private final String subscriptionFile ="data/subCharge.csv";
@@ -44,6 +45,32 @@ public class FileHandler {
         }
     }
 
+    public ArrayList<Coach> getAllCoachs() {
+        File file = new File(coachFile);
+
+        try {
+            Scanner scanner = new Scanner(file);
+            ArrayList<Coach> coaches = new ArrayList<>();
+
+            while (scanner.hasNext()) {
+                String foundLine = scanner.nextLine();
+                String[] details = foundLine.split(";");
+                String name = details[0];
+                String age = details[1];
+                String discipline = details[2];
+                DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
+                Coach m = new Coach(name, age, disciplineEnum);
+                coaches.add(m);
+            }
+                return coaches;
+            } catch(FileNotFoundException e){
+                throw new FileReadException("Can't read from " + file, e);
+            }
+        }
+
+
+
+    //TODO: se på om denne kan blive lette at læse
     public ArrayList<Member> getAllMembers() {
         File file = new File(memberFile);
 
@@ -63,12 +90,11 @@ public class FileHandler {
                     String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
                     String date = details[5];
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate dateToAdd = LocalDate.parse(date, formatter);
+                    LocalDate dateToAdd = LocalDate.parse(date, dateFormatter);
                     String competitionName = details[6];
                     String place = details[7];
                     String competitionDate = details[8];
-                    LocalDate competitionDateToAdd = LocalDate.parse(competitionDate, formatter);
+                    LocalDate competitionDateToAdd = LocalDate.parse(competitionDate, dateFormatter);
                     String competitionTime = details[9];
                     LocalTime competitionTimeToAdd = LocalTime.parse(competitionTime);
                     if (competitionTimeToAdd != null) {
@@ -81,8 +107,7 @@ public class FileHandler {
                     String time = details[4];
                     LocalTime timeToAdd = LocalTime.parse(time);
                     String date = details[5];
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate dateToAdd = LocalDate.parse(date, formatter);
+                    LocalDate dateToAdd = LocalDate.parse(date, dateFormatter);
                     if (timeToAdd != null) {
                         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd);
                         members.add(competitionSwimmer);
@@ -94,14 +119,14 @@ public class FileHandler {
                     if (discipline != null) {
                         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum);
                         members.add(competitionSwimmer);
-
+                    }
                     } else {
-                        Member m = new Member(name, age, isActive);
-                        members.add(m);
+                        Member member = new Member(name, age, isActive);
+                        members.add(member);
 
                     }
                 }
-            }
+
 
             return members;
         } catch (FileNotFoundException e) {
@@ -242,4 +267,3 @@ public class FileHandler {
         }
     }
 }
-

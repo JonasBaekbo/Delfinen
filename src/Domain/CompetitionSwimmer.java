@@ -12,7 +12,7 @@ public class CompetitionSwimmer extends Member {
     private DisciplineEnum swimDiscipline;
     private LocalTime practiceTime = null;
     private LocalDate practiceDate;
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private ArrayList<Competition> competitions = new ArrayList<>();
     private LocalDate competitionDate;
 
@@ -101,23 +101,24 @@ public class CompetitionSwimmer extends Member {
         }
     }
 
+
     @Override
     public String toString() {
         if (swimDiscipline == null) {
-            return basisToString() +
+            return basisMemberToString() +
                     "----------------------------------------------\n";
         } else if (practiceTime == null) {
-            return basisToString() +
+            return basisMemberToString() +
                     "Svømmedisciplin: " + swimDiscipline + '\n' +
                     "----------------------------------------------\n";
         } else if (competitions.isEmpty()) {
-            return basisToString() +
+            return basisMemberToString() +
                     "Svømmedisciplin: " + swimDiscipline + '\n' +
                     "tid: " + practiceTime + '\n' +
                     "----------------------------------------------\n";
         } else {
             Competition competition = getCompetition();
-            return basisToString() +
+            return basisMemberToString() +
                     "Svømmedisciplin: " + swimDiscipline + '\n' +
                     "tid: " + practiceTime + '\n' +
                     "stævne navn: " + competition.getConvention() + '\n' +

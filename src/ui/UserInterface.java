@@ -12,8 +12,8 @@ public class UserInterface {
         return scanner.nextLine();
     }
 
-    public void printMessage(String s) {
-        System.out.println(s);
+    public void printMessage(String string) {
+        System.out.println(string);
     }
 
     public void mainMenu() {
@@ -35,6 +35,7 @@ public class UserInterface {
                 1) Registrer nyt medlem
                 2) Skift status på medlem (Aktiv/Passiv)
                 3) Registrer ny træner
+                4) Udskriv liste med alle trænere
                 0) Tilbage til hovedmenu""");
     }
 
