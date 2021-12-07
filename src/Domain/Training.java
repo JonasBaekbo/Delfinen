@@ -34,10 +34,10 @@ public class Training {
 
 
     public String informationToTable() {
-       String firstPartOfTable= member.informationToTable();
-        String secondPartOfTable=format("%-20s",trainingTime);
+        String firstPartOfTable = member.informationToTable();
+        String secondPartOfTable = format("%-20s", trainingTime);
 
-        return firstPartOfTable+secondPartOfTable;
+        return firstPartOfTable + secondPartOfTable;
     }
 }
 

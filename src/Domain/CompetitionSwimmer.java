@@ -38,7 +38,7 @@ public class CompetitionSwimmer extends Member {
         if (getDiscipline() == null) {
             return basisStringForSaveMember();
         } else {
-            return basisStringForSaveMember() + ";"  + getDiscipline();
+            return basisStringForSaveMember() + ";" + getDiscipline();
         }
     }
 
@@ -49,8 +49,8 @@ public class CompetitionSwimmer extends Member {
                     "----------------------------------------------\n";
         } else {
             return basisMemberToString() +
-                   "Svømmedisciplin: " + swimDiscipline + '\n' +
-                   "----------------------------------------------\n";
+                    "Svømmedisciplin: " + swimDiscipline + '\n' +
+                    "----------------------------------------------\n";
         }
     }
 
@@ -74,7 +74,4 @@ public class CompetitionSwimmer extends Member {
             return null;
         }
     }
-
-
-    //return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActive(), "|", member.getDiscipline(), "|", trainingTime);
 }

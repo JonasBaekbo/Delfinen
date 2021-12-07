@@ -7,10 +7,10 @@ public class Coach {
     private String age;
     private DisciplineEnum swimDiscipline;
 
-    public Coach(String name, String age, DisciplineEnum swimDiscipline){
+    public Coach(String name, String age, DisciplineEnum swimDiscipline) {
         this.name = name;
         this.age = age;
-        this.swimDiscipline=swimDiscipline;
+        this.swimDiscipline = swimDiscipline;
     }
 
     public String getName() {
@@ -21,19 +21,19 @@ public class Coach {
         return age;
     }
 
-    public DisciplineEnum getSwimDiscipline(){
+    public DisciplineEnum getSwimDiscipline() {
         return swimDiscipline;
     }
 
     public String getStringForSaving() {
-        return getName() + ";" + getAge()+";"+getSwimDiscipline();
+        return getName() + ";" + getAge() + ";" + getSwimDiscipline();
     }
 
     @Override
     public String toString() {
         return "Navn: " + name + '\n' +
-                "Alder: " + age+'\n' +
-                "Svømmedisciplin: " + swimDiscipline+'\n'+
+                "Alder: " + age + '\n' +
+                "Svømmedisciplin: " + swimDiscipline + '\n' +
                 "----------------------------------------------\n";
     }
 }

@@ -43,6 +43,16 @@ public class FileHandler {
         }
     }
 
+    public void saveToSubscriptionFile(String line) {
+        File file = new File(subscriptionFile);
+        try {
+            PrintStream printStream = new PrintStream(new FileOutputStream(file, true));
+            printStream.append(line).append("\n");
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't find the file you're looking for", e);
+        }
+    }
+
     public ArrayList<Coach> getAllCoachs() {
         File file = new File(coachFile);
 
@@ -101,121 +111,44 @@ public class FileHandler {
         }
     }
 
-
-    //https://intellipaat.com/community/69798/how-to-clear-a-text-file-without-deleting-it
-    public void clearFile(String FILE_PATH) {
-        try {
-            FileWriter fw = new FileWriter(FILE_PATH, false);
-            PrintWriter pw = new PrintWriter(fw, false);
-            pw.flush();
-            pw.close();
-            fw.close();
-        } catch (Exception exception) {
-            System.out.println("Exception have been caught");
-        }
-    }
-
-    public void saveToSubscriptionFile(String line) {
-        File file = new File(subscriptionFile);
-        try {
-            PrintStream printStream = new PrintStream(new FileOutputStream(file, true));
-            printStream.append(line).append("\n");
-        } catch (FileNotFoundException e) {
-            throw new FileReadException("Can't find the file you're looking for", e);
-        }
-    }
-
-    public int countLinesInSubscriptionFile() {
-        File file = new File(subscriptionFile);
-        int lines = 0;
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                scanner.nextLine();
-                lines++;
+    public Member findMemberByName(ArrayList<Member> members, String memberName) {
+        Member foundMember = null;
+        for (Member member : members) {
+            if (memberName.equalsIgnoreCase(member.getName())) {
+                foundMember = member;
             }
-            return lines;
-        } catch (FileNotFoundException e) {
-            throw new FileReadException("Can't read from " + file, e);
         }
+        return foundMember;
     }
 
-    public String updatePaymentStatus(String input) {
-        try {
-            ArrayList<Charge> charges = readSubFile();
-            clearFile(subscriptionFile);
+    public CompetitionSwimmer findCompetitionSwimmerByName(ArrayList<CompetitionSwimmer> members, String memberName) {
+        for (CompetitionSwimmer member : members) {
+            if (memberName.equalsIgnoreCase(member.getName())) {
+                return member;
+            }
+        }
+        return null;
+    }
 
-            File file = new File(subscriptionFile);
+    public ArrayList<CompetitionSwimmer> getCompetitionSwimmers() {
+        ArrayList<CompetitionSwimmer> result = new ArrayList<>();
+        for (Member member : getAllMembers()) {
+            if (member.getDiscipline() != null) {
+                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
+                result.add(competitionSwimmer);
+            }
+        }
+        return result;
+    }
+
+    public void saveSwimResult(Training result) {
+        File file = new File(swimResultFile);
+        try {
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-
-            int numUpdates = 0;
-            for (Charge charge : charges) {
-                // Slå op på medlemsnavn eller fakturanummer
-                if (charge.getName().equalsIgnoreCase(input) || (charge.getChargeNumber().equalsIgnoreCase(input))) {
-                    charge.setIsPaid("betalt");
-                    numUpdates++;
-                }
-                ps.println(charge);
-            }
+            ps.println(result);
             ps.close();
-
-            if (numUpdates == 0) {
-                return "Kunne ikke finde noget, der matchede din søgning";
-            } else if (numUpdates == 1) {
-                return "Markerede fakturaen som betalt";
-            } else {
-                return "Markerede flere fakturaer som betalte";
-            }
         } catch (FileNotFoundException e) {
-            throw new FileReadException("Can't read from subscription file", e);
-        }
-    }
-
-    public ArrayList<Charge> readSubFile() {
-        try {
-            ArrayList<Charge> result = new ArrayList<>();
-            File file = new File(subscriptionFile);
-            Scanner scanner = new Scanner(file);
-
-            while (scanner.hasNext()) {
-                String foundLine = scanner.nextLine();
-                String[] details = foundLine.split(";");
-
-                String chargeNumber = details[0];
-                String name = details[1];
-                String age = details[2];
-                String isActive = details[3];
-                String amount = details[4];
-                String isPaid = details[5];
-
-                Charge charge = new Charge(chargeNumber, name, age, isActive, amount, isPaid);
-
-                result.add(charge);
-            }
-
-            return result;
-
-        } catch (FileNotFoundException e) {
-            throw new FileReadException("Can't read from subscription file", e);
-        }
-    }
-
-    public void updateActiveStatus(String input, boolean isActive) {
-        String file = memberFile;
-        try {
-            ArrayList<Member> members = getAllMembers();
-            clearFile(file);
-            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-            for (Member member : members) {
-                if (member.getName().equalsIgnoreCase(input)) {
-                    member.setActive(isActive);
-                }
-                ps.println(member.getStringForSaving());
-            }
-            ps.close();
-
-        } catch (FileNotFoundException e) {
-            throw new FileReadException("Can't read member file", e);
+            throw new FileWriteException("Can't write to " + file, e);
         }
     }
 
@@ -254,46 +187,113 @@ public class FileHandler {
         }
     }
 
-    public void saveSwimResultResult(Training result) {
-        File file = new File(swimResultFile);
+    public String updatePaymentStatus(String input) {
         try {
+            ArrayList<Charge> charges = readSubFile();
+            clearFile(subscriptionFile);
+
+            File file = new File(subscriptionFile);
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-            ps.println(result);
+
+            int numUpdates = 0;
+            for (Charge charge : charges) {
+                // Slå op på medlemsnavn eller fakturanummer
+                if (charge.getName().equalsIgnoreCase(input) || (charge.getChargeNumber().equalsIgnoreCase(input))) {
+                    charge.setIsPaid("betalt");
+                    numUpdates++;
+                }
+                ps.println(charge);
+            }
             ps.close();
+
+            if (numUpdates == 0) {
+                return "Kunne ikke finde noget, der matchede din søgning";
+            } else if (numUpdates == 1) {
+                return "Markerede fakturaen som betalt";
+            } else {
+                return "Markerede flere fakturaer som betalte";
+            }
         } catch (FileNotFoundException e) {
-            throw new FileWriteException("Can't write to " + file, e);
+            throw new FileReadException("Can't read from subscription file", e);
         }
     }
 
-    public Member findMemberByName(ArrayList<Member> members, String memberName) {
-        Member foundMember = null;
-        for (Member member : members) {
-            if (memberName.equalsIgnoreCase(member.getName())) {
-                foundMember = member;
+    public void updateActiveStatus(String input, boolean isActive) {
+        String file = memberFile;
+        try {
+            ArrayList<Member> members = getAllMembers();
+            clearFile(file);
+            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+            for (Member member : members) {
+                if (member.getName().equalsIgnoreCase(input)) {
+                    member.setActive(isActive);
+                }
+                ps.println(member.getStringForSaving());
             }
+            ps.close();
+
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't read member file", e);
         }
-        return foundMember;
     }
 
+    public ArrayList<Charge> readSubFile() {
+        try {
+            ArrayList<Charge> result = new ArrayList<>();
+            File file = new File(subscriptionFile);
+            Scanner scanner = new Scanner(file);
 
-    public CompetitionSwimmer findCompetitionSwimmerByName(ArrayList<CompetitionSwimmer> members, String memberName) {
-        for (CompetitionSwimmer member : members) {
-            if (memberName.equalsIgnoreCase(member.getName())) {
-                return member;
+            while (scanner.hasNext()) {
+                String foundLine = scanner.nextLine();
+                String[] details = foundLine.split(";");
+
+                String chargeNumber = details[0];
+                String name = details[1];
+                String age = details[2];
+                String isActive = details[3];
+                String amount = details[4];
+                String isPaid = details[5];
+
+                Charge charge = new Charge(chargeNumber, name, age, isActive, amount, isPaid);
+
+                result.add(charge);
             }
+
+            return result;
+
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't read from subscription file", e);
         }
-        return null;
     }
 
-
-    public ArrayList<CompetitionSwimmer> getCompetitionSwimmers() {
-        ArrayList<CompetitionSwimmer> result = new ArrayList<>();
-        for (Member member : getAllMembers()) {
-            if (member.getDiscipline() != null) {
-                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
-                result.add(competitionSwimmer);
+    public int countLinesInSubscriptionFile() {
+        File file = new File(subscriptionFile);
+        int lines = 0;
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                scanner.nextLine();
+                lines++;
             }
+            return lines;
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't read from " + file, e);
         }
-        return result;
     }
+
+
+    //https://intellipaat.com/community/69798/how-to-clear-a-text-file-without-deleting-it
+    public void clearFile(String FILE_PATH) {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+        } catch (Exception exception) {
+            System.out.println("Exception have been caught");
+        }
+    }
+
+
 }

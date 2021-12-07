@@ -32,6 +32,10 @@ public class CoachController {
             }
         }
     }
+
+    public void stop() {
+        isRunning = false;
+    }
 //TODO: ny metode tilføj til diagrammer
     private void showTimesForSwimmer() {
         ui.printMessage("Skriv navnet på svømmeren hvis tider du vil se");
@@ -42,9 +46,6 @@ public class CoachController {
         }
     }
 
-    public void stop() {
-        isRunning = false;
-    }
 
     private void listCompetitionSwimmers(ArrayList<CompetitionSwimmer> members) {
         for (CompetitionSwimmer member : members) {
@@ -76,7 +77,7 @@ public class CoachController {
                 LocalTime tournamentTime = LocalTime.parse(timeAsString);
 
                 Competition competition = new Competition(foundMember, tournamentDate,tournamentTime,tournamentName,tournamentPlace);
-                files.saveSwimResultResult(competition);
+                files.saveSwimResult(competition);
 
             } else {
                 ui.printMessage("Det valgte medlem har ikke en træningstid");
@@ -100,7 +101,7 @@ public class CoachController {
             String swimDateAsString = ui.userInput();
             LocalDate swimDate = LocalDate.parse(swimDateAsString,dateFormatter);
             Training training = new Training(foundMember, swimDate, swimTime);
-            files.saveSwimResultResult(training);
+            files.saveSwimResult(training);
         } else {
             ui.printMessage("Det indtastede navn findes ikke, prøv igen");
         }

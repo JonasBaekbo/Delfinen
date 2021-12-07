@@ -20,7 +20,7 @@ public class Member {
     private double seniorFeeDiscount = 0.75; // der er 25% rabat for medlemmer over 60
     private double subscriptionFee;
 
-//Der er oprettet en tom constructor for at undgå at have en static klasse, når metoderne skal kaldes fra controllerne
+    //Der er oprettet en tom constructor for at undgå at have en static klasse, når metoderne skal kaldes fra controllerne
     public Member() {
     }
 
@@ -35,11 +35,14 @@ public class Member {
         return name;
     }
 
-    public DisciplineEnum getDiscipline() { return discipline; }
+    public DisciplineEnum getDiscipline() {
+        return discipline;
+    }
 
     public String getAge() {
         return age;
     }
+
     public int getAgeAsInt(Member member) {
         return Integer.parseInt(member.getAge());
     }
@@ -91,7 +94,7 @@ public class Member {
 
     public String makeSubscriptionChargeForOneMember(String memberName) {
         ArrayList<Member> members = files.getAllMembers();
-        int invoiceNumber = getNextInvoiceNumber()+1;
+        int invoiceNumber = getNextInvoiceNumber() + 1;
         int numCharge = 0;
         for (Member member : members) {
             if (member.getName().equalsIgnoreCase(memberName)) {
@@ -128,6 +131,7 @@ public class Member {
         String line = invoiceNumber + ";" + member.getInvoiceLine() + ";" + Math.round(amount) + ";" + "ikke betalt";
         files.saveToSubscriptionFile(line);
     }
+
     public int getNextInvoiceNumber() {
         return files.countLinesInSubscriptionFile();
     }
