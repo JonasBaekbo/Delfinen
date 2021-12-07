@@ -1,4 +1,4 @@
-//@ Mikkel Sandell, Jonas Bækbo, Johanne Riis-Weitling
+//@ Mikkel Sandell, Jonas Bækbo, Johanne Riis-Weitling, Adam Lasson
 package Files;
 
 import Domain.*;
@@ -65,10 +65,10 @@ public class FileHandler {
                 String[] details = foundLine.split(";");
                 String name = details[0];
                 String age = details[1];
-                String discipline = details[2];
-                DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
-                Coach m = new Coach(name, age, disciplineEnum);
-                coaches.add(m);
+                String disciplineAsString = details[2];
+                DisciplineEnum discipline = DisciplineEnum.valueOf(disciplineAsString);
+                Coach coach = new Coach(name, age, discipline);
+                coaches.add(coach);
             }
             return coaches;
         } catch (FileNotFoundException e) {
@@ -103,7 +103,6 @@ public class FileHandler {
 
                 }
             }
-
 
             return members;
         } catch (FileNotFoundException e) {
@@ -163,20 +162,20 @@ public class FileHandler {
                 String foundLine = scanner.nextLine();
                 String[] details = foundLine.split(";");
                 String name = details[0];
-                String date = details[1];
-                LocalDate dateToAdd = LocalDate.parse(date, dateFormatter);
-                String time = details[2];
-                LocalTime timeToAdd = LocalTime.parse(time);
+                String dateAsString = details[1];
+                LocalDate date = LocalDate.parse(dateAsString, dateFormatter);
+                String timeAsString = details[2];
+                LocalTime time = LocalTime.parse(timeAsString);
 
                 Member member = findMemberByName(getAllMembers(), name);
 
                 if (details.length > 3) {
-                    String conventionName = details[3];
-                    String place = details[4];
-                    Competition competition = new Competition(member, dateToAdd, timeToAdd, conventionName, place);
+                    String competitionName = details[3];
+                    String placementAtCompetition = details[4];
+                    Competition competition = new Competition(member, date, time, competitionName, placementAtCompetition);
                     times.add(competition);
                 } else {
-                    Training training = new Training(member, dateToAdd, timeToAdd);
+                    Training training = new Training(member, date, time);
                     times.add(training);
                 }
 
@@ -265,7 +264,7 @@ public class FileHandler {
             throw new FileReadException("Can't read from subscription file", e);
         }
     }
-
+    //Dette gøres for at finde næste fakturanummer når der oprettes kontingent opkrævning
     public int countLinesInSubscriptionFile() {
         File file = new File(subscriptionFile);
         int lines = 0;

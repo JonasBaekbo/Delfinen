@@ -1,4 +1,4 @@
-//@Jonas Bækbo, Mikkel Sandell
+//@Jonas Bækbo, Mikkel Sandell, Johanne Riis-Weitling
 
 package controller;
 

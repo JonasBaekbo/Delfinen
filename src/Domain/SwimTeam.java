@@ -6,7 +6,7 @@ import Files.FileHandler;
 import java.util.ArrayList;
 
 public class SwimTeam {
-    private FileHandler files = new FileHandler();
+    private final FileHandler files = new FileHandler();
 
     public ArrayList<Training> getTimesForSwimmer(String name) {
         ArrayList<Training> result = new ArrayList<>();
