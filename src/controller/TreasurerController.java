@@ -13,7 +13,9 @@ public class TreasurerController {
     private boolean isRunning = true;
     private FileHandler files = new FileHandler();
     private UserInterface ui = new UserInterface();
-    private Member member = new Member();
+    //private Member member = new Member();
+//TODO: fjern fra diagrammer?
+
 
     public void treasurerMenu(Controller controller) {
         while (isRunning) {
@@ -33,10 +35,15 @@ public class TreasurerController {
         isRunning = false;
     }
 
-    private void calculateTotalExpectedIncome() {
-        ArrayList<Member> members = files.getAllMembers();
-        double expectedTotal = member.getTotalExpectedIncome(members);
-        ui.printMessage(Math.round(expectedTotal) + "kr. kan forventes i kontingent");
+
+    public void calculateTotalExpectedIncome() {
+        ArrayList<Member> memberArrayList = files.getAllMembers();
+        double totalSubscription = 0;
+
+        for (Member member : memberArrayList) {
+            totalSubscription += member.getSubscriptionFee(member);
+        }
+        ui.printMessage(Math.round(totalSubscription) + "kr. kan forventes i kontingent");
     }
 
     private void chargeSubscriptionFee() {
@@ -61,12 +68,42 @@ public class TreasurerController {
 
     private String makeSubscriptionChargeForOneMember(String memberName) {
         //TODO: udskriv alle medlemmer?
-        return member.makeSubscriptionChargeForOneMember(memberName);
+            ArrayList<Member> members = files.getAllMembers();
+            int invoiceNumber = files.countLinesInSubscriptionFile() + 1;
+            int numCharge = 0;
+            for (Member member : members) {
+                if (member.getName().equalsIgnoreCase(memberName)) {
+                    String line = member.generateAndSaveInvoiceLine(member, invoiceNumber);
+                    numCharge++;
+                    files.saveToSubscriptionFile(line);
+                }
+            }
+            if (numCharge == 0) {
+                return "Kunne ikke finde et medlem, der matchede din søgning";
+            } else if (numCharge == 1) {
+                return "Oprettede faktura nummer " + invoiceNumber + " til " + memberName;
+            } else {
+                return "Oprettede flere fakturaer";
+            }
+
     }
 
     private String makeSubscriptionChargeForAllMembers() {
-        return member.makeSubscriptionChargeForAllMembers();
-    }
+            ArrayList<Member> members = files.getAllMembers();
+            int invoiceNumber = files.countLinesInSubscriptionFile();
+            int numCharge = 0;
+            for (Member member : members) {
+                invoiceNumber++;
+                String line = member.generateAndSaveInvoiceLine(member, invoiceNumber);
+                numCharge++;
+                files.saveToSubscriptionFile(line);
+            }
+            if (numCharge == 0) {
+                return "Kunne ikke finde nogle medlemmer!";
+            } else
+                return "Oprettede " + numCharge + " fakturaer";
+        }
+
 
     private String updatePaymentStatus(String userInput) {
         return files.updatePaymentStatus(userInput);

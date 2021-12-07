@@ -1,15 +1,13 @@
 //@ Adam Lasson, Johanne Riis-Weitling, Mikkel Sandell
 package Domain;
 
-import Files.FileHandler;
 
 import java.util.ArrayList;
 
-import static java.lang.String.format;
-
 public class CompetitionSwimmer extends Member {
     private DisciplineEnum swimDiscipline;
-    private FileHandler files = new FileHandler();
+    // private FileHandler files = new FileHandler();
+    //TODO: fjern fra diagram
 
     public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDiscipline) {
         super(name, age, isActive);
@@ -20,8 +18,10 @@ public class CompetitionSwimmer extends Member {
         return swimDiscipline;
     }
 
-    public boolean hasPracticeTime() {
-        ArrayList<Training> times = files.getAllSavedTimes();
+
+    //TODO: ændre diagram så den får arraylist med
+    public boolean hasPracticeTime(ArrayList<Training> times) {
+        //ArrayList<Training> times = files.getAllSavedTimes();
         for (Training time : times) {
             if (time.getMemberName().equalsIgnoreCase(getName())) {
                 return true;
@@ -30,33 +30,39 @@ public class CompetitionSwimmer extends Member {
         return false;
     }
 
-    public String basisStringForSaveMember() {
+    //TODO: fjern fra diagrammer
+   /* public String basisStringForSaveMember() {
         return getName() + ";" + getAge() + ";" + getActive();
-    }
+    }*/
 
     public String getStringForSaving() {
         if (getDiscipline() == null) {
-            return basisStringForSaveMember();
+            return getName() + ";" + getAge() + ";" + getActive();
         } else {
-            return basisStringForSaveMember() + ";" + getDiscipline();
+            return getName() + ";" + getAge() + ";" + getActive() + ";" + getDiscipline();
         }
     }
 
     @Override
     public String toString() {
         if (swimDiscipline == null) {
-            return basisMemberToString() +
+            return "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktiv: " + isActive + '\n' +
                     "----------------------------------------------\n";
         } else {
-            return basisMemberToString() +
+            return "Medlemsnavn: " + name + '\n' +
+                    "Alder: " + age + '\n' +
+                    "Aktiv: " + isActive + '\n' +
                     "Svømmedisciplin: " + swimDiscipline + '\n' +
                     "----------------------------------------------\n";
         }
     }
 
-    public ArrayList<Training> getTimes() {
+    //TODO: ændre diagram så den får arraylist med
+    public ArrayList<Training> getTimes(ArrayList<Training> times) {
         ArrayList<Training> result = new ArrayList<>();
-        ArrayList<Training> times = files.getAllSavedTimes();
+        //AArrayList<Training> times
         for (Training time : times) {
             if (time.getMemberName().equalsIgnoreCase(getName())) {
                 result.add(time);
@@ -65,8 +71,9 @@ public class CompetitionSwimmer extends Member {
         return result;
     }
 
-    public Training getBestTime() {
-        ArrayList<Training> swimmerTimes = getTimes();
+    //TODO: ændre diagram så den får arraylist med
+    public Training getBestTime(ArrayList<Training> times) {
+        ArrayList<Training> swimmerTimes = getTimes(times);
         swimmerTimes.sort(new Sorting());
         if (swimmerTimes.size() > 0) {
             return swimmerTimes.get(0);

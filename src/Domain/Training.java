@@ -23,9 +23,17 @@ public class Training {
         return trainingTime;
     }
 
+    //TODO: tilføj til diagram
+    public String StringForSavning() {
+        return member.getName() + ";" + trainingDate + ";" + trainingTime;
+    }
+
     @Override
     public String toString() {
-        return member.getName() + ";" + trainingDate + ";" + trainingTime;
+        return "Medlemsnavn: " + member.getName() + '\n' +
+                "Dato: " + trainingDate + '\n' +
+                "Træningtid: " + trainingTime + '\n' +
+                "----------------------------------------------\n";
     }
 
     public String getMemberName() {

@@ -44,8 +44,8 @@ public class UserInterface {
                                     
                 Træner
                 Foretag et valg:
-                1) Tilføj tid til medlem
-                2) Registrer resultat til stævne for svømmer
+                1) Tilføj tid til svømmer
+                2) Registrer resultat fra stævne til svømmer
                 3) Se top 5 svømmere indenfor hver svømmedisciplin
                 4) Se alle tider for én svømmer
                 0) Tilbage til hovedmenu""");
@@ -64,10 +64,14 @@ public class UserInterface {
     }
 
 
+    public void printSeparator() {
+        System.out.printf("%s%n", "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+    }
+
     public void printTableHeader() {
-        System.out.printf("%s%n", "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        printSeparator();
         System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktiv", "|", "Svømmedisciplin", "|", "Tid");
-        System.out.printf("%s%n", "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        printSeparator();
     }
 
     public void printTableContents(String tableContent) {
@@ -75,8 +79,6 @@ public class UserInterface {
         System.out.println();
     }
 
-    public void printSeparator() {
-        System.out.printf("%s%n", "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    }
+
 }
 

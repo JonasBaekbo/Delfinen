@@ -1,28 +1,27 @@
 //@ Adam Lasson, Johanne Riis-Weitling, Mikkel Sandell
 package Domain;
 
-import Files.FileHandler;
-
-import java.util.ArrayList;
 
 import static java.lang.String.format;
 
 public class Member {
-    private String name;
-    private String age;
-    private boolean isActive; //e.g. Aktivt eller passivt medlem.
+    protected String name;
+    protected String age;
+    protected boolean isActive; //e.g. Aktivt eller passivt medlem.
     private DisciplineEnum discipline;
 
-    private FileHandler files = new FileHandler();
+    //TODO: slet fra diagrammer
+    //private FileHandler files = new FileHandler();
     private double below18Fee = 1000;
     private double above18Fee = 1600;
     private double passiveFee = 500;
     private double seniorFeeDiscount = 0.75; // der er 25% rabat for medlemmer over 60
     private double subscriptionFee;
 
+    //TODO: tjek at denne ikke optræder i nogle diagrammer
     //Der er oprettet en tom constructor for at undgå at have en static klasse, når metoderne skal kaldes fra controllerne
-    public Member() {
-    }
+    /*public Member() {
+    }*/
 
     public Member(String name, String age, boolean isActive) {
         this.name = name;
@@ -43,9 +42,6 @@ public class Member {
         return age;
     }
 
-    public int getAgeAsInt(Member member) {
-        return Integer.parseInt(member.getAge());
-    }
 
     public boolean getActive() {
         return isActive;
@@ -67,9 +63,13 @@ public class Member {
         }
         return subscriptionFee;
     }
+//TODO: fjern metode fra diagram
+    /*public int getAgeAsInt(Member member) {
+        return Integer.parseInt(member.getAge());
+    }*/
 
     private double calculateSubscriptionFee(Member member) {
-        int age = getAgeAsInt(member);
+        int age = Integer.parseInt(member.getAge());
 
         if (age < 18) {
             subscriptionFee = below18Fee;
@@ -81,18 +81,18 @@ public class Member {
 
         return Math.round(subscriptionFee);
     }
-
-    public double getTotalExpectedIncome(ArrayList<Member> memberArrayList) {
+//TODO:fjern fra diagrammer
+    /*public double getTotalExpectedIncome(ArrayList<Member> memberArrayList) {
         double totalSubscription = 0;
 
         for (Member member : memberArrayList) {
             totalSubscription += getSubscriptionFee(member);
         }
-
         return Math.round(totalSubscription);
-    }
+    }*/
 
-    public String makeSubscriptionChargeForOneMember(String memberName) {
+    //TODO: fjern fra diagrammer
+    /*public String makeSubscriptionChargeForOneMember(String memberName) {
         ArrayList<Member> members = files.getAllMembers();
         int invoiceNumber = getNextInvoiceNumber() + 1;
         int numCharge = 0;
@@ -109,8 +109,8 @@ public class Member {
         } else {
             return "Oprettede flere fakturaer";
         }
-    }
-
+    }*/
+/*
     public String makeSubscriptionChargeForAllMembers() {
         ArrayList<Member> members = files.getAllMembers();
         int invoiceNumber = getNextInvoiceNumber();
@@ -124,17 +124,17 @@ public class Member {
             return "Kunne ikke finde nogle medlemmer!";
         } else
             return "Oprettede " + numCharge + " fakturaer";
-    }
-
-    public void generateAndSaveInvoiceLine(Member member, int invoiceNumber) {
+    }*/
+//TODO: omdøb dan den ikke længer gemmer
+    public String generateAndSaveInvoiceLine(Member member, int invoiceNumber) {
         double amount = getSubscriptionFee(member);
-        String line = invoiceNumber + ";" + member.getInvoiceLine() + ";" + Math.round(amount) + ";" + "ikke betalt";
-        files.saveToSubscriptionFile(line);
-    }
+        return invoiceNumber + ";" + member.getInvoiceLine() + ";" + Math.round(amount) + ";" + "ikke betalt";
 
-    public int getNextInvoiceNumber() {
-        return files.countLinesInSubscriptionFile();
     }
+//TODO: flyttet til fileHandler
+    /*public int getNextInvoiceNumber() {
+        return files.countLinesInSubscriptionFile();
+    }*/
 
     public String getInvoiceLine() {
         if (getActive()) {
@@ -144,17 +144,21 @@ public class Member {
         }
     }
 
-
-    public String basisMemberToString() {
+//TODO: fjern denne fra diagrammer
+    /*public String basisMemberToString() {
         return "Medlemsnavn: " + name + '\n' +
                 "Alder: " + age + '\n' +
                 "Aktiv: " + isActive + '\n';
-    }
+    }*/
 
     @Override
     public String toString() {
-        return basisMemberToString() + "----------------------------------------------\n";
+        return "Medlemsnavn: " + name + '\n' +
+                "Alder: " + age + '\n' +
+                "Aktiv: " + isActive + '\n' +
+                "----------------------------------------------\n";
     }
+
 
     public String informationToTable() {
         return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s", getName(), "|", getAge(), "|", getActive(), "|", getDiscipline(), "|");

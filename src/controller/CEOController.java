@@ -61,9 +61,14 @@ public class CEOController {
         }
     }
 
+   /* private void createNormalMember(String name, String age, boolean isActive) {
+        Member member = new Member(name, age, isActive);
+                files.saveNewMember(member);
+    }*/
     private void createNormalMember(String name, String age, boolean isActive) {
         Member member = new Member(name, age, isActive);
-        files.saveNewMember(member);
+        String newMember =member.getStringForSaving();
+        files.saveNewMember(newMember);
     }
 
     private void createCompetitionSwimmer(String name, String age, boolean isActive) {
@@ -77,7 +82,8 @@ public class CEOController {
         String swimDisciplineChosen = ui.userInput();
         DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, swimDiscipline);
-        files.saveNewMember(competitionSwimmer);
+        String newCompetitionSwimmer = competitionSwimmer.getStringForSaving();
+        files.saveNewMember(newCompetitionSwimmer);
 
     }
 
@@ -127,7 +133,8 @@ public class CEOController {
         String swimDisciplineChosen = ui.userInput();
         DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
         Coach coach = new Coach(name, age,swimDiscipline);
-        files.saveNewCoach(coach);
+        String newCoach=coach.getStringForSaving();
+        files.saveNewCoach(newCoach);
     }
 //TODO: ny metode tilføj til diagrammer'
     private void printAllCoachs() {

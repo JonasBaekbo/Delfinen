@@ -9,6 +9,7 @@ import ui.UserInterface;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class CoachController {
@@ -36,7 +37,9 @@ public class CoachController {
     public void stop() {
         isRunning = false;
     }
-//TODO: ny metode tilføj til diagrammer
+
+    //TODO: ny metode tilføj til diagrammer
+    //TODO: besked hvis der ikke kan findes et medlem med det indtastede navn
     private void showTimesForSwimmer() {
         ui.printMessage("Skriv navnet på svømmeren hvis tider du vil se");
         String name = ui.userInput();
@@ -54,56 +57,69 @@ public class CoachController {
     }
 
     private void addTournamentResult() {
-        ArrayList<CompetitionSwimmer> members = files.getCompetitionSwimmers();
-        listCompetitionSwimmers(members);
-        ui.printMessage("Indtast medlemmets navn som har deltaget i et stævne:");
-        String memberName = ui.userInput();
-        CompetitionSwimmer foundMember = files.findCompetitionSwimmerByName(members, memberName);
-        if (foundMember != null) {
-            // Konkurrencesvømmere skal have haft mindst 1 træningstid før de kan svømme i en turnering
-            if (foundMember.hasPracticeTime()) {
-                ui.printMessage("Indtast navnet på stævnet:");
-                String tournamentName = ui.userInput();
+        try {
+            ArrayList<CompetitionSwimmer> members = files.getCompetitionSwimmers();
+            listCompetitionSwimmers(members);
+            ui.printMessage("Indtast medlemmets navn som har deltaget i et stævne:");
+            String memberName = ui.userInput();
+            CompetitionSwimmer foundMember = files.findCompetitionSwimmerByName(members, memberName);
+            if (foundMember != null) {
+                // Konkurrencesvømmere skal have haft mindst 1 træningstid før de kan svømme i en turnering
+                ArrayList<Training> times=files.getAllSavedTimes();
+                if (foundMember.hasPracticeTime(times)) {
 
-                ui.printMessage("Indtast placeringen til stævnet:");
-                String tournamentPlace = ui.userInput();
+                    ui.printMessage("Indtast navnet på stævnet:");
+                    String tournamentName = ui.userInput();
 
-                ui.printMessage("Indtast datoen for stævnet (DD/MM/ÅÅÅÅ) :");
-                String tournamentDateAsString = ui.userInput();
-                LocalDate tournamentDate = LocalDate.parse(tournamentDateAsString, dateFormatter);
+                    ui.printMessage("Indtast placeringen til stævnet:");
+                    String tournamentPlace = ui.userInput();
 
-                ui.printMessage("Indtast tiden til stævnet (HH:mm:ss):");
-                String timeAsString = ui.userInput();
-                LocalTime tournamentTime = LocalTime.parse(timeAsString);
+                    ui.printMessage("Indtast tiden til stævnet (HH:mm:ss):");
+                    String timeAsString = ui.userInput();
+                    LocalTime tournamentTime = LocalTime.parse(timeAsString);
 
-                Competition competition = new Competition(foundMember, tournamentDate,tournamentTime,tournamentName,tournamentPlace);
-                files.saveSwimResult(competition);
+                    ui.printMessage("Indtast datoen for stævnet (DD/MM/ÅÅÅÅ) :");
+                    String tournamentDateAsString = ui.userInput();
+                    LocalDate tournamentDate = LocalDate.parse(tournamentDateAsString, dateFormatter);
 
+                    Competition competition = new Competition(foundMember, tournamentDate, tournamentTime, tournamentName, tournamentPlace);
+                    String newCompetition = competition.StringForSavning();
+                    files.saveSwimResult(newCompetition);
+
+                } else {
+                    ui.printMessage("Det valgte medlem har ikke en træningstid");
+                }
             } else {
-                ui.printMessage("Det valgte medlem har ikke en træningstid");
+                ui.printMessage("Det indtastede navn findes ikke, prøv igen");
             }
-        } else {
-            ui.printMessage("Det indtastede navn findes ikke, prøv igen");
+        } catch (DateTimeParseException e) {
+            ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver nød til at starte forfra");
         }
     }
 
+
     public void addTrainingResult() {
-        ArrayList<CompetitionSwimmer> members = files.getCompetitionSwimmers();
-        listCompetitionSwimmers(members);
-        ui.printMessage("Indtast medlemmets navn som skal have tilføjet en ny tid:");
-        String memberName = ui.userInput();
-        CompetitionSwimmer foundMember = files.findCompetitionSwimmerByName(members, memberName);
-        if (foundMember != null) {
-            ui.printMessage("Indtast medlemmets tid (HH:mm:ss)");
-            String swimTimeAsString = ui.userInput();
-            LocalTime swimTime = LocalTime.parse(swimTimeAsString);
-            ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
-            String swimDateAsString = ui.userInput();
-            LocalDate swimDate = LocalDate.parse(swimDateAsString,dateFormatter);
-            Training training = new Training(foundMember, swimDate, swimTime);
-            files.saveSwimResult(training);
-        } else {
-            ui.printMessage("Det indtastede navn findes ikke, prøv igen");
+        try {
+            ArrayList<CompetitionSwimmer> members = files.getCompetitionSwimmers();
+            listCompetitionSwimmers(members);
+            ui.printMessage("Indtast medlemmets navn som skal have tilføjet en ny tid:");
+            String memberName = ui.userInput();
+            CompetitionSwimmer foundMember = files.findCompetitionSwimmerByName(members, memberName);
+            if (foundMember != null) {
+                ui.printMessage("Indtast medlemmets tid (HH:mm:ss)");
+                String swimTimeAsString = ui.userInput();
+                LocalTime swimTime = LocalTime.parse(swimTimeAsString);
+                ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
+                String swimDateAsString = ui.userInput();
+                LocalDate swimDate = LocalDate.parse(swimDateAsString, dateFormatter);
+                Training training = new Training(foundMember, swimDate, swimTime);
+                String newTraining = training.StringForSavning();
+                files.saveSwimResult(newTraining);
+            } else {
+                ui.printMessage("Det indtastede navn findes ikke, prøv igen");
+            }
+        } catch (DateTimeParseException e) {
+            ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver nød til at starte forfra");
         }
     }
 
@@ -168,4 +184,8 @@ public class CoachController {
         String tableContent = training.informationToTable();
         ui.printTableContents(tableContent);
     }
+
+
 }
+
+

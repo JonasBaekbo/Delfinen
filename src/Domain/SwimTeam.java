@@ -5,14 +5,17 @@ import Files.FileHandler;
 
 import java.util.ArrayList;
 
+
+//TODO: optimer så den ikke er så langsom i sin udskrift
 public class SwimTeam {
-    private final FileHandler files = new FileHandler();
+    private FileHandler files = new FileHandler();
 
     public ArrayList<Training> getTimesForSwimmer(String name) {
         ArrayList<Training> result = new ArrayList<>();
         CompetitionSwimmer swimmer = files.findCompetitionSwimmerByName(files.getCompetitionSwimmers(), name);
+        ArrayList<Training> times = files.getAllSavedTimes();
         if (swimmer != null) {
-            return swimmer.getTimes();
+            return swimmer.getTimes(times);
         }
         return result;
     }
@@ -30,15 +33,17 @@ public class SwimTeam {
 
                     // Medlemmet er ældre end "splitAge" og vi ønsker at se medlemmer over den alder
                     if (overSplitAge && (memberAge >= splitAge)) {
-                        bestTime = swimmer.getBestTime();
+                        ArrayList<Training> times = files.getAllSavedTimes();
+                        bestTime = swimmer.getBestTime(times);
                         if (bestTime != null) {
-                            result.add(swimmer.getBestTime());
+                            result.add(swimmer.getBestTime(times));
                         }
                         // Medlemmet er yngre end "splitAge" og vi ønsker at se medlemmer under den alder
                     } else if (!overSplitAge && (memberAge < splitAge)) {
-                        bestTime = swimmer.getBestTime();
+                        ArrayList<Training> times = files.getAllSavedTimes();
+                        bestTime = swimmer.getBestTime(times);
                         if (bestTime != null) {
-                            result.add(swimmer.getBestTime());
+                            result.add(swimmer.getBestTime(times));
                         }
                     }
                 }

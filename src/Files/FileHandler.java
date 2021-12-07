@@ -18,7 +18,42 @@ public class FileHandler {
     private final String subscriptionFile = "data/subCharge.csv";
     private final String swimResultFile = "data/swimResults.txt";
 
-    public void saveNewMember(Member member) {
+    public void saveNewMember(String stringForSaving) {
+        File file = new File(memberFile);
+        saveToFile(stringForSaving, file);
+    }
+
+    public void saveNewCoach(String stringForSaving) {
+        File file = new File(coachFile);
+        saveToFile(stringForSaving, file);
+    }
+
+
+    public void saveToSubscriptionFile(String stringForSaving) {
+        File file = new File(subscriptionFile);
+        saveToFile(stringForSaving, file);
+    }
+
+
+    public void saveSwimResult(String stringForSaving) {
+        File file = new File(swimResultFile);
+        saveToFile(stringForSaving, file);
+    }
+
+
+    //TODO: har tilføjet denne for at mindste genbrug
+    public void saveToFile(String stringForSaving, File file) {
+        try {
+            PrintStream printStream = new PrintStream(new FileOutputStream(file, true));
+            printStream.append(stringForSaving).append("\n");
+            printStream.close();
+        } catch (FileNotFoundException e) {
+            throw new FileWriteException("Can't write to " + file, e);
+        }
+
+
+    }
+/*    public void saveNewMember(Member member) {
         File file = new File(memberFile);
         try {
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
@@ -28,9 +63,9 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
         }
-    }
+    }*/
 
-    public void saveNewCoach(Coach coach) {
+   /* public void saveNewCoach(Coach coach) {
         File file = new File(coachFile);
         try {
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
@@ -41,9 +76,9 @@ public class FileHandler {
             throw new FileWriteException("Can't write to " + file, e);
 
         }
-    }
+    }*/
 
-    public void saveToSubscriptionFile(String line) {
+  /*  public void saveToSubscriptionFile(String line) {
         File file = new File(subscriptionFile);
         try {
             PrintStream printStream = new PrintStream(new FileOutputStream(file, true));
@@ -51,7 +86,7 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't find the file you're looking for", e);
         }
-    }
+    }*/
 
     public ArrayList<Coach> getAllCoachs() {
         File file = new File(coachFile);
@@ -140,7 +175,7 @@ public class FileHandler {
         return result;
     }
 
-    public void saveSwimResult(Training result) {
+   /* public void saveSwimResult(Training result) {
         File file = new File(swimResultFile);
         try {
             PrintStream ps = new PrintStream(new FileOutputStream(file, true));
@@ -149,7 +184,7 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             throw new FileWriteException("Can't write to " + file, e);
         }
-    }
+    }*/
 
     public ArrayList<Training> getAllSavedTimes() {
         File file = new File(swimResultFile);
@@ -264,6 +299,7 @@ public class FileHandler {
             throw new FileReadException("Can't read from subscription file", e);
         }
     }
+
     //Dette gøres for at finde næste fakturanummer når der oprettes kontingent opkrævning
     public int countLinesInSubscriptionFile() {
         File file = new File(subscriptionFile);
@@ -293,6 +329,5 @@ public class FileHandler {
             System.out.println("Exception have been caught");
         }
     }
-
 
 }

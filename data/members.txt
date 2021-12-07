@@ -6,7 +6,7 @@ Johanne Weitling;22;true;RYGCRAWL
 Knut Knutsen;27;false;BUTTERFLY
 Lars Larsen;36;true;CRAWL
 Mie Bonde;21;true;RYGCRAWL
-Mikkel Sandell;23;true;BRYSTSVØMNING
+Mikkel Sandell;23;false;BRYSTSVØMNING
 Mille Helbo;22;true;BRYSTSVØMNING
 Pelle Helle;12;true;BRYSTSVØMNING
 Peter Lind;45;true;CRAWL

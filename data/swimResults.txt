@@ -53,3 +53,5 @@ Ole Sørensen;2021-11-26;00:22:59
 Sofie Milling;2021-12-01;00:16:43
 Mads Schrøder;2021-12-01;00:21:21
 Mikkel Søgaard;2021-12-02;00:16:43
+Mikkel Søgaard;2021-12-12;00:20:59
+Mikkel Søgaard;2021-05-12;00:02:55;swiMaton cph2021;3
