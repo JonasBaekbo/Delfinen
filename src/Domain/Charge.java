@@ -1,4 +1,4 @@
-package accounting;
+package Domain;
 
 public class Charge {
     private String chargeNumber;

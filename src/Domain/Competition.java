@@ -5,40 +5,20 @@ package Domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Competition {
-    private String convention;
-    private String conventionPlace;
-    private LocalTime competitionTime;
-    private LocalDate competitionDate;
 
-    public Competition(String convention, String conventionPlace, LocalDate competitionDate, LocalTime competitionTime) {
-        this.convention = convention;
-        this.conventionPlace = conventionPlace;
-        this.competitionTime = competitionTime;
-        this.competitionDate = competitionDate;
-    }
+public class Competition extends Training {
+    private String conventionName;
+    private String placementInCompetition;
 
-    public String getConvention() {
-        return convention;
-    }
-
-    public String getConventionPlace() {
-        return conventionPlace;
-    }
-
-    public LocalDate getCompetitionDate() {
-        return competitionDate;
-    }
-
-    public LocalTime getCompetitionTime() {
-        return competitionTime;
+    public Competition(Member member, LocalDate trainingDate, LocalTime trainingTime, String conventionName, String placementInCompetition) {
+        super(member, trainingDate, trainingTime);
+        this.conventionName = conventionName;
+        this.placementInCompetition = placementInCompetition;
     }
 
     @Override
     public String toString() {
-        return "Stævnets navn: " + convention + '\n' +
-                "Dato for stævne: " + competitionDate + '\n' +
-                "Placeringen til stævnet: " + conventionPlace + '\n' +
-                "Tiden til stævnet: " + competitionTime;
+        return member.getName() + ";" + trainingDate + ";" + trainingTime + ";" + conventionName + ";" + placementInCompetition;
     }
+
 }

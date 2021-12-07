@@ -1,42 +1,62 @@
 // @Jonas Bækbo, Johanne Riis-Weitling
 package Domain;
 
+import Files.FileHandler;
+
 import java.util.ArrayList;
 
 public class SwimTeam {
+    private FileHandler files = new FileHandler();
 
-    public ArrayList<CompetitionSwimmer> listSwimmersSplitByAge(ArrayList<Member> membersList, int splitAge, DisciplineEnum swimDiscipline, boolean overSplitAge) {
-        ArrayList<CompetitionSwimmer> swimDisciplineSplitByAge = new ArrayList<>();
-        for (Member member : membersList) {
-            if (member.getActive()) {
-                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
-                if (competitionSwimmer.getSwimDiscipline() != null) {
-                    if (competitionSwimmer.getPracticeTime() != null) {
-                        if (competitionSwimmer.getSwimDiscipline() == swimDiscipline) {
-                            int memberAge = Integer.parseInt(member.getAge());
-                            // Medlemmet er ældre end "splitAge" og vi ønsker at se medlemmer over den alder
-                            if (overSplitAge && (memberAge >= splitAge)) {
-                                swimDisciplineSplitByAge.add((CompetitionSwimmer) member);
-                            // Medlemmet er yngre end "splitAge" og vi ønsker at se medlemmer under den alder
-                            } else if (!overSplitAge && (memberAge < splitAge)) {
-                                swimDisciplineSplitByAge.add((CompetitionSwimmer) member);
-                            }
+    public ArrayList<Training> getTimesForSwimmer(String name) {
+        ArrayList<Training> result = new ArrayList<>();
+        CompetitionSwimmer swimmer = files.findCompetitionSwimmerByName(files.getCompetitionSwimmers(), name);
+        if (swimmer != null) {
+            return swimmer.getTimes();
+        }
+        return result;
+    }
+
+    public ArrayList<Training> getDisciplineResultsSplitByAge(DisciplineEnum swimDiscipline, int splitAge, boolean overSplitAge) {
+        ArrayList<CompetitionSwimmer> swimmers = files.getCompetitionSwimmers();
+        ArrayList<Training> result = new ArrayList<>();
+
+        for (CompetitionSwimmer swimmer : swimmers) {
+            DisciplineEnum discipline = swimmer.getDiscipline();
+            int memberAge = Integer.parseInt(swimmer.getAge());
+            if (swimmer.getActive()) {
+                if (discipline == swimDiscipline) {
+                    Training bestTime = null;
+
+                    // Medlemmet er ældre end "splitAge" og vi ønsker at se medlemmer over den alder
+                    if (overSplitAge && (memberAge >= splitAge)) {
+                        bestTime = swimmer.getBestTime();
+                        if (bestTime != null) {
+                            result.add(swimmer.getBestTime());
+                        }
+                        // Medlemmet er yngre end "splitAge" og vi ønsker at se medlemmer under den alder
+                    } else if (!overSplitAge && (memberAge < splitAge)) {
+                        bestTime = swimmer.getBestTime();
+                        if (bestTime != null) {
+                            result.add(swimmer.getBestTime());
                         }
                     }
                 }
             }
         }
-        return swimDisciplineSplitByAge;
+        return result;
     }
 
-    public ArrayList<CompetitionSwimmer> writeTop5Swimmers(ArrayList<CompetitionSwimmer> membersList) {
-        ArrayList<CompetitionSwimmer> top5Swimmers = new ArrayList<>();
-        membersList.sort(new Sorting("time"));
+    public ArrayList<Training> writeTop5Times(ArrayList<Training> times) {
+        ArrayList<Training> top5Times = new ArrayList<>();
+
+        times.sort(new Sorting());
+
         // Sæt 'min' til antal medlemmer i 'membersList', men dog højest 5
-        int min = Math.min(membersList.size(), 5);
+        int min = Math.min(times.size(), 5);
         for (int i = 0; i < min; i++) {
-            top5Swimmers.add(membersList.get(i));
+            top5Times.add(times.get(i));
         }
-        return top5Swimmers;
+        return top5Times;
     }
 }

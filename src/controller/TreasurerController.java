@@ -4,8 +4,7 @@ package controller;
 
 import Domain.Member;
 import Files.FileHandler;
-import accounting.Charge;
-import accounting.SubscriptionFee;
+import Domain.Charge;
 import ui.UserInterface;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ public class TreasurerController {
     private boolean isRunning = true;
     private FileHandler files = new FileHandler();
     private UserInterface ui = new UserInterface();
-    //private SubscriptionFee subFee = new SubscriptionFee();
     private Member member = new Member();
 
     public void treasurerMenu(Controller controller) {

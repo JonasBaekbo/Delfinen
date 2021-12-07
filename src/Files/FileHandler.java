@@ -1,11 +1,8 @@
 //@ Mikkel Sandell, Jonas Bækbo, Johanne Riis-Weitling
 package Files;
 
-import Domain.Coach;
-import Domain.CompetitionSwimmer;
-import Domain.Member;
-import Domain.DisciplineEnum;
-import accounting.Charge;
+import Domain.*;
+import Domain.Charge;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -18,7 +15,8 @@ public class FileHandler {
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final String memberFile = "data/members.txt";
     private final String coachFile = "data/coach.txt";
-    private final String subscriptionFile ="data/subCharge.csv";
+    private final String subscriptionFile = "data/subCharge.csv";
+    private final String swimResultFile = "data/swimResults.txt";
 
     public void saveNewMember(Member member) {
         File file = new File(memberFile);
@@ -62,15 +60,12 @@ public class FileHandler {
                 Coach m = new Coach(name, age, disciplineEnum);
                 coaches.add(m);
             }
-                return coaches;
-            } catch(FileNotFoundException e){
-                throw new FileReadException("Can't read from " + file, e);
-            }
+            return coaches;
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't read from " + file, e);
         }
+    }
 
-
-
-    //TODO: se på om denne kan blive lette at læse
     public ArrayList<Member> getAllMembers() {
         File file = new File(memberFile);
 
@@ -84,48 +79,20 @@ public class FileHandler {
                 String name = details[0];
                 String age = details[1];
                 boolean isActive = Boolean.parseBoolean(details[2]);
-                if (details.length == 10) {
-                    String discipline = details[3];
-                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
-                    String time = details[4];
-                    LocalTime timeToAdd = LocalTime.parse(time);
-                    String date = details[5];
-                    LocalDate dateToAdd = LocalDate.parse(date, dateFormatter);
-                    String competitionName = details[6];
-                    String place = details[7];
-                    String competitionDate = details[8];
-                    LocalDate competitionDateToAdd = LocalDate.parse(competitionDate, dateFormatter);
-                    String competitionTime = details[9];
-                    LocalTime competitionTimeToAdd = LocalTime.parse(competitionTime);
-                    if (competitionTimeToAdd != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd, competitionName, place, competitionDateToAdd, competitionTimeToAdd);
-                        members.add(competitionSwimmer);
-                    }
-                } else if (details.length == 6) {
-                    String discipline = details[3];
-                    DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
-                    String time = details[4];
-                    LocalTime timeToAdd = LocalTime.parse(time);
-                    String date = details[5];
-                    LocalDate dateToAdd = LocalDate.parse(date, dateFormatter);
-                    if (timeToAdd != null) {
-                        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum, timeToAdd, dateToAdd);
-                        members.add(competitionSwimmer);
-                    }
 
-                } else if (details.length == 4) {
+                if (details.length == 4) {
                     String discipline = details[3];
                     DisciplineEnum disciplineEnum = DisciplineEnum.valueOf(discipline);
                     if (discipline != null) {
                         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, disciplineEnum);
                         members.add(competitionSwimmer);
                     }
-                    } else {
-                        Member member = new Member(name, age, isActive);
-                        members.add(member);
+                } else {
+                    Member member = new Member(name, age, isActive);
+                    members.add(member);
 
-                    }
                 }
+            }
 
 
             return members;
@@ -134,21 +101,6 @@ public class FileHandler {
         }
     }
 
-    public void saveMemberResult(ArrayList<Member> members) {
-        File file = new File(memberFile);
-        clearFile(memberFile);
-        try {
-            for (Member member : members) {
-                PrintStream ps = new PrintStream(new FileOutputStream(file, true));
-                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
-                String memberCompetition = competitionSwimmer.getStringForSaving();
-                ps.println(memberCompetition);
-                ps.close();
-            }
-        } catch (FileNotFoundException e) {
-            throw new FileWriteException("Can't write to " + file, e);
-        }
-    }
 
     //https://intellipaat.com/community/69798/how-to-clear-a-text-file-without-deleting-it
     public void clearFile(String FILE_PATH) {
@@ -265,5 +217,83 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't read member file", e);
         }
+    }
+
+    public ArrayList<Training> getAllSavedTimes() {
+        File file = new File(swimResultFile);
+
+        try {
+            Scanner scanner = new Scanner(file);
+            ArrayList<Training> times = new ArrayList<>();
+
+            while (scanner.hasNext()) {
+                String foundLine = scanner.nextLine();
+                String[] details = foundLine.split(";");
+                String name = details[0];
+                String date = details[1];
+                LocalDate dateToAdd = LocalDate.parse(date, dateFormatter);
+                String time = details[2];
+                LocalTime timeToAdd = LocalTime.parse(time);
+
+                Member member = findMemberByName(getAllMembers(), name);
+
+                if (details.length > 3) {
+                    String conventionName = details[3];
+                    String place = details[4];
+                    Competition competition = new Competition(member, dateToAdd, timeToAdd, conventionName, place);
+                    times.add(competition);
+                } else {
+                    Training training = new Training(member, dateToAdd, timeToAdd);
+                    times.add(training);
+                }
+
+            }
+            return times;
+        } catch (FileNotFoundException e) {
+            throw new FileReadException("Can't read from " + file, e);
+        }
+    }
+
+    public void saveSwimResultResult(Training result) {
+        File file = new File(swimResultFile);
+        try {
+            PrintStream ps = new PrintStream(new FileOutputStream(file, true));
+            ps.println(result);
+            ps.close();
+        } catch (FileNotFoundException e) {
+            throw new FileWriteException("Can't write to " + file, e);
+        }
+    }
+
+    public Member findMemberByName(ArrayList<Member> members, String memberName) {
+        Member foundMember = null;
+        for (Member member : members) {
+            if (memberName.equalsIgnoreCase(member.getName())) {
+                foundMember = member;
+            }
+        }
+        return foundMember;
+    }
+
+
+    public CompetitionSwimmer findCompetitionSwimmerByName(ArrayList<CompetitionSwimmer> members, String memberName) {
+        for (CompetitionSwimmer member : members) {
+            if (memberName.equalsIgnoreCase(member.getName())) {
+                return member;
+            }
+        }
+        return null;
+    }
+
+
+    public ArrayList<CompetitionSwimmer> getCompetitionSwimmers() {
+        ArrayList<CompetitionSwimmer> result = new ArrayList<>();
+        for (Member member : getAllMembers()) {
+            if (member.getDiscipline() != null) {
+                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
+                result.add(competitionSwimmer);
+            }
+        }
+        return result;
     }
 }

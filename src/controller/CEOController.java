@@ -129,7 +129,7 @@ public class CEOController {
         Coach coach = new Coach(name, age,swimDiscipline);
         files.saveNewCoach(coach);
     }
-//TODO: ny metode tilføj til diagrammer
+//TODO: ny metode tilføj til diagrammer'
     private void printAllCoachs() {
        ArrayList<Coach> coaches= files.getAllCoachs();
         for (Coach coach : coaches) {

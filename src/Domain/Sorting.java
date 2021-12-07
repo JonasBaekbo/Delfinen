@@ -4,22 +4,13 @@ package Domain;
 
 import java.util.Comparator;
 
-public class Sorting implements Comparator<CompetitionSwimmer> {
-    private String type;
-
-    public Sorting(String type) {
-        this.type = type;
-    }
-
+public class Sorting implements Comparator<Training> {
     @Override
-    public int compare(CompetitionSwimmer o1, CompetitionSwimmer o2) {
-        int result = switch (type) {
-            case "age" -> o1.getAge().compareTo(o2.getAge());
-            case "name" -> o1.getName().compareTo(o2.getName());
-            case "discipline" -> o1.getSwimDiscipline().compareTo(o2.getSwimDiscipline());
-            case "time" -> o1.getPracticeTime().compareTo(o2.getPracticeTime());
-            default -> 0;
-        };
-        return result;
+    public int compare(Training o1, Training o2) {
+        if ((o1 != null) && (o2 != null)) {
+            return o1.getTrainingTime().compareTo(o2.getTrainingTime());
+        } else {
+            return 0;
+        }
     }
 }

@@ -9,6 +9,7 @@ public class Member {
     private String name;
     private String age;
     private boolean isActive; //e.g. Aktivt eller passivt medlem.
+    private DisciplineEnum discipline;
 
     private FileHandler files = new FileHandler();
     private double below18Fee = 1000;
@@ -17,7 +18,7 @@ public class Member {
     private double seniorFeeDiscount = 0.75; // der er 25% rabat for medlemmer over 60
     private double subscriptionFee;
 
-//TODO: er dette korrekt, eller skal man lave Klassen på en anden måde?
+//Der er oprettet en tom constructor for at undgå at have en static klasse, når metoderne skal kaldes fra controllerne
     public Member() {
     }
 
@@ -25,11 +26,14 @@ public class Member {
         this.name = name;
         this.age = age;
         this.isActive = isActive;
+        this.discipline = null;
     }
 
     public String getName() {
         return name;
     }
+
+    public DisciplineEnum getDiscipline() { return discipline; }
 
     public String getAge() {
         return age;
