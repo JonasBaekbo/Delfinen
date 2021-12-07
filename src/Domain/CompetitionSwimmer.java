@@ -5,6 +5,8 @@ import Files.FileHandler;
 
 import java.util.ArrayList;
 
+import static java.lang.String.format;
+
 public class CompetitionSwimmer extends Member {
     private DisciplineEnum swimDiscipline;
     private FileHandler files = new FileHandler();
@@ -72,4 +74,7 @@ public class CompetitionSwimmer extends Member {
             return null;
         }
     }
+
+
+    //return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActive(), "|", member.getDiscipline(), "|", trainingTime);
 }

@@ -5,6 +5,8 @@ import Files.FileHandler;
 
 import java.util.ArrayList;
 
+import static java.lang.String.format;
+
 public class Member {
     private String name;
     private String age;
@@ -150,5 +152,8 @@ public class Member {
         return basisMemberToString() + "----------------------------------------------\n";
     }
 
+    public String informationToTable() {
+        return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s", getName(), "|", getAge(), "|", getActive(), "|", getDiscipline(), "|");
+    }
 
 }

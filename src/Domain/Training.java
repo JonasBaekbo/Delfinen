@@ -32,9 +32,12 @@ public class Training {
         return member.getName();
     }
 
-//TODO: find ud af hvor dette skal ligge
+
     public String informationToTable() {
-        return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s %-20s", member.getName(), "|", member.getAge(), "|", member.getActive(), "|", member.getDiscipline(), "|", trainingTime);
+       String firstPartOfTable= member.informationToTable();
+        String secondPartOfTable=format("%-20s",trainingTime);
+
+        return firstPartOfTable+secondPartOfTable;
     }
 }
 

@@ -5,6 +5,8 @@ package Domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static java.lang.String.format;
+
 
 public class Competition extends Training {
     private String conventionName;

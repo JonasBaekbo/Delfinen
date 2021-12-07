@@ -47,6 +47,7 @@ public class UserInterface {
                 1) Tilføj tid til medlem
                 2) Registrer resultat til stævne for svømmer
                 3) Se top 5 svømmere indenfor hver svømmedisciplin
+                4) Se alle tider for én svømmer
                 0) Tilbage til hovedmenu""");
     }
 
