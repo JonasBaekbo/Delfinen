@@ -67,7 +67,7 @@ public class CEOController {
     }*/
     private void createNormalMember(String name, String age, boolean isActive) {
         Member member = new Member(name, age, isActive);
-        String newMember =member.getStringForSaving();
+        String newMember =member.stringForSaving();
         files.saveNewMember(newMember);
     }
 
@@ -82,7 +82,7 @@ public class CEOController {
         String swimDisciplineChosen = ui.userInput();
         DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, swimDiscipline);
-        String newCompetitionSwimmer = competitionSwimmer.getStringForSaving();
+        String newCompetitionSwimmer = competitionSwimmer.stringForSaving();
         files.saveNewMember(newCompetitionSwimmer);
 
     }
@@ -133,7 +133,7 @@ public class CEOController {
         String swimDisciplineChosen = ui.userInput();
         DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
         Coach coach = new Coach(name, age,swimDiscipline);
-        String newCoach=coach.getStringForSaving();
+        String newCoach=coach.stringForSaving();
         files.saveNewCoach(newCoach);
     }
 //TODO: ny metode tilføj til diagrammer'

@@ -13,8 +13,6 @@ public class TreasurerController {
     private boolean isRunning = true;
     private FileHandler files = new FileHandler();
     private UserInterface ui = new UserInterface();
-    //private Member member = new Member();
-//TODO: fjern fra diagrammer?
 
 
     public void treasurerMenu(Controller controller) {
@@ -41,7 +39,7 @@ public class TreasurerController {
         double totalSubscription = 0;
 
         for (Member member : memberArrayList) {
-            totalSubscription += member.getSubscriptionFee(member);
+            totalSubscription += member.getSubscriptionFee();
         }
         ui.printMessage(Math.round(totalSubscription) + "kr. kan forventes i kontingent");
     }
@@ -69,11 +67,11 @@ public class TreasurerController {
     private String makeSubscriptionChargeForOneMember(String memberName) {
         //TODO: udskriv alle medlemmer?
             ArrayList<Member> members = files.getAllMembers();
-            int invoiceNumber = files.countLinesInSubscriptionFile() + 1;
+            int invoiceNumber = files.getNextInvoiceNumber() + 1;
             int numCharge = 0;
             for (Member member : members) {
                 if (member.getName().equalsIgnoreCase(memberName)) {
-                    String line = member.generateAndSaveInvoiceLine(member, invoiceNumber);
+                    String line = member.generateInvoiceLine(invoiceNumber);
                     numCharge++;
                     files.saveToSubscriptionFile(line);
                 }
@@ -90,11 +88,11 @@ public class TreasurerController {
 
     private String makeSubscriptionChargeForAllMembers() {
             ArrayList<Member> members = files.getAllMembers();
-            int invoiceNumber = files.countLinesInSubscriptionFile();
+            int invoiceNumber = files.getNextInvoiceNumber();
             int numCharge = 0;
             for (Member member : members) {
                 invoiceNumber++;
-                String line = member.generateAndSaveInvoiceLine(member, invoiceNumber);
+                String line = member.generateInvoiceLine(invoiceNumber);
                 numCharge++;
                 files.saveToSubscriptionFile(line);
             }

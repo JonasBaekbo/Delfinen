@@ -16,8 +16,7 @@ public class Competition extends Training {
         this.placementInCompetition = placementInCompetition;
     }
 
-    //TODO: tilføj til diagram
-    public String StringForSavning() {
+    public String stringForSaving() {
         return member.getName() + ";" + trainingDate + ";" + trainingTime + ";" + competitionName + ";" + placementInCompetition;
     }
 

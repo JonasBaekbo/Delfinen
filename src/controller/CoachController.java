@@ -83,7 +83,7 @@ public class CoachController {
                     LocalDate tournamentDate = LocalDate.parse(tournamentDateAsString, dateFormatter);
 
                     Competition competition = new Competition(foundMember, tournamentDate, tournamentTime, tournamentName, tournamentPlace);
-                    String newCompetition = competition.StringForSavning();
+                    String newCompetition = competition.stringForSaving();
                     files.saveSwimResult(newCompetition);
 
                 } else {
@@ -113,7 +113,7 @@ public class CoachController {
                 String swimDateAsString = ui.userInput();
                 LocalDate swimDate = LocalDate.parse(swimDateAsString, dateFormatter);
                 Training training = new Training(foundMember, swimDate, swimTime);
-                String newTraining = training.StringForSavning();
+                String newTraining = training.stringForSaving();
                 files.saveSwimResult(newTraining);
             } else {
                 ui.printMessage("Det indtastede navn findes ikke, prøv igen");
@@ -124,49 +124,51 @@ public class CoachController {
     }
 
 
-    public void listAllSwimmersUnder18() {
+    public void listAllSwimmersUnder18(ArrayList<Training> times) {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
-        ArrayList<Training> brystUnder18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.BRYSTSVØMNING, 18, false);
+        ArrayList<Training> brystUnder18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.BRYSTSVØMNING, 18, false);
         writeTop5Swimmers(brystUnder18);
         ui.printSeparator();
         ui.printMessage("Konkurrencesvømmere i butterfly:");
-        ArrayList<Training> butterflyUnder18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.BUTTERFLY, 18, false);
+        ArrayList<Training> butterflyUnder18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.BUTTERFLY, 18, false);
         writeTop5Swimmers(butterflyUnder18);
         ui.printSeparator();
         ui.printMessage("Konkurrencesvømmere i crawl:");
-        ArrayList<Training> crawlUnder18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.CRAWL, 18, false);
+        ArrayList<Training> crawlUnder18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.CRAWL, 18, false);
         writeTop5Swimmers(crawlUnder18);
         ui.printSeparator();
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
-        ArrayList<Training> rygUnder18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.RYGCRAWL, 18, false);
+        ArrayList<Training> rygUnder18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.RYGCRAWL, 18, false);
         writeTop5Swimmers(rygUnder18);
     }
 
-    public void listAllSwimmersOver18() {
+
+    public void listAllSwimmersOver18(ArrayList<Training> times) {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
-        ArrayList<Training> brystOver18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.BRYSTSVØMNING, 18, true);
+        ArrayList<Training> brystOver18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.BRYSTSVØMNING, 18, true);
         writeTop5Swimmers(brystOver18);
         ui.printSeparator();
         ui.printMessage("Konkurrencesvømmere i butterfly:");
-        ArrayList<Training> butterflyOver18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.BUTTERFLY, 18, true);
+        ArrayList<Training> butterflyOver18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.BUTTERFLY, 18, true);
         writeTop5Swimmers(butterflyOver18);
         ui.printSeparator();
         ui.printMessage("Konkurrencesvømmere i crawl:");
-        ArrayList<Training> crawlOver18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.CRAWL, 18, true);
+        ArrayList<Training> crawlOver18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.CRAWL, 18, true);
         writeTop5Swimmers(crawlOver18);
         ui.printSeparator();
         ui.printMessage("Konkurrencesvømmere i rygcrawl:");
-        ArrayList<Training> rygOver18 = swimTeam.getDisciplineResultsSplitByAge(DisciplineEnum.RYGCRAWL, 18, true);
+        ArrayList<Training> rygOver18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.RYGCRAWL, 18, true);
         writeTop5Swimmers(rygOver18);
     }
 
     public void showTop5Swimmers() {
+        ArrayList<Training> times = files.getAllSavedTimes();
         ui.printMessage("Konkurrencesvømmere under 18:");
         createTableHeader();
-        listAllSwimmersUnder18();
+        listAllSwimmersUnder18(times);
         ui.printMessage("\nKonkurrencesvømmere over 18:");
         createTableHeader();
-        listAllSwimmersOver18();
+        listAllSwimmersOver18(times);
     }
 
     private void writeTop5Swimmers(ArrayList<Training> times) {

@@ -8,7 +8,6 @@ public class UserInterface {
     Scanner scanner = new Scanner(System.in);
 
     public String userInput() {
-
         return scanner.nextLine();
     }
 
@@ -24,7 +23,6 @@ public class UserInterface {
                 3) Kassér menu
                 0) Slut programmet
                 """);
-
     }
 
     public void menuCEO() {
@@ -63,7 +61,6 @@ public class UserInterface {
                 0) Tilbage til hovedmenu""");
     }
 
-
     public void printSeparator() {
         System.out.printf("%s%n", "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
@@ -78,7 +75,4 @@ public class UserInterface {
         System.out.format(tableContent);
         System.out.println();
     }
-
-
 }
-

@@ -18,13 +18,11 @@ public class Training {
         this.trainingDate = trainingDate;
     }
 
-
     public LocalTime getTrainingTime() {
         return trainingTime;
     }
 
-    //TODO: tilføj til diagram
-    public String StringForSavning() {
+    public String stringForSaving() {
         return member.getName() + ";" + trainingDate + ";" + trainingTime;
     }
 
@@ -39,7 +37,6 @@ public class Training {
     public String getMemberName() {
         return member.getName();
     }
-
 
     public String informationToTable() {
         String firstPartOfTable = member.informationToTable();

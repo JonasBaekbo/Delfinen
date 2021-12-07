@@ -5,8 +5,6 @@ import Files.FileHandler;
 
 import java.util.ArrayList;
 
-
-//TODO: optimer så den ikke er så langsom i sin udskrift
 public class SwimTeam {
     private FileHandler files = new FileHandler();
 
@@ -20,7 +18,7 @@ public class SwimTeam {
         return result;
     }
 
-    public ArrayList<Training> getDisciplineResultsSplitByAge(DisciplineEnum swimDiscipline, int splitAge, boolean overSplitAge) {
+    public ArrayList<Training> getDisciplineResultsSplitByAge(ArrayList<Training> times, DisciplineEnum swimDiscipline, int splitAge, boolean overSplitAge) {
         ArrayList<CompetitionSwimmer> swimmers = files.getCompetitionSwimmers();
         ArrayList<Training> result = new ArrayList<>();
 
@@ -33,14 +31,12 @@ public class SwimTeam {
 
                     // Medlemmet er ældre end "splitAge" og vi ønsker at se medlemmer over den alder
                     if (overSplitAge && (memberAge >= splitAge)) {
-                        ArrayList<Training> times = files.getAllSavedTimes();
                         bestTime = swimmer.getBestTime(times);
                         if (bestTime != null) {
                             result.add(swimmer.getBestTime(times));
                         }
                         // Medlemmet er yngre end "splitAge" og vi ønsker at se medlemmer under den alder
                     } else if (!overSplitAge && (memberAge < splitAge)) {
-                        ArrayList<Training> times = files.getAllSavedTimes();
                         bestTime = swimmer.getBestTime(times);
                         if (bestTime != null) {
                             result.add(swimmer.getBestTime(times));

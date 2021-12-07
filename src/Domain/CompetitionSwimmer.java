@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class CompetitionSwimmer extends Member {
     private DisciplineEnum swimDiscipline;
-    // private FileHandler files = new FileHandler();
-    //TODO: fjern fra diagram
 
     public CompetitionSwimmer(String name, String age, boolean isActive, DisciplineEnum swimDiscipline) {
         super(name, age, isActive);
@@ -18,10 +16,7 @@ public class CompetitionSwimmer extends Member {
         return swimDiscipline;
     }
 
-
-    //TODO: ændre diagram så den får arraylist med
     public boolean hasPracticeTime(ArrayList<Training> times) {
-        //ArrayList<Training> times = files.getAllSavedTimes();
         for (Training time : times) {
             if (time.getMemberName().equalsIgnoreCase(getName())) {
                 return true;
@@ -30,18 +25,34 @@ public class CompetitionSwimmer extends Member {
         return false;
     }
 
-    //TODO: fjern fra diagrammer
-   /* public String basisStringForSaveMember() {
-        return getName() + ";" + getAge() + ";" + getActive();
-    }*/
+    public ArrayList<Training> getTimes(ArrayList<Training> times) {
+        ArrayList<Training> result = new ArrayList<>();
+        for (Training time : times) {
+            if (time.getMemberName().equalsIgnoreCase(getName())) {
+                result.add(time);
+            }
+        }
+        return result;
+    }
 
-    public String getStringForSaving() {
+    public Training getBestTime(ArrayList<Training> times) {
+        ArrayList<Training> swimmerTimes = getTimes(times);
+        swimmerTimes.sort(new Sorting());
+        if (swimmerTimes.size() > 0) {
+            return swimmerTimes.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public String stringForSaving() {
         if (getDiscipline() == null) {
             return getName() + ";" + getAge() + ";" + getActive();
         } else {
             return getName() + ";" + getAge() + ";" + getActive() + ";" + getDiscipline();
         }
     }
+
 
     @Override
     public String toString() {
@@ -56,29 +67,6 @@ public class CompetitionSwimmer extends Member {
                     "Aktiv: " + isActive + '\n' +
                     "Svømmedisciplin: " + swimDiscipline + '\n' +
                     "----------------------------------------------\n";
-        }
-    }
-
-    //TODO: ændre diagram så den får arraylist med
-    public ArrayList<Training> getTimes(ArrayList<Training> times) {
-        ArrayList<Training> result = new ArrayList<>();
-        //AArrayList<Training> times
-        for (Training time : times) {
-            if (time.getMemberName().equalsIgnoreCase(getName())) {
-                result.add(time);
-            }
-        }
-        return result;
-    }
-
-    //TODO: ændre diagram så den får arraylist med
-    public Training getBestTime(ArrayList<Training> times) {
-        ArrayList<Training> swimmerTimes = getTimes(times);
-        swimmerTimes.sort(new Sorting());
-        if (swimmerTimes.size() > 0) {
-            return swimmerTimes.get(0);
-        } else {
-            return null;
         }
     }
 }

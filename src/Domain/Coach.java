@@ -25,7 +25,7 @@ public class Coach {
         return swimDiscipline;
     }
 
-    public String getStringForSaving() {
+    public String stringForSaving() {
         return getName() + ";" + getAge() + ";" + getSwimDiscipline();
     }
 
