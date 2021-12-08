@@ -1,5 +1,4 @@
 // @Jonas Bækbo, Mikkel Sandell, Johanne Riis-Weitling
-
 package ui;
 
 import java.util.Scanner;
@@ -44,7 +43,7 @@ public class UserInterface {
                 Foretag et valg:
                 1) Tilføj tid til svømmer
                 2) Registrer resultat fra stævne til svømmer
-                3) Se top 5 svømmere indenfor hver svømmedisciplin
+                3) Se top 5 aktive svømmere indenfor hver svømmedisciplin
                 4) Se alle tider for én svømmer
                 0) Tilbage til hovedmenu""");
     }
@@ -62,12 +61,12 @@ public class UserInterface {
     }
 
     public void printSeparator() {
-        System.out.printf("%s%n", "---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%s%n", "-----------------------------------------------------------------------------------------------------------------------------");
     }
 
     public void printTableHeader() {
         printSeparator();
-        System.out.printf("%-20s %15s %-15s %20s %-20s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Aktiv", "|", "Svømmedisciplin", "|", "Tid");
+        System.out.printf("%-25s %15s %-15s %15s %-20s %15s %-20s %n", "Navn", "|", "Alder", "|", "Svømmedisciplin", "|", "Tid");
         printSeparator();
     }
 

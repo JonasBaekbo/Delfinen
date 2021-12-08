@@ -56,23 +56,25 @@ public class Member {
     }
 
     private double calculateSubscriptionFee() {
-        int age = Integer.parseInt(getAge());
+        try {
+            int age = Integer.parseInt(getAge());
 
-        if (age < 18) {
-            subscriptionFee = below18Fee;
-        } else if (age >= 60) {
-            subscriptionFee = above18Fee * seniorFeeDiscount;
-        } else {
-            subscriptionFee = above18Fee;
+            if (age < 18) {
+                subscriptionFee = below18Fee;
+            } else if (age >= 60) {
+                subscriptionFee = above18Fee * seniorFeeDiscount;
+            } else {
+                subscriptionFee = above18Fee;
+            }
+            return Math.round(subscriptionFee);
+        } catch (NumberFormatException e) {
+            return 0;
         }
-
-        return Math.round(subscriptionFee);
     }
 
     public String generateInvoiceLine(int invoiceNumber) {
         double amount = getSubscriptionFee();
         return invoiceNumber + ";" + getInvoiceLine() + ";" + Math.round(amount) + ";" + "ikke betalt";
-
     }
 
     public String getInvoiceLine() {
@@ -85,14 +87,21 @@ public class Member {
 
     @Override
     public String toString() {
+        //Vi "oversætter" true/false da bruger fladen er på dansk
+        String activeStatus;
+        if (getActive()) {
+            activeStatus = "Ja";
+        } else {
+            activeStatus = "Nej";
+        }
         return "Medlemsnavn: " + name + '\n' +
                 "Alder: " + age + '\n' +
-                "Aktiv: " + isActive + '\n' +
+                "Aktiv: " + activeStatus + '\n' +
                 "----------------------------------------------\n";
     }
 
     public String informationToTable() {
-        return format("%-20s %15s %-20s %15s %-20s %15s %-20s %15s", getName(), "|", getAge(), "|", getActive(), "|", getDiscipline(), "|");
-    }
+            return format("%-25s %15s %-15s %15s %-20s %15s", getName(), "|", getAge(), "|", getDiscipline(), "|");
+        }
 
 }

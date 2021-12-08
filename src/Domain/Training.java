@@ -1,5 +1,4 @@
 //@Johanne Riis-Weitling, Mikkel Sandell
-
 package Domain;
 
 import java.time.LocalDate;
@@ -30,7 +29,7 @@ public class Training {
     public String toString() {
         return "Medlemsnavn: " + member.getName() + '\n' +
                 "Dato: " + trainingDate + '\n' +
-                "Træningtid: " + trainingTime + '\n' +
+                "Træningstid: " + trainingTime + '\n' +
                 "----------------------------------------------\n";
     }
 
@@ -45,5 +44,3 @@ public class Training {
         return firstPartOfTable + secondPartOfTable;
     }
 }
-
-

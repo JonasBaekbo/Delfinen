@@ -96,4 +96,12 @@ class SubscriptionFeeTest {
         int result = (int) competitionSwimmer.getSubscriptionFee();
         assertEquals(expected, result);
     }
+
+    @Test
+    public void testafCalculateSubscriptionFee_AktivtMedlemMedFejlIndput() {
+            Member member = new Member("Adam Lasson","hej", true);
+            int expected = 0;
+            int result = (int) member.getSubscriptionFee();
+            assertEquals(expected, result);
+    }
 }

@@ -19,33 +19,37 @@ public class SwimTeam {
     }
 
     public ArrayList<Training> getDisciplineResultsSplitByAge(ArrayList<Training> times, DisciplineEnum swimDiscipline, int splitAge, boolean overSplitAge) {
-        ArrayList<CompetitionSwimmer> swimmers = files.getCompetitionSwimmers();
-        ArrayList<Training> result = new ArrayList<>();
+        try {
+            ArrayList<CompetitionSwimmer> swimmers = files.getCompetitionSwimmers();
+            ArrayList<Training> result = new ArrayList<>();
 
-        for (CompetitionSwimmer swimmer : swimmers) {
-            DisciplineEnum discipline = swimmer.getDiscipline();
-            int memberAge = Integer.parseInt(swimmer.getAge());
-            if (swimmer.getActive()) {
-                if (discipline == swimDiscipline) {
-                    Training bestTime = null;
+            for (CompetitionSwimmer swimmer : swimmers) {
+                DisciplineEnum discipline = swimmer.getDiscipline();
+                int memberAge = Integer.parseInt(swimmer.getAge());
+                if (swimmer.getActive()) {
+                    if (discipline == swimDiscipline) {
+                        Training bestTime = null;
 
-                    // Medlemmet er ældre end "splitAge" og vi ønsker at se medlemmer over den alder
-                    if (overSplitAge && (memberAge >= splitAge)) {
-                        bestTime = swimmer.getBestTime(times);
-                        if (bestTime != null) {
-                            result.add(swimmer.getBestTime(times));
-                        }
-                        // Medlemmet er yngre end "splitAge" og vi ønsker at se medlemmer under den alder
-                    } else if (!overSplitAge && (memberAge < splitAge)) {
-                        bestTime = swimmer.getBestTime(times);
-                        if (bestTime != null) {
-                            result.add(swimmer.getBestTime(times));
+                        // Medlemmet er ældre end "splitAge" og vi ønsker at se medlemmer over den alder
+                        if (overSplitAge && (memberAge >= splitAge)) {
+                            bestTime = swimmer.getBestTime(times);
+                            if (bestTime != null) {
+                                result.add(swimmer.getBestTime(times));
+                            }
+                            // Medlemmet er yngre end "splitAge" og vi ønsker at se medlemmer under den alder
+                        } else if (!overSplitAge && (memberAge < splitAge)) {
+                            bestTime = swimmer.getBestTime(times);
+                            if (bestTime != null) {
+                                result.add(swimmer.getBestTime(times));
+                            }
                         }
                     }
                 }
             }
+            return result;
+        } catch (NumberFormatException e) {
+            return null;
         }
-        return result;
     }
 
     public ArrayList<Training> writeTop5Times(ArrayList<Training> times) {

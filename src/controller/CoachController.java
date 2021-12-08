@@ -38,17 +38,20 @@ public class CoachController {
         isRunning = false;
     }
 
-    //TODO: ny metode tilføj til diagrammer
-    //TODO: besked hvis der ikke kan findes et medlem med det indtastede navn
     private void showTimesForSwimmer() {
+        ArrayList<CompetitionSwimmer> members = files.getCompetitionSwimmers();
+        listCompetitionSwimmers(members);
         ui.printMessage("Skriv navnet på svømmeren hvis tider du vil se");
         String name = ui.userInput();
         ArrayList<Training> times = swimTeam.getTimesForSwimmer(name);
-        for (Training time : times) {
-            ui.printMessage(time.toString());
+        if (times.size() > 0) {
+            for (Training time : times) {
+                ui.printMessage(time.toString());
+            }
+        } else {
+            ui.printMessage("Der er ikke registeret nogen tider på en svømmer, der matcher din søgning");
         }
     }
-
 
     private void listCompetitionSwimmers(ArrayList<CompetitionSwimmer> members) {
         for (CompetitionSwimmer member : members) {
@@ -65,9 +68,8 @@ public class CoachController {
             CompetitionSwimmer foundMember = files.findCompetitionSwimmerByName(members, memberName);
             if (foundMember != null) {
                 // Konkurrencesvømmere skal have haft mindst 1 træningstid før de kan svømme i en turnering
-                ArrayList<Training> times=files.getAllSavedTimes();
+                ArrayList<Training> times = files.getAllSavedTimes();
                 if (foundMember.hasPracticeTime(times)) {
-
                     ui.printMessage("Indtast navnet på stævnet:");
                     String tournamentName = ui.userInput();
 
@@ -85,7 +87,6 @@ public class CoachController {
                     Competition competition = new Competition(foundMember, tournamentDate, tournamentTime, tournamentName, tournamentPlace);
                     String newCompetition = competition.stringForSaving();
                     files.saveSwimResult(newCompetition);
-
                 } else {
                     ui.printMessage("Det valgte medlem har ikke en træningstid");
                 }
@@ -93,10 +94,9 @@ public class CoachController {
                 ui.printMessage("Det indtastede navn findes ikke, prøv igen");
             }
         } catch (DateTimeParseException e) {
-            ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver nød til at starte forfra");
+            ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver desværre nød til at starte forfra, med at vælge fra menuen");
         }
     }
-
 
     public void addTrainingResult() {
         try {
@@ -109,9 +109,11 @@ public class CoachController {
                 ui.printMessage("Indtast medlemmets tid (HH:mm:ss)");
                 String swimTimeAsString = ui.userInput();
                 LocalTime swimTime = LocalTime.parse(swimTimeAsString);
+
                 ui.printMessage("Indtast datoen for tiden (DD/MM/ÅÅÅÅ)");
                 String swimDateAsString = ui.userInput();
                 LocalDate swimDate = LocalDate.parse(swimDateAsString, dateFormatter);
+
                 Training training = new Training(foundMember, swimDate, swimTime);
                 String newTraining = training.stringForSaving();
                 files.saveSwimResult(newTraining);
@@ -119,10 +121,9 @@ public class CoachController {
                 ui.printMessage("Det indtastede navn findes ikke, prøv igen");
             }
         } catch (DateTimeParseException e) {
-            ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver nød til at starte forfra");
+            ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver desværre nød til at starte forfra, med at vælge fra menuen");
         }
     }
-
 
     public void listAllSwimmersUnder18(ArrayList<Training> times) {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
@@ -141,7 +142,6 @@ public class CoachController {
         ArrayList<Training> rygUnder18 = swimTeam.getDisciplineResultsSplitByAge(times, DisciplineEnum.RYGCRAWL, 18, false);
         writeTop5Swimmers(rygUnder18);
     }
-
 
     public void listAllSwimmersOver18(ArrayList<Training> times) {
         ui.printMessage("Konkurrencesvømmere i brystsvømning:");
@@ -163,10 +163,10 @@ public class CoachController {
 
     public void showTop5Swimmers() {
         ArrayList<Training> times = files.getAllSavedTimes();
-        ui.printMessage("Konkurrencesvømmere under 18:");
+        ui.printMessage("Aktive konkurrencesvømmere under 18:");
         createTableHeader();
         listAllSwimmersUnder18(times);
-        ui.printMessage("\nKonkurrencesvømmere over 18:");
+        ui.printMessage("\nAktive konkurrencesvømmere over 18:");
         createTableHeader();
         listAllSwimmersOver18(times);
     }
@@ -186,8 +186,4 @@ public class CoachController {
         String tableContent = training.informationToTable();
         ui.printTableContents(tableContent);
     }
-
-
 }
-
-

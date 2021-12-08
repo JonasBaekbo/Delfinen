@@ -1,4 +1,4 @@
-//@Jonas Bækbo, Mikkel Sandell
+//@Jonas Bækbo, Mikkel Sandell, Johanne Riis-Weitling, Adam Lasson
 
 package controller;
 
@@ -33,15 +33,17 @@ public class TreasurerController {
         isRunning = false;
     }
 
-
     public void calculateTotalExpectedIncome() {
         ArrayList<Member> memberArrayList = files.getAllMembers();
         double totalSubscription = 0;
-
-        for (Member member : memberArrayList) {
-            totalSubscription += member.getSubscriptionFee();
+        if (memberArrayList.size() > 0) {
+            for (Member member : memberArrayList) {
+                totalSubscription += member.getSubscriptionFee();
+            }
+            ui.printMessage(Math.round(totalSubscription) + "kr. kan forventes i kontingent");
+        } else {
+            ui.printMessage("Kan ikke læse medlemskartoteket");
         }
-        ui.printMessage(Math.round(totalSubscription) + "kr. kan forventes i kontingent");
     }
 
     private void chargeSubscriptionFee() {
@@ -49,7 +51,6 @@ public class TreasurerController {
                 Vil du:
                   1) Opkræve kontingent for en person
                   2) Opkræve kontingent for ALLE medlemmer""");
-
         String choice = ui.userInput();
         if (choice.equalsIgnoreCase("1")) {
             ui.printMessage("Skriv navnet på medlemmet der skal opkræves");
@@ -65,43 +66,41 @@ public class TreasurerController {
     }
 
     private String makeSubscriptionChargeForOneMember(String memberName) {
-        //TODO: udskriv alle medlemmer?
-            ArrayList<Member> members = files.getAllMembers();
-            int invoiceNumber = files.getNextInvoiceNumber() + 1;
-            int numCharge = 0;
-            for (Member member : members) {
-                if (member.getName().equalsIgnoreCase(memberName)) {
-                    String line = member.generateInvoiceLine(invoiceNumber);
-                    numCharge++;
-                    files.saveToSubscriptionFile(line);
-                }
-            }
-            if (numCharge == 0) {
-                return "Kunne ikke finde et medlem, der matchede din søgning";
-            } else if (numCharge == 1) {
-                return "Oprettede faktura nummer " + invoiceNumber + " til " + memberName;
-            } else {
-                return "Oprettede flere fakturaer";
-            }
-
-    }
-
-    private String makeSubscriptionChargeForAllMembers() {
-            ArrayList<Member> members = files.getAllMembers();
-            int invoiceNumber = files.getNextInvoiceNumber();
-            int numCharge = 0;
-            for (Member member : members) {
-                invoiceNumber++;
+        ArrayList<Member> members = files.getAllMembers();
+        int invoiceNumber = files.getNextInvoiceNumber() + 1;
+        int numCharge = 0;
+        for (Member member : members) {
+            if (member.getName().equalsIgnoreCase(memberName)) {
                 String line = member.generateInvoiceLine(invoiceNumber);
                 numCharge++;
                 files.saveToSubscriptionFile(line);
             }
-            if (numCharge == 0) {
-                return "Kunne ikke finde nogle medlemmer!";
-            } else
-                return "Oprettede " + numCharge + " fakturaer";
         }
+        if (numCharge == 0) {
+            return "Kunne ikke finde et medlem, der matchede din søgning";
+        } else if (numCharge == 1) {
+            return "Oprettede faktura nummer " + invoiceNumber + " til " + memberName;
+        } else {
+            return "Oprettede flere fakturaer";
+        }
+    }
 
+    private String makeSubscriptionChargeForAllMembers() {
+        ArrayList<Member> members = files.getAllMembers();
+        int invoiceNumber = files.getNextInvoiceNumber();
+        int numCharge = 0;
+        for (Member member : members) {
+            invoiceNumber++;
+            String line = member.generateInvoiceLine(invoiceNumber);
+            numCharge++;
+            files.saveToSubscriptionFile(line);
+        }
+        if (numCharge == 0) {
+            return "Kunne ikke finde nogle medlemmer!";
+        } else
+            return "Oprettede " + numCharge + " fakturaer";
+
+    }
 
     private String updatePaymentStatus(String userInput) {
         return files.updatePaymentStatus(userInput);
@@ -113,6 +112,7 @@ public class TreasurerController {
             ui.printMessage(member);
         }
     }
+
     public ArrayList<String> getMembersMissingPayment() {
         ArrayList<String> members = new ArrayList<>();
         ArrayList<Charge> charges = files.readSubFile();
@@ -122,7 +122,6 @@ public class TreasurerController {
                 members.add(charge.toString());
             }
         }
-
         return members;
     }
 
@@ -134,7 +133,4 @@ public class TreasurerController {
         String resultUpdatePayment = updatePaymentStatus(userInput);
         ui.printMessage(resultUpdatePayment);
     }
-
-
-
 }

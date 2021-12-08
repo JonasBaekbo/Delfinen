@@ -63,7 +63,6 @@ public class FileHandler {
 
     public ArrayList<Coach> getAllCoachs() {
         File file = new File(coachFile);
-
         try {
             Scanner scanner = new Scanner(file);
             ArrayList<Coach> coaches = new ArrayList<>();
@@ -118,7 +117,6 @@ public class FileHandler {
 
     public ArrayList<Training> getAllSavedTimes() {
         File file = new File(swimResultFile);
-
         try {
             Scanner scanner = new Scanner(file);
             ArrayList<Training> times = new ArrayList<>();
@@ -153,7 +151,7 @@ public class FileHandler {
 
     public ArrayList<Charge> readSubFile() {
         try {
-            ArrayList<Charge> result = new ArrayList<>();
+            ArrayList<Charge> charges = new ArrayList<>();
             File file = new File(subscriptionFile);
             Scanner scanner = new Scanner(file);
 
@@ -170,9 +168,9 @@ public class FileHandler {
 
                 Charge charge = new Charge(chargeNumber, name, age, isActive, amount, isPaid);
 
-                result.add(charge);
+                charges.add(charge);
             }
-            return result;
+            return charges;
         } catch (FileNotFoundException e) {
             throw new FileReadException("Can't read from subscription file", e);
         }
@@ -188,24 +186,24 @@ public class FileHandler {
         return foundMember;
     }
 
-    public CompetitionSwimmer findCompetitionSwimmerByName(ArrayList<CompetitionSwimmer> members, String memberName) {
-        for (CompetitionSwimmer member : members) {
-            if (memberName.equalsIgnoreCase(member.getName())) {
-                return member;
+    public CompetitionSwimmer findCompetitionSwimmerByName(ArrayList<CompetitionSwimmer> competitionSwimmers, String memberName) {
+        for (CompetitionSwimmer swimmer : competitionSwimmers) {
+            if (memberName.equalsIgnoreCase(swimmer.getName())) {
+                return swimmer;
             }
         }
         return null;
     }
 
     public ArrayList<CompetitionSwimmer> getCompetitionSwimmers() {
-        ArrayList<CompetitionSwimmer> result = new ArrayList<>();
+        ArrayList<CompetitionSwimmer> competitionSwimmers = new ArrayList<>();
         for (Member member : getAllMembers()) {
             if (member.getDiscipline() != null) {
-                CompetitionSwimmer competitionSwimmer = (CompetitionSwimmer) member;
-                result.add(competitionSwimmer);
+                CompetitionSwimmer swimmer = (CompetitionSwimmer) member;
+                competitionSwimmers.add(swimmer);
             }
         }
-        return result;
+        return competitionSwimmers;
     }
 
     public String updatePaymentStatus(String input) {
@@ -257,6 +255,7 @@ public class FileHandler {
         }
     }
 
+    //Vi tæller linjerne i subscription-filen for at finde ud af hvad det næste fakturanummer skal være
     public int getNextInvoiceNumber() {
         File file = new File(subscriptionFile);
         int lines = 0;

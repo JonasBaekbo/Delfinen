@@ -53,18 +53,24 @@ public class CompetitionSwimmer extends Member {
         }
     }
 
-
     @Override
     public String toString() {
+        //Vi "oversætter" true/false da bruger fladen er på dansk
+        String activeStatus;
+        if (getActive()) {
+            activeStatus = "Ja";
+        } else {
+            activeStatus = "Nej";
+        }
         if (swimDiscipline == null) {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
-                    "Aktiv: " + isActive + '\n' +
+                    "Aktiv: " + activeStatus + '\n' +
                     "----------------------------------------------\n";
         } else {
             return "Medlemsnavn: " + name + '\n' +
                     "Alder: " + age + '\n' +
-                    "Aktiv: " + isActive + '\n' +
+                    "Aktiv: " + activeStatus + '\n' +
                     "Svømmedisciplin: " + swimDiscipline + '\n' +
                     "----------------------------------------------\n";
         }

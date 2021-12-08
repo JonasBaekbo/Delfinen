@@ -1,20 +1,17 @@
-//@Jonas Bækbo, Mikkel Sandell
+//@Jonas Bækbo, Mikkel Sandell, Johanne Riis-Weitling
 
 package controller;
 
 import Domain.*;
 import Files.FileHandler;
-
 import ui.UserInterface;
 
 import java.util.ArrayList;
-
 
 public class CEOController {
     private boolean isRunning = true;
     private UserInterface ui = new UserInterface();
     private FileHandler files = new FileHandler();
-
 
 
     public void ceoMenu(Controller controller) {
@@ -31,8 +28,6 @@ public class CEOController {
         }
     }
 
-
-
     public void stop() {
         isRunning = false;
     }
@@ -43,32 +38,29 @@ public class CEOController {
         ui.printMessage("Indtast medlemmets alder: ");
         String age = ui.userInput();
         ui.printMessage("""
-                Indtast medlemmets aktivitetsform:
-                1) Motionssvømmer
-                2) Konkurrencesvømmer""");
-        String activityFormChosen = ui.userInput();
-        String activityForm = chooseActivityForm(activityFormChosen);
-        ui.printMessage("""
                 Aktivt eller passivt medlem?
                 1) Aktivt medlem
                 2) Passivt medlem""");
         String activityLevelChosen = ui.userInput();
         boolean isActive = chooseActivityLevel(activityLevelChosen);
+        ui.printMessage("""
+                Indtast medlemmets aktivitetsform:
+                1) Motionssvømmer
+                2) Konkurrencesvømmer""");
+        String activityFormChosen = ui.userInput();
+        String activityForm = chooseActivityForm(activityFormChosen);
         if (!activityForm.equalsIgnoreCase("Motionist")) {
             createCompetitionSwimmer(name, age, isActive);
         } else {
-            createNormalMember(name, age, isActive);
+            createExerciseSwimmer(name, age, isActive);
         }
     }
 
-   /* private void createNormalMember(String name, String age, boolean isActive) {
+    private void createExerciseSwimmer(String name, String age, boolean isActive) {
         Member member = new Member(name, age, isActive);
-                files.saveNewMember(member);
-    }*/
-    private void createNormalMember(String name, String age, boolean isActive) {
-        Member member = new Member(name, age, isActive);
-        String newMember =member.stringForSaving();
+        String newMember = member.stringForSaving();
         files.saveNewMember(newMember);
+        ui.printMessage("Oprettede:\n" + member);
     }
 
     private void createCompetitionSwimmer(String name, String age, boolean isActive) {
@@ -84,27 +76,23 @@ public class CEOController {
         CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(name, age, isActive, swimDiscipline);
         String newCompetitionSwimmer = competitionSwimmer.stringForSaving();
         files.saveNewMember(newCompetitionSwimmer);
-
+        ui.printMessage("Oprettede:\n" + competitionSwimmer);
     }
 
     private String chooseActivityForm(String activityFormChosen) {
-        String activityForm = "";
-        if (activityFormChosen.equals("1")) {
-            activityForm = "Motionist";
-        } else if (activityFormChosen.equals("2")) {
-            activityForm = "Konkurrence";
+        if (activityFormChosen.equals("2")) {
+            return "Konkurrence";
+        } else {
+            return "Motionist";
         }
-        return activityForm;
     }
 
     private boolean chooseActivityLevel(String activityLevelChosen) {
-        boolean isActive = true;
-        if (activityLevelChosen.equals("1")) {
-            isActive = true;
-        } else if (activityLevelChosen.equals("2")) {
-            isActive = false;
+        if (activityLevelChosen.equals("2")) {
+            return false;
+        } else {
+            return true;
         }
-        return isActive;
     }
 
     private DisciplineEnum chooseSwimDiscipline(String swimDisciplineChosen) {
@@ -132,13 +120,14 @@ public class CEOController {
                 """);
         String swimDisciplineChosen = ui.userInput();
         DisciplineEnum swimDiscipline = chooseSwimDiscipline(swimDisciplineChosen);
-        Coach coach = new Coach(name, age,swimDiscipline);
-        String newCoach=coach.stringForSaving();
+        Coach coach = new Coach(name, age, swimDiscipline);
+        String newCoach = coach.stringForSaving();
         files.saveNewCoach(newCoach);
+        ui.printMessage("Oprettede:\n"+coach);
     }
-//TODO: ny metode tilføj til diagrammer'
+
     private void printAllCoachs() {
-       ArrayList<Coach> coaches= files.getAllCoachs();
+        ArrayList<Coach> coaches = files.getAllCoachs();
         for (Coach coach : coaches) {
             String coachString = coach.toString();
             ui.printMessage(coachString);
@@ -159,6 +148,6 @@ public class CEOController {
     }
 
     private void updateActiveStatus(String input, boolean isActive) {
-        files.updateActiveStatus(input,isActive);
+        files.updateActiveStatus(input, isActive);
     }
 }

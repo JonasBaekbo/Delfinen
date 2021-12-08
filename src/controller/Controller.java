@@ -1,4 +1,4 @@
-//@Jonas Bækbo, @Johanne Riis-Weitling, @Mikkel Sandell
+//@Jonas Bækbo, Johanne Riis-Weitling, Mikkel Sandell
 
 package controller;
 
@@ -40,5 +40,4 @@ public class Controller {
     public void backToMainMenu() {
         mainMenu();
     }
-
 }
