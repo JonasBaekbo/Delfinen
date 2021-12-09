@@ -1,7 +1,7 @@
 // @Jonas Bækbo, Johanne Riis-Weitling
-package Domain;
+package domain;
 
-import Files.FileHandler;
+import files.FileHandler;
 
 import java.util.ArrayList;
 

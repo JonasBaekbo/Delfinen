@@ -1,5 +1,5 @@
 //@ Adam Lasson, Johanne Riis-Weitling, Mikkel Sandell
-package Domain;
+package domain;
 
 import static java.lang.String.format;
 

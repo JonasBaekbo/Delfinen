@@ -2,9 +2,9 @@
 
 package controller;
 
-import Domain.Member;
-import Files.FileHandler;
-import Domain.Charge;
+import domain.Member;
+import files.FileHandler;
+import domain.Charge;
 import ui.UserInterface;
 
 import java.util.ArrayList;

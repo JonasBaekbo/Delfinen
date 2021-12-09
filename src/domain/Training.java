@@ -1,5 +1,5 @@
 //@Johanne Riis-Weitling, Mikkel Sandell
-package Domain;
+package domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

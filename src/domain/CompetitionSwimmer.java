@@ -1,5 +1,5 @@
 //@ Adam Lasson, Johanne Riis-Weitling, Mikkel Sandell
-package Domain;
+package domain;
 
 
 import java.util.ArrayList;

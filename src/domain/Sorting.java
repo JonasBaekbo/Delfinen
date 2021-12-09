@@ -1,5 +1,5 @@
 //@Mikkel Sandell, @Jonas Bækbo
-package Domain;
+package domain;
 
 import java.util.Comparator;
 

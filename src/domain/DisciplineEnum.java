@@ -1,4 +1,4 @@
 //@ Johanne Riis-Weitling
-package Domain;
+package domain;
 
 public enum DisciplineEnum {BRYSTSVØMNING, RYGCRAWL, CRAWL, BUTTERFLY}

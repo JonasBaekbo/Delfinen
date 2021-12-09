@@ -1,8 +1,8 @@
 //@ Mikkel Sandell, Jonas Bækbo, Johanne Riis-Weitling, Adam Lasson
-package Files;
+package files;
 
-import Domain.*;
-import Domain.Charge;
+import domain.*;
+import domain.Charge;
 
 import java.io.*;
 import java.time.LocalDate;

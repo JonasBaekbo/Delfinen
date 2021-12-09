@@ -1,4 +1,4 @@
-package Domain;
+package domain;
 
 public class Charge {
     private String chargeNumber;

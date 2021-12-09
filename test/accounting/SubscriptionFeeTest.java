@@ -1,9 +1,9 @@
 //@Adam Lasson
 package accounting;
 
-import Domain.CompetitionSwimmer;
-import Domain.DisciplineEnum;
-import Domain.Member;
+import domain.CompetitionSwimmer;
+import domain.DisciplineEnum;
+import domain.Member;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -2,8 +2,8 @@
 
 package controller;
 
-import Domain.*;
-import Files.FileHandler;
+import domain.*;
+import files.FileHandler;
 import ui.UserInterface;
 
 import java.time.LocalDate;

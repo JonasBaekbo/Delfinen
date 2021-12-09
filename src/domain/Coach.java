@@ -1,6 +1,6 @@
 //@Mikkel Sandell
 
-package Domain;
+package domain;
 
 public class Coach {
     private String name;

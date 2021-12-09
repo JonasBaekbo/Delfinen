@@ -1,5 +1,5 @@
 //@ Mikkel Sandell
-package Files;
+package files;
 
 import java.io.FileNotFoundException;
 
