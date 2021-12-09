@@ -5,7 +5,6 @@ package Domain;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 public class Competition extends Training {
     private String competitionName;
     private String placementInCompetition;

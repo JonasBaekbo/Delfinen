@@ -101,7 +101,6 @@ public class Member {
     }
 
     public String informationToTable() {
-            return format("%-25s %15s %-15s %15s %-20s %15s", getName(), "|", getAge(), "|", getDiscipline(), "|");
-        }
-
+        return format("%-25s %15s %-15s %15s %-20s %15s", getName(), "|", getAge(), "|", getDiscipline(), "|");
+    }
 }
