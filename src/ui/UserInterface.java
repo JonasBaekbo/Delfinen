@@ -20,13 +20,11 @@ public class UserInterface {
                 1) Formands menu
                 2) Træner menu
                 3) Kassér menu
-                0) Slut programmet
-                """);
+                0) Slut programmet""");
     }
 
     public void menuCEO() {
-        printMessage("""
-                                    
+        printMessage("""         
                 Formand
                 Foretag et valg:
                 1) Registrer nyt medlem
@@ -37,8 +35,7 @@ public class UserInterface {
     }
 
     public void menuCoach() {
-        printMessage("""
-                                    
+        printMessage("""                                    
                 Træner
                 Foretag et valg:
                 1) Tilføj tid til svømmer
@@ -49,8 +46,7 @@ public class UserInterface {
     }
 
     public void menuTreasurer() {
-        printMessage(""" 
-                  
+        printMessage("""               
                 Kassér
                 Foretag et valg:
                 1) Opret kontingent opkrævning
