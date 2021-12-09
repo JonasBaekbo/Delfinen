@@ -134,7 +134,7 @@ public class CEOController {
         }
     }
 
-    private void changeActiveStatus() {
+        private void changeActiveStatus() {
         ui.printMessage("Skriv navnet på det medlem, der skal ændre status");
         String name = ui.userInput();
         ui.printMessage("""
