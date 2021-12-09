@@ -98,10 +98,9 @@ public class CoachController {
                     ui.printMessage("Det indtastede navn findes ikke, prøv igen");
                 }
             } catch (DateTimeParseException e) {
-                ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver desværre nød til at starte forfra, med at taste navnet på svømmeren");
+                ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver desværre nød til at starte forfra, med at skrive navnet på svømmeren");
             }
         }
-
     }
 
     public void addTrainingResult() {
@@ -130,7 +129,7 @@ public class CoachController {
                     ui.printMessage("Det indtastede navn findes ikke, prøv igen");
                 }
             } catch (DateTimeParseException e) {
-                ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver desværre nød til at starte forfra, med at taste navnet på svømmeren");
+                ui.printMessage("Kan ikke genkende tid/dato-format. Du bliver desværre nød til at starte forfra, med at skrive navnet på svømmeren");
             }
         }
     }
